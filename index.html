@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서울시 치매 노인 실종 위험구역 진단 — 대시보드</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f7f8fb;
+    --panel: #ffffff;
+    --border: #e5e7eb;
+    --border-strong: #d1d5db;
+    --text: #0f172a;
+    --text-soft: #334155;
+    --muted: #64748b;
+
+    --red: #ef4444;
+    --red-deep: #dc2626;
+    --red-soft: #fee2e2;
+    --blue: #2563eb;
+    --blue-deep: #1d4ed8;
+    --blue-soft: #dbeafe;
+    --green: #16a34a;
+    --green-deep: #15803d;
+    --green-soft: #dcfce7;
+    --orange: #f97316;
+    --orange-deep: #ea580c;
+    --orange-soft: #fed7aa;
+    --yellow: #eab308;
+    --yellow-deep: #ca8a04;
+    --yellow-soft: #fef3c7;
+    --purple: #9333ea;
+    --purple-soft: #f3e8ff;
+    --cyan: #06b6d4;
+    --cyan-soft: #cffafe;
+
+    --sidebar-w: 200px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  code, .mono { font-family: "SF Mono", "JetBrains Mono", "Menlo", "Consolas", monospace; }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: #ffffff;
+    border-right: 1px solid var(--border);
+    padding: 24px 16px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 1px 0 0 #f1f5f9;
+  }
+  .brand {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+  .brand .sub {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  .brand .pin {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-top: 8px;
+  }
+  .nav-group { margin-top: 24px; }
+  .nav-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 8px;
+    padding-left: 10px;
+    font-weight: 700;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 10px;
+    margin-bottom: 3px;
+    border-radius: 8px;
+    color: var(--text-soft);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+    line-height: 1.3;
+  }
+  .nav-item .ndot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .nav-item:hover { background: var(--bg-soft); color: var(--text); }
+  .nav-item.active {
+    background: var(--bg-soft);
+    color: var(--text);
+    border-left-color: currentColor;
+    font-weight: 800;
+  }
+  .nav-item[data-color="red"]    { color: var(--red-deep); }
+  .nav-item[data-color="red"] .ndot    { background: var(--red); }
+  .nav-item[data-color="blue"]   { color: var(--blue-deep); }
+  .nav-item[data-color="blue"] .ndot   { background: var(--blue); }
+  .nav-item[data-color="orange"] { color: var(--orange-deep); }
+  .nav-item[data-color="orange"] .ndot { background: var(--orange); }
+  .nav-item[data-color="green"]  { color: var(--green-deep); }
+  .nav-item[data-color="green"] .ndot  { background: var(--green); }
+  .nav-item[data-color="purple"] { color: var(--purple); }
+  .nav-item[data-color="purple"] .ndot { background: var(--purple); }
+  .nav-item[data-color="yellow"] { color: var(--yellow-deep); }
+  .nav-item[data-color="yellow"] .ndot { background: var(--yellow); }
+
+  .nav-item:not(.active) { color: var(--text-soft); }
+  .nav-item:not(.active) .ndot { opacity: 0.5; }
+
+  /* ---------- Topbar ---------- */
+  .topbar {
+    position: fixed;
+    top: 14px; right: 24px;
+    background: white;
+    border: 1px solid var(--border-strong);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--muted);
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    font-weight: 600;
+  }
+  .topbar .dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--red);
+    margin-right: 8px;
+    vertical-align: middle;
+    animation: blink 1.6s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* ---------- Main / Sections ---------- */
+  main { margin-left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); }
+  section {
+    min-height: 100vh;
+    padding: 56px 64px 48px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    background: white;
+  }
+  .section-num {
+    font-family: monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    margin-bottom: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .section-num.red    { color: var(--red-deep); }
+  .section-num.blue   { color: var(--blue-deep); }
+  .section-num.orange { color: var(--orange-deep); }
+  .section-num.green  { color: var(--green-deep); }
+  .section-num.purple { color: var(--purple); }
+  .section-num.yellow { color: var(--yellow-deep); }
+
+  .section-title {
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+    line-height: 1.18;
+    color: var(--text);
+  }
+  .section-sub {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 26px;
+    font-weight: 500;
+  }
+  .time-hint {
+    position: absolute;
+    bottom: 16px;
+    right: 28px;
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.55;
+    font-family: monospace;
+    font-weight: 600;
+  }
+
+  /* ===================== ① COVER ===================== */
+  #sec1 {
+    background:
+      radial-gradient(ellipse at 15% 30%, rgba(239,68,68,0.06), transparent 50%),
+      radial-gradient(ellipse at 90% 75%, rgba(37,99,235,0.05), transparent 55%),
+      white;
+  }
+  .cover-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .cover-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--red-soft);
+    color: var(--red-deep);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+    border: 1px solid var(--red);
+  }
+  .cover-tag::before {
+    content: "";
+    width: 7px; height: 7px;
+    background: var(--red); border-radius: 50%;
+    animation: blink 1.6s ease-in-out infinite;
+  }
+  .cover-title {
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .cover-title .h1 { color: var(--red); }
+  .cover-sub {
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+  .cover-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1.5px solid;
+  }
+  .pill.red    { color: var(--red-deep); border-color: var(--red); background: var(--red-soft); }
+  .pill.blue   { color: var(--blue-deep); border-color: var(--blue); background: var(--blue-soft); }
+  .pill.green  { color: var(--green-deep); border-color: var(--green); background: var(--green-soft); }
+  .pill.orange { color: var(--orange-deep); border-color: var(--orange); background: var(--orange-soft); }
+  .pill.yellow { color: var(--yellow-deep); border-color: var(--yellow); background: var(--yellow-soft); }
+  .pill.purple { color: var(--purple); border-color: var(--purple); background: var(--purple-soft); }
+
+  .cover-meta {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.85;
+    border-top: 2px solid var(--text);
+    padding-top: 16px;
+    margin-top: 10px;
+  }
+  .cover-meta strong { color: var(--text); font-weight: 800; }
+
+  /* Hero scatter mock */
+  .hero-scatter {
+    background: white;
+    border: 2px solid var(--text);
+    border-radius: 18px;
+    padding: 18px 20px 14px;
+    aspect-ratio: 5 / 4;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.10), 0 2px 6px rgba(15,23,42,0.06);
+  }
+  .hero-scatter .hs-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: monospace;
+    margin-bottom: 8px;
+  }
+  .hero-scatter .hs-legend {
+    display: flex;
+    gap: 14px;
+  }
+  .hero-scatter .hs-legend .lg {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .hero-scatter .hs-legend .sw {
+    width: 9px; height: 9px; border-radius: 50%;
+  }
+  .hero-scatter svg { width: 100%; height: calc(100% - 38px); }
+
+  /* ===================== ② PROBLEM ===================== */
+  .prob-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .bigstat {
+    background: white;
+    border: 2px solid var(--border-strong);
+    border-radius: 14px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .bigstat:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0,0,0,0.08); }
+  .bigstat .label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .bigstat .num {
+    font-family: "SF Mono", monospace;
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .bigstat .unit { font-size: 18px; margin-left: 4px; font-weight: 800; }
+  .bigstat .desc { font-size: 12px; color: var(--text-soft); margin-top: 6px; line-height: 1.5; }
+  .bigstat.red    { border-color: var(--red); }
+  .bigstat.red .num { color: var(--red-deep); }
+  .bigstat.red .label { color: var(--red-deep); }
+  .bigstat.blue   { border-color: var(--blue); }
+  .bigstat.blue .num { color: var(--blue-deep); }
+  .bigstat.blue .label { color: var(--blue-deep); }
+  .bigstat.orange { border-color: var(--orange); }
+  .bigstat.orange .num { color: var(--orange-deep); }
+  .bigstat.orange .label { color: var(--orange-deep); }
+  .bigstat.green  { border-color: var(--green); }
+  .bigstat.green .num { color: var(--green-deep); }
+  .bigstat.green .label { color: var(--green-deep); }
+
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .compare-cell {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+  .compare-cell h4 {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .urban-bars { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .urban-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+  }
+  .urban-bar .lbl { width: 70px; font-weight: 700; color: var(--text); }
+  .urban-bar .track {
+    flex: 1; height: 22px;
+    background: var(--bg-soft);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .urban-bar .fill {
+    height: 100%; border-radius: 999px;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 10px;
+    color: white; font-weight: 800; font-size: 12px;
+  }
+  .urban-bar.rural .fill { background: linear-gradient(90deg, #94a3b8, #64748b); }
+  .urban-bar.urban .fill { background: linear-gradient(90deg, #f87171, var(--red-deep)); }
+
+  .mismatch-card {
+    background: linear-gradient(135deg, #fff5f5, white);
+    border: 2px solid var(--red);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .mismatch-num {
+    font-family: monospace;
+    font-size: 60px;
+    font-weight: 900;
+    color: var(--red-deep);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .mismatch-num .x { color: var(--text); font-size: 28px; vertical-align: middle; margin: 0 6px; font-weight: 700; }
+  .mismatch-lbl {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  .gap-callout {
+    background: var(--text);
+    color: white;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .gap-callout .ic {
+    background: var(--yellow);
+    color: var(--text);
+    font-weight: 900;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+  }
+  .gap-callout strong { color: var(--yellow); }
+
+  /* ===================== ③ METHOD ===================== */
+  .layer3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .layer-card {
+    background: white;
+    border: 2px solid;
+    border-radius: 16px;
+    padding: 22px 24px;
+    transition: transform 0.2s, box-shadow 0.25s;
+  }
+  .layer-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,0.08); }
+  .layer-card.where { border-color: var(--red); }
+  .layer-card.why   { border-color: var(--blue); }
+  .layer-card.what  { border-color: var(--green); }
+  .layer-tag {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .layer-card.where .layer-tag { background: var(--red-soft); color: var(--red-deep); }
+  .layer-card.why   .layer-tag { background: var(--blue-soft); color: var(--blue-deep); }
+  .layer-card.what  .layer-tag { background: var(--green-soft); color: var(--green-deep); }
+  .layer-card h3 { font-size: 24px; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .layer-card.where h3 { color: var(--red-deep); }
+  .layer-card.why   h3 { color: var(--blue-deep); }
+  .layer-card.what  h3 { color: var(--green-deep); }
+  .layer-card .meth {
+    font-family: monospace;
+    font-size: 12.5px;
+    color: var(--text-soft);
+    line-height: 1.7;
+    border-top: 1px dashed var(--border);
+    padding-top: 10px;
+    margin-top: 12px;
+    margin-bottom: 14px;
+  }
+  .layer-card .result {
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.6;
+  }
+  .layer-card.where .result { color: var(--red-deep); }
+  .layer-card.why   .result { color: var(--blue-deep); }
+  .layer-card.what  .result { color: var(--green-deep); }
+
+  .method-sub {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .grid50 {
+    background: linear-gradient(135deg, #fffbeb, white);
+    border: 2px solid var(--yellow);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .grid50 .num {
+    font-family: monospace;
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--yellow-deep);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .grid50 .meta { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.6; }
+  .grid50 .meta small { display: block; color: var(--muted); font-weight: 500; margin-top: 4px; font-size: 11.5px; }
+
+  .data8 {
+    background: white;
+    border: 2px solid var(--blue);
+    border-radius: 14px;
+    padding: 16px 20px;
+  }
+  .data8 .head {
+    font-size: 13px; font-weight: 800; color: var(--blue-deep);
+    margin-bottom: 10px; letter-spacing: 0.04em;
+  }
+  .data8 .src-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px 10px;
+    font-size: 12px;
+  }
+  .data8 .src-grid .src {
+    display: flex; align-items: center; gap: 6px;
+    font-weight: 600; color: var(--text-soft);
+  }
+  .data8 .src-grid .src .icn {
+    width: 22px; height: 22px;
+    background: var(--blue-soft);
+    color: var(--blue-deep);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    font-weight: 900; font-size: 11px;
+  }
+
+  /* ===================== ④ LISA ===================== */
+  .lisa-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+  .moran-card {
+    background: white;
+    border: 2px solid var(--text);
+    border-radius: 14px;
+    padding: 18px 22px 16px;
+  }
+  .moran-card .head {
+    font-size: 13px; font-weight: 800; color: var(--muted);
+    letter-spacing: 0.04em; margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .moran-svg { width: 100%; aspect-ratio: 5 / 4.2; }
+  .moran-svg .qrect { stroke: var(--text); stroke-width: 1.2; }
+  .moran-svg text.qlabel { font-family: -apple-system, sans-serif; font-weight: 900; font-size: 22px; }
+  .moran-svg text.qsub { font-family: -apple-system, sans-serif; font-weight: 700; font-size: 11px; }
+  .moran-svg text.axis { font-family: -apple-system, sans-serif; font-weight: 700; font-size: 11px; fill: var(--muted); }
+  .moran-svg .ax { stroke: var(--text); stroke-width: 1.5; }
+
+  .lisa-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .lisa-row {
+    background: white;
+    border: 2px solid;
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.18s;
+  }
+  .lisa-row:hover { transform: translateX(4px); }
+  .lisa-row.hh { border-color: var(--red); }
+  .lisa-row.hl { border-color: var(--orange); background: linear-gradient(90deg, var(--orange-soft) 0%, white 50%); }
+  .lisa-row.lh { border-color: var(--yellow); }
+  .lisa-row.ll { border-color: var(--blue); }
+  .lisa-row .code {
+    font-family: monospace;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+  }
+  .lisa-row.hh .code { color: var(--red-deep); }
+  .lisa-row.hl .code { color: var(--orange-deep); }
+  .lisa-row.lh .code { color: var(--yellow-deep); }
+  .lisa-row.ll .code { color: var(--blue-deep); }
+  .lisa-row .desc-t { font-weight: 800; color: var(--text); font-size: 14px; }
+  .lisa-row .desc-s { font-size: 12px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+  .lisa-row .count {
+    font-family: monospace;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: right;
+    letter-spacing: -0.02em;
+  }
+  .lisa-row.hh .count { color: var(--red-deep); }
+  .lisa-row.hl .count { color: var(--orange-deep); }
+  .lisa-row.lh .count { color: var(--yellow-deep); }
+  .lisa-row.ll .count { color: var(--blue-deep); }
+  .lisa-row .count small { font-size: 11px; color: var(--muted); display: block; font-weight: 600; margin-top: 2px; }
+
+  .lisa-callout {
+    background: var(--orange-soft);
+    border: 2px solid var(--orange);
+    color: var(--orange-deep);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+  .lisa-callout strong { color: var(--text); }
+  .lisa-callout .star { font-size: 16px; margin-right: 4px; }
+
+  /* ===================== ⑤ HDBSCAN PERSONAS ===================== */
+  .persona-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .persona-card {
+    background: white;
+    border: 2px solid;
+    border-top: 6px solid;
+    border-radius: 14px;
+    padding: 16px 18px;
+    transition: transform 0.2s, box-shadow 0.22s;
+    position: relative;
+  }
+  .persona-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,0.08); }
+  .persona-card.a { border-color: var(--red); }
+  .persona-card.b { border-color: var(--blue); }
+  .persona-card.c { border-color: var(--green); }
+  .persona-card.d { border-color: var(--purple); }
+  .persona-card .pcode {
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .persona-card.a .pcode { color: var(--red-deep); }
+  .persona-card.b .pcode { color: var(--blue-deep); }
+  .persona-card.c .pcode { color: var(--green-deep); }
+  .persona-card.d .pcode { color: var(--purple); }
+  .persona-card .ptitle {
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .persona-card .pdesc {
+    font-size: 12px;
+    color: var(--text-soft);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .persona-card .pdong {
+    font-size: 11px;
+    color: var(--muted);
+    border-top: 1px dashed var(--border);
+    padding-top: 8px;
+    line-height: 1.55;
+    font-weight: 600;
+  }
+  .persona-card .pemoji {
+    position: absolute;
+    top: 12px; right: 14px;
+    font-size: 22px;
+  }
+
+  .persona-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 14px;
+  }
+  .hdb-stat {
+    background: white;
+    border: 2px solid var(--cyan);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    text-align: center;
+  }
+  .hdb-stat .cell .n {
+    font-family: monospace;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--cyan);
+    line-height: 1;
+  }
+  .hdb-stat .cell .l { font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 700; }
+
+  .pca-row {
+    background: white;
+    border: 2px solid var(--border-strong);
+    border-radius: 14px;
+    padding: 12px 16px;
+  }
+  .pca-row .head { font-size: 12px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .pca-bar { display: flex; align-items: center; gap: 8px; font-size: 11.5px; margin-bottom: 3px; }
+  .pca-bar .lbl { width: 96px; font-weight: 700; color: var(--text-soft); }
+  .pca-bar .track {
+    flex: 1; height: 10px;
+    background: var(--bg-soft);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .pca-bar .fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--red), var(--orange));
+    border-radius: 999px;
+  }
+  .pca-bar .val { font-family: monospace; font-weight: 800; color: var(--text); width: 38px; text-align: right; }
+
+  /* ===================== ⑥ HL BLIND SPOTS (Group E) ===================== */
+  .gE-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+  .gE-hero {
+    background: linear-gradient(135deg, var(--orange-soft), white);
+    border: 3px solid var(--orange);
+    border-radius: 16px;
+    padding: 20px 24px;
+    position: relative;
+  }
+  .gE-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--orange-deep);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+  .gE-title { font-size: 22px; font-weight: 900; color: var(--orange-deep); margin-bottom: 8px; line-height: 1.3; }
+  .gE-desc { font-size: 13.5px; color: var(--text); line-height: 1.7; }
+  .gE-desc strong { background: linear-gradient(transparent 60%, var(--yellow-soft) 60%); padding: 0 2px; font-weight: 800; }
+  .gE-cells {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .gE-cell {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+  }
+  .gE-cell h5 {
+    font-size: 12px; font-weight: 800;
+    color: var(--orange-deep);
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .gE-cell .body { font-size: 12px; line-height: 1.7; color: var(--text-soft); }
+  .gE-cell .body strong { color: var(--text); font-weight: 800; }
+
+  .gE-flow {
+    background: white;
+    border: 2px solid var(--text);
+    border-radius: 14px;
+    padding: 16px 20px;
+  }
+  .gE-flow .head { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 10px; letter-spacing: 0.03em; }
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-family: monospace;
+    font-weight: 700;
+  }
+  .flow-tag {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: white;
+  }
+  .flow-tag.ll { background: var(--blue); }
+  .flow-tag.hl { background: var(--orange); }
+  .flow-tag.hh { background: var(--red); }
+  .flow-arr { color: var(--muted); font-weight: 600; }
+  .flow-name { font-size: 12px; color: var(--text); font-family: -apple-system, sans-serif; }
+
+  /* ===================== ⑦ POLICY ===================== */
+  .policy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .policy-card {
+    background: white;
+    border: 2px solid;
+    border-radius: 14px;
+    padding: 16px 20px;
+    position: relative;
+  }
+  .policy-card.problem { border-color: var(--red); background: linear-gradient(135deg, var(--red-soft) 0%, white 60%); }
+  .policy-card.solution { border-color: var(--green); background: linear-gradient(135deg, var(--green-soft) 0%, white 60%); }
+  .policy-card.case { border-color: var(--blue); background: linear-gradient(135deg, var(--blue-soft) 0%, white 60%); }
+  .policy-card h4 {
+    font-size: 14px; font-weight: 900; margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .policy-card.problem h4 { color: var(--red-deep); }
+  .policy-card.solution h4 { color: var(--green-deep); }
+  .policy-card.case h4 { color: var(--blue-deep); }
+  .policy-card ul { list-style: none; padding: 0; }
+  .policy-card li {
+    font-size: 12px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    padding: 4px 0 4px 16px;
+    position: relative;
+  }
+  .policy-card li::before {
+    content: "▶";
+    position: absolute;
+    left: 0;
+    font-size: 8px;
+    top: 7px;
+  }
+  .policy-card.problem li::before { color: var(--red); }
+  .policy-card.solution li::before { color: var(--green); }
+  .policy-card.case li::before { color: var(--blue); }
+  .policy-card li strong { color: var(--text); font-weight: 800; }
+
+  .impact-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .impact-card {
+    background: white;
+    border: 2px solid var(--green);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .impact-card .n {
+    font-family: monospace;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--green-deep);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .impact-card .n .unit { font-size: 16px; color: var(--text); }
+  .impact-card .l { font-size: 11px; color: var(--text-soft); font-weight: 700; margin-top: 6px; line-height: 1.45; }
+  .impact-card.zero { border-color: var(--purple); }
+  .impact-card.zero .n { color: var(--purple); }
+
+  .closing {
+    margin-top: 20px;
+    text-align: center;
+    padding: 18px 20px;
+    background: linear-gradient(90deg, white, var(--bg-soft) 30%, var(--bg-soft) 70%, white);
+    border-top: 2px solid var(--text);
+    border-bottom: 2px solid var(--text);
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .closing .red { color: var(--red); }
+  .closing .green { color: var(--green); }
+
+  /* ===================== Responsive ===================== */
+  @media (max-width: 1100px) {
+    :root { --sidebar-w: 170px; }
+    section { padding: 40px 32px; }
+    .cover-title { font-size: 44px; }
+    .cover-grid, .lisa-grid, .gE-grid, .persona-bottom { grid-template-columns: 1fr; }
+    .prob-grid, .persona-grid, .impact-row { grid-template-columns: repeat(2, 1fr); }
+    .layer3, .compare-row, .policy-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="brand">
+    서울시 치매 노인<br>실종 위험구역 진단
+    <span class="sub">데이터로 진단 · 정책으로 연결</span>
+    <span class="pin">LIVE DASHBOARD</span>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label">SECTIONS</div>
+    <a class="nav-item active" data-target="sec1" data-color="red">
+      <span class="ndot"></span>① 표지
+    </a>
+    <a class="nav-item" data-target="sec2" data-color="red">
+      <span class="ndot"></span>② 문제 정의
+    </a>
+    <a class="nav-item" data-target="sec3" data-color="blue">
+      <span class="ndot"></span>③ 분석 방법
+    </a>
+    <a class="nav-item" data-target="sec4" data-color="orange">
+      <span class="ndot"></span>④ LISA 4-Cluster
+    </a>
+    <a class="nav-item" data-target="sec5" data-color="purple">
+      <span class="ndot"></span>⑤ 동 페르소나
+    </a>
+    <a class="nav-item" data-target="sec6" data-color="yellow">
+      <span class="ndot"></span>⑥ HL 사각지대
+    </a>
+    <a class="nav-item" data-target="sec7" data-color="green">
+      <span class="ndot"></span>⑦ 정책 제안
+    </a>
+  </div>
+</aside>
+
+<header class="topbar"><span class="dot"></span>SEOUL · DEMENTIA RISK</header>
+
+<main>
+
+<!-- ① COVER -->
+<section id="sec1" data-section="1">
+  <div class="cover-grid">
+    <div>
+      <span class="cover-tag">데이터로 진단하고, 정책으로 연결합니다</span>
+      <h1 class="cover-title">서울시 <span class="h1">치매 노인</span><br>실종 <span class="h1">위험구역</span> 진단</h1>
+      <p class="cover-sub">50m 격자 단위 비지도 학습으로 자치구 평균에 가려진 사각지대를 찾아냅니다.</p>
+
+      <div class="cover-pills">
+        <span class="pill red">서울 65+ 192만 명</span>
+        <span class="pill orange">치매환자 추정 20만 명</span>
+        <span class="pill blue">50m × 50m 격자</span>
+        <span class="pill green">LISA × HDBSCAN</span>
+        <span class="pill yellow">8개 출처 13개 변수</span>
+      </div>
+
+      <div class="cover-meta">
+        <strong>분석 기간</strong> 2023.09 ~ 2024.11 (15개월) ·
+        <strong>분석 단위</strong> 50m × 50m 격자 250,450개<br>
+        <strong>데이터 출처</strong> 서울 열린데이터광장 · 서울시 빅데이터캠퍼스 · 행정안전부 · OSM
+      </div>
+    </div>
+
+    <div class="hero-scatter">
+      <div class="hs-head">
+        <span>HH(핫스팟) · HL(사각지대) 분포 — 서울 전역 50m 격자</span>
+      </div>
+      <div class="hs-legend">
+        <span class="lg"><span class="sw" style="background:var(--red)"></span>HH 46,940개</span>
+        <span class="lg"><span class="sw" style="background:var(--orange)"></span>HL 약 980개 (사각지대)</span>
+        <span class="lg"><span class="sw" style="background:var(--blue)"></span>LL 84,200개</span>
+      </div>
+      <svg viewBox="0 0 500 380" preserveAspectRatio="xMidYMid meet">
+        <!-- Seoul-ish silhouette dots: many red blobs, scattered orange -->
+        <g id="scatter-dots"></g>
+      </svg>
+    </div>
+  </div>
+  <span class="time-hint">⏱ 인트로</span>
+</section>
+
+<!-- ② PROBLEM -->
+<section id="sec2" data-section="2">
+  <div class="section-num red">SECTION 02 · PROBLEM</div>
+  <h2 class="section-title">자치구 평균에 가려진 사각지대</h2>
+  <p class="section-sub">치매 노인은 어디서 어떻게 실종되고 있나 — 격자 단위로 보면 다른 그림이 보입니다.</p>
+
+  <div class="prob-grid">
+    <div class="bigstat red">
+      <div class="label">치매 환자 추정</div>
+      <div class="num" data-target="10.4" data-suffix="%">0<span class="unit">%</span></div>
+      <div class="desc">서울 65+ 192만 명 중 <strong>약 20만 명</strong></div>
+    </div>
+    <div class="bigstat orange">
+      <div class="label">실종 신고 (15개월)</div>
+      <div class="num" data-target="741">0</div>
+      <div class="desc">2023.09 ~ 2024.11 누적 신고</div>
+    </div>
+    <div class="bigstat red">
+      <div class="label">사망 · 미발견</div>
+      <div class="num" data-target="49">0</div>
+      <div class="desc"><strong>6.6%</strong> · 4시간 초과 시 생존율 급락</div>
+    </div>
+    <div class="bigstat blue">
+      <div class="label">발견 평균 반경</div>
+      <div class="num" data-target="250" data-suffix="m">0<span class="unit">m</span></div>
+      <div class="desc">자치구 평균 25km² 대비 <strong>10,000배 정밀</strong></div>
+    </div>
+  </div>
+
+  <div class="compare-row">
+    <div class="compare-cell">
+      <h4>🏙 도시 vs 시골 — 외출 시 길 잃음</h4>
+      <div class="urban-bars">
+        <div class="urban-bar rural">
+          <div class="lbl">시골 거주</div>
+          <div class="track"><div class="fill" style="width:20%">20%</div></div>
+        </div>
+        <div class="urban-bar urban">
+          <div class="lbl">도시 거주</div>
+          <div class="track"><div class="fill" style="width:80%">80%</div></div>
+        </div>
+      </div>
+      <div style="font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.6;">
+        도시 거주 치매 노인의 <strong style="color:var(--red-deep)">80%</strong>가 외출 시 길을 잃음 — 시골 대비 <strong>약 4배</strong>
+      </div>
+    </div>
+
+    <div class="compare-cell">
+      <h4>📐 공간 해상도 미스매치</h4>
+      <div style="display:flex; align-items:center; gap:14px; margin-top:8px;">
+        <div style="text-align:center;">
+          <div style="font-family:monospace; font-size:24px; font-weight:900; color:var(--text);">25 km²</div>
+          <div style="font-size:11px; color:var(--muted); font-weight:600; margin-top:4px;">자치구 평균</div>
+        </div>
+        <div style="font-size:28px; color:var(--muted); font-weight:300;">vs</div>
+        <div style="text-align:center;">
+          <div style="font-family:monospace; font-size:24px; font-weight:900; color:var(--red-deep);">0.0625 km²</div>
+          <div style="font-size:11px; color:var(--muted); font-weight:600; margin-top:4px;">실종 발견 250m²</div>
+        </div>
+      </div>
+      <div style="font-size: 12px; color: var(--muted); margin-top: 14px; line-height: 1.6;">
+        자치구 단위 예산은 위험·안전 격자에 <strong>동일 분산</strong> → 효율성 저하
+      </div>
+    </div>
+
+    <div class="mismatch-card">
+      <div class="mismatch-num">약 245<span class="x">×</span></div>
+      <div class="mismatch-lbl">공간 미스매치 (면적 환산 시 약 1만 배) — 동일 자치구 안에서도 격자별 위험은 <span style="color:var(--red-deep)">5배 이상 차이</span></div>
+    </div>
+  </div>
+
+  <div class="gap-callout">
+    <span class="ic">FINDING</span>
+    자치구 평균에 묻힌 <strong>HL ≈ 980개</strong>의 사각지대 — 안전구역(LL) 사이에 박혀 보이지 않는 점 단위 위험구역.
+  </div>
+  <span class="time-hint">⏱ 문제 정의</span>
+</section>
+
+<!-- ③ METHOD -->
+<section id="sec3" data-section="3">
+  <div class="section-num blue">SECTION 03 · METHOD</div>
+  <h2 class="section-title">3-Layer 진단 프레임</h2>
+  <p class="section-sub">Where (공간) × Why (환경) = What (정책) — 격자 단위 비지도 학습으로 어디 × 왜 동시 식별</p>
+
+  <div class="layer3">
+    <div class="layer-card where">
+      <span class="layer-tag">LAYER 01 · 공간</span>
+      <h3>🗺 WHERE</h3>
+      <div style="font-size:13.5px; font-weight:700; color:var(--text); margin-bottom:8px;">공간 자기상관 (LISA)</div>
+      <div class="meth">
+        LISA Local Moran's I (Anselin 1995)<br>
+        Queen contiguity weight matrix<br>
+        permutations=999, p&lt;0.05
+      </div>
+      <div class="result">HH 46,940 · HL 약 980<br><span style="font-weight:600; font-size:13px;">통계적 핫스팟·사각지대</span></div>
+    </div>
+
+    <div class="layer-card why">
+      <span class="layer-tag">LAYER 02 · 환경</span>
+      <h3>🧬 WHY</h3>
+      <div style="font-size:13.5px; font-weight:700; color:var(--text); margin-bottom:8px;">환경 군집화 (HDBSCAN)</div>
+      <div class="meth">
+        HDBSCAN (Campello 2013)<br>
+        min_cluster_size = 500<br>
+        metric = euclidean (cuML GPU)
+      </div>
+      <div class="result">96 valid clusters<br><span style="font-weight:600; font-size:13px;">노이즈 80,824 (32.3%)</span></div>
+    </div>
+
+    <div class="layer-card what">
+      <span class="layer-tag">LAYER 03 · 정책</span>
+      <h3>🎯 WHAT</h3>
+      <div style="font-size:13.5px; font-weight:700; color:var(--text); margin-bottom:8px;">정책 매핑</div>
+      <div class="meth">
+        LISA × HDBSCAN 교차<br>
+        위험 밀도 TOP 20 행정동<br>
+        환경 페르소나 그룹 A·B·C·D·E
+      </div>
+      <div class="result">연남동·신사동·진관동<br><span style="font-weight:600; font-size:13px;">정책 우선순위 자동 도출</span></div>
+    </div>
+  </div>
+
+  <div class="method-sub">
+    <div class="grid50">
+      <div class="num">250,450</div>
+      <div class="meta">
+        서울 전역 50m × 50m 격자
+        <small>분석 대상 (65+ 거주) <strong>121,051개</strong> · 발견 반경 250m와 5×5 셀 매칭</small>
+      </div>
+    </div>
+
+    <div class="data8">
+      <div class="head">📦 8개 출처 통합 → 13개 환경 변수</div>
+      <div class="src-grid">
+        <div class="src"><span class="icn">1</span>도로망</div>
+        <div class="src"><span class="icn">2</span>건물·도로 SHP</div>
+        <div class="src"><span class="icn">3</span>노인복지시설</div>
+        <div class="src"><span class="icn">4</span>CCTV 개수</div>
+        <div class="src"><span class="icn">5</span>상권발달지수</div>
+        <div class="src"><span class="icn">6</span>편의시설</div>
+        <div class="src"><span class="icn">7</span>표준 용도지역</div>
+        <div class="src"><span class="icn">8</span>경사도</div>
+      </div>
+    </div>
+  </div>
+  <span class="time-hint">⏱ 방법론</span>
+</section>
+
+<!-- ④ LISA 4-CLUSTER -->
+<section id="sec4" data-section="4">
+  <div class="section-num orange">SECTION 04 · LISA 4-CLUSTER</div>
+  <h2 class="section-title">공간 자기상관으로 4가지 유형 분류</h2>
+  <p class="section-sub">Local Moran's I × Queen contiguity weight · permutation test (p&lt;0.05)</p>
+
+  <div class="lisa-grid">
+    <div class="moran-card">
+      <div class="head">Moran's I Scatter Plot — Anselin (1995)</div>
+      <svg class="moran-svg" viewBox="0 0 500 420">
+        <!-- 4 quadrants -->
+        <rect class="qrect" x="40"  y="30"  width="220" height="170" fill="#fef9c3"/>
+        <rect class="qrect" x="260" y="30"  width="200" height="170" fill="#fee2e2"/>
+        <rect class="qrect" x="40"  y="200" width="220" height="170" fill="#dbeafe"/>
+        <rect class="qrect" x="260" y="200" width="200" height="170" fill="#fed7aa"/>
+        <!-- axes -->
+        <line class="ax" x1="40"  y1="200" x2="460" y2="200"/>
+        <line class="ax" x1="260" y1="30"  x2="260" y2="370"/>
+        <!-- axis labels -->
+        <text class="axis" x="32"  y="35"  text-anchor="end">높음</text>
+        <text class="axis" x="32"  y="205" text-anchor="end">평균</text>
+        <text class="axis" x="32"  y="370" text-anchor="end">낮음</text>
+        <text class="axis" x="46"  y="395">낮음</text>
+        <text class="axis" x="260" y="395" text-anchor="middle">평균</text>
+        <text class="axis" x="460" y="395" text-anchor="end">높음</text>
+        <text class="axis" x="14"  y="200" text-anchor="middle" transform="rotate(-90,14,200)">이웃 셀 평균 위험도 (W·z)</text>
+        <text class="axis" x="250" y="415" text-anchor="middle">자기 셀 위험도 (z-score)</text>
+
+        <!-- quadrant labels -->
+        <text class="qlabel" x="150" y="80" text-anchor="middle" fill="#ca8a04">LH</text>
+        <text class="qsub"   x="150" y="100" text-anchor="middle" fill="#ca8a04">안전 섬 (저-고 인접)</text>
+        <text class="qlabel" x="360" y="80" text-anchor="middle" fill="#dc2626">HH</text>
+        <text class="qsub"   x="360" y="100" text-anchor="middle" fill="#dc2626">핫스팟 (고-고 인접)</text>
+        <text class="qlabel" x="150" y="280" text-anchor="middle" fill="#1d4ed8">LL</text>
+        <text class="qsub"   x="150" y="300" text-anchor="middle" fill="#1d4ed8">안전구역 (저-저 인접)</text>
+        <text class="qlabel" x="360" y="280" text-anchor="middle" fill="#ea580c">HL</text>
+        <text class="qsub"   x="360" y="300" text-anchor="middle" fill="#ea580c">★ 사각지대 (고-저, outlier)</text>
+
+        <g id="moran-dots"></g>
+      </svg>
+    </div>
+
+    <div class="lisa-stats">
+      <div class="lisa-row hh">
+        <div class="code">HH</div>
+        <div>
+          <div class="desc-t">핫스팟 (고-고 인접)</div>
+          <div class="desc-s">위험이 면(area) 단위로 퍼지는 광역 핫스팟</div>
+        </div>
+        <div class="count">46,940<small>격자</small></div>
+      </div>
+      <div class="lisa-row hl">
+        <div class="code">HL</div>
+        <div>
+          <div class="desc-t">★ 사각지대 (고-저, outlier)</div>
+          <div class="desc-s">안전구역 사이에 둘러싸인 자치구 단위 사각지대</div>
+        </div>
+        <div class="count">980<small>격자 (0.4%)</small></div>
+      </div>
+      <div class="lisa-row lh">
+        <div class="code">LH</div>
+        <div>
+          <div class="desc-t">안전 섬 (저-고 인접)</div>
+          <div class="desc-s">핫스팟 안의 안전 섬 — 대피·발견 거점 후보</div>
+        </div>
+        <div class="count">3,640<small>격자</small></div>
+      </div>
+      <div class="lisa-row ll">
+        <div class="code">LL</div>
+        <div>
+          <div class="desc-t">안전구역 (저-저 인접)</div>
+          <div class="desc-s">통계적 평균일 뿐, 노인 동선의 시작점</div>
+        </div>
+        <div class="count">84,200<small>격자</small></div>
+      </div>
+
+      <div class="lisa-callout">
+        <span class="star">★</span><strong>HL 약 980 × 평균 0.0025 km² ≈ 2.45 km²</strong> — 표면적은 작지만 <strong>ROI가 가장 높은 우선 투입 대상</strong>
+      </div>
+    </div>
+  </div>
+  <span class="time-hint">⏱ 핵심 결과 1</span>
+</section>
+
+<!-- ⑤ PERSONAS -->
+<section id="sec5" data-section="5">
+  <div class="section-num purple">SECTION 05 · PERSONA</div>
+  <h2 class="section-title">HDBSCAN 군집 조합 → 4가지 동 페르소나</h2>
+  <p class="section-sub">사전 라벨링 없이 96개 환경 군집이 결합된 양상으로 도시 동선의 4가지 핵심 유형을 자생적으로 식별</p>
+
+  <div class="persona-grid">
+    <div class="persona-card a">
+      <span class="pemoji">🏛</span>
+      <div class="pcode">그룹 A · 군집 [0, 1]</div>
+      <div class="ptitle">유동인구 폭발형<br>고밀도 상업·인프라 거점</div>
+      <div class="pdesc">가장 강력한 상업 지표·인프라 밀집도. 보행자·차량 통행이 겹쳐 유동 인구 밀도 매우 높음.</div>
+      <div class="pdong">송파 가락2·오금 · 양천 신월1·신정4 · 동대문 용신·장안1·이문1 · 강서 우장산</div>
+    </div>
+
+    <div class="persona-card b">
+      <span class="pemoji">🏠</span>
+      <div class="pcode">그룹 B · 군집 [5, 18, 19]</div>
+      <div class="ptitle">미로형 골목상권 ·<br>생활 밀착형 거주지</div>
+      <div class="pdesc">막다른 길과 복잡한 이면도로가 많아 보행 동선이 엉켜있는 구도심·골목 상권. 200m 이내 편의·휴게음식점 촘촘.</div>
+      <div class="pdong">서대문 연남·북가좌2 · 성북 장위1·2 · 은평 역촌·증산 · 마포 서교·성산1</div>
+    </div>
+
+    <div class="persona-card c">
+      <span class="pemoji">🌳</span>
+      <div class="pcode">그룹 C · 군집 [3, 16]</div>
+      <div class="ptitle">경사도 높은 고지대<br>공원 품은 근린 주거권</div>
+      <div class="pdesc">경사도·공원 1위 군집 + 근린시설 인접. 자연 친화적 고밀도 주거지지만 노인 이동 에너지 부담.</div>
+      <div class="pdong">강북구 송천동</div>
+    </div>
+
+    <div class="persona-card d">
+      <span class="pemoji">🔄</span>
+      <div class="pcode">그룹 D · 군집 [0, 1, 18, 19]</div>
+      <div class="ptitle">메인 상권 + 골목 인프라<br>초고밀도 복합 생활권</div>
+      <div class="pdesc">대로변 번화 상업 구역과 그 배후의 촘촘한 생활 상권이 혼재. 시간대 무관하게 인구 활동성 꾸준히 높음.</div>
+      <div class="pdong">중랑구 면목본동</div>
+    </div>
+  </div>
+
+  <div class="persona-bottom">
+    <div class="hdb-stat">
+      <div class="cell">
+        <div class="n">96</div>
+        <div class="l">VALID CLUSTERS</div>
+      </div>
+      <div class="cell">
+        <div class="n">80,824</div>
+        <div class="l">NOISE (32.3%)</div>
+      </div>
+      <div class="cell">
+        <div class="n">13</div>
+        <div class="l">환경 변수</div>
+      </div>
+    </div>
+
+    <div class="pca-row">
+      <div class="head">📊 PCA로 산출한 13개 환경 변수 기여도 (TOP 5)</div>
+      <div class="pca-bar"><div class="lbl">교차로 개수</div><div class="track"><div class="fill" style="width:88%"></div></div><div class="val">8.78</div></div>
+      <div class="pca-bar"><div class="lbl">도로 복잡도</div><div class="track"><div class="fill" style="width:87%"></div></div><div class="val">8.72</div></div>
+      <div class="pca-bar"><div class="lbl">격자 내 쉘터</div><div class="track"><div class="fill" style="width:85%"></div></div><div class="val">8.49</div></div>
+      <div class="pca-bar"><div class="lbl">막다른 길</div><div class="track"><div class="fill" style="width:81%"></div></div><div class="val">8.11</div></div>
+      <div class="pca-bar"><div class="lbl">200m 복지시설</div><div class="track"><div class="fill" style="width:80%"></div></div><div class="val">7.99</div></div>
+    </div>
+  </div>
+  <span class="time-hint">⏱ 핵심 결과 2</span>
+</section>
+
+<!-- ⑥ HL BLIND SPOT (Group E) -->
+<section id="sec6" data-section="6">
+  <div class="section-num yellow">SECTION 06 · BLIND SPOT</div>
+  <h2 class="section-title">HL 사각지대 페르소나 — 그룹 E</h2>
+  <p class="section-sub">거주 인구 부재 통과 구역에 응축된 HL과 LL→HH로 흐르는 노인 동선의 진입점</p>
+
+  <div class="gE-grid">
+    <div class="gE-hero">
+      <span class="gE-tag">⚠️ 그룹 E · 군집 [6, 8] · HL 142개 응축</span>
+      <div class="gE-title">거주 인구 부재 통과 구역<br>도심 특수목적 + 외곽 IC 배후</div>
+      <div class="gE-desc">
+        거주(POPULATION 0) · 상가(STORE 평균 4 vs 서울 192) · 인프라(INFRA 0) 모두 부재하는 <strong>비주거 격자</strong>. 그러나 도로 복잡도 6.60 · 막다른 길 1.0 시그너처가 강해 HL 응축. 격자당 65+ 추정 <strong>14.7명 (서울 평균 7.7의 2배)</strong> — 인근 노인 거주민의 통과 동선이 응축된 구역.
+      </div>
+      <div class="gE-cells" style="margin-top:14px;">
+        <div class="gE-cell">
+          <h5>E-1 · 도심 특수목적 비주거</h5>
+          <div class="body">
+            여의동(국회·금융) · 종로1·2·3·4가동(정부청사)<br>
+            용산2가·한강로·남영·서빙고(국방·외교)<br>
+            청운효자(청와대) · 상암(DMC)
+          </div>
+        </div>
+        <div class="gE-cell">
+          <h5>E-2 · 외곽 산업 · 교통 결절</h5>
+          <div class="body">
+            강서 방화2(공항 배후) · 가양1<br>
+            금천 가산동(가산디지털단지)<br>
+            노원 공릉2(육사·과기대) · 사당2(사당IC)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gE-flow">
+      <div class="head">🔁 LL → HH 유입 동선 — 노인 통행로의 위험 응축 패턴</div>
+      <div style="font-size: 12.5px; color: var(--text-soft); margin-bottom: 14px; line-height: 1.65;">
+        LL(안전 거주지)에 거주하는 노인이 일과 중 도심·외곽 비주거 구역(HL)을 통과해 HH(상권·교통 결절) 쪽으로 유입. LL의 안전은 <strong style="color:var(--text)">통계적 평균일 뿐</strong>, 노인 일과 동선의 시작점이라는 점에서 발견 거점·안내 표지 배치 대상.
+      </div>
+
+      <div class="flow-row">
+        <span class="flow-tag ll">LL</span><span class="flow-name">청운효자동</span>
+        <span class="flow-arr">→</span>
+        <span class="flow-tag hl">HL</span><span class="flow-name">종로</span>
+        <span class="flow-arr">→</span>
+        <span class="flow-tag hh">HH</span><span class="flow-name">광화문</span>
+        <span style="font-size:11px; color:var(--muted); margin-left:auto;">도심 외출</span>
+      </div>
+      <div class="flow-row">
+        <span class="flow-tag ll">LL</span><span class="flow-name">이촌·용산</span>
+        <span class="flow-arr">→</span>
+        <span class="flow-tag hl">HL</span><span class="flow-name">한강로</span>
+        <span class="flow-arr">→</span>
+        <span class="flow-tag hh">HH</span><span class="flow-name">여의도</span>
+        <span style="font-size:11px; color:var(--muted); margin-left:auto;">한강 산책</span>
+      </div>
+      <div class="flow-row">
+        <span class="flow-tag ll">LL</span><span class="flow-name">성산·연희</span>
+        <span class="flow-arr">→</span>
+        <span class="flow-tag hl">HL</span><span class="flow-name">상암</span>
+        <span class="flow-arr">→</span>
+        <span class="flow-tag hh">HH</span><span class="flow-name">DMC</span>
+        <span style="font-size:11px; color:var(--muted); margin-left:auto;">공원 접근</span>
+      </div>
+
+      <div style="margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); font-size:11.5px; color:var(--muted); line-height:1.65;">
+        <strong style="color:var(--orange-deep)">→ 회색(LL) 거주민이 빨강(HH·HL)으로 통과하는 경계 격자가 정책 핀셋 투입 1순위</strong>
+      </div>
+    </div>
+  </div>
+  <span class="time-hint">⏱ 핵심 결과 3</span>
+</section>
+
+<!-- ⑦ POLICY -->
+<section id="sec7" data-section="7">
+  <div class="section-num green">SECTION 07 · POLICY</div>
+  <h2 class="section-title">정책 제안 — AI CCTV 탐색 우선순위 추천 시스템</h2>
+  <p class="section-sub">100시간 영상 → 10분 분석. 그러나 12만 3천 대 중 어디부터 볼지는 여전히 사람이 정해야 한다.</p>
+
+  <div class="policy-grid">
+    <div class="policy-card problem">
+      <h4>🚨 현재 시스템의 3가지 한계</h4>
+      <ul>
+        <li><strong>메모리·GPU 연산 비용</strong> — 100시간 영상 → 10분 분석에 막대한 부하</li>
+        <li><strong>수십만 대 무차별 탐색</strong> — 신고 반경 500m 평균 수백 대 CCTV 균일 탐색</li>
+        <li><strong>발생 시각 기반 동선 추정 부재</strong> — 시간 차원이 우선순위에 반영 안됨</li>
+      </ul>
+    </div>
+
+    <div class="policy-card solution">
+      <h4>💡 본 분석의 솔루션</h4>
+      <ul>
+        <li>실종 발생 위치·시각으로부터 <strong>격자 단위 위험 점수</strong> 자동 계산</li>
+        <li>LISA HH 응집도 + HDBSCAN 군집 시그너처로 <strong>탐색 우선순위 격자 리스트</strong> 출력</li>
+        <li>새 CCTV 설치 X · 새 모델 X · <strong>기존 서울시 시스템에 우선순위만 공급</strong></li>
+      </ul>
+    </div>
+
+    <div class="policy-card case">
+      <h4>📍 연남동 케이스 (밀도 1위)</h4>
+      <ul>
+        <li>마포구 연남동 — HH 격자 <strong>185 / 전체 약 250 (위험 밀도 0.74, 서울 1위)</strong></li>
+        <li>골목 미로형 → 길잃음 빈도 평지 대비 약 4배</li>
+        <li>그룹 B 동일 페르소나 7개 동(서교·성산·북가좌2·장위·역촌·증산·연희) <strong>즉시 확장 가능</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="impact-row">
+    <div class="impact-card zero">
+      <div class="n">0<span class="unit">원</span></div>
+      <div class="l">추가 인프라 비용<br>(데이터 + API 연동만)</div>
+    </div>
+    <div class="impact-card">
+      <div class="n">-90<span class="unit">%</span></div>
+      <div class="l">영상 분석 대상 CCTV<br>(수백 → 수십 대 핀셋)</div>
+    </div>
+    <div class="impact-card">
+      <div class="n">+10<span class="unit">%p</span></div>
+      <div class="l">골든타임 4시간 내<br>발견율 추정 상승</div>
+    </div>
+    <div class="impact-card">
+      <div class="n">25<span class="unit">구</span></div>
+      <div class="l">서울 전역 즉시 확장<br>(2026년 통합 완료 시점)</div>
+    </div>
+  </div>
+
+  <div class="closing">
+    데이터가 <span class="red">사각지대</span>를 찾고, 시스템이 <span class="green">골든타임</span>을 지킵니다.
+  </div>
+  <span class="time-hint">⏱ 끝 · Q&A</span>
+</section>
+
+</main>
+
+<script>
+// ===================== Sidebar nav =====================
+const navItems = document.querySelectorAll('.nav-item');
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const target = document.getElementById(item.dataset.target);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+const sections = [...document.querySelectorAll('section[data-section]')];
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.intersectionRatio > 0.5) {
+      const id = e.target.id;
+      navItems.forEach(n => n.classList.toggle('active', n.dataset.target === id));
+    }
+  });
+}, { threshold: [0.5, 0.6] });
+sections.forEach(s => obs.observe(s));
+
+// Keyboard nav
+document.addEventListener('keydown', (e) => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  const sy = window.scrollY;
+  let cur = 0;
+  for (let i = 0; i < sections.length; i++) {
+    if (sections[i].offsetTop <= sy + window.innerHeight * 0.4) cur = i;
+  }
+  if (['ArrowDown','PageDown',' '].includes(e.key)) {
+    e.preventDefault();
+    if (cur < sections.length - 1) sections[cur + 1].scrollIntoView({ behavior: 'smooth' });
+  } else if (['ArrowUp','PageUp'].includes(e.key)) {
+    e.preventDefault();
+    if (cur > 0) sections[cur - 1].scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+// ===================== Count-up animation =====================
+function countUp(el) {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const isFloat = !Number.isInteger(target);
+  const dur = 1100;
+  const t0 = performance.now();
+  function tick(t) {
+    const k = Math.min(1, (t - t0) / dur);
+    const eased = 1 - Math.pow(1 - k, 3);
+    const v = target * eased;
+    const s = isFloat ? v.toFixed(1) : Math.floor(v).toLocaleString();
+    el.innerHTML = s + '<span class="unit">' + suffix + '</span>';
+    if (k < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const counted = new WeakSet();
+const cntObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !counted.has(e.target)) {
+      counted.add(e.target);
+      countUp(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.bigstat .num[data-target]').forEach(el => cntObs.observe(el));
+
+// ===================== Cover hero scatter (mock seoul-like) =====================
+(function() {
+  const g = document.getElementById('scatter-dots');
+  if (!g) return;
+  const W = 500, H = 380;
+  function rndNormal() {
+    let u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+  // Generate HH (red) clusters around several Seoul-like centers
+  const centers = [
+    {x: 140, y: 160, n: 130}, {x: 200, y: 180, n: 150}, {x: 250, y: 150, n: 160},
+    {x: 300, y: 200, n: 140}, {x: 350, y: 170, n: 130}, {x: 180, y: 220, n: 110},
+    {x: 280, y: 240, n: 130}, {x: 380, y: 220, n: 110}, {x: 240, y: 130, n: 100},
+    {x: 320, y: 130, n: 90}, {x: 400, y: 180, n: 90}
+  ];
+  centers.forEach(c => {
+    for (let i = 0; i < c.n; i++) {
+      const x = c.x + rndNormal() * 24;
+      const y = c.y + rndNormal() * 18;
+      if (x < 20 || x > W-10 || y < 20 || y > H-10) continue;
+      g.innerHTML += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.6" fill="#dc2626" opacity="0.75"/>`;
+    }
+  });
+  // sprinkle blue (LL)
+  for (let i = 0; i < 320; i++) {
+    const x = 30 + Math.random() * (W - 50);
+    const y = 30 + Math.random() * (H - 60);
+    g.innerHTML += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="0.9" fill="#3b82f6" opacity="0.45"/>`;
+  }
+  // sprinkle orange (HL) outliers
+  const hlSpots = [
+    {x: 170, y: 100}, {x: 240, y: 105}, {x: 295, y: 90},
+    {x: 380, y: 95}, {x: 420, y: 150}, {x: 200, y: 280},
+    {x: 290, y: 290}, {x: 360, y: 280}, {x: 100, y: 180}, {x: 130, y: 240}
+  ];
+  hlSpots.forEach(p => {
+    g.innerHTML += `<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#f97316" opacity="0.95" stroke="#ea580c" stroke-width="1"/>`;
+  });
+})();
+
+// ===================== Moran scatter dots =====================
+(function() {
+  const g = document.getElementById('moran-dots');
+  if (!g) return;
+  function rndNormal() {
+    let u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+  // HH quadrant (x: 260-460, y: 30-200) — red, many
+  for (let i = 0; i < 38; i++) {
+    const x = 350 + rndNormal() * 35;
+    const y = 105 + rndNormal() * 30;
+    if (x > 265 && x < 455 && y > 35 && y < 195)
+      g.innerHTML += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3" fill="#dc2626" opacity="0.85"/>`;
+  }
+  // LL quadrant (x: 40-260, y: 200-370)
+  for (let i = 0; i < 32; i++) {
+    const x = 145 + rndNormal() * 35;
+    const y = 290 + rndNormal() * 30;
+    if (x > 45 && x < 255 && y > 205 && y < 365)
+      g.innerHTML += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3" fill="#1d4ed8" opacity="0.78"/>`;
+  }
+  // LH quadrant (top-left)
+  for (let i = 0; i < 14; i++) {
+    const x = 145 + rndNormal() * 35;
+    const y = 110 + rndNormal() * 30;
+    if (x > 45 && x < 255 && y > 35 && y < 195)
+      g.innerHTML += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3" fill="#ca8a04" opacity="0.78"/>`;
+  }
+  // HL quadrant (bottom-right) — orange, fewer with star
+  const hlPts = [];
+  for (let i = 0; i < 10; i++) {
+    const x = 350 + rndNormal() * 35;
+    const y = 290 + rndNormal() * 30;
+    if (x > 265 && x < 455 && y > 205 && y < 365) {
+      g.innerHTML += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.4" fill="#ea580c" opacity="0.9"/>`;
+      hlPts.push([x, y]);
+    }
+  }
+  // Add star on a center HL point
+  g.innerHTML += `<text x="360" y="330" font-size="20" text-anchor="middle" fill="#dc2626">★</text>`;
+})();
+</script>
+
+</body>
+</html>
