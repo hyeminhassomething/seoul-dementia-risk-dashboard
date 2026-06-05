@@ -385,6 +385,26 @@
   .flow-name{font-size:11.5px;color:var(--text);font-family:-apple-system,sans-serif}
 
   /* Section 15-22 specific helpers */
+  /* Slide 16 — 날아 모이는 뉴스 카드 */
+  .s16-news{opacity:0;transition:opacity .55s ease-out,transform .9s cubic-bezier(.18,.85,.32,1.05)}
+  .s16-news[data-from="tl"]{transform:translate(-160%,-160%) rotate(-30deg) scale(.4)}
+  .s16-news[data-from="tr"]{transform:translate(160%,-160%) rotate(30deg) scale(.4)}
+  .s16-news[data-from="ml"]{transform:translate(-160%,0) rotate(-20deg) scale(.4)}
+  .s16-news[data-from="mr"]{transform:translate(160%,0) rotate(20deg) scale(.4)}
+  .s16-news[data-from="bm"]{transform:translate(0,180%) rotate(-25deg) scale(.4)}
+  .s16-news.on{opacity:1}
+  .s16-news.on[data-from="tl"]{transform:rotate(-2deg) scale(1)}
+  .s16-news.on[data-from="tr"]{transform:rotate(2.5deg) scale(1)}
+  .s16-news.on[data-from="ml"]{transform:rotate(-1.5deg) scale(1)}
+  .s16-news.on[data-from="mr"]{transform:rotate(2deg) scale(1)}
+  .s16-news.on[data-from="bm"]{transform:rotate(-1deg) scale(1)}
+  @keyframes s16Flash{
+    0%{opacity:0}
+    20%{opacity:.95}
+    100%{opacity:0}
+  }
+  #s16-flash.flash{animation:s16Flash .5s ease-out 1}
+
   .news-card{background:#fff;border:1.5px solid var(--border-strong);border-radius:10px;padding:10px 14px;box-shadow:0 4px 14px rgba(0,0,0,.04);transform:rotate(-.3deg);margin-bottom:8px}
   .news-card:nth-child(even){transform:rotate(.4deg)}
   .news-card .src{font-size:10.5px;color:var(--muted);font-weight:700;margin-bottom:3px}
@@ -392,9 +412,9 @@
   .news-card .de{font-size:11px;color:var(--text-soft);line-height:1.5}
 
   .step-list{counter-reset:stp;list-style:none;padding:0}
-  .step-list li{counter-increment:stp;padding:3px 0 3px 28px;position:relative;font-size:11.5px;color:var(--text-soft);line-height:1.5;border-bottom:1px dashed var(--border)}
+  .step-list li{counter-increment:stp;padding:4px 0 4px 52px;position:relative;font-size:11.5px;color:var(--text-soft);line-height:1.45;border-bottom:1px dashed var(--border);min-height:20px;word-break:keep-all}
   .step-list li:last-child{border-bottom:0}
-  .step-list li::before{content:"Step "counter(stp);position:absolute;left:0;top:8px;font-family:monospace;font-size:10px;font-weight:900;color:var(--green-deep);background:var(--green-soft);padding:2px 6px;border-radius:5px;letter-spacing:.04em}
+  .step-list li::before{content:"Step "counter(stp);position:absolute;left:0;top:5px;font-family:monospace;font-size:9.5px;font-weight:900;color:var(--green-deep);background:var(--green-soft);padding:2px 6px;border-radius:5px;letter-spacing:.04em;width:46px;text-align:center;box-sizing:border-box}
   .step-list li b{color:var(--text);font-weight:800}
 
   .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
@@ -446,7 +466,7 @@
   <div class="nav-group">
     <div class="nav-label">SECTION 1 · 문제</div>
     <a class="nav-item active" data-target="s01" data-c="red"><span class="ndot"></span>1. 표지</a>
-    <a class="nav-item" data-target="s02" data-c="cyan"><span class="ndot"></span>2. Contents</a>
+    <a class="nav-item" data-target="s02" data-c="red"><span class="ndot"></span>2. Contents</a>
     <a class="nav-item" data-target="s03" data-c="red"><span class="ndot"></span>3. 치매 실종 문제</a>
     <a class="nav-item" data-target="s04" data-c="red"><span class="ndot"></span>4. 기존 분석 한계</a>
   </div>
@@ -1641,14 +1661,29 @@
         <iframe src="maps/hl.html" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" title="HL Clusters Map"></iframe>
       </div>
     </div>
-    <div class="card" style="border-color:var(--text);padding:8px 12px">
-      <div class="head" style="margin-bottom:6px;font-size:11px">🧭 HL 페르소나 — 위치적 의미</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:11px;font-family:monospace;line-height:1.5">
-        <div><b style="color:var(--red-deep)">cluster 8, 7, 5</b> · 자연/비도시</div>
-        <div><b style="color:var(--orange-deep)">cluster 2, 3, 6, 0</b> · 주거 단순</div>
-        <div><b style="color:var(--yellow-deep)">cluster 1, 16, 3</b> · 인프라 편중</div>
-        <div><b style="color:var(--green-deep)">cluster 20, 22, 26+</b> · 외곽 확장</div>
-        <div style="grid-column:1/3"><b style="color:var(--blue-deep)">cluster 15, 19, 21+</b> · 혼합 전이</div>
+    <div class="card" style="border-color:var(--text);padding:10px 14px">
+      <div class="head" style="margin-bottom:8px;font-size:12.5px">🧭 HL 페르소나 — 위치적 의미</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <div style="background:var(--red-soft);border:1.5px solid var(--red);border-radius:8px;padding:6px 10px">
+          <div style="font-family:monospace;font-size:12px;font-weight:900;color:var(--red-deep)">cluster 8, 7, 5</div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px">자연 / 비도시</div>
+        </div>
+        <div style="background:var(--orange-soft);border:1.5px solid var(--orange);border-radius:8px;padding:6px 10px">
+          <div style="font-family:monospace;font-size:12px;font-weight:900;color:var(--orange-deep)">cluster 2, 3, 6, 0</div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px">주거 단순</div>
+        </div>
+        <div style="background:var(--yellow-soft);border:1.5px solid var(--yellow);border-radius:8px;padding:6px 10px">
+          <div style="font-family:monospace;font-size:12px;font-weight:900;color:var(--yellow-deep)">cluster 1, 16, 3</div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px">인프라 편중</div>
+        </div>
+        <div style="background:var(--green-soft);border:1.5px solid var(--green);border-radius:8px;padding:6px 10px">
+          <div style="font-family:monospace;font-size:12px;font-weight:900;color:var(--green-deep)">cluster 20, 22, 26+</div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px">외곽 확장</div>
+        </div>
+        <div style="grid-column:1/3;background:var(--blue-soft);border:1.5px solid var(--blue);border-radius:8px;padding:6px 10px">
+          <div style="font-family:monospace;font-size:12px;font-weight:900;color:var(--blue-deep)">cluster 15, 19, 21+</div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px">혼합 전이 (도시 ↔ 외곽 경계)</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1790,49 +1825,49 @@
 </section>
 
 <!-- 16. AI CCTV 정책 추세 -->
-<section id="s16" data-section="16">
-  <div class="secnum green">SLIDE 16 · AI CCTV TREND</div>
-  <h2 class="sectitle">서울시는 이미 움직이고 있다 — AI CCTV 정책 추세</h2>
-  <p class="secsub">100시간 영상을 10분에 분석하는 시스템이 서울 25개 자치구로 확대 중 — <strong>그렇다면 우리 분석은 어디에 더해질 수 있나?</strong></p>
+<section id="s16" data-section="16" style="background:#0a0f1f;color:#fff;position:relative;overflow:hidden">
+  <!-- 플래시 효과 레이어 -->
+  <div id="s16-flash" style="position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:30;transition:opacity .1s"></div>
 
-  <div class="grid-2" style="gap:14px;margin-bottom:12px">
-    <div>
-      <div class="news-card">
-        <div class="src">서울특별시 보도자료</div>
-        <div class="ti">100시간 분량 CCTV, AI로 10분이면 본다 — 실종자 추적에 활용</div>
-        <div class="de">서울시 AI 기반 CCTV 고속검색시스템 가동 / 인상착의·이동방향 자동 인식 / 약 <strong>12만 3천 대 통합 검색</strong> / 1,600건 이상 실제 활용</div>
-      </div>
-      <div class="news-card">
-        <div class="src">서울특별시 보도자료</div>
-        <div class="ti">서울 전역 실종자 수색 빨라진다 — 25개 자치구 CCTV 통합</div>
-        <div class="de">2022년 강남구 시작 → <strong>2026년 종로·성동·강북·동작·관악 포함 25개 자치구 완료 예정</strong></div>
-      </div>
-      <div class="news-card">
-        <div class="src">채널A 뉴스</div>
-        <div class="ti">AI로 CCTV 영상 고속분석 — 실종자 찾는 시간 앞당긴다</div>
-        <div class="de">2025년 서초구 아동 수시간 내 발견 · 동대문구 노인 위치 신속 파악</div>
-      </div>
+  <div class="secnum" style="color:#fbbf24">SLIDE 16 · AI CCTV TREND</div>
+  <h2 class="sectitle" style="color:#fff">서울시는 이미 움직이고 있다 — AI CCTV 정책 추세</h2>
+  <p class="secsub" style="color:#94a3b8">100시간 영상을 10분에 분석하는 시스템이 서울 25개 자치구로 확대 중 — <strong style="color:#fff">그렇다면 우리 분석은 어디에 더해질 수 있나?</strong></p>
+
+  <div id="s16-news-stage" style="position:relative;width:100%;height:62vh;max-height:600px">
+    <!-- 5장 뉴스 카드가 사방에서 중앙으로 날아 모임 -->
+    <div class="s16-news" data-from="tl" style="position:absolute;top:6%;left:2%;width:46%;background:#fff;color:#0f172a;border-radius:10px;padding:12px 18px;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate(-2deg)">
+      <div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:4px">서울특별시 보도자료</div>
+      <div style="font-size:16px;font-weight:900;color:#0f172a;margin-bottom:5px;line-height:1.3">100시간 분량 CCTV, AI로 10분이면 본다 — 실종자 추적에 활용</div>
+      <div style="font-size:12px;color:#475569;line-height:1.55">서울시 AI 기반 CCTV 고속검색시스템 / 인상착의·이동방향 자동 인식 / 약 <b>12만 3천 대 통합 검색</b> / 1,600건+ 활용</div>
     </div>
-    <div>
-      <div class="news-card">
-        <div class="src">제주의소리</div>
-        <div class="ti">CCTV 너머 사람의 온기로 찾는다 — 실종자의 멈춤지</div>
-        <div class="de">연 670건 실종 신고 중 치매 65건·장애 45건 / <strong>CCTV 없는 구간에서 동선이 끊긴다</strong></div>
-      </div>
-      <div class="news-card">
-        <div class="src">보건복지부·경찰청</div>
-        <div class="ti">2024년 서울 실종 신고 13,766건 — 골든타임 확보가 핵심</div>
-        <div class="de">아동·치매환자·장애인 등 사회적 약자 실종 / <strong>4시간 초과 시 생존율 급락</strong></div>
-      </div>
-
-      <div class="callout orange" style="margin-top:10px;font-size:12.5px;line-height:1.65">
-        <strong>🔍 그래서 본 분석은 어떻게 끼어드는가</strong><br>
-        AI CCTV는 100시간을 10분에 분석한다. 그러나 12만 3천 대 중 <strong>어느 격자의 CCTV부터 분석할지는 여전히 사람이 판단</strong>한다.<br>
-        본 분석의 50m 격자 단위 LISA × HDBSCAN 결과 → 신고 발생 시 <strong>"어디부터 분석할지" 우선순위를 자동 추천</strong>하는 소프트웨어 레이어로 결합.
-      </div>
+    <div class="s16-news" data-from="tr" style="position:absolute;top:22%;right:2%;width:46%;background:#fff;color:#0f172a;border-radius:10px;padding:12px 18px;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate(2.5deg)">
+      <div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:4px">서울특별시 보도자료</div>
+      <div style="font-size:16px;font-weight:900;color:#0f172a;margin-bottom:5px;line-height:1.3">서울 전역 실종자 수색 빨라진다 — 25개 자치구 CCTV 통합</div>
+      <div style="font-size:12px;color:#475569;line-height:1.55">2022년 강남구 시작 → <b>2026년 종로·성동·강북·동작·관악 포함 25개 자치구 완료 예정</b></div>
+    </div>
+    <div class="s16-news" data-from="ml" style="position:absolute;top:42%;left:0%;width:44%;background:#fff;color:#0f172a;border-radius:10px;padding:12px 18px;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate(-1.5deg)">
+      <div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:4px">채널A 뉴스</div>
+      <div style="font-size:15.5px;font-weight:900;color:#0f172a;margin-bottom:5px;line-height:1.3">AI로 CCTV 영상 고속분석 — 실종자 찾는 시간 앞당긴다</div>
+      <div style="font-size:12px;color:#475569;line-height:1.55">2025년 서초구 아동 수시간 내 발견 · 동대문구 노인 위치 신속 파악</div>
+    </div>
+    <div class="s16-news" data-from="mr" style="position:absolute;top:48%;right:1%;width:46%;background:#fff;color:#0f172a;border-radius:10px;padding:12px 18px;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate(2deg)">
+      <div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:4px">제주의소리</div>
+      <div style="font-size:15.5px;font-weight:900;color:#0f172a;margin-bottom:5px;line-height:1.3">CCTV 너머 사람의 온기로 찾는다 — 실종자의 멈춤지</div>
+      <div style="font-size:12px;color:#475569;line-height:1.55">연 670건 실종 신고 중 치매 65건·장애 45건 / <b>CCTV 없는 구간에서 동선이 끊긴다</b></div>
+    </div>
+    <div class="s16-news" data-from="bm" style="position:absolute;bottom:6%;left:18%;width:60%;background:#fff;color:#0f172a;border-radius:10px;padding:12px 18px;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate(-1deg)">
+      <div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:4px">보건복지부·경찰청</div>
+      <div style="font-size:16px;font-weight:900;color:#0f172a;margin-bottom:5px;line-height:1.3">2024년 서울 실종 신고 13,766건 — 골든타임 확보가 핵심</div>
+      <div style="font-size:12px;color:#475569;line-height:1.55">아동·치매환자·장애인 등 사회적 약자 실종 / <b>4시간 초과 시 생존율 급락</b></div>
     </div>
   </div>
-  <span class="pageno">SLIDE 16 / 23</span>
+
+  <div style="background:rgba(251,191,36,.08);border:1.5px solid rgba(251,191,36,.4);border-radius:10px;padding:12px 18px;margin-top:10px;font-size:13px;line-height:1.65">
+    <strong style="color:#fbbf24;font-size:13.5px">🔍 그래서 본 분석은 어떻게 끼어드는가</strong><br>
+    <span style="color:#cbd5e1">AI CCTV는 100시간을 10분에 분석한다. 그러나 12만 3천 대 중 <b style="color:#fff">어느 격자의 CCTV부터 분석할지는 여전히 사람이 판단</b>한다.<br>
+    본 분석의 50m 격자 단위 LISA × HDBSCAN 결과 → 신고 발생 시 <b style="color:#fff">"어디부터 분석할지" 우선순위를 자동 추천</b>하는 소프트웨어 레이어로 결합.</span>
+  </div>
+  <span class="pageno" style="color:#64748b">SLIDE 16 / 23</span>
 </section>
 
 <!-- 17. 좋은 기술이 있지만 — 어디부터 볼지 모른다 -->
@@ -2024,20 +2059,15 @@
         <li>API 연동 + 격자 데이터(parquet 243,920행) 정기 갱신만으로 운영</li>
       </ul>
     </div>
-    <div class="card green">
-      <div class="head">📍 그룹 B 페르소나 7개 동 즉시 확장</div>
-      <ul class="bul green">
-        <li>연남동 케이스 검증 → <strong>동일 환경 시그너처(막다른길+이면도로+편의시설 촘촘)</strong> 다른 동 자동 적용</li>
-        <li>서대문구 북가좌2 · 마포구 서교·성산1 · 성북구 장위1·2 · 은평구 역촌·증산 · 서대문구 연희</li>
-        <li>그룹 A(상권형) 10개 동 · 그룹 D(복합 생활권) 1개 동도 동일 방식 즉시 확장</li>
-        <li>2026년 25개 자치구 AI CCTV 통합 완료 시점과 정합 → <strong>서울 전역 동시 시행 가능</strong></li>
-      </ul>
+    <div class="callout dark" style="font-size:13.5px;padding:14px 20px">
+      <div style="font-size:12px;font-weight:900;color:var(--yellow);letter-spacing:.08em;margin-bottom:6px">⚡ END-TO-END</div>
+      <div style="line-height:1.65">
+        신고 발생부터 발견 알림까지 <strong style="color:var(--yellow)">10분 이내</strong>를 목표로 동작<br>
+        골든타임 4시간의 <strong style="color:var(--yellow)">1/24 시점</strong>에서 동선 추정 완료
+      </div>
     </div>
   </div>
 
-  <div class="callout dark" style="font-size:13px">
-    <strong style="color:var(--yellow)">END-TO-END →</strong> 신고 발생부터 발견 알림까지 <strong>10분 이내</strong>를 목표로 동작 · 골든타임 4시간의 1/24 시점에서 동선 추정 완료
-  </div>
   <span class="pageno">SLIDE 19 / 23</span>
 </section>
 
@@ -2212,6 +2242,35 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
 </script>
 
 <script>
+// s16 — 뉴스 카드 날아 모이기 + 플래시
+(function(){
+  const sec = document.getElementById('s16');
+  if (!sec) return;
+  const cards = sec.querySelectorAll('.s16-news');
+  const flash = document.getElementById('s16-flash');
+  let triggered = false;
+  function play(){
+    cards.forEach(c => c.classList.remove('on'));
+    if (flash) { flash.classList.remove('flash'); void flash.offsetWidth; }
+    cards.forEach((c, i) => {
+      setTimeout(() => {
+        c.classList.add('on');
+        // 카드 도착 시 플래시
+        if (flash) { flash.classList.remove('flash'); void flash.offsetWidth; flash.classList.add('flash'); }
+      }, 250 + i * 480);
+    });
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .35 && !triggered) {
+        triggered = true;
+        play();
+      }
+    });
+  }, { threshold: [.35] });
+  io.observe(sec);
+})();
+
 // s13 — HH 클러스터 의미 매핑 팝업 (5개 색별 그룹, 좌표 기반)
 (function(){
   const sec = document.getElementById('s13');
