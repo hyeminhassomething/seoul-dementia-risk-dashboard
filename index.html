@@ -1490,8 +1490,8 @@
     <div>
       <div class="card" style="border-color:var(--text);padding:10px 12px">
         <div class="head" style="margin-bottom:6px">LISA 4-Cluster — 서울 전역 50m 격자 (Queen contiguity · p&lt;0.05)</div>
-        <div id="s11-map-wrap" style="position:relative;width:100%;max-width:560px;aspect-ratio:1326/1248;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border);margin:0 auto">
-          <img src="maps/s11_map.png" alt="서울 HH/HL 분포 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
+        <div id="s11-map-wrap" style="position:relative;width:100%;max-width:560px;aspect-ratio:1198/1022;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border);margin:0 auto">
+          <img src="maps/s15_map.png" alt="서울 HH/HL 분포 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
           <div class="s11-popups" id="s11-popups" style="position:absolute;inset:0;pointer-events:none"></div>
           <button id="s11-replay" style="position:absolute;bottom:8px;right:8px;background:#fff;border:1.5px solid var(--text);border-radius:999px;padding:4px 12px;font-size:11px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12);z-index:5;pointer-events:auto">↻ 다시 재생</button>
           <div style="position:absolute;top:8px;left:8px;background:#fff;border:1.5px solid var(--text);border-radius:8px;padding:5px 10px;font-size:10.5px;font-weight:800;color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.1);z-index:5">
@@ -1614,13 +1614,13 @@
       <div class="pdesc" style="font-size:10.5px;line-height:1.5">상업(6·4·0) + 주거(1) + 생활 클러스터 대량 혼합. 도시 기능이 가장 격렬히 충돌. cluster diversity 매우 높음.</div>
       <div class="pdong" style="font-size:10px">명동 · 왕십리2동 · 왕십리도선동 · 중곡2동 · 행당1동</div>
     </div>
-    <div class="persona-card b" style="padding:10px 12px;border-color:var(--orange);border-top-color:var(--orange)">
+    <div class="persona-card b" style="padding:7px 10px;border-color:var(--orange);border-top-color:var(--orange)">
       <div class="pcode" style="font-size:9.5px;color:var(--orange-deep)">cluster [1,0,4,6]</div>
       <div class="ptitle" style="font-size:13px;line-height:1.3">🟠 ② 전통 고밀도<br>상업 중심형</div>
       <div class="pdesc" style="font-size:10.5px;line-height:1.5">상업 클러스터 중심(6·0·4), 주거 비중 낮음. 구조 단순하지만 밀도 극단적 — 관광·유통·업무 집중.</div>
       <div class="pdong" style="font-size:10px">명동 · 을지로동 · 황학동 · 동화동</div>
     </div>
-    <div class="persona-card" style="padding:10px 12px;border:2px solid var(--yellow);border-top:5px solid var(--yellow)">
+    <div class="persona-card" style="padding:7px 10px;border:2px solid var(--yellow);border-top:5px solid var(--yellow)">
       <div class="pcode" style="font-size:9.5px;color:var(--yellow-deep)">cluster [6,1,4,0+15,22,17]</div>
       <div class="ptitle" style="font-size:13px;line-height:1.3">🟡 ③ 주거 기반<br>혼합형 위험</div>
       <div class="pdesc" style="font-size:10.5px;line-height:1.5">주거 클러스터(1) 강함 + 상업 일부 침투. 외곽 생활권에 상업 확장 — 골목상권 발달.</div>
@@ -1654,11 +1654,13 @@
   <h2 class="sectitle">HL 사각지대 페르소나 — 5가지 비도시·확장형 유형</h2>
   <p class="secsub">HL 948개 격자에서 자생적으로 등장한 5개 도시 외곽·전이 페르소나</p>
 
-  <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:10px;margin-bottom:8px">
+  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:10px;margin-bottom:8px;align-items:start">
     <div class="card" style="border-color:var(--text);padding:8px 10px">
       <div class="head" style="margin-bottom:4px;font-size:11px">HL 클러스터 지도 — 서울 전역</div>
-      <div style="position:relative;width:100%;aspect-ratio:5/3;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
-        <iframe src="maps/hl.html" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" title="HL Clusters Map"></iframe>
+      <div id="s14-map-wrap" style="position:relative;width:100%;max-width:420px;aspect-ratio:1392/1186;margin:0 auto;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+        <img src="maps/s14_map.png" alt="HL 클러스터 산점도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
+        <!-- 5색 클러스터 팝업 오버레이 -->
+        <div id="s14-popups" style="position:absolute;inset:0;pointer-events:none"></div>
       </div>
     </div>
     <div class="card" style="border-color:var(--text);padding:10px 14px">
@@ -1688,10 +1690,10 @@
     </div>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:10px">
-    <div class="persona-card a" style="padding:10px 12px">
-      <div class="pcode" style="font-size:9.5px">cluster [8, 7, 5]</div>
-      <div class="ptitle" style="font-size:13px;line-height:1.3">🔴 ① 극저밀도<br>자연/비도시</div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:6px">
+    <div class="persona-card a" style="padding:7px 10px">
+      <div class="pcode" style="font-size:9px">cluster [8, 7, 5]</div>
+      <div class="ptitle" style="font-size:12px;line-height:1.25">🔴 ① 극저밀도<br>자연/비도시</div>
       <div class="pdesc" style="font-size:10.5px;line-height:1.5">STORE↓↓↓ · facility↓↓↓ · population↓↓↓ · slope 일부↑. 도시 기능이 거의 없는 비활성 공간.</div>
       <div class="pdong" style="font-size:10px">산지 / 공원 / 개발 제한 구역 — "빈 공간" 성격</div>
     </div>
@@ -1707,31 +1709,26 @@
       <div class="pdesc" style="font-size:10.5px;line-height:1.5">STORE↑ or POPULATION↑ 일부 · facility 일부만. 한두 기능만 과도 발달한 비균형 구조.</div>
       <div class="pdong" style="font-size:10px">특정 상권/시설 집중 · 주변 인프라 부족</div>
     </div>
-    <div class="persona-card c" style="padding:10px 12px">
-      <div class="pcode" style="font-size:9.5px">cluster [20,22,26,32,33,39]</div>
+    <div class="persona-card c" style="padding:7px 10px">
+      <div class="pcode" style="font-size:9px">cluster [20,22,26,32,33,39]</div>
       <div class="ptitle" style="font-size:13px;line-height:1.3">🟢 ④ 외곽 확장<br>생활권</div>
       <div class="pdesc" style="font-size:10.5px;line-height:1.5">POPULATION↑ · STORE 중간 · road complexity↓ · facility 낮음. 도시 외곽 생활권.</div>
       <div class="pdong" style="font-size:10px">신도시/외곽 주거 · 생활 인프라 부족 · 확장 중</div>
     </div>
-    <div class="persona-card d" style="padding:10px 12px">
-      <div class="pcode" style="font-size:9.5px">cluster [15,19,21,24,25,27,30,37]</div>
+    <div class="persona-card d" style="padding:7px 10px">
+      <div class="pcode" style="font-size:9px">cluster [15,19,21,24,25,27,30,37]</div>
       <div class="ptitle" style="font-size:13px;line-height:1.3">🔵 ⑤ 혼합형<br>전이 클러스터</div>
       <div class="pdesc" style="font-size:10.5px;line-height:1.5">모든 변수 중간값 · 특정 강한 feature 없음 · 구조 불안정. 도시 ↔ 외곽 경계.</div>
       <div class="pdong" style="font-size:10px">재개발/변화 구간 · 구조가 안정되지 않음</div>
     </div>
   </div>
 
-  <div class="card" style="border-color:var(--text);padding:10px 16px;margin-bottom:10px">
-    <div class="head" style="margin-bottom:6px;font-size:11.5px">🔥 HH vs HL 구조적 결론 — 서울 공간은 2축으로 나뉜다</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11.5px">
-      <div style="background:var(--red-soft);border-left:4px solid var(--red);padding:8px 12px;border-radius:6px">
-        <div style="font-weight:900;color:var(--red-deep);margin-bottom:2px">🧱 HH 구조 (압축형 도시)</div>
-        <div style="color:var(--text-soft);font-size:11px">명동 · 왕십리 · 중곡 · 행당<br><strong style="color:var(--text)">"강한 도시 기능 집중"</strong></div>
-      </div>
-      <div style="background:var(--blue-soft);border-left:4px solid var(--blue);padding:8px 12px;border-radius:6px">
-        <div style="font-weight:900;color:var(--blue-deep);margin-bottom:2px">🌫 HL 구조 (확장/비균형 도시)</div>
-        <div style="color:var(--text-soft);font-size:11px">수유 · 외곽 주거 · 산지/공원 · 전이 지역<br><strong style="color:var(--text)">"구조가 깨지거나 퍼진 영역"</strong></div>
-      </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;font-size:11px">
+    <div style="background:var(--red-soft);border-left:3px solid var(--red);padding:5px 10px;border-radius:6px">
+      <b style="color:var(--red-deep)">🧱 HH 압축형</b> · 명동·왕십리·중곡·행당 — <b style="color:var(--text)">강한 도시 기능 집중</b>
+    </div>
+    <div style="background:var(--blue-soft);border-left:3px solid var(--blue);padding:5px 10px;border-radius:6px">
+      <b style="color:var(--blue-deep)">🌫 HL 확장형</b> · 수유·외곽·산지·전이 — <b style="color:var(--text)">구조가 깨지거나 퍼진 영역</b>
     </div>
   </div>
 
@@ -1752,9 +1749,10 @@
     <!-- 4 페르소나 카드 -->
     <div style="display:flex;flex-direction:column;gap:6px">
       <!-- 명동 -->
-      <div style="background:#fff;border:2px solid var(--red);border-left:6px solid var(--red);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center">
+      <div style="background:linear-gradient(135deg,var(--red-soft),#fff 60%);border:2.5px solid var(--red);border-left:6px solid var(--red);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;box-shadow:0 4px 16px rgba(239,68,68,.18);position:relative">
+        <div style="position:absolute;top:-8px;left:14px;background:var(--red);color:#fff;font-size:10px;font-weight:900;padding:2px 9px;border-radius:999px;letter-spacing:.04em">🎯 분석 대상</div>
         <div>
-          <div style="font-size:14px;font-weight:900;color:var(--red-deep)">중구 명동</div>
+          <div style="font-size:14px;font-weight:900;color:var(--red-deep);margin-top:2px">중구 명동</div>
           <div style="font-size:11.5px;color:var(--text);font-weight:700;margin-top:2px">도심형 초고밀도 상업·업무 복합 중심지</div>
           <div style="font-size:10.5px;color:var(--muted);margin-top:2px;font-family:monospace">cluster [6, 1, 4, 0, 5] · 핵심 거의 모두</div>
         </div>
@@ -1776,8 +1774,7 @@
         </div>
       </div>
       <!-- 왕십리도선동 (강조) -->
-      <div style="background:linear-gradient(135deg,var(--yellow-soft),#fff 60%);border:2.5px solid var(--yellow);border-left:6px solid var(--yellow);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;box-shadow:0 4px 16px rgba(234,179,8,.18);position:relative">
-        <div style="position:absolute;top:-8px;left:14px;background:var(--yellow);color:var(--text);font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px;letter-spacing:.04em">★ 가장 흥미로움 — 혼합도 최고</div>
+      <div style="background:#fff;border:2px solid var(--yellow);border-left:6px solid var(--yellow);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center">
         <div>
           <div style="font-size:14px;font-weight:900;color:var(--yellow-deep)">성동구 왕십리도선동</div>
           <div style="font-size:11.5px;color:var(--text);font-weight:700;margin-top:2px">광역 교통거점 기반 복합 도시 중심지</div>
@@ -1807,6 +1804,8 @@
       <div class="head" style="margin-bottom:4px;font-size:11px">HH 밀도 분포 — TOP 4 행정동 위치</div>
       <div id="s15-map-wrap" style="position:relative;width:100%;max-width:480px;margin:0 auto;aspect-ratio:1198/1022;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
         <img src="maps/s15_map.png" alt="동별 위험 밀도 TOP 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
+        <!-- 4개 행정동 팝업 오버레이 -->
+        <div id="s15-popups" style="position:absolute;inset:0;pointer-events:none"></div>
       </div>
       <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
         * 빨강 폴리곤: HH·HL 밀도 상위 행정동 · 회색 점: LL 격자
@@ -1818,7 +1817,7 @@
     <span style="display:inline-block;color:var(--yellow);font-weight:900;margin-right:6px">📌 한 줄</span>
     <b style="color:var(--red-deep)">명동</b> 도심 상업 중심 ·
     <b style="color:var(--orange-deep)">대치4동</b> 교육·주거 ·
-    <b style="color:var(--yellow-deep)">왕십리도선동</b> 교통·상업 복합 거점(혼합도 최고) ·
+    <b style="color:var(--yellow-deep)">왕십리도선동</b> 교통·상업 복합 거점 ·
     <b style="color:#86efac">수유3동</b> 생활밀착형 주거·상권
   </div>
   <span class="pageno">SLIDE 15 / 23</span>
@@ -2242,6 +2241,129 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
 </script>
 
 <script>
+// s15 — 4개 행정동 페르소나 팝업
+(function(){
+  const sec = document.getElementById('s15');
+  const wrap = document.getElementById('s15-popups');
+  if (!sec || !wrap) return;
+  const LAT_MIN = 37.42, LAT_MAX = 37.71;
+  const LNG_MIN = 126.78, LNG_MAX = 127.19;
+  const PAD_L = 8, PAD_R = 92, PAD_T = 4, PAD_B = 96;
+  function lng2pct(lng){ return PAD_L + ((lng - LNG_MIN) / (LNG_MAX - LNG_MIN)) * (PAD_R - PAD_L); }
+  function lat2pct(lat){ return PAD_T + ((LAT_MAX - lat) / (LAT_MAX - LAT_MIN)) * (PAD_B - PAD_T); }
+
+  const DONGS = [
+    { name:'중구 명동',         lat:37.5636, lng:126.9826, dark:'#dc2626', density:'0.92', persona:'도심형 초고밀도 상업·업무 복합', tag:'🎯 분석 대상' },
+    { name:'강남구 대치4동',     lat:37.4972, lng:127.0635, dark:'#ea580c', density:'~0.70', persona:'교육·주거·상업 결합 생활권' },
+    { name:'성동구 왕십리도선동', lat:37.5650, lng:127.0290, dark:'#ca8a04', density:'~0.71', persona:'광역 교통거점 복합 도시 중심지' },
+    { name:'강북구 수유3동',     lat:37.6420, lng:127.0285, dark:'#15803d', density:'~0.55', persona:'서민형 주거·생활상권 혼합' }
+  ];
+
+  function build(){
+    wrap.innerHTML = '';
+    DONGS.forEach((d) => {
+      const top = lat2pct(d.lat), left = lng2pct(d.lng);
+      if (top < 1 || top > 99 || left < 1 || left > 99) return;
+      const el = document.createElement('div');
+      el.className = 's15-pop';
+      el.style.cssText = `position:absolute;top:${top.toFixed(2)}%;left:${left.toFixed(2)}%;transform:translate(-50%,-100%) scale(.6);opacity:0;transition:opacity .35s ease-out,transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none`;
+      const tag = d.tag ? `<div style="position:absolute;top:-7px;left:50%;transform:translateX(-50%);background:${d.dark};color:#fff;font-size:9px;font-weight:900;padding:1px 7px;border-radius:999px;letter-spacing:.04em;white-space:nowrap">${d.tag}</div>` : '';
+      el.innerHTML = `
+        <div style="position:absolute;left:50%;top:100%;transform:translate(-50%,0);width:9px;height:9px;border-radius:50%;background:${d.dark};border:1.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>
+        <div style="background:#fff;border:2px solid ${d.dark};border-radius:8px;padding:6px 10px;box-shadow:0 6px 18px rgba(0,0,0,.2);white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;margin-bottom:7px;position:relative">
+          ${tag}
+          <div style="font-size:11px;font-weight:900;color:#0f172a;line-height:1.2;margin-top:${d.tag?'4px':'0'}">${d.name}</div>
+          <div style="font-size:9.5px;color:${d.dark};font-weight:800;margin-top:2px;line-height:1.2">density <b style="font-family:monospace;font-size:11px">${d.density}</b></div>
+          <div style="font-size:9.5px;color:#0f172a;font-weight:700;margin-top:2px;padding-top:2px;border-top:1px dashed #e5e7eb;line-height:1.25">${d.persona}</div>
+          <div style="position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid ${d.dark}"></div>
+        </div>`;
+      wrap.appendChild(el);
+    });
+  }
+  build();
+
+  let triggered = false;
+  function play(){
+    const pops = wrap.querySelectorAll('.s15-pop');
+    pops.forEach(p => { p.style.opacity = '0'; p.style.transform = 'translate(-50%,-100%) scale(.6)'; });
+    pops.forEach((p, i) => {
+      setTimeout(() => { p.style.opacity = '1'; p.style.transform = 'translate(-50%,-100%) scale(1)'; }, 250 + i * 320);
+    });
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .35 && !triggered) {
+        triggered = true;
+        play();
+      }
+    });
+  }, { threshold: [.35] });
+  io.observe(sec);
+})();
+
+// s14 — HL 클러스터 5색 팝업 (좌표 기반)
+(function(){
+  const sec = document.getElementById('s14');
+  const wrap = document.getElementById('s14-popups');
+  if (!sec || !wrap) return;
+  const LAT_MIN = 37.42, LAT_MAX = 37.71;
+  const LNG_MIN = 126.78, LNG_MAX = 127.19;
+  const PAD_L = 8, PAD_R = 92, PAD_T = 4, PAD_B = 96;
+  function lng2pct(lng){ return PAD_L + ((lng - LNG_MIN) / (LNG_MAX - LNG_MIN)) * (PAD_R - PAD_L); }
+  function lat2pct(lat){ return PAD_T + ((LAT_MAX - lat) / (LAT_MAX - LAT_MIN)) * (PAD_B - PAD_T); }
+
+  // 5개 HL 클러스터 그룹 × 대표 격자 위치
+  const GROUPS = [
+    { dark:'#dc2626', clusters:'8, 7, 5',         label:'자연 / 비도시',           dongs:[['청운효자동',37.5870,126.9690],['상암동',37.5790,126.8910],['평창동',37.6130,126.9740]] },
+    { dark:'#ea580c', clusters:'2, 3, 6, 0',      label:'주거 단순',              dongs:[['수유3동',37.6420,127.0285],['장위2동',37.6160,127.0560],['상봉2동',37.5950,127.0850]] },
+    { dark:'#ca8a04', clusters:'1, 16, 3',        label:'인프라 편중',            dongs:[['가산동',37.4800,126.8830],['상암 DMC',37.5790,126.8910],['신사동',37.5240,127.0204]] },
+    { dark:'#15803d', clusters:'20, 22, 26+',     label:'외곽 확장',              dongs:[['진관동',37.6394,126.9270],['방화2동',37.5800,126.8120],['공릉2동',37.6260,127.0760]] },
+    { dark:'#1d4ed8', clusters:'15, 19, 21+',     label:'혼합 전이',              dongs:[['청파동',37.5470,126.9690],['이태원1동',37.5380,126.9930],['공항동',37.5610,126.8120]] }
+  ];
+
+  function build(){
+    wrap.innerHTML = '';
+    GROUPS.forEach((g) => {
+      g.dongs.forEach((d) => {
+        const [name, lat, lng] = d;
+        const top = lat2pct(lat), left = lng2pct(lng);
+        if (top < 1 || top > 99 || left < 1 || left > 99) return;
+        const el = document.createElement('div');
+        el.className = 's14-pop';
+        el.style.cssText = `position:absolute;top:${top.toFixed(2)}%;left:${left.toFixed(2)}%;transform:translate(-50%,-100%) scale(.6);opacity:0;transition:opacity .35s ease-out,transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none`;
+        el.innerHTML = `
+          <div style="position:absolute;left:50%;top:100%;transform:translate(-50%,0);width:8px;height:8px;border-radius:50%;background:${g.dark};border:1.5px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.3)"></div>
+          <div style="background:#fff;border:1.5px solid ${g.dark};border-radius:8px;padding:4px 8px;box-shadow:0 4px 14px rgba(0,0,0,.16);white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;margin-bottom:6px;position:relative">
+            <div style="font-size:9.5px;font-weight:900;color:#0f172a;line-height:1.2">${name}</div>
+            <div style="font-size:8.5px;color:${g.dark};font-weight:800;margin-top:1px;line-height:1.2">cluster ${g.clusters}</div>
+            <div style="font-size:9px;color:#0f172a;font-weight:700;margin-top:2px;padding-top:2px;border-top:1px dashed #e5e7eb;line-height:1.2">${g.label}</div>
+            <div style="position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid ${g.dark}"></div>
+          </div>`;
+        wrap.appendChild(el);
+      });
+    });
+  }
+  build();
+
+  let triggered = false;
+  function play(){
+    const pops = wrap.querySelectorAll('.s14-pop');
+    pops.forEach(p => { p.style.opacity = '0'; p.style.transform = 'translate(-50%,-100%) scale(.6)'; });
+    pops.forEach((p, i) => {
+      setTimeout(() => { p.style.opacity = '1'; p.style.transform = 'translate(-50%,-100%) scale(1)'; }, 200 + i * 240);
+    });
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .35 && !triggered) {
+        triggered = true;
+        play();
+      }
+    });
+  }, { threshold: [.35] });
+  io.observe(sec);
+})();
+
 // s16 — 뉴스 카드 날아 모이기 + 플래시
 (function(){
   const sec = document.getElementById('s16');
