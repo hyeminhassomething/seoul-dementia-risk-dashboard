@@ -375,7 +375,7 @@
 <aside class="sidebar">
   <div class="brand">서울시 치매 노인<br>실종 위험구역 진단
     <span class="sub">데이터로 진단 · 정책으로 연결</span>
-    <span class="pin">22 SLIDES</span>
+    <span class="pin">23 SLIDES</span>
   </div>
   <div class="nav-group">
     <div class="nav-label">SECTION 1 · 문제</div>
@@ -394,18 +394,19 @@
   <div class="nav-group">
     <div class="nav-label">SECTION 3 · 결과</div>
     <a class="nav-item" data-target="s09" data-c="orange"><span class="ndot"></span>9. PCA 위험도 점수</a>
+    <a class="nav-item" data-target="s09b" data-c="orange"><span class="ndot"></span>9+. risk_score 검증</a>
     <a class="nav-item" data-target="s10" data-c="orange"><span class="ndot"></span>10. LISA 정의·근거</a>
     <a class="nav-item" data-target="s11" data-c="orange"><span class="ndot"></span>11. LISA 4-Cluster 지도</a>
     <a class="nav-item" data-target="s12" data-c="orange"><span class="ndot"></span>12. HDBSCAN 정의</a>
-    <a class="nav-item" data-target="s13" data-c="orange"><span class="ndot"></span>13. 4가지 동 페르소나</a>
-    <a class="nav-item" data-target="s14" data-c="orange"><span class="ndot"></span>14. HL 사각지대 페르소나</a>
+    <a class="nav-item" data-target="s13" data-c="orange"><span class="ndot"></span>13. HH 5가지 페르소나</a>
+    <a class="nav-item" data-target="s14" data-c="orange"><span class="ndot"></span>14. HL 5가지 페르소나</a>
     <a class="nav-item" data-target="s15" data-c="orange"><span class="ndot"></span>15. 동별 위험 밀도 TOP</a>
   </div>
   <div class="nav-group">
     <div class="nav-label">SECTION 4 · 정책</div>
     <a class="nav-item" data-target="s16" data-c="green"><span class="ndot"></span>16. AI CCTV 정책 추세</a>
     <a class="nav-item" data-target="s17" data-c="green"><span class="ndot"></span>17. 좋은 기술의 한계</a>
-    <a class="nav-item" data-target="s18" data-c="green"><span class="ndot"></span>18. 연남동 케이스</a>
+    <a class="nav-item" data-target="s18" data-c="green"><span class="ndot"></span>18. 명동 케이스</a>
     <a class="nav-item" data-target="s19" data-c="green"><span class="ndot"></span>19. 시스템 흐름</a>
     <a class="nav-item" data-target="s20" data-c="green"><span class="ndot"></span>20. KPI · 확장</a>
   </div>
@@ -417,7 +418,7 @@
   </div>
 </aside>
 
-<header class="topbar"><span class="dot"></span>SEOUL · DEMENTIA RISK · 22 SLIDES</header>
+<header class="topbar"><span class="dot"></span>SEOUL · DEMENTIA RISK · 23 SLIDES</header>
 
 <main>
 
@@ -452,7 +453,7 @@
       </svg>
     </div>
   </div>
-  <span class="pageno">SLIDE 01 / 22</span>
+  <span class="pageno">SLIDE 01 / 23</span>
 </section>
 
 <!-- 2. CONTENTS -->
@@ -493,7 +494,7 @@
       <div class="tdetail">검증 KPI · 시스템 확장 · Q&amp;A</div>
     </div>
   </div>
-  <span class="pageno">SLIDE 02 / 22</span>
+  <span class="pageno">SLIDE 02 / 23</span>
 </section>
 
 <!-- 3. 치매 실종 문제 -->
@@ -558,7 +559,7 @@
     <span class="ic">FINDING</span>
     자치구 평균에 가려진 사각지대 — <strong>격자 단위 진단</strong>이 필요한 이유 · 5배 이상의 격자별 위험 격차가 동일 자치구 안에 공존.
   </div>
-  <span class="pageno">SLIDE 03 / 22</span>
+  <span class="pageno">SLIDE 03 / 23</span>
 </section>
 
 <!-- 4. 기존 분석의 한계 -->
@@ -609,7 +610,7 @@
   <div class="callout dark" style="margin-top:14px">
     <strong>해결책 →</strong> 50m 격자 단위 + 공간 자기상관 (LISA) + 환경 군집화 (HDBSCAN)으로 <strong>격자 단위 핀셋 진단</strong>
   </div>
-  <span class="pageno">SLIDE 04 / 22</span>
+  <span class="pageno">SLIDE 04 / 23</span>
 </section>
 
 <!-- 5. 3-Layer 진단 프레임 -->
@@ -657,7 +658,7 @@
   <div class="callout yellow">
     <strong>차별점 →</strong> 자치구 단위 가산 통계가 아닌 <strong>격자 단위 비지도 학습</strong>. 사전 가설 없이 환경 패턴이 데이터에서 자생적으로 등장 — 정책 의사결정 지원 도구.
   </div>
-  <span class="pageno">SLIDE 05 / 22</span>
+  <span class="pageno">SLIDE 05 / 23</span>
 </section>
 
 <!-- 6. 50m 격자 -->
@@ -700,7 +701,7 @@
   <div class="callout yellow" style="margin-top:14px;font-size:13px;text-align:center">
     정책 집행 단위와 정확히 일치 — <strong>어디에 무엇을 투입할지 지도 한 장으로 결정</strong>
   </div>
-  <span class="pageno">SLIDE 06 / 22</span>
+  <span class="pageno">SLIDE 06 / 23</span>
 </section>
 
 <!-- 7. 분석 파이프라인 -->
@@ -759,7 +760,7 @@
     </div>
   </div>
 
-  <span class="pageno">SLIDE 07 / 22</span>
+  <span class="pageno">SLIDE 07 / 23</span>
 </section>
 
 <!-- 8. 데이터 8개 출처 -->
@@ -787,7 +788,7 @@
       <li>8개 출처를 <strong>50m 격자 ID 기준 join</strong> → 13개 환경 변수 추출</li>
     </ul>
   </div>
-  <span class="pageno">SLIDE 08 / 22</span>
+  <span class="pageno">SLIDE 08 / 23</span>
 </section>
 
 <!-- 9. PCA 위험도 점수 -->
@@ -835,7 +836,95 @@
       <div style="font-size:10.5px;color:var(--muted);margin-top:6px;text-align:center;font-weight:600">기여도 (PCA 가중치) · 0 ~ 10</div>
     </div>
   </div>
-  <span class="pageno">SLIDE 09 / 22</span>
+  <span class="pageno">SLIDE 09 / 23</span>
+</section>
+
+<!-- 9B. risk_score 타당성 검토 -->
+<section id="s09b" data-section="9.5">
+  <div class="secnum orange">SLIDE 09+ · VALIDATION</div>
+  <h2 class="sectitle">PCA risk_score 타당성 검토</h2>
+  <p class="secsub">Target_y = (구별 치매노인 실종 발생확률) × (격자점 별 치매노인 예상 수) — 공간 블록 CV로 risk_score의 예측력 검증</p>
+
+  <div style="display:grid;grid-template-columns:0.85fr 1fr 1fr;gap:14px;align-items:stretch">
+    <!-- Spearman + 비교 카드 -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="card orange" style="padding:14px 18px">
+        <div class="head" style="margin-bottom:6px">📈 Spearman 상관계수</div>
+        <div style="font-family:monospace;font-size:44px;font-weight:900;color:var(--orange-deep);line-height:1;letter-spacing:-.02em">0.7427</div>
+        <div style="font-size:11.5px;color:var(--text-soft);margin-top:8px;line-height:1.55">
+          risk_score ↔ Target_y 간 <strong>강한 양의 순위 상관</strong> — PCA로 합성한 점수가 실제 위험 분포를 잘 따라간다는 1차 증거
+        </div>
+      </div>
+      <div class="card" style="border-color:var(--text);padding:12px 16px">
+        <div class="head" style="margin-bottom:6px">🧪 검증 설계</div>
+        <ul class="bul" style="font-size:11.5px">
+          <li style="font-size:11.5px;padding:3px 0 3px 14px">5-Fold <strong>공간 블록 CV</strong> (지리적 누수 차단)</li>
+          <li style="font-size:11.5px;padding:3px 0 3px 14px">단독 risk_score vs 원변수 13개</li>
+          <li style="font-size:11.5px;padding:3px 0 3px 14px">개별 변수 CV R² 순위 산출</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CV 결과 비교 표 -->
+    <div class="card red" style="padding:12px 16px">
+      <div class="head" style="margin-bottom:8px">📊 공간 블록 CV — risk_score 단독</div>
+      <div style="font-family:monospace;font-size:11px;line-height:1.7">
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px;color:var(--muted);font-weight:800;border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:4px">
+          <div>Fold</div><div style="text-align:right">R²</div><div style="text-align:right">MSE</div>
+        </div>
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>0</div><div style="text-align:right;color:var(--text)">0.1876</div><div style="text-align:right;color:var(--text-soft)">0.0120</div></div>
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>1</div><div style="text-align:right;color:var(--text)">0.1987</div><div style="text-align:right;color:var(--text-soft)">0.0078</div></div>
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>2</div><div style="text-align:right;color:var(--text)">0.2375</div><div style="text-align:right;color:var(--text-soft)">0.0162</div></div>
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>3</div><div style="text-align:right;color:var(--text)">0.3151</div><div style="text-align:right;color:var(--text-soft)">0.0064</div></div>
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>4</div><div style="text-align:right;color:var(--text)">0.1728</div><div style="text-align:right;color:var(--text-soft)">0.0062</div></div>
+        <div style="border-top:2px solid var(--red);margin-top:5px;padding-top:5px;font-weight:900;display:grid;grid-template-columns:30px 1fr 1fr;gap:6px;color:var(--red-deep)">
+          <div>평균</div><div style="text-align:right">0.2223<small style="color:var(--muted);font-weight:600">±0.0571</small></div><div style="text-align:right">0.0097<small style="color:var(--muted);font-weight:600">±0.0043</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card green" style="padding:12px 16px">
+      <div class="head" style="margin-bottom:8px">📊 공간 블록 CV — PCA 원변수 13개</div>
+      <div style="font-family:monospace;font-size:11px;line-height:1.7">
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px;color:var(--muted);font-weight:800;border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:4px">
+          <div>Fold</div><div style="text-align:right">R²</div><div style="text-align:right">MSE</div>
+        </div>
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>0</div><div style="text-align:right;color:var(--text)">0.3720</div><div style="text-align:right;color:var(--text-soft)">0.0093</div></div>
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>1</div><div style="text-align:right;color:var(--text)">0.3209</div><div style="text-align:right;color:var(--text-soft)">0.0066</div></div>
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>2</div><div style="text-align:right;color:var(--text)">0.4117</div><div style="text-align:right;color:var(--text-soft)">0.0125</div></div>
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>3</div><div style="text-align:right;color:var(--text)">0.4407</div><div style="text-align:right;color:var(--text-soft)">0.0053</div></div>
+        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>4</div><div style="text-align:right;color:var(--text)">0.2121</div><div style="text-align:right;color:var(--text-soft)">0.0059</div></div>
+        <div style="border-top:2px solid var(--green);margin-top:5px;padding-top:5px;font-weight:900;display:grid;grid-template-columns:30px 1fr 1fr;gap:6px;color:var(--green-deep)">
+          <div>평균</div><div style="text-align:right">0.3515<small style="color:var(--muted);font-weight:600">±0.0900</small></div><div style="text-align:right">0.0079<small style="color:var(--muted);font-weight:600">±0.0030</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 개별 변수 CV R² 순위 -->
+  <div class="card" style="border-color:var(--blue);padding:12px 18px;margin-top:12px">
+    <div class="head" style="color:var(--blue-deep);margin-bottom:8px">🥇 개별 변수 CV R² 순위 (단일 변수로만 학습 시)</div>
+    <div style="display:grid;grid-template-columns:repeat(13,1fr);gap:4px;font-size:10.5px;font-family:monospace">
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">is_residential</div><div style="background:#dcfce7;color:#15803d;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">0.2645</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0977</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">rest_200m</div><div style="background:#dcfce7;color:#15803d;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">0.1630</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0498</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">road_complex</div><div style="background:#dcfce7;color:#15803d;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">0.1314</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0522</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">intersect</div><div style="background:#fef3c7;color:#ca8a04;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">0.0677</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0377</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">fac_200m</div><div style="background:#fee2e2;color:#dc2626;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">-0.0169</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0478</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">deadend</div><div style="background:#fee2e2;color:#dc2626;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">-0.0261</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0500</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">POPULATION</div><div style="background:#fee2e2;color:#dc2626;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">-0.0262</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0451</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">STORE</div><div style="background:#fee2e2;color:#dc2626;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">-0.0348</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0267</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">slope</div><div style="background:#fee2e2;color:#dc2626;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">-0.0485</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0355</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">INFRA</div><div style="background:#fee2e2;color:#dc2626;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">-0.0538</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0307</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">rest_cell</div><div style="background:#fee2e2;color:#dc2626;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">-0.0585</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0424</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">park_200m</div><div style="background:#fee2e2;color:#dc2626;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">-0.0608</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0420</div></div>
+      <div style="text-align:center"><div style="font-weight:900;color:var(--text)">fac_cell</div><div style="background:#fee2e2;color:#dc2626;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">-0.0677</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0454</div></div>
+    </div>
+  </div>
+
+  <div class="callout dark" style="margin-top:12px;font-size:12.5px">
+    <strong style="color:var(--yellow)">결론 →</strong> 단일 변수로는 노이즈 수준이지만 PCA 합성 risk_score는 평균 R² 0.22, 원변수 13개 함께 쓰면 0.35 — <strong>PCA가 다중 변수의 위험 신호를 효과적으로 응축</strong>한 것이 확인됨. Spearman 0.74로 순위 일치도도 높음.
+  </div>
+  <span class="pageno">SLIDE 09+ / 23</span>
 </section>
 
 <!-- 10. LISA 정의·근거 -->
@@ -893,7 +982,7 @@
       </div>
     </div>
   </div>
-  <span class="pageno">SLIDE 10 / 22</span>
+  <span class="pageno">SLIDE 10 / 23</span>
 </section>
 
 </main>
@@ -968,7 +1057,7 @@
       </div>
     </div>
   </div>
-  <span class="pageno">SLIDE 11 / 22</span>
+  <span class="pageno">SLIDE 11 / 23</span>
 </section>
 
 <!-- 12. HDBSCAN 정의·근거 -->
@@ -1044,106 +1133,124 @@
       </div>
     </div>
   </div>
-  <span class="pageno">SLIDE 12 / 22</span>
+  <span class="pageno">SLIDE 12 / 23</span>
 </section>
 
 <!-- 13. HDBSCAN 군집 조합 4가지 동 페르소나 (HH) -->
 <section id="s13" data-section="13">
-  <div class="secnum orange">SLIDE 13 · PERSONA (HH)</div>
-  <h2 class="sectitle">HDBSCAN 군집 조합으로 본 4가지 동 페르소나 (HH)</h2>
-  <p class="secsub">사전 라벨링 없이 환경 군집(0 ~ 96)이 결합된 양상으로 <strong>도시 동선의 4가지 핵심 유형</strong>을 식별</p>
+  <div class="secnum orange">SLIDE 13 · HH PERSONA</div>
+  <h2 class="sectitle">HH 동 페르소나 — 5가지 핵심 유형</h2>
+  <p class="secsub">82개 클러스터를 5개 그룹으로 묶어 본 서울 HH 위험구역의 도시 기능 유형</p>
 
-  <div class="persona-grid">
-    <div class="persona-card a">
-      <span class="pemoji">🏛</span>
-      <div class="pcode">그룹 A · 군집 [0, 1] 포함</div>
-      <div class="ptitle">유동인구 폭발형 고밀도 상업·인프라 거점</div>
-      <div class="pdesc">가장 강력한 상업 지표와 인프라 밀집도를 가진 군집(0·1)만으로 이루어진 구역. 상가·휴게음식점이 집중되어 외부 유입 인구와 자체 거주 인구의 교차가 활발한 핵심 번화가 또는 메인 상권. 보행자와 차량 통행이 겹쳐 유동 인구 밀도 매우 높음.</div>
-      <div class="pdong">송파구 가락2동·오금동 · 양천구 신월1동·신정4동 · 동대문구 용신동·장안1동·이문1동 · 강서구 우장산동 · 광진구 군자동 · 중랑구 중곡2동</div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:10px">
+    <div class="persona-card a" style="padding:10px 12px">
+      <div class="pcode" style="font-size:9.5px">cluster [6,1,4,0+...]</div>
+      <div class="ptitle" style="font-size:13px;line-height:1.3">🔴 ① 초고위험<br>코어형</div>
+      <div class="pdesc" style="font-size:10.5px;line-height:1.5">상업(6·4·0) + 주거(1) + 생활 클러스터 대량 혼합. 도시 기능이 가장 격렬히 충돌. cluster diversity 매우 높음.</div>
+      <div class="pdong" style="font-size:10px">명동 · 왕십리2동 · 왕십리도선동 · 중곡2동 · 행당1동</div>
     </div>
-
-    <div class="persona-card b">
-      <span class="pemoji">🏠</span>
-      <div class="pcode">그룹 B · 군집 [5, 18, 19] 포함</div>
-      <div class="ptitle">미로형 골목상권 및 생활 밀착형 이면도로 거주지</div>
-      <div class="pdesc">막다른 길과 복잡한 이면도로(군집 5)가 많아 보행 동선이 다소 엉켜있는 구도심·골목 상권. 반경 200m 이내 편의시설·휴게음식점(군집 18·19)이 촘촘하게 박혀 있어 좁은 골목 사이사이로 생활 인프라가 매우 잘 갖춰진 것이 특징. 연남동·서교동 같은 골목 핫플레이스나 거주 인구가 빽빽한 빌라·단독주택 밀집지.</div>
-      <div class="pdong">서대문구 연남동·북가좌2동 · 성북구 장위1동·장위2동 · 은평구 역촌동·증산동 · 마포구 서교동·성산1동</div>
+    <div class="persona-card b" style="padding:10px 12px;border-color:var(--orange);border-top-color:var(--orange)">
+      <div class="pcode" style="font-size:9.5px;color:var(--orange-deep)">cluster [1,0,4,6]</div>
+      <div class="ptitle" style="font-size:13px;line-height:1.3">🟠 ② 전통 고밀도<br>상업 중심형</div>
+      <div class="pdesc" style="font-size:10.5px;line-height:1.5">상업 클러스터 중심(6·0·4), 주거 비중 낮음. 구조 단순하지만 밀도 극단적 — 관광·유통·업무 집중.</div>
+      <div class="pdong" style="font-size:10px">명동 · 을지로동 · 황학동 · 동화동</div>
     </div>
-
-    <div class="persona-card c">
-      <span class="pemoji">🌳</span>
-      <div class="pcode">그룹 C · 군집 [3, 16] 포함</div>
-      <div class="ptitle">경사도 높은 고지대 공원 품은 근린 주거권</div>
-      <div class="pdesc">군집 3(경사도 1위, 공원 1위)과 군집 16(근린시설 인접)이 결합된 독특한 형태. 평지보다 지대가 다소 높거나 경사가 있어 물리적 보행 이동에는 에너지가 더 쓰일 수 있음. 주변 녹지(공원)가 훌륭하게 조성되어 있고 군집 생활시설이 확보되어 자연 친화적 고밀도 주거지 형태.</div>
-      <div class="pdong">강북구 송천동</div>
+    <div class="persona-card" style="padding:10px 12px;border:2px solid var(--yellow);border-top:5px solid var(--yellow)">
+      <div class="pcode" style="font-size:9.5px;color:var(--yellow-deep)">cluster [6,1,4,0+15,22,17]</div>
+      <div class="ptitle" style="font-size:13px;line-height:1.3">🟡 ③ 주거 기반<br>혼합형 위험</div>
+      <div class="pdesc" style="font-size:10.5px;line-height:1.5">주거 클러스터(1) 강함 + 상업 일부 침투. 외곽 생활권에 상업 확장 — 골목상권 발달.</div>
+      <div class="pdong" style="font-size:10px">수유2동 · 수유3동 · 화곡3동 · 상봉2동</div>
     </div>
-
-    <div class="persona-card d">
-      <span class="pemoji">🔄</span>
-      <div class="pcode">그룹 D · 군집 [0, 1, 18, 19] 포함</div>
-      <div class="ptitle">메인 상권과 골목 인프라가 결합된 초고밀도 복합 생활권</div>
-      <div class="pdesc">대형 상권·인프라(군집 0·1)와 골목 구석구석의 근거리 편의시설(군집 18·19) 군집이 모두 나타나는 지역. 대로변 번화 상업 구역과 그 배후의 촘촘한 생활 상권이 혼재되어 공간 활용도가 높고 시간대 무관하게 인구 활동성이 꾸준히 높게 나타남.</div>
-      <div class="pdong">중랑구 면목본동</div>
+    <div class="persona-card c" style="padding:10px 12px">
+      <div class="pcode" style="font-size:9.5px">cluster [6,1,4,0] 소수</div>
+      <div class="ptitle" style="font-size:13px;line-height:1.3">🟢 ④ 중간 밀도<br>안정 혼합형</div>
+      <div class="pdesc" style="font-size:10.5px;line-height:1.5">핵심 클러스터는 있으나 다양성 낮음. 서울 평균형 구조 + 일부 상업 기능.</div>
+      <div class="pdong" style="font-size:10px">교남동 · 구로4동 · 용문동</div>
+    </div>
+    <div class="persona-card d" style="padding:10px 12px">
+      <div class="pcode" style="font-size:9.5px">15~20개 클러스터 동시</div>
+      <div class="ptitle" style="font-size:13px;line-height:1.3">🔵 ⑤ 확장된 다중<br>클러스터 복합형</div>
+      <div class="pdesc" style="font-size:10.5px;line-height:1.5">거의 모든 도시 기능 존재. urban mosaic + 기능 충돌 + 다양성 최대. <strong>정책적으로 가장 어려운 지역</strong>.</div>
+      <div class="pdong" style="font-size:10px">중곡2동 · 왕십리도선동 · 행당1동</div>
     </div>
   </div>
 
-  <div class="callout dark" style="font-size:12px">
+  <div class="card" style="border-color:var(--text);padding:10px 16px;margin-bottom:10px">
+    <div class="head" style="margin-bottom:4px;font-size:11.5px">🧠 클러스터 의미 매핑 (82 valid clusters)</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;font-size:11px;font-family:monospace">
+      <div><b style="color:var(--red-deep)">6,3,0,4</b> · 고밀도 상업/복합 핵심지</div>
+      <div><b style="color:var(--orange-deep)">1,2,17,24</b> · 일반 주거</div>
+      <div><b style="color:var(--yellow-deep)">18,19,20,30</b> · 외곽 생활권</div>
+      <div><b style="color:var(--green-deep)">27,31,32,33</b> · 저밀도</div>
+      <div><b style="color:var(--blue-deep)">5,7,8,23</b> · 특수/자연/비도시</div>
+    </div>
+  </div>
+
+  <div class="callout dark" style="font-size:11.5px">
     <span style="color:var(--yellow);font-weight:900;margin-right:8px">NOTE</span>
-    각 색은 HDBSCAN 군집 ID — 위 4개 그룹은 특정 군집 조합이 함께 나타나는 동의 패턴을 명명한 것. <strong>군집 ID는 클러스터링 결과 그대로 사용 (사전 라벨링 없음)</strong>. HDBSCAN 82개 환경 군집이 서울 전역 243,920 격자에 자생적으로 분포.
+    사전 라벨링 없이 82개 환경 군집이 결합된 양상으로 5개 페르소나가 자생적으로 등장. 군집 ID는 HDBSCAN 결과 그대로 사용 — 243,920 격자 전역.
   </div>
-  <span class="pageno">SLIDE 13 / 22</span>
+  <span class="pageno">SLIDE 13 / 23</span>
 </section>
 
 <!-- 14. HL 사각지대 페르소나 — 그룹 E -->
 <section id="s14" data-section="14">
-  <div class="secnum orange">SLIDE 14 · BLIND SPOT (HL)</div>
-  <h2 class="sectitle">HL 사각지대 페르소나 — 그룹 E · LL → HH 유입 동선 인사이트</h2>
-  <p class="secsub">거주 인구 부재 통과 구역에 응축된 HL과 그 주변 LL → HH로 흘러가는 노인 동선 — 자치구 평균이 가리는 점 단위 위험구역</p>
+  <div class="secnum orange">SLIDE 14 · HL PERSONA</div>
+  <h2 class="sectitle">HL 사각지대 페르소나 — 5가지 비도시·확장형 유형</h2>
+  <p class="secsub">HL 948개 격자에서 자생적으로 등장한 5개 도시 외곽·전이 페르소나</p>
 
-  <div class="gE-hero">
-    <span class="gE-tag">⚠️ 그룹 E · 군집 [6, 8] 포함 (HL 142개 응축)</span>
-    <div class="gE-title">거주 인구 부재 통과 구역 — 도심 특수목적 + 외곽 IC 배후</div>
-    <div class="gE-desc">
-      거주(POPULATION 0) · 상가(STORE 평균 4 vs 서울 192) · 인프라(INFRA 0) <strong>모두 부재하는 비주거 격자</strong>. 그러나 도로 복잡도(6.60) · 막다른길(1.0) 시그너처가 강해 HL(위험↑·주변↓) 응축. 격자당 65+ 추정 <strong>14.7명 (서울 평균 7.7의 2배)</strong> — 인근 노인 거주민의 통과 동선이 응축된 구역.
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:10px">
+    <div class="persona-card a" style="padding:10px 12px">
+      <div class="pcode" style="font-size:9.5px">cluster [8, 7, 5]</div>
+      <div class="ptitle" style="font-size:13px;line-height:1.3">🔴 ① 극저밀도<br>자연/비도시</div>
+      <div class="pdesc" style="font-size:10.5px;line-height:1.5">STORE↓↓↓ · facility↓↓↓ · population↓↓↓ · slope 일부↑. 도시 기능이 거의 없는 비활성 공간.</div>
+      <div class="pdong" style="font-size:10px">산지 / 공원 / 개발 제한 구역 — "빈 공간" 성격</div>
     </div>
-    <div class="gE-cells">
-      <div class="gE-cell">
-        <h5>E-1 · 도심 특수목적 비주거</h5>
-        <div class="body">
-          여의동(국회·금융) · 종로1·2·3·4가동(정부청사)<br>
-          용산2가동·한강로동·남영동·서빙고동(국방·외교)<br>
-          청운효자동(청와대) · 상암동(DMC 미디어단지)<br>
-          <strong>정부·외교·금융·미디어로 점거된 도심 내 거주 0 구역</strong>
-        </div>
+    <div class="persona-card b" style="padding:10px 12px;border-color:var(--orange);border-top-color:var(--orange)">
+      <div class="pcode" style="font-size:9.5px;color:var(--orange-deep)">cluster [2,3,6,0,17,31]</div>
+      <div class="ptitle" style="font-size:13px;line-height:1.3">🟠 ② 주거 기반<br>단순 구조</div>
+      <div class="pdesc" style="font-size:10.5px;line-height:1.5">is_residential↑ · STORE↓ · facility 중간. 서울 평균보다 단순한 주거 구조.</div>
+      <div class="pdong" style="font-size:10px">오래된 주거지 · 기능 단순 · 상업 거의 없음</div>
+    </div>
+    <div class="persona-card" style="padding:10px 12px;border:2px solid var(--yellow);border-top:5px solid var(--yellow)">
+      <div class="pcode" style="font-size:9.5px;color:var(--yellow-deep)">cluster [1, 16, 3]</div>
+      <div class="ptitle" style="font-size:13px;line-height:1.3">🟡 ③ 인프라 편중형<br>비균형 주거</div>
+      <div class="pdesc" style="font-size:10.5px;line-height:1.5">STORE↑ or POPULATION↑ 일부 · facility 일부만. 한두 기능만 과도 발달한 비균형 구조.</div>
+      <div class="pdong" style="font-size:10px">특정 상권/시설 집중 · 주변 인프라 부족</div>
+    </div>
+    <div class="persona-card c" style="padding:10px 12px">
+      <div class="pcode" style="font-size:9.5px">cluster [20,22,26,32,33,39]</div>
+      <div class="ptitle" style="font-size:13px;line-height:1.3">🟢 ④ 외곽 확장<br>생활권</div>
+      <div class="pdesc" style="font-size:10.5px;line-height:1.5">POPULATION↑ · STORE 중간 · road complexity↓ · facility 낮음. 도시 외곽 생활권.</div>
+      <div class="pdong" style="font-size:10px">신도시/외곽 주거 · 생활 인프라 부족 · 확장 중</div>
+    </div>
+    <div class="persona-card d" style="padding:10px 12px">
+      <div class="pcode" style="font-size:9.5px">cluster [15,19,21,24,25,27,30,37]</div>
+      <div class="ptitle" style="font-size:13px;line-height:1.3">🔵 ⑤ 혼합형<br>전이 클러스터</div>
+      <div class="pdesc" style="font-size:10.5px;line-height:1.5">모든 변수 중간값 · 특정 강한 feature 없음 · 구조 불안정. 도시 ↔ 외곽 경계.</div>
+      <div class="pdong" style="font-size:10px">재개발/변화 구간 · 구조가 안정되지 않음</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:var(--text);padding:10px 16px;margin-bottom:10px">
+    <div class="head" style="margin-bottom:6px;font-size:11.5px">🔥 HH vs HL 구조적 결론 — 서울 공간은 2축으로 나뉜다</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11.5px">
+      <div style="background:var(--red-soft);border-left:4px solid var(--red);padding:8px 12px;border-radius:6px">
+        <div style="font-weight:900;color:var(--red-deep);margin-bottom:2px">🧱 HH 구조 (압축형 도시)</div>
+        <div style="color:var(--text-soft);font-size:11px">명동 · 왕십리 · 중곡 · 행당<br><strong style="color:var(--text)">"강한 도시 기능 집중"</strong></div>
       </div>
-      <div class="gE-cell">
-        <h5>E-2 · 외곽 산업 · 교통 결절</h5>
-        <div class="body">
-          강서구 방화2동(공항 배후) · 가양1동<br>
-          금천구 가산동(가산디지털산업단지)<br>
-          노원구 공릉2동(육사·과기대) · 사당2동(사당IC)<br>
-          <strong>화물 터미널 · 산업단지 · 고속도로 IC 배후</strong>
-        </div>
+      <div style="background:var(--blue-soft);border-left:4px solid var(--blue);padding:8px 12px;border-radius:6px">
+        <div style="font-weight:900;color:var(--blue-deep);margin-bottom:2px">🌫 HL 구조 (확장/비균형 도시)</div>
+        <div style="color:var(--text-soft);font-size:11px">수유 · 외곽 주거 · 산지/공원 · 전이 지역<br><strong style="color:var(--text)">"구조가 깨지거나 퍼진 영역"</strong></div>
       </div>
     </div>
   </div>
 
-  <div class="gE-flow">
-    <div class="gh">🔁 LL → HH 유입 동선 — 노인 통행로의 위험 응축 패턴</div>
-    <div style="font-size:11.5px;color:var(--text-soft);margin-bottom:10px;line-height:1.65">
-      LL(안전 거주지)에 거주하는 노인이 일과 중 도심·외곽 비주거 구역(HL)을 통과해 HH(상권·교통 결절) 쪽으로 유입되는 동선 발견. LL의 안전은 <strong style="color:var(--text)">통계적 평균일 뿐</strong>, 노인 일과 동선의 시작점이라는 점에서 <strong style="color:var(--text)">발견 거점 · 안내 표지 배치 대상</strong>.
-    </div>
-    <div style="font-size:11px;font-weight:800;color:var(--muted);margin-bottom:5px;letter-spacing:.04em">핵심 동선 예시</div>
-    <div class="flow-row"><span class="flow-tag ll">LL</span><span class="flow-name">청운효자동</span><span class="flow-arr">→</span><span class="flow-tag hl">HL</span><span class="flow-name">종로</span><span class="flow-arr">→</span><span class="flow-tag hh">HH</span><span class="flow-name">광화문</span><span style="font-size:10.5px;color:var(--muted);margin-left:auto;font-family:-apple-system,sans-serif">도심 외출</span></div>
-    <div class="flow-row"><span class="flow-tag ll">LL</span><span class="flow-name">이촌·용산</span><span class="flow-arr">→</span><span class="flow-tag hl">HL</span><span class="flow-name">한강로</span><span class="flow-arr">→</span><span class="flow-tag hh">HH</span><span class="flow-name">여의도</span><span style="font-size:10.5px;color:var(--muted);margin-left:auto;font-family:-apple-system,sans-serif">한강 산책</span></div>
-    <div class="flow-row"><span class="flow-tag ll">LL</span><span class="flow-name">성산·연희</span><span class="flow-arr">→</span><span class="flow-tag hl">HL</span><span class="flow-name">상암</span><span class="flow-arr">→</span><span class="flow-tag hh">HH</span><span class="flow-name">DMC</span><span style="font-size:10.5px;color:var(--muted);margin-left:auto;font-family:-apple-system,sans-serif">공원 접근</span></div>
-
-    <div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--border);font-size:11.5px;color:var(--orange-deep);font-weight:700;line-height:1.6">
-      → 빨강 폴리곤: HH·HL 밀도 상위 20개 행정동 / 회색 점: LL 격자 (안전 거주지)<br>
-      → <strong>회색(LL) 거주민이 빨강(HH·HL)으로 통과하는 경계 격자가 정책 핀셋 투입 1순위</strong>
-    </div>
+  <div class="callout dark" style="font-size:11.5px">
+    <span style="color:var(--yellow);font-weight:900;margin-right:8px">정책 함의</span>
+    HH = 면 단위 광역 정비 · HL = 점 단위 핀셋 정책으로 <strong style="color:var(--yellow)">이중 처방</strong> 필요. HL 948 × 평균 0.0025km² ≈ <strong style="color:var(--yellow)">2.37km²</strong> — 표면적은 작지만 ROI가 가장 높은 우선 투입 대상.
   </div>
-  <span class="pageno">SLIDE 14 / 22</span>
+  <span class="pageno">SLIDE 14 / 23</span>
 </section>
 
 <!-- 15. 동별 위험 밀도 TOP -->
@@ -1159,10 +1266,10 @@
         <div style="display:flex;align-items:center;gap:10px">
           <div style="width:30px;font-family:monospace;font-weight:900;color:var(--red-deep);font-size:14px">1위</div>
           <div style="flex:1">
-            <div style="font-weight:800;font-size:13.5px">마포구 연남동</div>
-            <div style="font-size:10.5px;color:var(--muted)">HH 185 / 전체 약 250 · 그룹 B (골목 미로형)</div>
+            <div style="font-weight:800;font-size:13.5px">중구 명동</div>
+            <div style="font-size:10.5px;color:var(--muted)">HH 355 / 전체 386 · 도심형 고밀도 복합 활동 중심지</div>
           </div>
-          <div style="font-family:monospace;font-weight:900;color:var(--red-deep);font-size:18px">0.74</div>
+          <div style="font-family:monospace;font-weight:900;color:var(--red-deep);font-size:18px">0.92</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px">
           <div style="width:30px;font-family:monospace;font-weight:900;color:var(--orange-deep);font-size:14px">2위</div>
@@ -1227,7 +1334,7 @@
   <div class="callout dark">
     <strong style="color:var(--yellow)">정책 함의 →</strong> 자치구가 아닌 <strong>행정동 단위</strong>로 우선순위 도출. 연남동(그룹 B · 골목 미로형 1위) — 막다른 길 + 이면도로 + 200m 반경 편의시설 촘촘 시그너처. <strong>그룹 B 동일 페르소나 7개 동 (서교·성산·북가좌2·장위·역촌·증산·연희) 즉시 확장 가능</strong>.
   </div>
-  <span class="pageno">SLIDE 15 / 22</span>
+  <span class="pageno">SLIDE 15 / 23</span>
 </section>
 
 <!-- 16. AI CCTV 정책 추세 -->
@@ -1273,7 +1380,7 @@
       </div>
     </div>
   </div>
-  <span class="pageno">SLIDE 16 / 22</span>
+  <span class="pageno">SLIDE 16 / 23</span>
 </section>
 
 <!-- 17. 좋은 기술이 있지만 — 어디부터 볼지 모른다 -->
@@ -1352,33 +1459,34 @@
   <div style="font-size:11px;color:var(--muted);text-align:right">
     출처: 서울특별시 보도자료 (AI CCTV 고속검색시스템, 2026년 25개 자치구 완료) · 방법론: LISA × HDBSCAN 격자 단위 위험 점수 + 시간-반경 확률 모델 결합
   </div>
-  <span class="pageno">SLIDE 17 / 22</span>
+  <span class="pageno">SLIDE 17 / 23</span>
 </section>
 
 <!-- 18. 연남동 케이스 -->
 <section id="s18" data-section="18">
   <div class="secnum green">SLIDE 18 · CASE</div>
-  <h2 class="sectitle">연남동 케이스 — AI CCTV 탐색 우선순위 추천 시스템</h2>
-  <p class="secsub">서울시 AI CCTV 고속검색(100시간→10분)에 본 분석이 <strong>어디를 먼저 볼지 알려준다</strong> — 추가 인프라 0원, 골든타임 단축</p>
+  <h2 class="sectitle">명동 케이스 — 서울 도심형 고밀도 복합 활동 중심지</h2>
+  <p class="secsub">위험 밀도 <strong>0.92 (355 / 386)</strong> — 행정동 대부분이 같은 "고활동 도시 패턴"으로 채워짐</p>
 
   <div class="grid-2" style="gap:14px;margin-bottom:10px">
     <div class="card red" style="padding:10px 14px">
-      <div class="head" style="font-size:11.5px;margin-bottom:6px">🎯 왜 연남동인가 — 골목 미로형 1위</div>
+      <div class="head" style="font-size:11.5px;margin-bottom:6px">🎯 왜 명동인가 — 위험 밀도 1위</div>
       <ul class="bul red" style="font-size:12px">
-        <li style="font-size:12px;padding:3px 0 3px 14px"><strong>HH 185 / 약 250 (위험 밀도 0.74, 서울 1위)</strong></li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">막다른길 + 이면도로 + 200m 편의시설 촘촘</li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">길잃음 빈도 평지 대비 <strong>약 4배</strong></li>
+        <li style="font-size:12px;padding:3px 0 3px 14px"><strong>HH 355 / 전체 386 = 0.92</strong> — 서울 1위</li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">행정동 전체가 거의 <strong>하나의 거대한 중심상업지</strong>처럼 작동</li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">상업 ↑ · 인프라 ↑ · 인구 노출 ↑ · 도로 복잡 ↑</li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">일부 배후 공간(막다른길·경사) 포함</li>
       </ul>
     </div>
 
     <div class="card" style="border-color:var(--text);padding:12px 14px">
-      <div class="head">연남동 — HH 격자 185개 분포 (마포구, 위험 밀도 1위)</div>
-      <div style="position:relative;width:100%;aspect-ratio:5/3.6;background:#f1f5f9;border-radius:10px;overflow:hidden">
-        <svg viewBox="0 0 500 360" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%">
-          <text x="20" y="22" font-size="11" font-weight="700" fill="#64748b">연남동 HH 격자 185개</text>
-          <g id="yeonnam-dots"></g>
-          <text x="490" y="350" font-size="9" text-anchor="end" fill="#94a3b8">© Carto © OpenStreetMap contributors</text>
-        </svg>
+      <div class="head">명동 — 클러스터 구성 (상위 5개)</div>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px;font-size:11.5px;font-family:monospace">
+        <div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;align-items:center;background:var(--red-soft);padding:5px 10px;border-radius:6px"><b style="color:var(--red-deep)">cluster 6</b><div style="color:var(--text);font-family:-apple-system,sans-serif">인프라↑ · 상업↑ · 인구↑ · 주거↑</div><div style="color:var(--red-deep);font-weight:800;text-align:right">고밀도 중심</div></div>
+        <div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;align-items:center;background:var(--orange-soft);padding:5px 10px;border-radius:6px"><b style="color:var(--orange-deep)">cluster 1</b><div style="color:var(--text);font-family:-apple-system,sans-serif">STORE↑↑ · POPULATION↑↑ · 공원↑</div><div style="color:var(--orange-deep);font-weight:800;text-align:right">유동인구</div></div>
+        <div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;align-items:center;background:var(--yellow-soft);padding:5px 10px;border-radius:6px"><b style="color:var(--yellow-deep)">cluster 4</b><div style="color:var(--text);font-family:-apple-system,sans-serif">도로복잡↑↑ · 주거↑ · 인프라↑</div><div style="color:var(--yellow-deep);font-weight:800;text-align:right">복잡 생활</div></div>
+        <div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;align-items:center;background:var(--green-soft);padding:5px 10px;border-radius:6px"><b style="color:var(--green-deep)">cluster 0</b><div style="color:var(--text);font-family:-apple-system,sans-serif">공원↑↑ · 상업↑ · 인구↑</div><div style="color:var(--green-deep);font-weight:800;text-align:right">편의 공간</div></div>
+        <div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;align-items:center;background:var(--blue-soft);padding:5px 10px;border-radius:6px"><b style="color:var(--blue-deep)">cluster 5</b><div style="color:var(--text);font-family:-apple-system,sans-serif">막다른길↑ · 경사↑ · 상업↓</div><div style="color:var(--blue-deep);font-weight:800;text-align:right">비핵심 배후</div></div>
       </div>
     </div>
   </div>
@@ -1388,7 +1496,7 @@
       <div class="head" style="font-size:11.5px;margin-bottom:6px">🎥 탐색 우선순위 추천 시스템</div>
       <ul class="bul cyan" style="font-size:12px">
         <li style="font-size:12px;padding:3px 0 3px 14px">기존 AI 시스템에 <strong>추천 정보 공급</strong>하는 소프트웨어 레이어</li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">HH 격자 + 골목 미로 페르소나 → <strong>분석 우선순위 자동 제공</strong></li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">HH 격자 + 도심 복합 페르소나 → <strong>분석 우선순위 자동 제공</strong></li>
         <li style="font-size:12px;padding:3px 0 3px 14px">추가 인프라 비용 ≒ <strong>0원</strong></li>
       </ul>
     </div>
@@ -1396,23 +1504,23 @@
       <div class="head">⚡ 신고 → 추천 → 분석 (격자 단위)</div>
       <ol class="step-list">
         <li>실종 신고 접수 → <b>신고 위치 격자 ID</b> 산출</li>
-        <li>HH 185 격자 중 <b>막다른길·교차로 격자 우선</b> 추출 (약 30개)</li>
+        <li>명동 HH 355 격자 중 <b>cluster 6·1 우선</b> (고밀도 중심)</li>
         <li>인상착의·이동방향 자동 인식 → <b>10분 이내 동선 추정</b></li>
         <li>200m 반경 편의시설·약국 <b>안심 신고망 자동 알림</b></li>
       </ol>
     </div>
     <div class="card green" style="padding:10px 14px">
-      <div class="head" style="font-size:11.5px;margin-bottom:6px">💡 기대효과 — 시간·발견율·확산</div>
+      <div class="head" style="font-size:11.5px;margin-bottom:6px">💡 통합 페르소나 — 명동이 의미하는 것</div>
       <ul class="bul green" style="font-size:12px">
-        <li style="font-size:12px;padding:3px 0 3px 14px">실종 위치 주변 전수 → <strong>배회 확률 높은 곳 우선</strong></li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">100시간 → 10분 + 단계적 추적으로 <strong>시간 절약</strong></li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">골든타임 4h 내 발견율 70%→80%↑ (<strong>+10%p</strong>)</li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">그룹 B 7개 동 <strong>즉시 확장</strong></li>
+        <li style="font-size:12px;padding:3px 0 3px 14px"><strong>"서울 도심형 고밀도 복합 활동 중심지"</strong></li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">상업·인프라·인구·도로망이 모두 강함 + 배후 공간 일부</li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">행정동 92%가 단일 패턴 → <strong>핫스팟 전체가 하나의 위험구역</strong></li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">동일 페르소나 동(왕십리·중곡·행당) <strong>즉시 확장</strong></li>
       </ul>
     </div>
   </div>
 
-  <span class="pageno">SLIDE 18 / 22</span>
+  <span class="pageno">SLIDE 18 / 23</span>
 </section>
 
 <!-- 19. 시스템 흐름 -->
@@ -1478,7 +1586,7 @@
   <div class="callout dark" style="font-size:13px">
     <strong style="color:var(--yellow)">END-TO-END →</strong> 신고 발생부터 발견 알림까지 <strong>10분 이내</strong>를 목표로 동작 · 골든타임 4시간의 1/24 시점에서 동선 추정 완료
   </div>
-  <span class="pageno">SLIDE 19 / 22</span>
+  <span class="pageno">SLIDE 19 / 23</span>
 </section>
 
 <!-- 20. KPI · 확장 -->
@@ -1540,7 +1648,7 @@
   <div class="closing">
     데이터가 <span class="red">사각지대</span>를 찾고, 시스템이 <span class="green">골든타임</span>을 지킵니다.
   </div>
-  <span class="pageno">SLIDE 20 / 22</span>
+  <span class="pageno">SLIDE 20 / 23</span>
 </section>
 
 <!-- 21. 참고문헌 · 활용툴 · 데이터 출처 -->
@@ -1599,7 +1707,7 @@
       <p>● 좌표계 통일 EPSG:4326<br>● 인코딩 표준화 UTF-8<br>● Kakao Local API 주소 → 좌표 변환 (99.0% 정합)<br>● 8개 출처 → 50m 격자 ID 기준 join<br>● <b>13개 환경 변수 추출</b></p>
     </div>
   </div>
-  <span class="pageno">SLIDE 21 / 22</span>
+  <span class="pageno">SLIDE 21 / 23</span>
 </section>
 
 <!-- 22. Q&A -->
@@ -1609,7 +1717,7 @@
     <div class="underline"></div>
     <div class="sub-c">데이터로 진단 · 정책으로 연결 — 서울시 치매 노인 실종 위험구역 진단 · 22 슬라이드</div>
   </div>
-  <span class="pageno">SLIDE 22 / 22</span>
+  <span class="pageno">SLIDE 22 / 23</span>
 </section>
 
 <!-- 감사합니다 (보너스) -->
