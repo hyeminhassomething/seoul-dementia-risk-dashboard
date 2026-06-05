@@ -1295,25 +1295,30 @@
       <div class="head" style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Moran's I Scatter Plot — Anselin (1995)</div>
       <svg class="moran-svg" viewBox="0 0 500 460" preserveAspectRatio="xMidYMid meet">
         <defs>
+          <radialGradient id="blobGreenSoft" cx="50%" cy="50%" r="55%">
+            <stop offset="0%" stop-color="#bbf7d0" stop-opacity=".75"/>
+            <stop offset="60%" stop-color="#86efac" stop-opacity=".4"/>
+            <stop offset="100%" stop-color="#86efac" stop-opacity="0"/>
+          </radialGradient>
           <radialGradient id="blobRed" cx="50%" cy="50%" r="55%">
-            <stop offset="0%" stop-color="#fca5a5" stop-opacity=".95"/>
-            <stop offset="60%" stop-color="#ef4444" stop-opacity=".6"/>
-            <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#fecaca" stop-opacity=".7"/>
+            <stop offset="60%" stop-color="#fca5a5" stop-opacity=".4"/>
+            <stop offset="100%" stop-color="#fca5a5" stop-opacity="0"/>
           </radialGradient>
           <radialGradient id="blobRedDeep" cx="50%" cy="50%" r="55%">
-            <stop offset="0%" stop-color="#ef4444" stop-opacity=".98"/>
-            <stop offset="55%" stop-color="#dc2626" stop-opacity=".7"/>
-            <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#fca5a5" stop-opacity=".82"/>
+            <stop offset="55%" stop-color="#f87171" stop-opacity=".5"/>
+            <stop offset="100%" stop-color="#f87171" stop-opacity="0"/>
           </radialGradient>
           <radialGradient id="blobGreen" cx="50%" cy="50%" r="55%">
-            <stop offset="0%" stop-color="#86efac" stop-opacity=".95"/>
-            <stop offset="60%" stop-color="#22c55e" stop-opacity=".6"/>
-            <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#bbf7d0" stop-opacity=".75"/>
+            <stop offset="60%" stop-color="#86efac" stop-opacity=".4"/>
+            <stop offset="100%" stop-color="#86efac" stop-opacity="0"/>
           </radialGradient>
           <radialGradient id="blobGreenDeep" cx="50%" cy="50%" r="55%">
-            <stop offset="0%" stop-color="#22c55e" stop-opacity=".95"/>
-            <stop offset="55%" stop-color="#16a34a" stop-opacity=".7"/>
-            <stop offset="100%" stop-color="#16a34a" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#86efac" stop-opacity=".75"/>
+            <stop offset="55%" stop-color="#4ade80" stop-opacity=".5"/>
+            <stop offset="100%" stop-color="#4ade80" stop-opacity="0"/>
           </radialGradient>
         </defs>
 
@@ -1337,37 +1342,37 @@
         <polygon points="475,400 463,394 463,406" fill="#0f172a"/>
         <polygon points="60,35 54,47 66,47" fill="#0f172a"/>
 
-        <!-- LH 좌상: 빨강 블롭 + 안전 섬 -->
+        <!-- LH 좌상: 초록 블롭 + 안전 섬 (안전구역과 같은 톤) -->
         <g>
-          <ellipse cx="155" cy="125" rx="78" ry="52" fill="url(#blobRed)"/>
-          <rect x="115" y="113" width="80" height="28" rx="14" fill="#7f1d1d"/>
+          <ellipse cx="155" cy="125" rx="78" ry="52" fill="url(#blobGreenSoft)"/>
+          <rect x="115" y="113" width="80" height="28" rx="14" fill="#166534"/>
           <text x="155" y="132" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,'Apple SD Gothic Neo',sans-serif">안전 섬</text>
         </g>
-        <text x="92" y="65" fill="#dc2626" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">LH</text>
+        <text x="92" y="65" fill="#16a34a" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">LH</text>
 
-        <!-- HH 우상: 진한 빨강 + 핫스팟 -->
+        <!-- HH 우상: 연한 빨강 + 핫스팟 -->
         <g>
           <ellipse cx="365" cy="125" rx="88" ry="58" fill="url(#blobRedDeep)"/>
-          <rect x="323" y="113" width="84" height="28" rx="14" fill="#7f1d1d"/>
+          <rect x="323" y="113" width="84" height="28" rx="14" fill="#b91c1c"/>
           <text x="365" y="132" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,sans-serif">핫스팟</text>
         </g>
-        <text x="280" y="65" fill="#dc2626" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">HH</text>
+        <text x="280" y="65" fill="#ef4444" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">HH</text>
 
-        <!-- LL 좌하: 초록 + 안전구역 -->
+        <!-- LL 좌하: 연한 초록 + 안전구역 -->
         <g>
           <ellipse cx="155" cy="310" rx="80" ry="54" fill="url(#blobGreen)"/>
-          <rect x="113" y="298" width="84" height="28" rx="14" fill="#14532d"/>
+          <rect x="113" y="298" width="84" height="28" rx="14" fill="#166534"/>
           <text x="155" y="317" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,sans-serif">안전구역</text>
         </g>
-        <text x="92" y="252" fill="#15803d" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">LL</text>
+        <text x="92" y="252" fill="#16a34a" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">LL</text>
 
-        <!-- HL 우하: 초록 + HL 사각지대 -->
+        <!-- HL 우하: 연한 초록 + HL 사각지대 (브라운 라벨) -->
         <g>
           <ellipse cx="365" cy="310" rx="88" ry="58" fill="url(#blobGreenDeep)"/>
-          <rect x="313" y="298" width="104" height="28" rx="14" fill="#7c2d12"/>
+          <rect x="313" y="298" width="104" height="28" rx="14" fill="#9a3412"/>
           <text x="365" y="317" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,sans-serif">HL 사각지대</text>
         </g>
-        <text x="280" y="252" fill="#ea580c" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">HL</text>
+        <text x="280" y="252" fill="#f97316" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">HL</text>
 
         <!-- 축 라벨 -->
         <g font-family="-apple-system,'Apple SD Gothic Neo',sans-serif" fill="#64748b" font-size="11" font-weight="700">
@@ -1465,7 +1470,7 @@
     <div>
       <div class="card" style="border-color:var(--text);padding:10px 12px">
         <div class="head" style="margin-bottom:6px">LISA 4-Cluster — 서울 전역 50m 격자 (Queen contiguity · p&lt;0.05)</div>
-        <div id="s11-map-wrap" style="position:relative;width:100%;aspect-ratio:5/4;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+        <div id="s11-map-wrap" style="position:relative;width:100%;max-width:560px;aspect-ratio:1/1;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border);margin:0 auto">
           <iframe src="maps/seoul_hh_hl.html" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none" loading="lazy" title="서울 HH/HL 분포 지도"></iframe>
           <div class="s11-popups" id="s11-popups" style="position:absolute;inset:0;pointer-events:none"></div>
           <button id="s11-replay" style="position:absolute;bottom:8px;right:8px;background:#fff;border:1.5px solid var(--text);border-radius:999px;padding:4px 12px;font-size:11px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12);z-index:5;pointer-events:auto">↻ 다시 재생</button>
@@ -1572,7 +1577,7 @@
         <span>HH 클러스터 지도 — 서울 전역 (82 valid clusters)</span>
         <button id="s13-replay" style="background:#fff;border:1.5px solid var(--text);border-radius:999px;padding:2px 10px;font-size:10.5px;font-weight:800;cursor:pointer">↻ 다시 재생</button>
       </div>
-      <div id="s13-map-wrap" style="position:relative;width:100%;aspect-ratio:32/9;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+      <div id="s13-map-wrap" style="position:relative;width:100%;max-width:430px;aspect-ratio:1/1;margin:0 auto;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
         <iframe src="maps/hh.html" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none" loading="lazy" title="HH Clusters Map"></iframe>
 
         <!-- 5개 색별 클러스터 의미 매핑 팝업 오버레이 -->
@@ -2212,8 +2217,9 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   const wrap = document.getElementById('s13-popups');
   if (!sec || !wrap) return;
 
-  const LAT_MIN = 37.42, LAT_MAX = 37.70;
-  const LNG_MIN = 126.78, LNG_MAX = 127.18;
+  const LAT_MIN = 37.42, LAT_MAX = 37.71;
+  const LNG_MIN = 126.78, LNG_MAX = 127.19;
+  const PAD_L = 8, PAD_R = 92, PAD_T = 4, PAD_B = 96;
 
   // 5개 클러스터 그룹 — 색·매핑·대표 동(좌표)
   const GROUPS = [
@@ -2224,8 +2230,14 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
     { color:'blue',   bg:'#dbeafe', dark:'#1d4ed8', clusters:'5, 7, 8, 23',    label:'특수/자연/비도시',       dongs:[['청운효자동',37.5870,126.9690],['상암동',37.5790,126.8910],['평창동',37.6130,126.9740]] }
   ];
 
-  function lng2pct(lng){ return ((lng - LNG_MIN) / (LNG_MAX - LNG_MIN)) * 100; }
-  function lat2pct(lat){ return ((LAT_MAX - lat) / (LAT_MAX - LAT_MIN)) * 100; }
+  function lng2pct(lng){
+    const inner = (lng - LNG_MIN) / (LNG_MAX - LNG_MIN);
+    return PAD_L + inner * (PAD_R - PAD_L);
+  }
+  function lat2pct(lat){
+    const inner = (LAT_MAX - lat) / (LAT_MAX - LAT_MIN);
+    return PAD_T + inner * (PAD_B - PAD_T);
+  }
 
   function build(){
     wrap.innerHTML = '';
@@ -2289,9 +2301,12 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   const wrap = document.getElementById('s11-popups');
   if (!sec || !wrap) return;
 
-  // 서울 bbox: lat 37.42 ~ 37.70, lng 126.78 ~ 127.18 (지도에 보이는 영역)
-  const LAT_MIN = 37.42, LAT_MAX = 37.70;
-  const LNG_MIN = 126.78, LNG_MAX = 127.18;
+  // 서울 bbox + 컨테이너 안 plot area 보정 (Plotly margin 감안)
+  // 정사각형 컨테이너 1:1에서 지도가 표시되는 실제 영역
+  const LAT_MIN = 37.42, LAT_MAX = 37.71;
+  const LNG_MIN = 126.78, LNG_MAX = 127.19;
+  // plot area = 컨테이너의 [PAD_L%, PAD_R%] × [PAD_T%, PAD_B%]
+  const PAD_L = 8, PAD_R = 92, PAD_T = 4, PAD_B = 96;
 
   // 서울 주요 행정동 100+개 (lat, lng, 이름, 타입, score)
   const DONGS = [
@@ -2404,8 +2419,14 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
     ['종로 청운효자동', 37.5870, 126.9690, 'HL', null, 1.78]
   ];
 
-  function lng2pct(lng){ return ((lng - LNG_MIN) / (LNG_MAX - LNG_MIN)) * 100; }
-  function lat2pct(lat){ return ((LAT_MAX - lat) / (LAT_MAX - LAT_MIN)) * 100; }
+  function lng2pct(lng){
+    const inner = (lng - LNG_MIN) / (LNG_MAX - LNG_MIN);
+    return PAD_L + inner * (PAD_R - PAD_L);
+  }
+  function lat2pct(lat){
+    const inner = (LAT_MAX - lat) / (LAT_MAX - LAT_MIN);
+    return PAD_T + inner * (PAD_B - PAD_T);
+  }
 
   // 팝업 DOM 생성
   function buildPops(){
