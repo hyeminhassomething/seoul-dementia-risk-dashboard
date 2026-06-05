@@ -1704,69 +1704,81 @@
 <!-- 15. 동별 위험 밀도 TOP -->
 <section id="s15" data-section="15">
   <div class="secnum orange">SLIDE 15 · TOP 동</div>
-  <h2 class="sectitle">동별 위험 밀도 TOP — 행정동 단위 정책 우선순위</h2>
-  <p class="secsub">HH 격자 수 ÷ 전체 격자 수 · 위험 밀도 기준 상위 행정동 자동 도출 — <strong>연남동 1위</strong></p>
+  <h2 class="sectitle">동별 위험 밀도 TOP — 4가지 페르소나</h2>
+  <p class="secsub">클러스터 구성과 밀도만으로 본 서울 대표 위험구역 4동 — <strong>왕십리도선동의 혼합도가 가장 흥미로움</strong></p>
 
-  <div class="grid-2" style="gap:14px;margin-bottom:12px;align-items:start">
-    <div class="card red">
-      <div class="head">🥇 위험 밀도 TOP 5 행정동 (HH 비율)</div>
-      <div style="display:flex;flex-direction:column;gap:7px;margin-top:6px">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:30px;font-family:monospace;font-weight:900;color:var(--red-deep);font-size:14px">1위</div>
-          <div style="flex:1">
-            <div style="font-weight:800;font-size:13.5px">중구 명동</div>
-            <div style="font-size:10.5px;color:var(--muted)">HH 355 / 전체 386 · 도심형 고밀도 복합 활동 중심지</div>
-          </div>
-          <div style="font-family:monospace;font-weight:900;color:var(--red-deep);font-size:18px">0.92</div>
+  <div style="display:grid;grid-template-columns:1.05fr 1.4fr;gap:14px;margin-bottom:10px;align-items:start">
+    <!-- 4 페르소나 카드 -->
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <!-- 명동 -->
+      <div style="background:#fff;border:2px solid var(--red);border-left:6px solid var(--red);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center">
+        <div>
+          <div style="font-size:14px;font-weight:900;color:var(--red-deep)">중구 명동</div>
+          <div style="font-size:11.5px;color:var(--text);font-weight:700;margin-top:2px">도심형 초고밀도 상업·업무 복합 중심지</div>
+          <div style="font-size:10.5px;color:var(--muted);margin-top:2px;font-family:monospace">cluster [6, 1, 4, 0, 5] · 핵심 거의 모두</div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:30px;font-family:monospace;font-weight:900;color:var(--orange-deep);font-size:14px">2위</div>
-          <div style="flex:1">
-            <div style="font-weight:800;font-size:13.5px">강남구 신사동</div>
-            <div style="font-size:10.5px;color:var(--muted)">그룹 A (도심 상권형)</div>
-          </div>
-          <div style="font-family:monospace;font-weight:900;color:var(--orange-deep);font-size:18px">~0.68</div>
+        <div style="text-align:right">
+          <div style="font-family:monospace;font-size:22px;font-weight:900;color:var(--red-deep);line-height:1">0.92</div>
+          <div style="font-size:9.5px;color:var(--muted);font-weight:700">density</div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:30px;font-family:monospace;font-weight:900;color:var(--orange-deep);font-size:14px">3위</div>
-          <div style="flex:1">
-            <div style="font-weight:800;font-size:13.5px">은평구 진관동</div>
-            <div style="font-size:10.5px;color:var(--muted)">그룹 A 변형</div>
-          </div>
-          <div style="font-family:monospace;font-weight:900;color:var(--orange-deep);font-size:18px">~0.64</div>
+      </div>
+      <!-- 대치4동 -->
+      <div style="background:#fff;border:2px solid var(--orange);border-left:6px solid var(--orange);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center">
+        <div>
+          <div style="font-size:14px;font-weight:900;color:var(--orange-deep)">강남구 대치4동</div>
+          <div style="font-size:11.5px;color:var(--text);font-weight:700;margin-top:2px">고밀도 교육·주거·상업 결합 생활권</div>
+          <div style="font-size:10.5px;color:var(--muted);margin-top:2px;font-family:monospace">cluster [6, 1, 4] · 보조 클러스터 거의 없음</div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:30px;font-family:monospace;font-weight:900;color:var(--yellow-deep);font-size:14px">4위</div>
-          <div style="flex:1">
-            <div style="font-weight:800;font-size:13.5px">은평구 불광동</div>
-            <div style="font-size:10.5px;color:var(--muted)">도심 상권형</div>
-          </div>
-          <div style="font-family:monospace;font-weight:900;color:var(--yellow-deep);font-size:18px">~0.60</div>
+        <div style="text-align:right">
+          <div style="font-family:monospace;font-size:20px;font-weight:900;color:var(--orange-deep);line-height:1">~0.70</div>
+          <div style="font-size:9.5px;color:var(--muted);font-weight:700">density</div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:30px;font-family:monospace;font-weight:900;color:var(--yellow-deep);font-size:14px">5위</div>
-          <div style="flex:1">
-            <div style="font-weight:800;font-size:13.5px">강북구 명일2동 · 송파구 방이2동</div>
-            <div style="font-size:10.5px;color:var(--muted)">도심 상권형</div>
-          </div>
-          <div style="font-family:monospace;font-weight:900;color:var(--yellow-deep);font-size:18px">~0.58</div>
+      </div>
+      <!-- 왕십리도선동 (강조) -->
+      <div style="background:linear-gradient(135deg,var(--yellow-soft),#fff 60%);border:2.5px solid var(--yellow);border-left:6px solid var(--yellow);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;box-shadow:0 4px 16px rgba(234,179,8,.18);position:relative">
+        <div style="position:absolute;top:-8px;left:14px;background:var(--yellow);color:var(--text);font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px;letter-spacing:.04em">★ 가장 흥미로움 — 혼합도 최고</div>
+        <div>
+          <div style="font-size:14px;font-weight:900;color:var(--yellow-deep)">성동구 왕십리도선동</div>
+          <div style="font-size:11.5px;color:var(--text);font-weight:700;margin-top:2px">광역 교통거점 기반 복합 도시 중심지</div>
+          <div style="font-size:10.5px;color:var(--muted);margin-top:2px;font-family:monospace">cluster [6, 1, 4, 0 + 다수 보조] · 내부 이질성↑</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:monospace;font-size:20px;font-weight:900;color:var(--yellow-deep);line-height:1">~0.71</div>
+          <div style="font-size:9.5px;color:var(--muted);font-weight:700">density</div>
+        </div>
+      </div>
+      <!-- 수유3동 -->
+      <div style="background:#fff;border:2px solid var(--green);border-left:6px solid var(--green);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center">
+        <div>
+          <div style="font-size:14px;font-weight:900;color:var(--green-deep)">강북구 수유3동</div>
+          <div style="font-size:11.5px;color:var(--text);font-weight:700;margin-top:2px">고밀도 서민형 주거·생활상권 혼합 지역</div>
+          <div style="font-size:10.5px;color:var(--muted);margin-top:2px;font-family:monospace">cluster [6, 1, 4, 0 + 다수] · STORE·INFRA 낮음</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:monospace;font-size:20px;font-weight:900;color:var(--green-deep);line-height:1">~0.55</div>
+          <div style="font-size:9.5px;color:var(--muted);font-weight:700">density</div>
         </div>
       </div>
     </div>
 
-    <div class="card" style="border-color:var(--text);padding:10px 12px">
-      <div class="head">HH 밀도 분포 — 위험 밀도 TOP 행정동 라벨 매핑</div>
+    <!-- 지도 -->
+    <div class="card" style="border-color:var(--text);padding:8px 10px">
+      <div class="head" style="margin-bottom:4px;font-size:11px">HH 밀도 분포 — TOP 4 행정동 위치</div>
       <div style="position:relative;width:100%;aspect-ratio:5/4;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
-        <iframe src="maps/s15.html" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" title="동별 위험 밀도 TOP 지도"></iframe>
+        <iframe src="maps/s15.html" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none" loading="lazy" title="동별 위험 밀도 TOP 지도"></iframe>
       </div>
-      <div style="font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.55">
-        * 빨강 폴리곤: HH·HL 밀도 상위 20개 행정동 · 회색 점: LL 격자 (안전 거주지)
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
+        * 빨강 폴리곤: HH·HL 밀도 상위 행정동 · 회색 점: LL 격자
       </div>
     </div>
   </div>
 
-  <div class="callout dark">
-    <strong style="color:var(--yellow)">정책 함의 →</strong> 자치구가 아닌 <strong>행정동 단위</strong>로 우선순위 도출. 명동(위험 밀도 0.92 · 도심형 고밀도 복합 활동 중심지) + 왕십리·중곡·행당 등 <strong>동일 페르소나 동 즉시 확장 가능</strong>.
+  <div class="callout dark" style="font-size:11.5px;padding:8px 14px">
+    <span style="display:inline-block;color:var(--yellow);font-weight:900;margin-right:6px">📌 한 줄</span>
+    <b style="color:var(--red-deep)">명동</b> 도심 상업 중심 ·
+    <b style="color:var(--orange-deep)">대치4동</b> 교육·주거 ·
+    <b style="color:var(--yellow-deep)">왕십리도선동</b> 교통·상업 복합 거점(혼합도 최고) ·
+    <b style="color:#86efac">수유3동</b> 생활밀착형 주거·상권
   </div>
   <span class="pageno">SLIDE 15 / 23</span>
 </section>
