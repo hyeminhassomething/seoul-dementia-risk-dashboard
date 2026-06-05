@@ -1255,32 +1255,80 @@
   <p class="secsub">Local Moran's I · Anselin (1995) · 공간 자기상관 학계 표준 — 각 격자와 이웃의 위험도를 비교해 <strong>HH/HL/LH/LL 4가지 유형</strong>으로 분류. Queen contiguity weight + permutation test (p&lt;0.05) 적용.</p>
 
   <div class="lisa-grid">
-    <div class="moran-card">
-      <div class="head" style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Moran's I Scatter Plot — Anselin (1995)</div>
-      <svg class="moran-svg" viewBox="0 0 500 420">
-        <rect class="qrect" x="40" y="30" width="220" height="170" fill="#fef9c3"/>
-        <rect class="qrect" x="260" y="30" width="200" height="170" fill="#fee2e2"/>
-        <rect class="qrect" x="40" y="200" width="220" height="170" fill="#dbeafe"/>
-        <rect class="qrect" x="260" y="200" width="200" height="170" fill="#fed7aa"/>
-        <line class="axln" x1="40" y1="200" x2="460" y2="200"/>
-        <line class="axln" x1="260" y1="30" x2="260" y2="370"/>
-        <text class="ax" x="32" y="35" text-anchor="end">높음</text>
-        <text class="ax" x="32" y="205" text-anchor="end">평균</text>
-        <text class="ax" x="32" y="370" text-anchor="end">낮음</text>
-        <text class="ax" x="46" y="395">낮음</text>
-        <text class="ax" x="260" y="395" text-anchor="middle">평균</text>
-        <text class="ax" x="460" y="395" text-anchor="end">높음</text>
-        <text class="ax" x="14" y="200" text-anchor="middle" transform="rotate(-90,14,200)">이웃 셀 평균 위험도 (W·z)</text>
-        <text class="ax" x="250" y="415" text-anchor="middle">자기 셀 위험도 (z-score)</text>
-        <text class="qlabel" x="150" y="80" text-anchor="middle" fill="#ca8a04">LH</text>
-        <text class="qsub" x="150" y="100" text-anchor="middle" fill="#ca8a04">안전 섬 (저-고 인접)</text>
-        <text class="qlabel" x="360" y="80" text-anchor="middle" fill="#dc2626">HH</text>
-        <text class="qsub" x="360" y="100" text-anchor="middle" fill="#dc2626">핫스팟 (고-고 인접)</text>
-        <text class="qlabel" x="150" y="280" text-anchor="middle" fill="#1d4ed8">LL</text>
-        <text class="qsub" x="150" y="300" text-anchor="middle" fill="#1d4ed8">안전구역 (저-저 인접)</text>
-        <text class="qlabel" x="360" y="280" text-anchor="middle" fill="#ea580c">HL</text>
-        <text class="qsub" x="360" y="300" text-anchor="middle" fill="#ea580c">★ 사각지대 (고-저, outlier)</text>
-        <g id="moran-dots"></g>
+    <div class="moran-card" style="background:#fff">
+      <div class="head" style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:8px;font-family:'Nanum Pen Script','Gaegu','Comic Sans MS',cursive;letter-spacing:0">Moran's I Scatter Plot — Anselin (1995)</div>
+      <svg class="moran-svg" viewBox="0 0 500 460" style="font-family:'Nanum Pen Script','Gaegu','Comic Sans MS',cursive">
+        <defs>
+          <filter id="blobBlur" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur stdDeviation="2"/>
+          </filter>
+        </defs>
+
+        <!-- 축 (손그림 톤) -->
+        <line x1="60" y1="220" x2="470" y2="220" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="60" y1="40" x2="60" y2="400" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- 화살표 -->
+        <polygon points="475,220 462,213 462,227" fill="#0f172a"/>
+        <polygon points="60,35 53,48 67,48" fill="#0f172a"/>
+
+        <!-- 점선 4분면 구분선 (노란색) -->
+        <line x1="265" y1="40" x2="265" y2="400" stroke="#eab308" stroke-width="2.5" stroke-dasharray="9 6"/>
+        <line x1="60" y1="220" x2="470" y2="220" stroke="#eab308" stroke-width="2.5" stroke-dasharray="9 6" opacity=".7"/>
+
+        <!-- LH 좌상 — 빨강 블롭 + "안전 섬" -->
+        <g filter="url(#blobBlur)" opacity=".55">
+          <ellipse cx="150" cy="120" rx="76" ry="50" fill="#ef4444"/>
+          <ellipse cx="135" cy="100" rx="50" ry="32" fill="#ef4444"/>
+          <ellipse cx="180" cy="135" rx="40" ry="26" fill="#ef4444"/>
+        </g>
+        <!-- LH 내부 브라운 라벨 박스 -->
+        <ellipse cx="150" cy="120" rx="40" ry="22" fill="#78350f" opacity=".75"/>
+        <text x="150" y="125" text-anchor="middle" fill="#fff" font-size="22" font-weight="900">안전 섬</text>
+        <text x="150" y="65" text-anchor="middle" fill="#0f172a" font-size="24" font-weight="900">LH</text>
+
+        <!-- HH 우상 — 빨강 블롭 (더 진하게) + "핫스팟" -->
+        <g filter="url(#blobBlur)" opacity=".75">
+          <ellipse cx="365" cy="120" rx="85" ry="55" fill="#dc2626"/>
+          <ellipse cx="345" cy="100" rx="55" ry="35" fill="#dc2626"/>
+          <ellipse cx="395" cy="140" rx="45" ry="30" fill="#dc2626"/>
+        </g>
+        <ellipse cx="365" cy="120" rx="50" ry="22" fill="#7f1d1d" opacity=".85"/>
+        <text x="365" y="125" text-anchor="middle" fill="#fff" font-size="22" font-weight="900">핫스팟</text>
+        <text x="365" y="65" text-anchor="middle" fill="#0f172a" font-size="24" font-weight="900">HH</text>
+
+        <!-- LL 좌하 — 초록 블롭 + "안전구역" -->
+        <g filter="url(#blobBlur)" opacity=".55">
+          <ellipse cx="150" cy="305" rx="78" ry="50" fill="#22c55e"/>
+          <ellipse cx="170" cy="290" rx="50" ry="32" fill="#22c55e"/>
+          <ellipse cx="130" cy="320" rx="42" ry="26" fill="#22c55e"/>
+        </g>
+        <ellipse cx="150" cy="305" rx="48" ry="22" fill="#14532d" opacity=".75"/>
+        <text x="150" y="310" text-anchor="middle" fill="#fff" font-size="22" font-weight="900">안전구역</text>
+        <text x="150" y="252" text-anchor="middle" fill="#0f172a" font-size="24" font-weight="900">LL</text>
+
+        <!-- HL 우하 — 초록 블롭 + "HL 사각지대" -->
+        <g filter="url(#blobBlur)" opacity=".55">
+          <ellipse cx="365" cy="305" rx="85" ry="55" fill="#22c55e"/>
+          <ellipse cx="345" cy="290" rx="55" ry="32" fill="#22c55e"/>
+          <ellipse cx="395" cy="320" rx="50" ry="30" fill="#22c55e"/>
+        </g>
+        <ellipse cx="365" cy="305" rx="55" ry="26" fill="#78350f" opacity=".85"/>
+        <text x="365" y="302" text-anchor="middle" fill="#fff" font-size="20" font-weight="900">HL</text>
+        <text x="365" y="320" text-anchor="middle" fill="#fff" font-size="20" font-weight="900">사각지대</text>
+        <text x="365" y="252" text-anchor="middle" fill="#0f172a" font-size="24" font-weight="900">HL</text>
+
+        <!-- 축 라벨 (노란 손글씨) -->
+        <text x="50" y="40" text-anchor="end" fill="#eab308" font-size="18" font-weight="900">높음</text>
+        <text x="50" y="225" text-anchor="end" fill="#eab308" font-size="18" font-weight="900">평균</text>
+        <text x="50" y="400" text-anchor="end" fill="#eab308" font-size="18" font-weight="900">낮음</text>
+        <text x="80" y="425" fill="#eab308" font-size="18" font-weight="900">낮음</text>
+        <text x="265" y="425" text-anchor="middle" fill="#eab308" font-size="18" font-weight="900">평균</text>
+        <text x="450" y="425" text-anchor="end" fill="#eab308" font-size="18" font-weight="900">높음</text>
+
+        <!-- y축 제목 -->
+        <text x="22" y="210" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="900" transform="rotate(-90,22,210)">이웃 셀 평균 위험도 (W·z)</text>
+        <!-- x축 제목 -->
+        <text x="265" y="450" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="900">자기 셀 위험도 (z-score)</text>
       </svg>
     </div>
 
@@ -1362,18 +1410,14 @@
     </div>
 
     <div>
-      <div class="card" style="border-color:var(--text);padding:12px 14px">
+      <div class="card" style="border-color:var(--text);padding:10px 12px">
         <div class="head" style="margin-bottom:6px">LISA 4-Cluster — 서울 전역 50m 격자 (Queen contiguity · p&lt;0.05)</div>
-        <div style="position:relative;width:100%;aspect-ratio:5/4;background:#f1f5f9;border-radius:10px;overflow:hidden">
-          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%">
-            <text x="20" y="22" font-size="11" font-weight="700" fill="#64748b">HH &amp; LH Clusters Visualization · Seoul</text>
-            <g id="lisa-map-dots"></g>
-            <text x="490" y="395" font-size="9" text-anchor="end" fill="#94a3b8">© Carto © OpenStreetMap contributors</text>
-          </svg>
+        <div style="position:relative;width:100%;aspect-ratio:5/4;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+          <iframe src="maps/s11.html" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" title="LISA 4-Cluster Map"></iframe>
         </div>
-        <div style="font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.55">
+        <div style="font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.55">
           * HH 핫스팟은 서울 전역에 <strong style="color:var(--red-deep)">면 단위 광역 분포</strong>. HL 사각지대는 자치구 평균에 묻혀 <strong style="color:var(--orange-deep)">자치구 단위로는 보이지 않는 점 단위 위험구역</strong>.<br>
-          * 방법론: Anselin (1995) Local Indicators of Spatial Association · permutations=999, seed=42 · 243,920 격자 단위 · cuML GPU
+          * 방법론: Anselin (1995) LISA · permutations=999, seed=42 · 243,920 격자 단위 · cuML GPU
         </div>
       </div>
     </div>
@@ -1463,6 +1507,25 @@
   <h2 class="sectitle">HH 동 페르소나 — 5가지 핵심 유형</h2>
   <p class="secsub">82개 클러스터를 5개 그룹으로 묶어 본 서울 HH 위험구역의 도시 기능 유형</p>
 
+  <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:10px;margin-bottom:8px">
+    <div class="card" style="border-color:var(--text);padding:8px 10px">
+      <div class="head" style="margin-bottom:4px;font-size:11px">HH 클러스터 지도 — 서울 전역</div>
+      <div style="position:relative;width:100%;aspect-ratio:5/3;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+        <iframe src="maps/hh.html" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" title="HH Clusters Map"></iframe>
+      </div>
+    </div>
+    <div class="card" style="border-color:var(--text);padding:8px 12px">
+      <div class="head" style="margin-bottom:6px;font-size:11px">🧠 클러스터 의미 매핑 (82 valid clusters)</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:11px;font-family:monospace;line-height:1.5">
+        <div><b style="color:var(--red-deep)">6, 3, 0, 4</b> · 고밀도 상업/복합 핵심지</div>
+        <div><b style="color:var(--orange-deep)">1, 2, 17, 24</b> · 일반 주거</div>
+        <div><b style="color:var(--yellow-deep)">18, 19, 20, 30</b> · 외곽 생활권</div>
+        <div><b style="color:var(--green-deep)">27, 31, 32, 33</b> · 저밀도</div>
+        <div style="grid-column:1/3"><b style="color:var(--blue-deep)">5, 7, 8, 23</b> · 특수/자연/비도시</div>
+      </div>
+    </div>
+  </div>
+
   <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:10px">
     <div class="persona-card a" style="padding:10px 12px">
       <div class="pcode" style="font-size:9.5px">cluster [6,1,4,0+...]</div>
@@ -1496,16 +1559,6 @@
     </div>
   </div>
 
-  <div class="card" style="border-color:var(--text);padding:10px 16px;margin-bottom:10px">
-    <div class="head" style="margin-bottom:4px;font-size:11.5px">🧠 클러스터 의미 매핑 (82 valid clusters)</div>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;font-size:11px;font-family:monospace">
-      <div><b style="color:var(--red-deep)">6,3,0,4</b> · 고밀도 상업/복합 핵심지</div>
-      <div><b style="color:var(--orange-deep)">1,2,17,24</b> · 일반 주거</div>
-      <div><b style="color:var(--yellow-deep)">18,19,20,30</b> · 외곽 생활권</div>
-      <div><b style="color:var(--green-deep)">27,31,32,33</b> · 저밀도</div>
-      <div><b style="color:var(--blue-deep)">5,7,8,23</b> · 특수/자연/비도시</div>
-    </div>
-  </div>
 
   <div class="callout dark" style="font-size:11.5px">
     <span style="color:var(--yellow);font-weight:900;margin-right:8px">NOTE</span>
@@ -1519,6 +1572,25 @@
   <div class="secnum orange">SLIDE 14 · HL PERSONA</div>
   <h2 class="sectitle">HL 사각지대 페르소나 — 5가지 비도시·확장형 유형</h2>
   <p class="secsub">HL 948개 격자에서 자생적으로 등장한 5개 도시 외곽·전이 페르소나</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:10px;margin-bottom:8px">
+    <div class="card" style="border-color:var(--text);padding:8px 10px">
+      <div class="head" style="margin-bottom:4px;font-size:11px">HL 클러스터 지도 — 서울 전역</div>
+      <div style="position:relative;width:100%;aspect-ratio:5/3;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+        <iframe src="maps/hl.html" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" title="HL Clusters Map"></iframe>
+      </div>
+    </div>
+    <div class="card" style="border-color:var(--text);padding:8px 12px">
+      <div class="head" style="margin-bottom:6px;font-size:11px">🧭 HL 페르소나 — 위치적 의미</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:11px;font-family:monospace;line-height:1.5">
+        <div><b style="color:var(--red-deep)">cluster 8, 7, 5</b> · 자연/비도시</div>
+        <div><b style="color:var(--orange-deep)">cluster 2, 3, 6, 0</b> · 주거 단순</div>
+        <div><b style="color:var(--yellow-deep)">cluster 1, 16, 3</b> · 인프라 편중</div>
+        <div><b style="color:var(--green-deep)">cluster 20, 22, 26+</b> · 외곽 확장</div>
+        <div style="grid-column:1/3"><b style="color:var(--blue-deep)">cluster 15, 19, 21+</b> · 혼합 전이</div>
+      </div>
+    </div>
+  </div>
 
   <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:10px">
     <div class="persona-card a" style="padding:10px 12px">
@@ -1627,24 +1699,10 @@
       </div>
     </div>
 
-    <div class="card" style="border-color:var(--text);padding:12px 14px">
-      <div class="head">HH 밀도 분포 — 서울 25개 자치구 라벨 매핑</div>
-      <div style="position:relative;width:100%;aspect-ratio:5/4;background:#f1f5f9;border-radius:10px;overflow:hidden">
-        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%">
-          <text x="20" y="22" font-size="11" font-weight="700" fill="#64748b">HH·HL 밀도 TOP 20동 (빨강) — 서울 전역 격자 분포</text>
-          <g id="top-dots"></g>
-          <!-- top dong labels -->
-          <g font-size="9.5" font-weight="700" fill="#0f172a">
-            <text x="160" y="170">연남동</text>
-            <text x="345" y="180">신사동</text>
-            <text x="100" y="120">진관동</text>
-            <text x="130" y="190">불광동</text>
-            <text x="80"  y="200">서교동</text>
-            <text x="370" y="245">방이2동</text>
-            <text x="195" y="135">명일2동</text>
-          </g>
-          <text x="490" y="395" font-size="9" text-anchor="end" fill="#94a3b8">© Carto © OpenStreetMap contributors</text>
-        </svg>
+    <div class="card" style="border-color:var(--text);padding:10px 12px">
+      <div class="head">HH 밀도 분포 — 위험 밀도 TOP 행정동 라벨 매핑</div>
+      <div style="position:relative;width:100%;aspect-ratio:5/4;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+        <iframe src="maps/s15.html" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" title="동별 위험 밀도 TOP 지도"></iframe>
       </div>
       <div style="font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.55">
         * 빨강 폴리곤: HH·HL 밀도 상위 20개 행정동 · 회색 점: LL 격자 (안전 거주지)
@@ -1653,7 +1711,7 @@
   </div>
 
   <div class="callout dark">
-    <strong style="color:var(--yellow)">정책 함의 →</strong> 자치구가 아닌 <strong>행정동 단위</strong>로 우선순위 도출. 연남동(그룹 B · 골목 미로형 1위) — 막다른 길 + 이면도로 + 200m 반경 편의시설 촘촘 시그너처. <strong>그룹 B 동일 페르소나 7개 동 (서교·성산·북가좌2·장위·역촌·증산·연희) 즉시 확장 가능</strong>.
+    <strong style="color:var(--yellow)">정책 함의 →</strong> 자치구가 아닌 <strong>행정동 단위</strong>로 우선순위 도출. 명동(위험 밀도 0.92 · 도심형 고밀도 복합 활동 중심지) + 왕십리·중곡·행당 등 <strong>동일 페르소나 동 즉시 확장 가능</strong>.
   </div>
   <span class="pageno">SLIDE 15 / 23</span>
 </section>
@@ -1789,54 +1847,54 @@
   <h2 class="sectitle">명동 케이스 — 서울 도심형 고밀도 복합 활동 중심지</h2>
   <p class="secsub">위험 밀도 <strong>0.92 (355 / 386)</strong> — 행정동 대부분이 같은 "고활동 도시 패턴"으로 채워짐</p>
 
-  <div class="grid-2" style="gap:14px;margin-bottom:10px">
-    <div class="card red" style="padding:10px 14px">
-      <div class="head" style="font-size:11.5px;margin-bottom:6px">🎯 왜 명동인가 — 위험 밀도 1위</div>
-      <ul class="bul red" style="font-size:12px">
-        <li style="font-size:12px;padding:3px 0 3px 14px"><strong>HH 355 / 전체 386 = 0.92</strong> — 서울 1위</li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">행정동 전체가 거의 <strong>하나의 거대한 중심상업지</strong>처럼 작동</li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">상업 ↑ · 인프라 ↑ · 인구 노출 ↑ · 도로 복잡 ↑</li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">일부 배후 공간(막다른길·경사) 포함</li>
+  <div class="grid-2" style="gap:12px;margin-bottom:8px">
+    <div class="card red" style="padding:8px 12px">
+      <div class="head" style="font-size:11px;margin-bottom:4px">🎯 왜 명동인가 — 위험 밀도 1위</div>
+      <ul class="bul red">
+        <li style="font-size:11.5px;padding:2px 0 2px 13px"><strong>HH 355 / 전체 386 = 0.92</strong> — 서울 1위</li>
+        <li style="font-size:11.5px;padding:2px 0 2px 13px">행정동 전체가 <strong>하나의 거대한 중심상업지</strong>처럼 작동</li>
+        <li style="font-size:11.5px;padding:2px 0 2px 13px">상업·인프라·인구 노출·도로 복잡 ↑</li>
+        <li style="font-size:11.5px;padding:2px 0 2px 13px">일부 배후 공간(막다른길·경사) 포함</li>
       </ul>
     </div>
 
-    <div class="card" style="border-color:var(--text);padding:12px 14px">
-      <div class="head">명동 — 클러스터 구성 (상위 5개)</div>
-      <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px;font-size:11.5px;font-family:monospace">
-        <div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;align-items:center;background:var(--red-soft);padding:5px 10px;border-radius:6px"><b style="color:var(--red-deep)">cluster 6</b><div style="color:var(--text);font-family:-apple-system,sans-serif">인프라↑ · 상업↑ · 인구↑ · 주거↑</div><div style="color:var(--red-deep);font-weight:800;text-align:right">고밀도 중심</div></div>
-        <div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;align-items:center;background:var(--orange-soft);padding:5px 10px;border-radius:6px"><b style="color:var(--orange-deep)">cluster 1</b><div style="color:var(--text);font-family:-apple-system,sans-serif">STORE↑↑ · POPULATION↑↑ · 공원↑</div><div style="color:var(--orange-deep);font-weight:800;text-align:right">유동인구</div></div>
-        <div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;align-items:center;background:var(--yellow-soft);padding:5px 10px;border-radius:6px"><b style="color:var(--yellow-deep)">cluster 4</b><div style="color:var(--text);font-family:-apple-system,sans-serif">도로복잡↑↑ · 주거↑ · 인프라↑</div><div style="color:var(--yellow-deep);font-weight:800;text-align:right">복잡 생활</div></div>
-        <div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;align-items:center;background:var(--green-soft);padding:5px 10px;border-radius:6px"><b style="color:var(--green-deep)">cluster 0</b><div style="color:var(--text);font-family:-apple-system,sans-serif">공원↑↑ · 상업↑ · 인구↑</div><div style="color:var(--green-deep);font-weight:800;text-align:right">편의 공간</div></div>
-        <div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;align-items:center;background:var(--blue-soft);padding:5px 10px;border-radius:6px"><b style="color:var(--blue-deep)">cluster 5</b><div style="color:var(--text);font-family:-apple-system,sans-serif">막다른길↑ · 경사↑ · 상업↓</div><div style="color:var(--blue-deep);font-weight:800;text-align:right">비핵심 배후</div></div>
+    <div class="card" style="border-color:var(--text);padding:8px 10px">
+      <div class="head" style="margin-bottom:4px;font-size:11px">명동 — HH 격자 분포 지도</div>
+      <div style="position:relative;width:100%;aspect-ratio:5/3;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+        <iframe src="maps/s18.html" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" title="명동 HH 격자 지도"></iframe>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
+        * 명동 386개 격자 중 <strong style="color:var(--red-deep)">355개(92%) HH 핫스팟</strong>
       </div>
     </div>
   </div>
 
-  <div class="grid-3" style="gap:12px">
-    <div class="card cyan" style="padding:10px 14px">
-      <div class="head" style="font-size:11.5px;margin-bottom:6px">🎥 탐색 우선순위 추천 시스템</div>
-      <ul class="bul cyan" style="font-size:12px">
-        <li style="font-size:12px;padding:3px 0 3px 14px">기존 AI 시스템에 <strong>추천 정보 공급</strong>하는 소프트웨어 레이어</li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">HH 격자 + 도심 복합 페르소나 → <strong>분석 우선순위 자동 제공</strong></li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">추가 인프라 비용 ≒ <strong>0원</strong></li>
+
+  <div class="grid-3" style="gap:10px">
+    <div class="card cyan" style="padding:8px 12px">
+      <div class="head" style="font-size:11px;margin-bottom:4px">🎥 탐색 우선순위 추천</div>
+      <ul class="bul cyan">
+        <li style="font-size:11.5px;padding:2px 0 2px 13px">기존 AI에 <strong>추천 정보 공급</strong> 소프트웨어 레이어</li>
+        <li style="font-size:11.5px;padding:2px 0 2px 13px">HH + 도심 복합 페르소나 → <strong>우선순위 자동</strong></li>
+        <li style="font-size:11.5px;padding:2px 0 2px 13px">추가 인프라 비용 ≒ <strong>0원</strong></li>
       </ul>
     </div>
-    <div class="card orange">
-      <div class="head">⚡ 신고 → 추천 → 분석 (격자 단위)</div>
+    <div class="card orange" style="padding:8px 12px">
+      <div class="head" style="font-size:11px;margin-bottom:4px">⚡ 신고 → 추천 → 분석</div>
       <ol class="step-list">
-        <li>실종 신고 접수 → <b>신고 위치 격자 ID</b> 산출</li>
-        <li>명동 HH 355 격자 중 <b>cluster 6·1 우선</b> (고밀도 중심)</li>
-        <li>인상착의·이동방향 자동 인식 → <b>10분 이내 동선 추정</b></li>
-        <li>200m 반경 편의시설·약국 <b>안심 신고망 자동 알림</b></li>
+        <li>신고 접수 → <b>격자 ID</b> 산출</li>
+        <li>HH 355 중 <b>cluster 6·1 우선</b></li>
+        <li>인상착의·이동방향 → <b>10분 동선 추정</b></li>
+        <li>200m 편의시설·약국 <b>자동 알림</b></li>
       </ol>
     </div>
-    <div class="card green" style="padding:10px 14px">
-      <div class="head" style="font-size:11.5px;margin-bottom:6px">💡 통합 페르소나 — 명동이 의미하는 것</div>
-      <ul class="bul green" style="font-size:12px">
-        <li style="font-size:12px;padding:3px 0 3px 14px"><strong>"서울 도심형 고밀도 복합 활동 중심지"</strong></li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">상업·인프라·인구·도로망이 모두 강함 + 배후 공간 일부</li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">행정동 92%가 단일 패턴 → <strong>핫스팟 전체가 하나의 위험구역</strong></li>
-        <li style="font-size:12px;padding:3px 0 3px 14px">동일 페르소나 동(왕십리·중곡·행당) <strong>즉시 확장</strong></li>
+    <div class="card green" style="padding:8px 12px">
+      <div class="head" style="font-size:11px;margin-bottom:4px">💡 통합 페르소나</div>
+      <ul class="bul green">
+        <li style="font-size:11.5px;padding:2px 0 2px 13px"><strong>"서울 도심형 고밀도 복합 활동 중심지"</strong></li>
+        <li style="font-size:11.5px;padding:2px 0 2px 13px">상업·인프라·인구·도로망 강함 + 배후 일부</li>
+        <li style="font-size:11.5px;padding:2px 0 2px 13px">행정동 92% 단일 패턴 → <strong>핫스팟 전체가 위험구역</strong></li>
+        <li style="font-size:11.5px;padding:2px 0 2px 13px">왕십리·중곡·행당 <strong>즉시 확장</strong></li>
       </ul>
     </div>
   </div>
