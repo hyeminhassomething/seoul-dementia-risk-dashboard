@@ -20,8 +20,32 @@
     --yellow: #eab308; --yellow-deep: #ca8a04; --yellow-soft: #fef3c7;
     --purple: #9333ea; --purple-soft: #f3e8ff;
     --cyan: #06b6d4; --cyan-soft: #cffafe;
-    --sidebar-w: 220px;
+    --sidebar-w: 180px;
+    --sidebar-w-collapsed: 0px;
   }
+  body.sb-collapsed .sidebar { width: 0; padding: 0; border: 0; overflow: hidden; }
+  body.sb-collapsed { --sidebar-w: var(--sidebar-w-collapsed); }
+  body.sb-collapsed .sidebar .brand,
+  body.sb-collapsed .sidebar .nav-group,
+  body.sb-collapsed .sidebar .nav-label { display: none; }
+  body.sb-collapsed .sidebar { padding: 12px 4px; }
+  .sb-toggle {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border-strong);
+    background: #fff;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    transition: left .2s;
+  }
+  body:not(.sb-collapsed) .sb-toggle { left: calc(var(--sidebar-w) + 8px); }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
   body{font-family:-apple-system,"Apple SD Gothic Neo","Pretendard","Malgun Gothic","Noto Sans KR",sans-serif;background:var(--bg);color:var(--text);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -49,12 +73,13 @@
   .topbar .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-right:7px;vertical-align:middle;animation:blink 1.6s ease-in-out infinite}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
 
-  main{margin-left:var(--sidebar-w);width:calc(100% - var(--sidebar-w))}
+  main{margin-left:var(--sidebar-w);width:calc(100% - var(--sidebar-w));transition:margin-left .25s ease,width .25s ease}
+  .sidebar{transition:width .25s ease}
   section{min-height:100vh;padding:40px 50px 36px;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;position:relative;border-bottom:1px solid var(--border);background:#fff}
   .secnum{font-family:monospace;font-size:11px;letter-spacing:.16em;margin-bottom:6px;font-weight:700;text-transform:uppercase}
   .secnum.red{color:var(--red-deep)} .secnum.blue{color:var(--blue-deep)} .secnum.orange{color:var(--orange-deep)} .secnum.green{color:var(--green-deep)} .secnum.purple{color:var(--purple)} .secnum.yellow{color:var(--yellow-deep)} .secnum.cyan{color:var(--cyan)}
-  .sectitle{font-size:32px;font-weight:900;letter-spacing:-.03em;margin-bottom:5px;line-height:1.18}
-  .secsub{font-size:14.5px;color:var(--muted);margin-bottom:20px;font-weight:500;line-height:1.55}
+  .sectitle{font-size:40px;font-weight:900;letter-spacing:-.03em;margin-bottom:7px;line-height:1.18}
+  .secsub{font-size:17px;color:var(--muted);margin-bottom:22px;font-weight:500;line-height:1.55}
   .pageno{position:absolute;bottom:14px;right:24px;font-size:10.5px;color:var(--muted);opacity:.55;font-family:monospace;font-weight:700}
 
   /* General reusable */
@@ -63,7 +88,7 @@
   .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   .card{background:#fff;border:2px solid var(--border-strong);border-radius:12px;padding:14px 18px}
   .card.red{border-color:var(--red)} .card.blue{border-color:var(--blue)} .card.orange{border-color:var(--orange)} .card.green{border-color:var(--green)} .card.purple{border-color:var(--purple)} .card.yellow{border-color:var(--yellow)} .card.cyan{border-color:var(--cyan)}
-  .card .head{font-size:11.5px;font-weight:800;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+  .card .head{font-size:13.5px;font-weight:800;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
   .card.red .head{color:var(--red-deep)} .card.blue .head{color:var(--blue-deep)} .card.orange .head{color:var(--orange-deep)} .card.green .head{color:var(--green-deep)} .card.purple .head{color:var(--purple)} .card.yellow .head{color:var(--yellow-deep)} .card.cyan .head{color:var(--cyan)}
   .pill{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:999px;font-size:11.5px;font-weight:700;border:1.5px solid}
   .pill.red{color:var(--red-deep);border-color:var(--red);background:var(--red-soft)}
@@ -76,8 +101,8 @@
 
   .bignum{font-family:"SF Mono",monospace;font-weight:900;letter-spacing:-.02em;line-height:1}
   ul.bul{list-style:none;padding:0}
-  ul.bul li{font-size:12.5px;color:var(--text-soft);line-height:1.65;padding:3px 0 3px 14px;position:relative}
-  ul.bul li::before{content:"▸";position:absolute;left:0;font-size:11px;top:3px;color:currentColor}
+  ul.bul li{font-size:14px;color:var(--text-soft);line-height:1.7;padding:5px 0 5px 16px;position:relative}
+  ul.bul li::before{content:"▸";position:absolute;left:0;font-size:12px;top:6px;color:currentColor}
   ul.bul.red li::before{color:var(--red)} ul.bul.blue li::before{color:var(--blue)} ul.bul.orange li::before{color:var(--orange)} ul.bul.green li::before{color:var(--green)} ul.bul.purple li::before{color:var(--purple)} ul.bul.yellow li::before{color:var(--yellow)} ul.bul.cyan li::before{color:var(--cyan)}
   ul.bul li strong{color:var(--text);font-weight:800}
 
@@ -214,7 +239,20 @@
   .pca-bar .nm{width:18px;font-family:monospace;font-weight:900;color:var(--text);text-align:right}
   .pca-bar .lb{width:110px;font-weight:700;color:var(--text-soft)}
   .pca-bar .tr{flex:1;height:11px;background:var(--bg-soft);border-radius:999px;overflow:hidden}
-  .pca-bar .fl{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--blue))}
+  .pca-bar .fl{height:100%;border-radius:999px;background:currentColor}
+  .pca-bars .pca-bar:nth-child(2) .fl{color:#dc2626}
+  .pca-bars .pca-bar:nth-child(3) .fl{color:#ef4444}
+  .pca-bars .pca-bar:nth-child(4) .fl{color:#f97316}
+  .pca-bars .pca-bar:nth-child(5) .fl{color:#fb923c}
+  .pca-bars .pca-bar:nth-child(6) .fl{color:#fbbf24}
+  .pca-bars .pca-bar:nth-child(7) .fl{color:#eab308}
+  .pca-bars .pca-bar:nth-child(8) .fl{color:#84cc16}
+  .pca-bars .pca-bar:nth-child(9) .fl{color:#22c55e}
+  .pca-bars .pca-bar:nth-child(10) .fl{color:#10b981}
+  .pca-bars .pca-bar:nth-child(11) .fl{color:#06b6d4}
+  .pca-bars .pca-bar:nth-child(12) .fl{color:#0ea5e9}
+  .pca-bars .pca-bar:nth-child(13) .fl{color:#3b82f6}
+  .pca-bars .pca-bar:nth-child(14) .fl{color:#1d4ed8}
   .pca-bar .vl{font-family:monospace;font-weight:800;color:var(--text);width:54px;text-align:right;font-size:11px}
 
   /* Section 10 — LISA def */
@@ -288,7 +326,7 @@
   .news-card .de{font-size:11px;color:var(--text-soft);line-height:1.5}
 
   .step-list{counter-reset:stp;list-style:none;padding:0}
-  .step-list li{counter-increment:stp;padding:5px 0 5px 30px;position:relative;font-size:12px;color:var(--text-soft);line-height:1.55;border-bottom:1px dashed var(--border)}
+  .step-list li{counter-increment:stp;padding:3px 0 3px 28px;position:relative;font-size:11.5px;color:var(--text-soft);line-height:1.5;border-bottom:1px dashed var(--border)}
   .step-list li:last-child{border-bottom:0}
   .step-list li::before{content:"Step "counter(stp);position:absolute;left:0;top:8px;font-family:monospace;font-size:10px;font-weight:900;color:var(--green-deep);background:var(--green-soft);padding:2px 6px;border-radius:5px;letter-spacing:.04em}
   .step-list li b{color:var(--text);font-weight:800}
@@ -333,6 +371,7 @@
 </head>
 <body>
 
+<button class="sb-toggle" id="sb-toggle" title="사이드바 토글">☰</button>
 <aside class="sidebar">
   <div class="brand">서울시 치매 노인<br>실종 위험구역 진단
     <span class="sub">데이터로 진단 · 정책으로 연결</span>
@@ -392,7 +431,7 @@
       <div class="cover-pills">
         <span class="pill red">서울 65+ 192만 명</span>
         <span class="pill orange">치매환자 추정 20만 명</span>
-        <span class="pill blue">50m × 50m 격자 250,450개</span>
+        <span class="pill blue">50m × 50m 격자 243,920개</span>
         <span class="pill green">LISA × HDBSCAN</span>
         <span class="pill yellow">8개 출처 13개 변수</span>
       </div>
@@ -433,13 +472,13 @@
       <div class="tn">02</div>
       <div><div class="ttitle">🧬 분석 방법</div><div class="tsub">격자 단위 비지도 진단 파이프라인</div></div>
       <div class="tslide">Slides 5–8</div>
-      <div class="tdetail">3-Layer 접근 · 8 출처 13 변수 · 50m 격자 250,450</div>
+      <div class="tdetail">3-Layer 접근 · 8 출처 13 변수 · 50m 격자 243,920</div>
     </div>
     <div class="toc-row orange">
       <div class="tn">03</div>
       <div><div class="ttitle">📊 분석 결과</div><div class="tsub">LISA × HDBSCAN 군집·페르소나·동별 진단</div></div>
       <div class="tslide">Slides 9–15</div>
-      <div class="tdetail">HH 46,940 · 96 군집 · 4 페르소나 그룹 + HL 그룹 E</div>
+      <div class="tdetail">HH 46,960 · 82 군집 · 4 페르소나 그룹 + HL 그룹 E</div>
     </div>
     <div class="toc-row green">
       <div class="tn">04</div>
@@ -505,8 +544,13 @@
       <div style="font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.55">자치구 단위 예산은 위험·안전 격자에 <strong>동일 분산</strong> → 효율성 저하</div>
     </div>
     <div class="mismatch-card">
-      <div class="mismatch-num">약 245<span class="x">×</span></div>
-      <div class="mismatch-lbl">공간 미스매치 (면적 환산 시 약 1만 배)<br>동일 자치구 내에서도 격자별 위험은 <span style="color:var(--red-deep)">5배 이상 차이</span></div>
+      <div style="display:flex;align-items:baseline;gap:8px;line-height:1">
+        <span style="font-size:13px;font-weight:800;color:var(--text)">약</span>
+        <span style="font-family:monospace;font-size:64px;font-weight:900;color:var(--red-deep);letter-spacing:-.03em">245</span>
+        <span style="font-size:32px;font-weight:900;color:var(--text)">×</span>
+        <span style="font-size:14px;font-weight:800;color:var(--text)">공간 미스매치</span>
+      </div>
+      <div class="mismatch-lbl" style="margin-top:8px">면적 환산 시 약 1만 배 — 동일 자치구 내에서도 격자별 위험은 <span style="color:var(--red-deep)">5배 이상 차이</span></div>
     </div>
   </div>
 
@@ -523,43 +567,46 @@
   <h2 class="sectitle">기존 분석의 한계</h2>
   <p class="secsub">자치구 평균 25km² vs 50m 격자 — <strong>약 10,000배 해상도 차이</strong>가 만드는 사각지대</p>
 
-  <div class="limit-row">
-    <div class="limit-card red">
-      <div class="h">📐 공간 해상도 미스매치</div>
-      <ul class="bul red">
-        <li>자치구 평균 면적 약 <strong>25km²</strong> vs 실종자 발견 반경 250m (약 0.0625km²)</li>
-        <li>약 <strong>250배 공간 미스매치</strong> (면적 환산 시 약 1만 배)</li>
-        <li>자치구 단위 예산은 위험·안전 격자에 동일 분산 → <strong>효율성 저하</strong></li>
-      </ul>
+  <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:20px;align-items:stretch">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="limit-card red">
+        <div class="h">📐 공간 해상도 미스매치</div>
+        <ul class="bul red">
+          <li>자치구 평균 면적 약 <strong>25km²</strong> vs 실종자 발견 반경 250m (약 0.0625km²)</li>
+          <li>약 <strong>250배 공간 미스매치</strong> (면적 환산 시 약 1만 배)</li>
+          <li>자치구 단위 예산은 위험·안전 격자에 동일 분산 → <strong>효율성 저하</strong></li>
+        </ul>
+      </div>
+      <div class="limit-card orange">
+        <div class="h">🔍 사각지대 식별 불가</div>
+        <ul class="bul orange">
+          <li>안전구역(LL) 사이에 고립된 위험 격자 (HL 948개)는 <strong>자치구 평균에 묻혀 보이지 않음</strong></li>
+          <li>동 단위 평균 위험도 안에는 격자 단위로 <strong>5배 이상의 편차 존재</strong></li>
+          <li>자치구 평균에 가려진 동선·환경 위험을 식별할 도구 부재</li>
+        </ul>
+      </div>
+      <div class="limit-card yellow">
+        <div class="h">💡 원인 분석 부재</div>
+        <ul class="bul yellow">
+          <li>같은 위험 격자라도 환경 유형이 다르면 <strong>처방도 달라야 함</strong></li>
+          <li>기존 정책은 일률 처방 — 골목 미로형과 도심 상권형에 동일 CCTV 정책</li>
+          <li>환경 시그너처를 식별하는 비지도 진단 도구 없음</li>
+        </ul>
+      </div>
     </div>
-    <div class="ratio-card">
-      <div class="rl" style="margin-bottom:6px">자치구 1개</div>
-      <div class="rn">25 km² <span class="vs">→</span> 250,450 격자</div>
-      <div class="rl" style="margin-top:8px;color:var(--yellow-deep);font-weight:900">약 10,000배 해상도 차이</div>
-      <div class="rl" style="margin-top:4px">50m × 50m 격자 단위</div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center">
+      <div style="font-size:14px;font-weight:800;color:var(--text)">자치구 1개</div>
+      <div id="s04-big" style="width:240px;height:130px;background:#cbd5e1;border:2px solid var(--text);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:22px;font-weight:900;color:var(--text);transition:all .6s ease">25 km²</div>
+      <div style="font-size:26px;color:var(--yellow-deep);font-weight:300">↓</div>
+      <div style="font-size:18px;font-weight:900;color:var(--yellow-deep);background:var(--yellow-soft);padding:6px 18px;border-radius:999px;border:2px solid var(--yellow)">약 10,000배 해상도 차이</div>
+      <div style="font-size:14px;font-weight:800;color:var(--text);margin-top:4px">243,920개 격자 (50m × 50m)</div>
+      <div id="s04-grid" style="width:260px;height:140px;display:grid;grid-template-columns:repeat(16,1fr);grid-template-rows:repeat(8,1fr);gap:1.5px;background:var(--text);padding:2px;border-radius:6px"></div>
+      <div style="font-size:11.5px;color:var(--muted);font-weight:600">▼ 자동 재생: 한 덩어리 → 243,920개 격자로 분할</div>
     </div>
   </div>
 
-  <div class="grid-2" style="gap:12px;margin-bottom:12px">
-    <div class="limit-card orange">
-      <div class="h">🔍 사각지대 식별 불가</div>
-      <ul class="bul orange">
-        <li>안전구역(LL) 사이에 고립된 위험 격자 (HL 약 980개)는 <strong>자치구 평균에 묻혀 보이지 않음</strong></li>
-        <li>동 단위 평균 위험도 안에는 격자 단위로 <strong>5배 이상의 편차 존재</strong></li>
-        <li>자치구 평균에 가려진 동선·환경 위험을 식별할 도구 부재</li>
-      </ul>
-    </div>
-    <div class="limit-card yellow">
-      <div class="h">💡 원인 분석 부재</div>
-      <ul class="bul yellow">
-        <li>같은 위험 격자라도 환경 유형이 다르면 <strong>처방도 달라야 함</strong></li>
-        <li>기존 정책은 일률 처방 — 골목 미로형과 도심 상권형에 동일 CCTV 정책</li>
-        <li>환경 시그너처를 식별하는 비지도 진단 도구 없음</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="callout dark">
+  <div class="callout dark" style="margin-top:14px">
     <strong>해결책 →</strong> 50m 격자 단위 + 공간 자기상관 (LISA) + 환경 군집화 (HDBSCAN)으로 <strong>격자 단위 핀셋 진단</strong>
   </div>
   <span class="pageno">SLIDE 04 / 22</span>
@@ -581,7 +628,7 @@
         Queen contiguity weight matrix<br>
         permutations=999, p&lt;0.05
       </div>
-      <div class="result">HH 46,940 · HL 약 980<br><span style="font-weight:600;font-size:12px">(통계적 핫스팟 · 사각지대)</span></div>
+      <div class="result">HH 46,960 · HL 948<br><span style="font-weight:600;font-size:12px">(통계적 핫스팟 · 사각지대)</span></div>
     </div>
     <div class="layer-card why">
       <span class="layer-tag">LAYER 02</span>
@@ -592,7 +639,7 @@
         min_cluster_size = 500<br>
         metric = euclidean (cuML GPU)
       </div>
-      <div class="result">96 valid clusters<br>노이즈 80,824 (32.3%)<br><span style="font-weight:600;font-size:12px">환경 시그너처 자동 도출</span></div>
+      <div class="result">82 valid clusters<br>노이즈 76,461 (31.3%)<br><span style="font-weight:600;font-size:12px">환경 시그너처 자동 도출</span></div>
     </div>
     <div class="layer-card what">
       <span class="layer-tag">LAYER 03</span>
@@ -617,7 +664,7 @@
 <section id="s06" data-section="6">
   <div class="secnum cyan">SLIDE 06 · UNIT</div>
   <h2 class="sectitle">분석 단위 — 50m 격자</h2>
-  <p class="secsub">서울 bbox 250,450개 격자 · <strong>정책 집행 단위와 정책 대상 단위의 일치</strong></p>
+  <p class="secsub">서울 bbox 243,920개 격자 · <strong>정책 집행 단위와 정책 대상 단위의 일치</strong></p>
 
   <div class="grid-hero">
     <div class="left">
@@ -625,7 +672,7 @@
         <div class="head">🗺 격자 시스템 정의</div>
         <ul class="bul blue">
           <li>서울 bbox (위도 37.41 ~ 37.72 · 경도 126.74 ~ 127.20)에 <strong>50m × 50m 격자</strong></li>
-          <li>총 격자 수: <strong>250,450개</strong></li>
+          <li>총 격자 수: <strong>243,920개</strong></li>
           <li>격자 ID 형식: <code>G50-{row}-{col}</code></li>
           <li>모든 데이터셋이 <strong>격자 키로 join 가능</strong></li>
         </ul>
@@ -641,7 +688,7 @@
     </div>
     <div class="right">
       <div class="big-block">
-        <div class="n1">250,450</div>
+        <div class="n1">243,920</div>
         <div class="lbl" style="margin-top:6px;font-size:12px;color:var(--text)">서울 전역 분석 격자</div>
         <div class="n2">121,051</div>
         <div class="lbl">65+ 거주인구 유효 격자 (분석 대상)</div>
@@ -662,34 +709,53 @@
   <h2 class="sectitle">분석 파이프라인</h2>
   <p class="secsub">격자 생성 → PCA/Local Moran's I × HDBSCAN → 교차 분류 → 행정동별 HH 격자 밀도</p>
 
-  <div class="pipe">
-    <div class="pipe-box" style="border-color:var(--cyan);min-width:420px">
-      <div class="t" style="color:var(--cyan)">[1] 격자 생성 및 변수 매핑</div>
-      <div class="s">50m × 50m, <strong>13개 환경 변수</strong> · 250,450 격자 · 65+ 유효 121,051</div>
-    </div>
-    <div class="arr">▼</div>
-
-    <div class="pipe-row">
-      <div class="pipe-box">
-        <div class="t">[2A] PCA → Local Moran's I</div>
-        <div class="s">PCA로 <strong>risk_score</strong> 도출<br>→ 지역 배회 위험도 클러스터링 도출</div>
-      </div>
-      <div class="pipe-box">
-        <div class="t">[2B] HDBSCAN 클러스터링</div>
-        <div class="s">risk_score / LISA 라벨 제외<br><strong>13개 환경 변수 기반</strong></div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+    <!-- Step 1 -->
+    <div style="background:#fff;border:2.5px solid var(--cyan);border-radius:14px;padding:14px 22px;display:flex;align-items:center;gap:14px;min-width:460px;box-shadow:0 0 0 4px rgba(6,182,212,.08)">
+      <div style="width:42px;height:42px;border-radius:50%;background:var(--cyan-soft);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🗺</div>
+      <div>
+        <div style="font-size:16px;font-weight:900;color:var(--cyan)">격자 생성 및 변수 매핑</div>
+        <div style="font-size:13px;color:var(--text-soft);margin-top:2px;line-height:1.5">50m × 50m · <strong>13개 환경 변수</strong> · 243,920 격자 · 65+ 유효 121,051</div>
       </div>
     </div>
-    <div class="arr">▼</div>
+    <div style="font-size:22px;color:var(--muted)">▼</div>
 
-    <div class="pipe-box" style="border-color:var(--orange);min-width:420px">
-      <div class="t" style="color:var(--orange-deep)">[3] 교차 분류 (LISA × HDBSCAN)</div>
-      <div class="s">HH/HL 비율 큰 클러스터 도출 · 환경 페르소나 자동 명명</div>
+    <!-- Step 2A + 2B -->
+    <div style="display:flex;gap:14px;align-items:stretch">
+      <div style="background:#fff;border:2.5px solid var(--cyan);border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:12px;flex:1;box-shadow:0 0 0 4px rgba(6,182,212,.08)">
+        <div style="width:42px;height:42px;border-radius:50%;background:var(--cyan-soft);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">📐</div>
+        <div>
+          <div style="font-size:15px;font-weight:900;color:var(--cyan)">PCA → Local Moran's I</div>
+          <div style="font-size:12.5px;color:var(--text-soft);margin-top:2px;line-height:1.5">PCA로 <strong>risk_score</strong> 도출 → 지역 배회 위험도 클러스터링</div>
+        </div>
+      </div>
+      <div style="background:#fff;border:2.5px solid var(--cyan);border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:12px;flex:1;box-shadow:0 0 0 4px rgba(6,182,212,.08)">
+        <div style="width:42px;height:42px;border-radius:50%;background:var(--cyan-soft);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🧬</div>
+        <div>
+          <div style="font-size:15px;font-weight:900;color:var(--cyan)">HDBSCAN 클러스터링</div>
+          <div style="font-size:12.5px;color:var(--text-soft);margin-top:2px;line-height:1.5">risk_score / LISA 라벨 제외 — <strong>13개 환경 변수 기반</strong></div>
+        </div>
+      </div>
     </div>
-    <div class="arr">▼</div>
+    <div style="font-size:22px;color:var(--muted)">▼</div>
 
-    <div class="pipe-box" style="border-color:var(--green);min-width:420px">
-      <div class="t" style="color:var(--green-deep)">[4] 행정동별 HH 격자 밀도</div>
-      <div class="s">HH 격자 수 ÷ 전체 격자 수 → <strong>위험 밀도 TOP 20 행정동</strong> 자동 도출</div>
+    <!-- Step 3 -->
+    <div style="background:#fff;border:2.5px solid var(--orange);border-radius:14px;padding:14px 22px;display:flex;align-items:center;gap:14px;min-width:460px;box-shadow:0 0 0 4px rgba(249,115,22,.08)">
+      <div style="width:42px;height:42px;border-radius:50%;background:var(--orange-soft);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🔀</div>
+      <div>
+        <div style="font-size:16px;font-weight:900;color:var(--orange-deep)">교차 분류 (LISA × HDBSCAN)</div>
+        <div style="font-size:13px;color:var(--text-soft);margin-top:2px;line-height:1.5">HH/HL 비율 큰 클러스터 도출 · 환경 페르소나 자동 명명</div>
+      </div>
+    </div>
+    <div style="font-size:22px;color:var(--muted)">▼</div>
+
+    <!-- Step 4 -->
+    <div style="background:#fff;border:2.5px solid var(--green);border-radius:14px;padding:14px 22px;display:flex;align-items:center;gap:14px;min-width:460px;box-shadow:0 0 0 4px rgba(22,163,74,.08)">
+      <div style="width:42px;height:42px;border-radius:50%;background:var(--green-soft);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📊</div>
+      <div>
+        <div style="font-size:16px;font-weight:900;color:var(--green-deep)">행정동별 HH 격자 밀도</div>
+        <div style="font-size:13px;color:var(--text-soft);margin-top:2px;line-height:1.5">HH 격자 수 ÷ 전체 격자 수 → <strong>위험 밀도 TOP 20 행정동</strong> 자동 도출</div>
+      </div>
     </div>
   </div>
 
@@ -704,7 +770,7 @@
 
   <div class="data8-grid">
     <div class="data-cell"><div class="n">① 도로망</div><div class="t">서울 도로망</div><div class="src">서울 열린데이터광장</div><div class="d">도로 12.5만 노드 + 교차로 9.8만 + 막다른길</div></div>
-    <div class="data-cell"><div class="n">② 건물·도로 SHP</div><div class="t">건물·도로 SHP</div><div class="src">행정안전부 도로명주소</div><div class="d">250,450개 50m 격자 매핑 기준</div></div>
+    <div class="data-cell"><div class="n">② 건물·도로 SHP</div><div class="t">건물·도로 SHP</div><div class="src">행정안전부 도로명주소</div><div class="d">243,920개 50m 격자 매핑 기준</div></div>
     <div class="data-cell"><div class="n">③ 노인복지시설</div><div class="t">노인복지시설</div><div class="src">서울시 빅데이터캠퍼스 (B428)</div><div class="d">서울 192개 시설</div></div>
     <div class="data-cell"><div class="n">④ CCTV 개수</div><div class="t">CCTV 개수</div><div class="src">서울 열린데이터광장</div><div class="d">서울시 격자별 CCTV 개수 추정</div></div>
     <div class="data-cell"><div class="n">⑤ 상권발달 개별지수</div><div class="t">상권발달지수</div><div class="src">서울시 빅데이터캠퍼스 (B069)</div><div class="d">STORE · SALES · DEPOSIT · POPULATION · INFRASTRUCTURE 지수</div></div>
@@ -753,19 +819,19 @@
     </div>
     <div class="pca-bars">
       <div style="font-size:12.5px;font-weight:900;color:var(--red-deep);margin-bottom:8px;text-align:center">PCA 결과 위험도 점수에의 변수별 기여도</div>
-      <div class="pca-bar"><div class="nm">1</div><div class="lb">교차로 개수</div><div class="tr"><div class="fl" style="width:96%"></div></div><div class="vl">8.78</div></div>
-      <div class="pca-bar"><div class="nm">2</div><div class="lb">도로 복잡도</div><div class="tr"><div class="fl" style="width:95%"></div></div><div class="vl">8.72</div></div>
-      <div class="pca-bar"><div class="nm">3</div><div class="lb">격자 내 쉘터</div><div class="tr"><div class="fl" style="width:93%"></div></div><div class="vl">8.49</div></div>
-      <div class="pca-bar"><div class="nm">4</div><div class="lb">막다른 길</div><div class="tr"><div class="fl" style="width:89%"></div></div><div class="vl">8.11</div></div>
-      <div class="pca-bar"><div class="nm">5</div><div class="lb">200m 복지시설</div><div class="tr"><div class="fl" style="width:88%"></div></div><div class="vl">7.99</div></div>
-      <div class="pca-bar"><div class="nm">6</div><div class="lb">주거 용도 지역</div><div class="tr"><div class="fl" style="width:87%"></div></div><div class="vl">7.95</div></div>
-      <div class="pca-bar"><div class="nm">7</div><div class="lb">200m 쉘터</div><div class="tr"><div class="fl" style="width:86%"></div></div><div class="vl">7.84</div></div>
-      <div class="pca-bar"><div class="nm">8</div><div class="lb">인프라 지수</div><div class="tr"><div class="fl" style="width:85%"></div></div><div class="vl">7.81</div></div>
-      <div class="pca-bar"><div class="nm">9</div><div class="lb">상점 지수</div><div class="tr"><div class="fl" style="width:84%"></div></div><div class="vl">7.72</div></div>
-      <div class="pca-bar"><div class="nm">10</div><div class="lb">격자 내 복지시설</div><div class="tr"><div class="fl" style="width:81%"></div></div><div class="vl">7.41</div></div>
-      <div class="pca-bar"><div class="nm">11</div><div class="lb">인구(밀도) 지수</div><div class="tr"><div class="fl" style="width:74%"></div></div><div class="vl">6.78</div></div>
-      <div class="pca-bar"><div class="nm">12</div><div class="lb">경사도</div><div class="tr"><div class="fl" style="width:70%"></div></div><div class="vl">6.43</div></div>
-      <div class="pca-bar"><div class="nm">13</div><div class="lb">200m 공원</div><div class="tr"><div class="fl" style="width:65%"></div></div><div class="vl">5.98</div></div>
+      <div class="pca-bar"><div class="nm">1</div><div class="lb">도로 복잡도</div><div class="tr"><div class="fl" style="width:98%"></div></div><div class="vl">9.84</div></div>
+      <div class="pca-bar"><div class="nm">2</div><div class="lb">교차로 개수</div><div class="tr"><div class="fl" style="width:93%"></div></div><div class="vl">9.35</div></div>
+      <div class="pca-bar"><div class="nm">3</div><div class="lb">인프라 지수</div><div class="tr"><div class="fl" style="width:91%"></div></div><div class="vl">9.08</div></div>
+      <div class="pca-bar"><div class="nm">4</div><div class="lb">상점 지수</div><div class="tr"><div class="fl" style="width:88%"></div></div><div class="vl">8.82</div></div>
+      <div class="pca-bar"><div class="nm">5</div><div class="lb">200m 휴식시설</div><div class="tr"><div class="fl" style="width:79%"></div></div><div class="vl">7.95</div></div>
+      <div class="pca-bar"><div class="nm">6</div><div class="lb">주거 용도 지역</div><div class="tr"><div class="fl" style="width:78%"></div></div><div class="vl">7.79</div></div>
+      <div class="pca-bar"><div class="nm">7</div><div class="lb">격자 내 휴식시설</div><div class="tr"><div class="fl" style="width:76%"></div></div><div class="vl">7.63</div></div>
+      <div class="pca-bar"><div class="nm">8</div><div class="lb">인구 지수</div><div class="tr"><div class="fl" style="width:72%"></div></div><div class="vl">7.24</div></div>
+      <div class="pca-bar"><div class="nm">9</div><div class="lb">200m 공원</div><div class="tr"><div class="fl" style="width:68%"></div></div><div class="vl">6.83</div></div>
+      <div class="pca-bar"><div class="nm">10</div><div class="lb">200m 복지시설</div><div class="tr"><div class="fl" style="width:65%"></div></div><div class="vl">6.53</div></div>
+      <div class="pca-bar"><div class="nm">11</div><div class="lb">경사도</div><div class="tr"><div class="fl" style="width:65%"></div></div><div class="vl">6.51</div></div>
+      <div class="pca-bar"><div class="nm">12</div><div class="lb">막다른길</div><div class="tr"><div class="fl" style="width:63%"></div></div><div class="vl">6.33</div></div>
+      <div class="pca-bar"><div class="nm">13</div><div class="lb">격자 내 복지시설</div><div class="tr"><div class="fl" style="width:61%"></div></div><div class="vl">6.11</div></div>
       <div style="font-size:10.5px;color:var(--muted);margin-top:6px;text-align:center;font-weight:600">기여도 (PCA 가중치) · 0 ~ 10</div>
     </div>
   </div>
@@ -812,7 +878,7 @@
       <div class="card red">
         <div class="head">① 채택 근거</div>
         <ul class="bul red">
-          <li><strong>자치구 평균에 묻힌 outlier(HL) 직접 식별</strong> — HL 1,092개 = 안전구역 사이 핫스팟, 자치구로는 보이지 않는 사각지대</li>
+          <li><strong>자치구 평균에 묻힌 outlier(HL) 직접 식별</strong> — HL 948개 = 안전구역 사이 핫스팟, 자치구로는 보이지 않는 사각지대</li>
           <li><strong>통계적 유의성 검정 (p&lt;0.05)</strong> — Queen contiguity + permutation test → 우연이 아닌 핫스팟만 추출</li>
           <li><strong>학계 표준 — 공간 역학</strong> — 범죄·전염병·자살·교통사고 등 공간 클러스터 분석의 표준 방법론 (Anselin 1995)</li>
         </ul>
@@ -835,7 +901,7 @@
 <section id="s11" data-section="11">
   <div class="secnum orange">SLIDE 11 · LISA MAP</div>
   <h2 class="sectitle">LISA 4-Cluster 지도</h2>
-  <p class="secsub">HH 46,940 · HL 약 980 · 통계적 핫스팟 추출 (Queen weight · permutations 999 · p&lt;0.05)</p>
+  <p class="secsub">HH 46,960 · HL 948 · 통계적 핫스팟 추출 (Queen weight · permutations 999 · p&lt;0.05)</p>
 
   <div class="lisamap-grid">
     <div>
@@ -845,7 +911,7 @@
           <div class="desc-t">핫스팟 (고-고 인접)</div>
           <div class="desc-s">위험이 면(area) 단위로 퍼지는 광역 핫스팟</div>
         </div>
-        <div class="cnum">46,940<small>격자</small></div>
+        <div class="cnum">46,960<small>격자</small></div>
       </div>
       <div class="lisa-row-c hl">
         <div class="code">HL</div>
@@ -853,7 +919,7 @@
           <div class="desc-t">★ 사각지대 — 이상치 (0.4%)</div>
           <div class="desc-s">안전 격자 사이에 둘러싸인 자치구 단위 사각지대</div>
         </div>
-        <div class="cnum">약 980<small>격자</small></div>
+        <div class="cnum">948<small>격자</small></div>
       </div>
       <div class="lisa-row-c lh">
         <div class="code">LH</div>
@@ -869,19 +935,19 @@
           <div class="desc-t">안전구역 (저-저 인접)</div>
           <div class="desc-s">통계적 평균일 뿐, 노인 일과 동선의 시작점</div>
         </div>
-        <div class="cnum">약 84,200<small>격자</small></div>
+        <div class="cnum">약 84,180<small>격자</small></div>
       </div>
 
       <div class="card" style="border-color:var(--text);margin-top:10px;padding:10px 14px">
         <div class="head">읽는 법</div>
         <div style="font-size:12px;color:var(--text-soft);line-height:1.65">
           HH(<strong style="color:var(--red-deep)">빨강</strong>)는 면으로 퍼지고 HL(<strong style="color:var(--orange-deep)">주황</strong>)은 점으로 흩어진다.<br>
-          HL 약 980개가 자치구 단위 LL 안에 박혀 있는 <strong>보이지 않는 사각지대</strong>.
+          HL 948개가 자치구 단위 LL 안에 박혀 있는 <strong>보이지 않는 사각지대</strong>.
         </div>
       </div>
 
       <div class="callout yellow" style="margin-top:10px;font-size:12px">
-        <strong>정책 함의 →</strong> HL 약 980 × 평균 0.0025 km² ≈ <strong>2.45 km²</strong> — 표면적은 작지만 ROI가 가장 높은 우선 투입 대상. HH 광역 핫스팟은 면 단위 정비, HL은 격자 단위 핀셋 정책으로 이중 처방.
+        <strong>정책 함의 →</strong> HL 948 × 평균 0.0025 km² ≈ <strong>2.45 km²</strong> — 표면적은 작지만 ROI가 가장 높은 우선 투입 대상. HH 광역 핫스팟은 면 단위 정비, HL은 격자 단위 핀셋 정책으로 이중 처방.
       </div>
     </div>
 
@@ -897,7 +963,7 @@
         </div>
         <div style="font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.55">
           * HH 핫스팟은 서울 전역에 <strong style="color:var(--red-deep)">면 단위 광역 분포</strong>. HL 사각지대는 자치구 평균에 묻혀 <strong style="color:var(--orange-deep)">자치구 단위로는 보이지 않는 점 단위 위험구역</strong>.<br>
-          * 방법론: Anselin (1995) Local Indicators of Spatial Association · permutations=999, seed=42 · 250,450 격자 단위 · cuML GPU
+          * 방법론: Anselin (1995) Local Indicators of Spatial Association · permutations=999, seed=42 · 243,920 격자 단위 · cuML GPU
         </div>
       </div>
     </div>
@@ -945,9 +1011,9 @@
         · 13개 환경 변수 (교차로·막다른길·경사·INFRASTRUCTURE·STORE·65+ 인구 등)<br>
         · z-score 정규화<br><br>
         <strong>[결과]</strong><br>
-        · <span style="color:var(--cyan)">96 valid clusters</span>: 자생적 동일 환경<br>
-        · 노이즈 <span style="color:var(--orange-deep)">80,824 격자 (32.3%)</span><br>
-        · 96 군집 = 5가지 환경 유형 통합 명명 (5종 슬라이드로)
+        · <span style="color:var(--cyan)">82 valid clusters</span>: 자생적 동일 환경<br>
+        · 노이즈 <span style="color:var(--orange-deep)">76,461 격자 (31.3%)</span><br>
+        · 82 군집 = 5가지 환경 유형 통합 명명 (5종 슬라이드로)
       </div>
     </div>
   </div>
@@ -974,7 +1040,7 @@
       <div style="font-size:11.5px;color:var(--text-soft);line-height:1.65">
         계층적 군집 트리 → <strong>condensed cluster tree</strong> → 최종 결과 (자생적 군집)<br>
         밀도(λ) 높음 ↔ 낮음 사이의 <strong>stability-based pruning</strong> (안정성 낮은 가지 제거)<br>
-        <strong style="color:var(--orange-deep)">→ 96 valid clusters + noise 80,824 격자 (32.3%)</strong>
+        <strong style="color:var(--orange-deep)">→ 82 valid clusters + noise 76,461 격자 (31.3%)</strong>
       </div>
     </div>
   </div>
@@ -1023,7 +1089,7 @@
 
   <div class="callout dark" style="font-size:12px">
     <span style="color:var(--yellow);font-weight:900;margin-right:8px">NOTE</span>
-    각 색은 HDBSCAN 군집 ID — 위 4개 그룹은 특정 군집 조합이 함께 나타나는 동의 패턴을 명명한 것. <strong>군집 ID는 클러스터링 결과 그대로 사용 (사전 라벨링 없음)</strong>. HDBSCAN 96개 환경 군집이 서울 전역 250,450 격자에 자생적으로 분포.
+    각 색은 HDBSCAN 군집 ID — 위 4개 그룹은 특정 군집 조합이 함께 나타나는 동의 패턴을 명명한 것. <strong>군집 ID는 클러스터링 결과 그대로 사용 (사전 라벨링 없음)</strong>. HDBSCAN 82개 환경 군집이 서울 전역 243,920 격자에 자생적으로 분포.
   </div>
   <span class="pageno">SLIDE 13 / 22</span>
 </section>
@@ -1296,13 +1362,12 @@
   <p class="secsub">서울시 AI CCTV 고속검색(100시간→10분)에 본 분석이 <strong>어디를 먼저 볼지 알려준다</strong> — 추가 인프라 0원, 골든타임 단축</p>
 
   <div class="grid-2" style="gap:14px;margin-bottom:10px">
-    <div class="card red">
-      <div class="head">🎯 왜 연남동인가 — 골목 미로형 1위</div>
-      <ul class="bul red">
-        <li>마포구 연남동 — <strong>HH 185 / 약 250 (위험 밀도 0.74, 서울 1위)</strong></li>
-        <li>막다른길 + 복잡 이면도로 + 200m 편의시설 촘촘 (그룹 B)</li>
-        <li>골목 미로형 길잃음 빈도 평지 대비 <strong>약 4배</strong></li>
-        <li>거주 인구 빽빽한 빌라·단독주택 → 65+ 모집단 큼</li>
+    <div class="card red" style="padding:10px 14px">
+      <div class="head" style="font-size:11.5px;margin-bottom:6px">🎯 왜 연남동인가 — 골목 미로형 1위</div>
+      <ul class="bul red" style="font-size:12px">
+        <li style="font-size:12px;padding:3px 0 3px 14px"><strong>HH 185 / 약 250 (위험 밀도 0.74, 서울 1위)</strong></li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">막다른길 + 이면도로 + 200m 편의시설 촘촘</li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">길잃음 빈도 평지 대비 <strong>약 4배</strong></li>
       </ul>
     </div>
 
@@ -1319,12 +1384,12 @@
   </div>
 
   <div class="grid-3" style="gap:12px">
-    <div class="card cyan">
-      <div class="head">🎥 탐색 우선순위 추천 시스템</div>
-      <ul class="bul cyan">
-        <li>새 CCTV 설치 아님 — 기존 AI 시스템에 <strong>추천 정보 공급</strong>하는 소프트웨어 레이어</li>
-        <li>HH 격자 + 골목 미로 페르소나 → <strong>"어느 격자의 CCTV부터 분석할지" 자동 제공</strong></li>
-        <li>추가 인프라 비용 ≒ <strong>0원</strong> · 2026년 25개 자치구 통합과 정합</li>
+    <div class="card cyan" style="padding:10px 14px">
+      <div class="head" style="font-size:11.5px;margin-bottom:6px">🎥 탐색 우선순위 추천 시스템</div>
+      <ul class="bul cyan" style="font-size:12px">
+        <li style="font-size:12px;padding:3px 0 3px 14px">기존 AI 시스템에 <strong>추천 정보 공급</strong>하는 소프트웨어 레이어</li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">HH 격자 + 골목 미로 페르소나 → <strong>분석 우선순위 자동 제공</strong></li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">추가 인프라 비용 ≒ <strong>0원</strong></li>
       </ul>
     </div>
     <div class="card orange">
@@ -1336,20 +1401,17 @@
         <li>200m 반경 편의시설·약국 <b>안심 신고망 자동 알림</b></li>
       </ol>
     </div>
-    <div class="card green">
-      <div class="head">💡 기대효과 — 시간·발견율·확산</div>
-      <ul class="bul green">
-        <li>실종 위치 주변 전수 탐색 → <strong>배회 확률 높은 장소 우선 탐색</strong></li>
-        <li>분석 소요 100시간 → 10분 + 우선순위별 단계적 추적으로 <strong>시간 절약</strong></li>
-        <li>골든타임 4시간 내 발견율: 약 70% → 목표 80%↑ (<strong>+10%p</strong>)</li>
-        <li>확산: 그룹 B 7개 동 (서교·성산·북가좌2·장위·역촌·증산·연희) <strong>즉시 적용</strong></li>
+    <div class="card green" style="padding:10px 14px">
+      <div class="head" style="font-size:11.5px;margin-bottom:6px">💡 기대효과 — 시간·발견율·확산</div>
+      <ul class="bul green" style="font-size:12px">
+        <li style="font-size:12px;padding:3px 0 3px 14px">실종 위치 주변 전수 → <strong>배회 확률 높은 곳 우선</strong></li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">100시간 → 10분 + 단계적 추적으로 <strong>시간 절약</strong></li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">골든타임 4h 내 발견율 70%→80%↑ (<strong>+10%p</strong>)</li>
+        <li style="font-size:12px;padding:3px 0 3px 14px">그룹 B 7개 동 <strong>즉시 확장</strong></li>
       </ul>
     </div>
   </div>
 
-  <div style="font-size:10.5px;color:var(--muted);text-align:center;margin-top:6px;line-height:1.5">
-    근거: 서울시 AI CCTV 고속검색(100→10분, 12만 3천 대, 2026 25구 완료) · 2024 서울 아동·치매·장애 실종 13,766건 · 활용 1,600건+
-  </div>
   <span class="pageno">SLIDE 18 / 22</span>
 </section>
 
@@ -1399,7 +1461,7 @@
         <li><strong>새 CCTV 설치 X</strong> — 기존 12만 3천 대 그대로 활용</li>
         <li><strong>새 영상 분석 모델 X</strong> — 서울시 기존 AI 검색 엔진 그대로</li>
         <li>본 분석은 <strong>"어디부터 볼지" 우선순위 데이터만 공급</strong>하는 미들웨어</li>
-        <li>API 연동 + 격자 데이터(parquet 250,450행) 정기 갱신만으로 운영</li>
+        <li>API 연동 + 격자 데이터(parquet 243,920행) 정기 갱신만으로 운영</li>
       </ul>
     </div>
     <div class="card green">
@@ -1532,7 +1594,7 @@
       <p>● 행정안전부 도로명주소<br>&nbsp;&nbsp;— 건물 · 도로 SHP</p>
       <p>● OpenStreetMap contributors (openstreetmap.org)<br>&nbsp;&nbsp;— 글로벌 도로망 보조</p>
       <h5 style="color:var(--green-deep)">분석 단위</h5>
-      <p>● 50m × 50m 격자 250,450개<br>● ID 형식: G50-{row}-{col}<br>● 좌표계: EPSG:4326<br>● 분석 기간: 2023.09 ~ 2024.11 (15개월)</p>
+      <p>● 50m × 50m 격자 243,920개<br>● ID 형식: G50-{row}-{col}<br>● 좌표계: EPSG:4326<br>● 분석 기간: 2023.09 ~ 2024.11 (15개월)</p>
       <h5 style="color:var(--green-deep)">데이터 가공</h5>
       <p>● 좌표계 통일 EPSG:4326<br>● 인코딩 표준화 UTF-8<br>● Kakao Local API 주소 → 좌표 변환 (99.0% 정합)<br>● 8개 출처 → 50m 격자 ID 기준 join<br>● <b>13개 환경 변수 추출</b></p>
     </div>
@@ -1590,6 +1652,44 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
 </script>
 
 <script>
+// s04 격자 분할 애니메이션
+(function(){
+  const grid=document.getElementById('s04-grid');
+  const big=document.getElementById('s04-big');
+  if(!grid)return;
+  let built=false;
+  function build(){
+    if(built)return;built=true;
+    const cells=16*8;
+    for(let i=0;i<cells;i++){
+      const d=document.createElement('div');
+      d.style.cssText='background:#94a3b8;border-radius:1px;opacity:0;transform:scale(.3);transition:all .5s ease';
+      grid.appendChild(d);
+    }
+    const sec=document.getElementById('s04');
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting&&e.intersectionRatio>.4){
+          // big shrinks
+          big.style.transform='scale(.92)';big.style.opacity='.55';
+          // cells appear one by one
+          [...grid.children].forEach((c,i)=>{
+            setTimeout(()=>{
+              c.style.opacity='1';c.style.transform='scale(1)';
+              // some red cells (HH-like) randomly
+              if(Math.random()<.18){c.style.background='#ef4444'}
+              else if(Math.random()<.06){c.style.background='#f97316'}
+            },i*8);
+          });
+        }
+      });
+    },{threshold:[.4]});
+    io.observe(sec);
+  }
+  build();
+})();
+const sbToggle=document.getElementById('sb-toggle');
+if(sbToggle){sbToggle.addEventListener('click',()=>{document.body.classList.toggle('sb-collapsed');sbToggle.textContent=document.body.classList.contains('sb-collapsed')?'☰':'✕';});}
 const navItems=document.querySelectorAll('.nav-item');
 navItems.forEach(it=>it.addEventListener('click',()=>{const t=document.getElementById(it.dataset.target);if(t)t.scrollIntoView({behavior:'smooth'})}));
 const sections=[...document.querySelectorAll('section[data-section]')];
