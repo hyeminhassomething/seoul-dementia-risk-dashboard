@@ -364,6 +364,7 @@
   .persona-card .pdesc{font-size:11.5px;color:var(--text-soft);line-height:1.6;margin-bottom:8px}
   .persona-card .pdong{font-size:10.5px;color:var(--muted);border-top:1px dashed var(--border);padding-top:6px;line-height:1.55;font-weight:600}
   .persona-card .pemoji{position:absolute;top:8px;right:12px;font-size:20px}
+  #s13,#s17{margin-left:var(--sidebar-w);width:calc(100% - var(--sidebar-w))}
 
   /* Section 14 — HL persona */
   .gE-hero{background:linear-gradient(135deg,var(--orange-soft),#fff);border:3px solid var(--orange);border-radius:14px;padding:14px 18px}
@@ -412,6 +413,28 @@
   .news-card .ti{font-size:14px;font-weight:900;color:var(--text);margin-bottom:4px;line-height:1.3}
   .news-card .de{font-size:11px;color:var(--text-soft);line-height:1.5}
 
+  /* Section 17 — AI CCTV gap */
+  .s17-reality{margin-bottom:12px;font-size:13px}
+  .s17-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-bottom:12px;align-items:stretch}
+  .s17-col{display:flex;flex-direction:column;gap:10px;height:100%;min-height:0}
+  .s17-col>.limit-card,.s17-col>.card,.s17-col>.callout{margin:0}
+  .s17-left .limit-card{padding:11px 15px}
+  .s17-left .limit-card .h{font-size:12.5px}
+  .s17-left .bul li{font-size:11.8px;line-height:1.55;padding-top:2px;padding-bottom:2px}
+  .s17-right .card,.s17-right .callout{border-width:2px;border-radius:12px;padding:13px 16px}
+  .card.green.s17-solution{flex:1 1 auto;background:linear-gradient(135deg,var(--green-deep),var(--green));border-color:var(--green-deep);color:#fff;box-shadow:0 12px 26px rgba(22,163,74,.18)}
+  .card.purple.s17-diff{background:linear-gradient(135deg,#7e22ce,var(--purple));border-color:#6b21a8;color:#fff;box-shadow:0 12px 26px rgba(147,51,234,.15)}
+  .callout.green.s17-effect{background:linear-gradient(135deg,var(--green-deep),var(--green));border-color:var(--green-deep);color:#fff;font-size:12px;line-height:1.6;box-shadow:0 12px 26px rgba(22,163,74,.16)}
+  .s17-solution .head,.s17-diff .head{color:#fff;margin-bottom:7px}
+  .s17-card-body{font-size:12px;color:#fff;line-height:1.65;margin-bottom:9px}
+  .s17-card-body strong,.s17-effect strong{color:#fff;font-weight:900}
+  .s17-priority-flow{display:grid;grid-template-columns:60px 1fr;gap:6px;font-size:11px;line-height:1.45}
+  .s17-input-tag{font-family:monospace;font-weight:900;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.38);padding:2px 6px;border-radius:5px;text-align:center;font-size:10px}
+  .s17-gridline{color:#f8fafc}
+  .s17-gridline strong{color:#fff}
+  .s17-effect-title{display:block;font-weight:900;margin-bottom:3px;color:#fff}
+  .s17-source{font-size:11px;color:var(--muted);text-align:right}
+
   .step-list{counter-reset:stp;list-style:none;padding:0}
   .step-list li{counter-increment:stp;padding:4px 0 4px 52px;position:relative;font-size:11.5px;color:var(--text-soft);line-height:1.45;border-bottom:1px dashed var(--border);min-height:20px;word-break:keep-all}
   .step-list li:last-child{border-bottom:0}
@@ -449,6 +472,7 @@
     section{padding:30px 26px}
     .cover-title{font-size:38px}
     .cover-grid,.lisa-grid,.persona-grid,.grid-hero,.limit-row,.lisamap-grid,.pca-grid{grid-template-columns:1fr}
+    .s17-grid{grid-template-columns:1fr}
     .prob-grid,.grid-4,.hdb-grid,.kpi-grid,.data8-grid{grid-template-columns:repeat(2,1fr)}
     .layer3,.grid-3,.refs-grid{grid-template-columns:1fr}
     .toc-row{grid-template-columns:48px 1fr 1fr;gap:10px}
@@ -1597,13 +1621,9 @@
     <div class="card" style="border-color:var(--text);padding:8px 10px">
       <div class="head" style="margin-bottom:4px;font-size:11px;display:flex;justify-content:space-between;align-items:center">
         <span>HH 클러스터 지도 — 서울 전역 (82 valid clusters)</span>
-        <button id="s13-replay" style="background:#fff;border:1.5px solid var(--text);border-radius:999px;padding:2px 10px;font-size:10.5px;font-weight:800;cursor:pointer">↻ 다시 재생</button>
       </div>
-      <div id="s13-map-wrap" style="position:relative;width:100%;max-width:400px;aspect-ratio:1315/1312;margin:0 auto;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
-        <img src="maps/s13_map.png" alt="HH 클러스터 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
-
-        <!-- 5개 색별 클러스터 의미 매핑 팝업 오버레이 -->
-        <div id="s13-popups" style="position:absolute;inset:0;pointer-events:none"></div>
+      <div id="s13-map-wrap" style="position:relative;width:100%;max-width:640px;aspect-ratio:1392/1186;margin:0 auto;background:#fff;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+        <img src="maps/s13_map.png?v=20260605-2140" alt="HH 클러스터 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
       </div>
     </div>
   </div>
@@ -1873,13 +1893,13 @@
   <h2 class="sectitle">좋은 기술이 있지만 — 어디부터 볼지 모른다는 문제</h2>
   <p class="secsub">서울시 AI CCTV 고속검색 시스템 (100시간 영상 → 10분 분석)이 가진 <strong>3가지 잠재 한계</strong>와 본 분석이 제공하는 <strong>"탐색 우선순위 추천" 솔루션</strong></p>
 
-  <div class="callout dark" style="margin-bottom:12px;font-size:13px">
+  <div class="callout dark s17-reality">
     <strong style="color:var(--yellow)">현실</strong>&nbsp;&nbsp;"100시간 영상을 10분에 분석할 수 있다 — 그러나 12만 3천 대 중 어느 영상을 분석할지는 여전히 사람이 정해야 한다."
   </div>
 
-  <div class="grid-2" style="gap:12px;margin-bottom:12px">
-    <div>
-      <div class="limit-card orange" style="margin-bottom:10px">
+  <div class="s17-grid">
+    <div class="s17-col s17-left">
+      <div class="limit-card orange">
         <div class="h">💰 메모리·GPU 연산 비용 부담</div>
         <ul class="bul orange">
           <li>100시간 영상을 10분에 분석한다는 것은 <strong>GPU와 메모리에 막대한 부하</strong> 발생</li>
@@ -1887,7 +1907,7 @@
           <li>분석 대상 영상을 줄이지 못하면 <strong>시스템 확장에 비용 한계가 명확</strong></li>
         </ul>
       </div>
-      <div class="limit-card red" style="margin-bottom:10px">
+      <div class="limit-card red">
         <div class="h">🔥 수십만 대 무차별 탐색의 비효율</div>
         <ul class="bul red">
           <li>실종 신고 발생 시 신고 위치 반경 500m 평균 <strong>수백 대 CCTV가 검색 대상</strong></li>
@@ -1905,33 +1925,33 @@
         </ul>
       </div>
     </div>
-    <div>
-      <div class="card green" style="margin-bottom:10px">
+    <div class="s17-col s17-right">
+      <div class="card green s17-solution">
         <div class="head">🎯 탐색 우선순위 추천 시스템</div>
-        <div style="font-size:12px;color:var(--text-soft);line-height:1.7;margin-bottom:10px">
+        <div class="s17-card-body">
           실종 발생 위치와 발생 시각으로부터의 경과 시간을 입력값으로 받아, LISA × HDBSCAN 격자 단위 <strong>위험 점수가 높은 지역의 CCTV를 우선 탐색 대상으로 자동 추천</strong>하는 시스템.
         </div>
-        <div style="display:grid;grid-template-columns:60px 1fr;gap:6px;font-size:11px;line-height:1.5">
-          <div style="font-family:monospace;font-weight:900;color:var(--green-deep);background:var(--green-soft);padding:2px 6px;border-radius:5px;text-align:center;font-size:10px">입력 1</div>
-          <div style="color:var(--text-soft)">실종 신고 위치 → 신고 격자 ID (G50-row-col)</div>
-          <div style="font-family:monospace;font-weight:900;color:var(--green-deep);background:var(--green-soft);padding:2px 6px;border-radius:5px;text-align:center;font-size:10px">입력 2</div>
-          <div style="color:var(--text-soft)">신고 시각으로부터 경과 시간 t → 가능 이동 반경 r(t)</div>
-          <div style="font-family:monospace;font-weight:900;color:var(--green-deep);background:var(--green-soft);padding:2px 6px;border-radius:5px;text-align:center;font-size:10px">입력 3</div>
-          <div style="color:var(--text-soft)">격자별 LISA HH 응집도 + HDBSCAN 군집 시그너처 (골목 미로·고밀도 상업 동)</div>
-          <div style="font-family:monospace;font-weight:900;color:var(--green-deep);background:var(--green-soft);padding:2px 6px;border-radius:5px;text-align:center;font-size:10px">출력</div>
-          <div style="color:var(--text-soft)"><strong style="color:var(--text)">탐색 우선순위 격자 리스트</strong> → AI CCTV 검색 시스템에 자동 전달</div>
+        <div class="s17-priority-flow">
+          <div class="s17-input-tag">입력 1</div>
+          <div class="s17-gridline">실종 신고 위치 → 신고 격자 ID (G50-row-col)</div>
+          <div class="s17-input-tag">입력 2</div>
+          <div class="s17-gridline">신고 시각으로부터 경과 시간 t → 가능 이동 반경 r(t)</div>
+          <div class="s17-input-tag">입력 3</div>
+          <div class="s17-gridline">격자별 LISA HH 응집도 + HDBSCAN 군집 시그너처 (골목 미로·고밀도 상업 동)</div>
+          <div class="s17-input-tag">출력</div>
+          <div class="s17-gridline"><strong>탐색 우선순위 격자 리스트</strong> → AI CCTV 검색 시스템에 자동 전달</div>
         </div>
       </div>
 
-      <div class="card purple">
+      <div class="card purple s17-diff">
         <div class="head">⭐ 핵심 차별점</div>
-        <div style="font-size:12px;color:var(--text-soft);line-height:1.7">
-          <strong style="color:var(--purple)">새 CCTV 설치 X / 새 분석 모델 X</strong> / 기존 서울시 시스템에 <strong>우선순위 데이터만 공급하는 소프트웨어 레이어</strong> — 추가 인프라 비용 ≒ 0원
+        <div class="s17-card-body">
+          <strong>새 CCTV 설치 X / 새 분석 모델 X</strong> / 기존 서울시 시스템에 <strong>우선순위 데이터만 공급하는 소프트웨어 레이어</strong> — 추가 인프라 비용 ≒ 0원
         </div>
       </div>
 
-      <div class="callout green" style="margin-top:10px;font-size:12px">
-        <strong>기대 효과 (정량 추정)</strong><br>
+      <div class="callout green s17-effect">
+        <span class="s17-effect-title">기대 효과 (정량 추정)</span>
         ● 영상 분석 대상 CCTV 약 <strong>90% 축소</strong> (수백 대 → 수십 대 핀셋)<br>
         ● GPU 연산 시간·메모리 사용량 비례 절감<br>
         ● 골든타임 4시간 내 발견율 추정 <strong>+10%p 이상</strong><br>
@@ -1940,7 +1960,7 @@
     </div>
   </div>
 
-  <div style="font-size:11px;color:var(--muted);text-align:right">
+  <div class="s17-source">
     출처: 서울특별시 보도자료 (AI CCTV 고속검색시스템, 2026년 25개 자치구 완료) · 방법론: LISA × HDBSCAN 격자 단위 위험 점수 + 시간-반경 확률 모델 결합
   </div>
   <span class="pageno">SLIDE 17 / 23</span>
