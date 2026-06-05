@@ -1470,8 +1470,8 @@
     <div>
       <div class="card" style="border-color:var(--text);padding:10px 12px">
         <div class="head" style="margin-bottom:6px">LISA 4-Cluster — 서울 전역 50m 격자 (Queen contiguity · p&lt;0.05)</div>
-        <div id="s11-map-wrap" style="position:relative;width:100%;max-width:560px;aspect-ratio:1/1;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border);margin:0 auto">
-          <iframe src="maps/seoul_hh_hl.html" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none" loading="lazy" title="서울 HH/HL 분포 지도"></iframe>
+        <div id="s11-map-wrap" style="position:relative;width:100%;max-width:560px;aspect-ratio:1326/1248;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border);margin:0 auto">
+          <img src="maps/s11_map.png" alt="서울 HH/HL 분포 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
           <div class="s11-popups" id="s11-popups" style="position:absolute;inset:0;pointer-events:none"></div>
           <button id="s11-replay" style="position:absolute;bottom:8px;right:8px;background:#fff;border:1.5px solid var(--text);border-radius:999px;padding:4px 12px;font-size:11px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12);z-index:5;pointer-events:auto">↻ 다시 재생</button>
           <div style="position:absolute;top:8px;left:8px;background:#fff;border:1.5px solid var(--text);border-radius:8px;padding:5px 10px;font-size:10.5px;font-weight:800;color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.1);z-index:5">
@@ -1536,29 +1536,30 @@
     </div>
   </div>
 
-  <div class="grid-2" style="gap:12px;margin-top:8px">
-    <div class="card cyan">
-      <div class="head">밀도 기반 군집 예시 (density scatter)</div>
-      <div style="display:flex;gap:14px;font-size:11.5px;line-height:1.6;color:var(--text-soft)">
-        <div style="flex:1">
-          <strong style="color:var(--text)">밀도 높은 영역</strong> → 자생적 군집 형성<br>
-          <strong style="color:var(--text)">밀도 낮은 영역</strong> → 노이즈로 분리
-        </div>
-        <div style="display:flex;flex-direction:column;gap:4px;font-size:10.5px;font-weight:700">
-          <span style="color:#0f172a">● 군집 A</span>
-          <span style="color:#ea580c">● 군집 B</span>
-          <span style="color:#16a34a">● 군집 C</span>
-          <span style="color:#9333ea">● 군집 D</span>
-          <span style="color:#94a3b8">● 노이즈</span>
-        </div>
+  <div class="grid-2" style="gap:12px;margin-top:8px;align-items:start">
+    <div class="card" style="border-color:var(--text);padding:6px 8px">
+      <div class="head" style="margin-bottom:3px;font-size:10.5px">HDBSCAN 82 valid clusters — 서울 전역</div>
+      <div style="position:relative;width:100%;max-width:330px;margin:0 auto;aspect-ratio:1662/1477;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+        <img src="maps/s12_map.png" alt="HDBSCAN 96 군집 산점도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
+        * 색상 = HDBSCAN 군집 ID — 사전 라벨링 없이 자생적으로 등장한 82개 valid clusters
       </div>
     </div>
-    <div class="card orange">
-      <div class="head">응축 군집 트리와 안정성 기반 가지치기</div>
-      <div style="font-size:11.5px;color:var(--text-soft);line-height:1.65">
-        계층적 군집 트리 → <strong>condensed cluster tree</strong> → 최종 결과 (자생적 군집)<br>
-        밀도(λ) 높음 ↔ 낮음 사이의 <strong>stability-based pruning</strong> (안정성 낮은 가지 제거)<br>
-        <strong style="color:var(--orange-deep)">→ 82 valid clusters + noise 76,461 격자 (31.3%)</strong>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div class="card cyan" style="padding:8px 12px">
+        <div class="head" style="font-size:11px;margin-bottom:4px">밀도 기반 군집 (density scatter)</div>
+        <div style="font-size:11.5px;line-height:1.6;color:var(--text-soft)">
+          <strong style="color:var(--text)">밀도 높은 영역</strong> → 자생적 군집 / <strong style="color:var(--text)">낮은 영역</strong> → 노이즈
+        </div>
+      </div>
+      <div class="card orange" style="padding:8px 12px">
+        <div class="head" style="font-size:11px;margin-bottom:4px">응축 군집 트리 + 안정성 기반 가지치기</div>
+        <div style="font-size:11.5px;color:var(--text-soft);line-height:1.6">
+          계층적 트리 → <strong>condensed cluster tree</strong> → 자생적 군집<br>
+          밀도(λ)별 <strong>stability-based pruning</strong><br>
+          <strong style="color:var(--orange-deep)">→ 82 valid + noise 76,461 (31.3%)</strong>
+        </div>
       </div>
     </div>
   </div>
@@ -1577,8 +1578,8 @@
         <span>HH 클러스터 지도 — 서울 전역 (82 valid clusters)</span>
         <button id="s13-replay" style="background:#fff;border:1.5px solid var(--text);border-radius:999px;padding:2px 10px;font-size:10.5px;font-weight:800;cursor:pointer">↻ 다시 재생</button>
       </div>
-      <div id="s13-map-wrap" style="position:relative;width:100%;max-width:430px;aspect-ratio:1/1;margin:0 auto;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
-        <iframe src="maps/hh.html" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none" loading="lazy" title="HH Clusters Map"></iframe>
+      <div id="s13-map-wrap" style="position:relative;width:100%;max-width:400px;aspect-ratio:1315/1312;margin:0 auto;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+        <img src="maps/s13_map.png" alt="HH 클러스터 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
 
         <!-- 5개 색별 클러스터 의미 매핑 팝업 오버레이 -->
         <div id="s13-popups" style="position:absolute;inset:0;pointer-events:none"></div>
@@ -1769,8 +1770,8 @@
     <!-- 지도 -->
     <div class="card" style="border-color:var(--text);padding:8px 10px">
       <div class="head" style="margin-bottom:4px;font-size:11px">HH 밀도 분포 — TOP 4 행정동 위치</div>
-      <div style="position:relative;width:100%;aspect-ratio:5/4;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
-        <iframe src="maps/s15.html" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none" loading="lazy" title="동별 위험 밀도 TOP 지도"></iframe>
+      <div id="s15-map-wrap" style="position:relative;width:100%;max-width:480px;margin:0 auto;aspect-ratio:1198/1022;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+        <img src="maps/s15_map.png" alt="동별 위험 밀도 TOP 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
       </div>
       <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
         * 빨강 폴리곤: HH·HL 밀도 상위 행정동 · 회색 점: LL 격자
@@ -1932,8 +1933,8 @@
 
     <div class="card" style="border-color:var(--text);padding:8px 10px">
       <div class="head" style="margin-bottom:4px;font-size:11px">명동 — HH 격자 분포 지도</div>
-      <div style="position:relative;width:100%;aspect-ratio:5/3;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
-        <iframe src="maps/s18.html" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" title="명동 HH 격자 지도"></iframe>
+      <div style="position:relative;width:100%;max-width:400px;margin:0 auto;aspect-ratio:1263/1188;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+        <img src="maps/s18_map.png" alt="명동 HH 격자 분포 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
       </div>
       <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
         * 명동 386개 격자 중 <strong style="color:var(--red-deep)">355개(92%) HH 핫스팟</strong>
