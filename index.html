@@ -137,7 +137,9 @@
   .contents-grid{display:flex;flex-direction:column;gap:10px}
   .toc-row{display:grid;grid-template-columns:64px 1fr 110px 1fr;gap:14px;align-items:center;background:#fff;border:2px solid;border-radius:12px;padding:12px 18px;transition:transform .18s}
   .toc-row:hover{transform:translateX(4px)}
-  .toc-row.red{border-color:var(--red)} .toc-row.blue{border-color:var(--cyan)} .toc-row.orange{border-color:var(--orange)} .toc-row.green{border-color:var(--green)} .toc-row.yellow{border-color:var(--yellow)}
+  .toc-row.red{border-color:var(--red);background:linear-gradient(90deg,var(--red-soft) 0%,#fff 80%)} .toc-row.blue{border-color:var(--cyan);background:linear-gradient(90deg,var(--cyan-soft) 0%,#fff 80%)} .toc-row.orange{border-color:var(--orange);background:linear-gradient(90deg,var(--orange-soft) 0%,#fff 80%)} .toc-row.green{border-color:var(--green);background:linear-gradient(90deg,var(--green-soft) 0%,#fff 80%)} .toc-row.yellow{border-color:var(--yellow);background:linear-gradient(90deg,var(--yellow-soft) 0%,#fff 80%)}
+  .toc-row{opacity:0;transform:translateX(-30px);transition:opacity .55s ease-out,transform .55s ease-out}
+  .toc-row.appear{opacity:1;transform:translateX(0)}
   .toc-row .tn{font-family:monospace;font-size:30px;font-weight:900;line-height:1;letter-spacing:-.02em}
   .toc-row.red .tn{color:var(--red-deep)} .toc-row.blue .tn{color:var(--cyan)} .toc-row.orange .tn{color:var(--orange-deep)} .toc-row.green .tn{color:var(--green-deep)} .toc-row.yellow .tn{color:var(--yellow-deep)}
   .toc-row .ttitle{font-size:18px;font-weight:900;letter-spacing:-.01em;line-height:1.3}
@@ -424,7 +426,88 @@
 
 <!-- 1. COVER -->
 <section id="s01" data-section="1">
-  <div class="cover-grid">
+  <!-- 배경 일러스트: 한강 + 서울 스카이라인 + 노인 부부 뒷모습 -->
+  <svg style="position:absolute;left:0;bottom:0;width:55%;height:60%;opacity:.45;pointer-events:none;z-index:0" viewBox="0 0 800 480" preserveAspectRatio="xMidYEnd meet">
+    <defs>
+      <linearGradient id="skygrad" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#dbeafe" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#dbeafe" stop-opacity=".6"/>
+      </linearGradient>
+      <linearGradient id="rivergrad" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#bfdbfe"/>
+        <stop offset="100%" stop-color="#93c5fd"/>
+      </linearGradient>
+    </defs>
+    <!-- 하늘 -->
+    <rect x="0" y="0" width="800" height="320" fill="url(#skygrad)"/>
+    <!-- 멀리 산 -->
+    <path d="M0,260 L60,230 L130,250 L190,210 L260,240 L320,200 L390,230 L450,205 L520,240 L600,215 L680,245 L760,220 L800,235 L800,300 L0,300 Z" fill="#cbd5e1" opacity=".55"/>
+    <!-- 스카이라인 빌딩 -->
+    <g fill="#94a3b8" opacity=".75">
+      <rect x="40" y="200" width="22" height="100"/>
+      <rect x="68" y="180" width="28" height="120"/>
+      <rect x="100" y="160" width="20" height="140"/>
+      <rect x="126" y="210" width="34" height="90"/>
+      <rect x="166" y="170" width="18" height="130"/>
+      <rect x="190" y="195" width="28" height="105"/>
+      <!-- N서울타워 -->
+      <rect x="240" y="120" width="6" height="180"/>
+      <polygon points="237,118 249,118 246,108 240,108"/>
+      <circle cx="243" cy="100" r="9" fill="#94a3b8"/>
+      <rect x="270" y="190" width="24" height="110"/>
+      <rect x="300" y="170" width="30" height="130"/>
+      <rect x="336" y="200" width="20" height="100"/>
+      <!-- 롯데타워 -->
+      <polygon points="380,80 396,80 392,300 384,300" />
+      <rect x="402" y="160" width="32" height="140"/>
+      <rect x="438" y="190" width="22" height="110"/>
+      <rect x="464" y="175" width="28" height="125"/>
+      <rect x="496" y="200" width="24" height="100"/>
+      <rect x="524" y="160" width="32" height="140"/>
+      <rect x="560" y="195" width="20" height="105"/>
+      <rect x="584" y="180" width="28" height="120"/>
+      <rect x="618" y="210" width="22" height="90"/>
+      <rect x="644" y="170" width="30" height="130"/>
+      <rect x="678" y="195" width="22" height="105"/>
+      <rect x="704" y="180" width="28" height="120"/>
+      <rect x="736" y="200" width="20" height="100"/>
+    </g>
+    <!-- 빌딩 창문 디테일 -->
+    <g fill="#fff" opacity=".25">
+      <rect x="74" y="200" width="3" height="3"/><rect x="82" y="200" width="3" height="3"/><rect x="74" y="215" width="3" height="3"/><rect x="82" y="215" width="3" height="3"/>
+      <rect x="106" y="180" width="3" height="3"/><rect x="113" y="180" width="3" height="3"/><rect x="106" y="195" width="3" height="3"/><rect x="113" y="195" width="3" height="3"/>
+      <rect x="306" y="190" width="3" height="3"/><rect x="314" y="190" width="3" height="3"/><rect x="322" y="190" width="3" height="3"/>
+      <rect x="408" y="180" width="3" height="3"/><rect x="416" y="180" width="3" height="3"/><rect x="424" y="180" width="3" height="3"/>
+      <rect x="530" y="180" width="3" height="3"/><rect x="540" y="180" width="3" height="3"/><rect x="548" y="180" width="3" height="3"/>
+    </g>
+    <!-- 한강 -->
+    <rect x="0" y="300" width="800" height="40" fill="url(#rivergrad)"/>
+    <!-- 다리 -->
+    <line x1="80" y1="305" x2="320" y2="305" stroke="#475569" stroke-width="2" opacity=".5"/>
+    <line x1="120" y1="305" x2="120" y2="335" stroke="#475569" stroke-width="1.5" opacity=".5"/>
+    <line x1="180" y1="305" x2="180" y2="335" stroke="#475569" stroke-width="1.5" opacity=".5"/>
+    <line x1="240" y1="305" x2="240" y2="335" stroke="#475569" stroke-width="1.5" opacity=".5"/>
+    <!-- 둑 -->
+    <rect x="0" y="340" width="800" height="140" fill="#e2e8f0" opacity=".6"/>
+    <!-- 노인 부부 뒷모습 -->
+    <g opacity=".85" transform="translate(80,340)">
+      <!-- 할아버지 -->
+      <ellipse cx="58" cy="20" rx="14" ry="10" fill="#475569"/>
+      <rect x="46" y="14" width="24" height="6" fill="#475569"/>
+      <rect x="42" y="20" width="34" height="3" fill="#475569"/>
+      <path d="M40,30 Q42,80 50,110 L66,110 Q74,80 76,30 Q66,28 58,28 Q50,28 40,30 Z" fill="#94a3b8"/>
+      <rect x="50" y="106" width="6" height="22" fill="#64748b"/>
+      <rect x="68" y="106" width="6" height="22" fill="#64748b"/>
+      <line x1="78" y1="50" x2="86" y2="125" stroke="#64748b" stroke-width="2"/>
+      <!-- 할머니 -->
+      <ellipse cx="118" cy="28" rx="13" ry="11" fill="#cbd5e1"/>
+      <path d="M101,40 Q103,85 110,115 L126,115 Q133,85 135,40 Q126,38 118,38 Q110,38 101,40 Z" fill="#94a3b8"/>
+      <rect x="110" y="112" width="6" height="20" fill="#64748b"/>
+      <rect x="120" y="112" width="6" height="20" fill="#64748b"/>
+    </g>
+  </svg>
+
+  <div class="cover-grid" style="position:relative;z-index:1">
     <div>
       <span class="cover-tag">데이터로 진단하고, 정책으로 연결합니다</span>
       <h1 class="cover-title">서울시 <span class="h1">치매 노인</span><br>실종 <span class="h1">위험구역 진단</span></h1>
@@ -436,16 +519,23 @@
         <span class="pill green">LISA × HDBSCAN</span>
         <span class="pill yellow">8개 출처 13개 변수</span>
       </div>
-      <div class="cover-meta">
-        <strong>분석 기간</strong> 2023.09 ~ 2024.11 (15개월) · <strong>분석 단위</strong> 50m × 50m 격자<br>
-        <strong>데이터 출처</strong> 서울 열린데이터광장 · 서울시 빅데이터캠퍼스 · 행정안전부 · OpenStreetMap
+      <div class="cover-meta" style="background:rgba(255,255,255,.75);backdrop-filter:blur(2px);border-radius:10px;padding:12px 16px;border-top:3px solid var(--text)">
+        <div style="font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px">DATA · METHOD</div>
+        <div style="margin-bottom:4px"><strong style="color:var(--red-deep)">분석 기간</strong> 2023.09 ~ 2024.11 (15개월) · <strong style="color:var(--blue-deep)">분석 단위</strong> 50m × 50m 격자 243,920개</div>
+        <div><strong style="color:var(--green-deep)">데이터 출처</strong>
+          <span style="display:inline-block;background:var(--green-soft);color:var(--green-deep);padding:1px 7px;border-radius:4px;font-weight:700;margin:1px 2px;font-size:11.5px">서울 열린데이터광장</span>
+          <span style="display:inline-block;background:var(--blue-soft);color:var(--blue-deep);padding:1px 7px;border-radius:4px;font-weight:700;margin:1px 2px;font-size:11.5px">서울 빅데이터캠퍼스</span>
+          <span style="display:inline-block;background:var(--orange-soft);color:var(--orange-deep);padding:1px 7px;border-radius:4px;font-weight:700;margin:1px 2px;font-size:11.5px">행정안전부 도로명주소</span>
+          <span style="display:inline-block;background:var(--purple-soft);color:var(--purple);padding:1px 7px;border-radius:4px;font-weight:700;margin:1px 2px;font-size:11.5px">OpenStreetMap</span>
+          <span style="display:inline-block;background:var(--yellow-soft);color:var(--yellow-deep);padding:1px 7px;border-radius:4px;font-weight:700;margin:1px 2px;font-size:11.5px">Kakao Local API</span>
+        </div>
       </div>
     </div>
-    <div class="scatter-wrap">
+    <div class="scatter-wrap" style="background:rgba(255,255,255,.92);backdrop-filter:blur(2px)">
       <div class="hs-head"><span>HH(핫스팟) · HL(사각지대) 분포 — 서울 전역 50m 격자</span></div>
       <div class="hs-legend">
-        <span class="lg"><span class="sw" style="background:var(--red)"></span>HH 23,976개</span>
-        <span class="lg"><span class="sw" style="background:var(--orange)"></span>HL 848개 (사각지대)</span>
+        <span class="lg"><span class="sw" style="background:var(--red)"></span>HH 46,960개</span>
+        <span class="lg"><span class="sw" style="background:var(--orange)"></span>HL 948개 (사각지대)</span>
         <span class="lg"><span class="sw" style="background:var(--blue)"></span>LL · 안전구역</span>
       </div>
       <svg viewBox="0 0 500 380" preserveAspectRatio="xMidYMid meet">
@@ -501,63 +591,115 @@
 <section id="s03" data-section="3">
   <div class="secnum red">SLIDE 03 · PROBLEM</div>
   <h2 class="sectitle">치매 실종 문제</h2>
-  <p class="secsub">현황 · 심각성 · 구조적 공백 — 자치구 평균에 묻힌 실제 위험을 격자 단위로 본다</p>
+  <p class="secsub">자치구 평균에 묻힌 실제 위험을 격자 단위로 본다</p>
 
-  <div class="prob-grid">
-    <div class="bigstat red">
-      <div class="label">01 · 현황 — 추정 치매환자</div>
-      <div class="num">10.4<span class="unit">%</span></div>
-      <div class="desc">서울 65+ <strong>192만 명</strong> 중 약 <strong>20만 명</strong></div>
+  <!-- 01 현황 + 02 심각성 두 칸 -->
+  <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:14px;margin-bottom:14px">
+    <!-- 01 현황 -->
+    <div class="card red" style="padding:16px 22px;background:#fff">
+      <div style="display:inline-block;background:var(--text);color:#fff;font-size:13px;font-weight:800;padding:4px 12px;border-radius:6px;margin-bottom:12px;letter-spacing:.03em">01. 현황</div>
+      <div style="display:grid;grid-template-columns:1fr 1px 1fr;gap:14px;align-items:center">
+        <!-- 도넛 -->
+        <div style="text-align:center">
+          <div style="position:relative;width:140px;height:140px;margin:0 auto">
+            <svg viewBox="0 0 100 100" style="width:100%;height:100%;transform:rotate(-90deg)">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#cbd5e1" stroke-width="14"/>
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#ef4444" stroke-width="14"
+                stroke-dasharray="27.4 263.9" stroke-dashoffset="0" stroke-linecap="butt"/>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+              <div style="font-family:monospace;font-size:30px;font-weight:900;color:var(--red-deep);line-height:1">10.4%</div>
+              <div style="font-size:11px;color:var(--muted);font-weight:700;margin-top:2px">20만 명</div>
+            </div>
+          </div>
+          <div style="font-size:11.5px;color:var(--text-soft);font-weight:700;margin-top:6px;line-height:1.5">서울 65+ 192만 명 중<br>추정 치매환자</div>
+        </div>
+        <div style="background:var(--border);height:130px"></div>
+        <!-- 741 → 49 화살표 -->
+        <div style="text-align:center">
+          <div style="font-size:11.5px;font-weight:800;color:var(--text);margin-bottom:2px">실종 신고</div>
+          <div style="font-family:monospace;font-size:38px;font-weight:900;color:var(--text);line-height:1">741<span style="font-size:18px">건</span></div>
+          <div style="font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">(2023.09 ~ 2024.11, 15개월)</div>
+          <div style="font-size:30px;color:var(--red);font-weight:300;margin:4px 0;line-height:1">↓</div>
+          <div style="font-size:11.5px;font-weight:800;color:var(--text)">사망 · 미발견</div>
+          <div style="font-family:monospace;font-size:38px;font-weight:900;color:var(--red-deep);line-height:1">49<span style="font-size:18px">건</span></div>
+          <div style="font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">(6.6% · 4시간 초과 시 생존율 급락)</div>
+        </div>
+      </div>
     </div>
-    <div class="bigstat orange">
-      <div class="label">실종 신고 (15개월)</div>
-      <div class="num">741<span class="unit">건</span></div>
-      <div class="desc">2023.09 ~ 2024.11 누적 신고</div>
-    </div>
-    <div class="bigstat red">
-      <div class="label">사망 · 미발견</div>
-      <div class="num">49<span class="unit">건</span></div>
-      <div class="desc"><strong>6.6%</strong> · 4시간 초과 시 생존율 급락</div>
-    </div>
-    <div class="bigstat blue">
-      <div class="label">실종자 발견 평균 반경</div>
-      <div class="num">250<span class="unit">m</span></div>
-      <div class="desc">자치구 평균 25km² 대비 <strong>약 1만 배</strong> 정밀</div>
+
+    <!-- 02 심각성 -->
+    <div class="card red" style="padding:16px 22px;background:#fff">
+      <div style="display:inline-block;background:var(--text);color:#fff;font-size:13px;font-weight:800;padding:4px 12px;border-radius:6px;margin-bottom:12px;letter-spacing:.03em">02. 심각성</div>
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:80px;font-size:14px;font-weight:800;color:var(--text)">시골 거주</div>
+          <div style="flex:1;height:32px;background:var(--bg-soft);border-radius:6px;overflow:hidden;border:1px solid var(--border)">
+            <div class="s3-bar s3-bar-rural" style="height:100%;width:0;background:linear-gradient(90deg,#94a3b8,#64748b);transition:width 1.4s cubic-bezier(.5,.1,.3,1);display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-weight:900;font-size:13px"></div>
+          </div>
+          <div style="font-family:monospace;font-size:20px;font-weight:900;color:var(--muted);width:60px;text-align:right">20%</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:80px;font-size:14px;font-weight:800;color:var(--text)">도시 거주</div>
+          <div style="flex:1;height:32px;background:var(--bg-soft);border-radius:6px;overflow:hidden;border:1px solid var(--border)">
+            <div class="s3-bar s3-bar-urban" style="height:100%;width:0;background:linear-gradient(90deg,#f87171,var(--red-deep));transition:width 1.6s .3s cubic-bezier(.5,.1,.3,1);display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-weight:900;font-size:13px"></div>
+          </div>
+          <div style="font-family:monospace;font-size:20px;font-weight:900;color:var(--red-deep);width:60px;text-align:right">80%</div>
+        </div>
+        <div style="font-size:13px;color:var(--text-soft);text-align:center;border-top:1px dashed var(--border);padding-top:10px;line-height:1.55;font-weight:600;margin-top:4px">
+          도시 거주 치매 노인의 <strong style="color:var(--red-deep);font-size:16px">80%</strong>가 외출 시 길을 잃음 · 시골 대비 <strong style="color:var(--text)">4배</strong>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="grid-3" style="margin-bottom:12px">
-    <div class="card red">
-      <div class="head">02 · 심각성 — 외출 시 길을 잃음</div>
-      <div class="urban-bars">
-        <div class="urban-bar rural"><div class="lbl">시골 거주</div><div class="track"><div class="fill" style="width:20%">20%</div></div></div>
-        <div class="urban-bar urban"><div class="lbl">도시 거주</div><div class="track"><div class="fill" style="width:80%">80%</div></div></div>
+  <!-- 03 구조적 공백 -->
+  <div class="card red" style="padding:14px 22px;background:#fff">
+    <div style="display:inline-block;background:var(--text);color:#fff;font-size:13px;font-weight:800;padding:4px 12px;border-radius:6px;margin-bottom:10px;letter-spacing:.03em">03. 구조적 공백</div>
+    <div style="display:grid;grid-template-columns:0.9fr 1.6fr;gap:18px;align-items:center">
+      <!-- 자치구 미니맵 -->
+      <div>
+        <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px">자치구<br>평균 49 km²</div>
+        <div style="position:relative;width:100%;aspect-ratio:5/3;background:#f1f5f9;border:1.5px solid var(--text);border-radius:6px;overflow:hidden">
+          <svg viewBox="0 0 250 150" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%">
+            <!-- 도로망 -->
+            <g stroke="#cbd5e1" stroke-width="1.2" fill="none">
+              <line x1="0" y1="40" x2="250" y2="40"/>
+              <line x1="0" y1="80" x2="250" y2="80"/>
+              <line x1="0" y1="120" x2="250" y2="120"/>
+              <line x1="50" y1="0" x2="50" y2="150"/>
+              <line x1="110" y1="0" x2="110" y2="150"/>
+              <line x1="170" y1="0" x2="170" y2="150"/>
+              <line x1="210" y1="0" x2="210" y2="150"/>
+            </g>
+            <!-- 하천 -->
+            <path d="M0,95 Q60,88 120,100 T250,92" stroke="#93c5fd" stroke-width="3" fill="none" opacity=".7"/>
+            <!-- 실종자 발견 점 -->
+            <circle cx="120" cy="65" r="5" fill="#ef4444"/>
+            <!-- 화살표 + 라벨 -->
+            <line x1="160" y1="105" x2="128" y2="72" stroke="#ef4444" stroke-width="1.5" marker-end="url(#s3arr)"/>
+            <defs><marker id="s3arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ef4444"/></marker></defs>
+            <text x="165" y="120" font-size="9" font-weight="700" fill="#dc2626">실종자 발견 반경</text>
+            <text x="165" y="132" font-size="9" font-weight="700" fill="#dc2626">250 m (0.2 km²)</text>
+          </svg>
+        </div>
       </div>
-      <div style="font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.55">도시 거주 치매 노인의 <strong style="color:var(--red-deep)">80%</strong>가 외출 시 길을 잃음 · 시골 대비 <strong>약 4배</strong></div>
-    </div>
-    <div class="card blue">
-      <div class="head">03 · 구조적 공백 — 공간 단위 불일치</div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-        <div style="text-align:center"><div style="font-family:monospace;font-size:18px;font-weight:900;color:var(--text)">25 km²</div><div style="font-size:10.5px;color:var(--muted);font-weight:600;margin-top:3px">자치구 평균</div></div>
-        <div style="font-size:20px;color:var(--muted);font-weight:300">vs</div>
-        <div style="text-align:center"><div style="font-family:monospace;font-size:18px;font-weight:900;color:var(--red-deep)">0.0625 km²</div><div style="font-size:10.5px;color:var(--muted);font-weight:600;margin-top:3px">실종자 발견 250m</div></div>
-      </div>
-      <div style="font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.55">자치구 단위 예산은 위험·안전 격자에 <strong>동일 분산</strong> → 효율성 저하</div>
-    </div>
-    <div class="mismatch-card">
-      <div style="display:flex;align-items:baseline;gap:8px;line-height:1">
-        <span style="font-size:13px;font-weight:800;color:var(--text)">약</span>
-        <span style="font-family:monospace;font-size:64px;font-weight:900;color:var(--red-deep);letter-spacing:-.03em">245</span>
-        <span style="font-size:32px;font-weight:900;color:var(--text)">×</span>
-        <span style="font-size:14px;font-weight:800;color:var(--text)">공간 미스매치</span>
-      </div>
-      <div class="mismatch-lbl" style="margin-top:8px">면적 환산 시 약 1만 배 — 동일 자치구 내에서도 격자별 위험은 <span style="color:var(--red-deep)">5배 이상 차이</span></div>
-    </div>
-  </div>
 
-  <div class="gap-callout">
-    <span class="ic">FINDING</span>
-    자치구 평균에 가려진 사각지대 — <strong>격자 단위 진단</strong>이 필요한 이유 · 5배 이상의 격자별 위험 격차가 동일 자치구 안에 공존.
+      <!-- 245× 큰 텍스트 -->
+      <div style="text-align:center">
+        <div style="display:flex;align-items:baseline;justify-content:center;gap:12px;line-height:1">
+          <span style="font-size:18px;font-weight:800;color:var(--text)">약</span>
+          <span style="font-family:'SF Mono',monospace;font-size:96px;font-weight:900;color:var(--red-deep);letter-spacing:-.04em">245</span>
+          <span style="font-size:48px;font-weight:900;color:var(--text)">×</span>
+          <span style="font-size:18px;font-weight:800;color:var(--text)">공간 미스매치</span>
+        </div>
+        <div style="border-top:1.5px solid var(--text);width:80%;margin:10px auto 8px"></div>
+        <div style="font-size:13px;font-weight:700;color:var(--text-soft);line-height:1.55">
+          동일 자치구 내에서도 격자별 위험은 <span style="font-size:18px;font-weight:900;color:var(--red-deep)">5배 이상 차이</span>
+        </div>
+        <div style="font-size:11.5px;color:var(--muted);font-weight:600;margin-top:4px">자치구 평균에 숨겨진 사각지대 — 격자 단위 진단 필요</div>
+      </div>
+    </div>
   </div>
   <span class="pageno">SLIDE 03 / 23</span>
 </section>
@@ -1760,6 +1902,43 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
 </script>
 
 <script>
+// s03 시골/도시 막대 애니메이션
+(function(){
+  const s03 = document.getElementById('s03');
+  if (!s03) return;
+  let triggered = false;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .4 && !triggered) {
+        triggered = true;
+        const rural = s03.querySelector('.s3-bar-rural');
+        const urban = s03.querySelector('.s3-bar-urban');
+        // 트리거 — width 변경
+        if (rural) { setTimeout(() => rural.style.width = '20%', 100); }
+        if (urban) { setTimeout(() => urban.style.width = '80%', 400); }
+      }
+    });
+  }, { threshold: [.4] });
+  io.observe(s03);
+})();
+
+// s02 목차 순차 등장
+(function(){
+  const s02 = document.getElementById('s02');
+  if (!s02) return;
+  const rows = s02.querySelectorAll('.toc-row');
+  let triggered = false;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .4 && !triggered) {
+        triggered = true;
+        rows.forEach((r, i) => setTimeout(() => r.classList.add('appear'), i * 280));
+      }
+    });
+  }, { threshold: [.4] });
+  io.observe(s02);
+})();
+
 // s04 격자 분할 애니메이션
 (function(){
   const grid=document.getElementById('s04-grid');
