@@ -160,18 +160,19 @@
   .s11-pop-pin{position:absolute;left:50%;top:100%;transform:translate(-50%,0);width:10px;height:10px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
   .s11-pop-hh .s11-pop-pin{background:#dc2626}
   .s11-pop-hl .s11-pop-pin{background:#f97316}
-  .s11-pop-card{background:#fff;border:2px solid;border-radius:10px;padding:6px 12px;box-shadow:0 8px 22px rgba(0,0,0,.18);white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;position:relative;margin-bottom:8px}
+  .s11-pop-card{background:#fff;border:1.5px solid;border-radius:8px;padding:3px 8px;box-shadow:0 4px 14px rgba(0,0,0,.16);white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;position:relative;margin-bottom:6px}
   .s11-pop-hh .s11-pop-card{border-color:#dc2626}
   .s11-pop-hl .s11-pop-card{border-color:#f97316}
   .s11-pop-card::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid;}
   .s11-pop-hh .s11-pop-card::after{border-top-color:#dc2626}
   .s11-pop-hl .s11-pop-card::after{border-top-color:#f97316}
-  .s11-pop-name{font-size:12px;font-weight:900;color:#0f172a}
-  .s11-pop-meta{font-size:10px;color:#64748b;font-weight:700;margin-top:1px}
+  .s11-pop-name{font-size:9.5px;font-weight:900;color:#0f172a;line-height:1.2}
+  .s11-pop-meta{font-size:8.5px;color:#64748b;font-weight:700;margin-top:1px;line-height:1.2}
   .s11-pop-hh .s11-pop-meta b{color:#dc2626}
   .s11-pop-hl .s11-pop-meta b{color:#f97316}
-  .s11-pop-score{font-size:11px;font-family:"SF Mono",monospace;color:#0f172a;font-weight:700;margin-top:3px;padding-top:3px;border-top:1px dashed #e5e7eb}
-  .s11-pop-score b{color:#dc2626;font-size:13px}
+  .s11-pop-score{font-size:8.5px;font-family:"SF Mono",monospace;color:#0f172a;font-weight:700;margin-top:2px;padding-top:2px;border-top:1px dashed #e5e7eb;line-height:1.2}
+  .s11-pop-score b{color:#dc2626;font-size:10px}
+  .s11-pop-pin{width:7px;height:7px;border-width:1.5px}
   /* 펄스 효과 — 새로 등장한 팝업 강조 */
   .s11-pop.flash .s11-pop-pin{animation:s11PinPulse 1.2s ease-out 2}
   @keyframes s11PinPulse{0%{box-shadow:0 0 0 0 rgba(220,38,38,.6),0 2px 6px rgba(0,0,0,.3)}100%{box-shadow:0 0 0 14px rgba(220,38,38,0),0 2px 6px rgba(0,0,0,.3)}}
@@ -1465,60 +1466,13 @@
       <div class="card" style="border-color:var(--text);padding:10px 12px">
         <div class="head" style="margin-bottom:6px">LISA 4-Cluster — 서울 전역 50m 격자 (Queen contiguity · p&lt;0.05)</div>
         <div id="s11-map-wrap" style="position:relative;width:100%;aspect-ratio:5/4;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
-          <iframe src="maps/s11.html" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none" loading="lazy" title="LISA 4-Cluster Map"></iframe>
-
-          <!-- 동별 risk_score 팝업 오버레이 (파박 등장 애니메이션) -->
-          <div class="s11-popups" style="position:absolute;inset:0;pointer-events:none">
-            <div class="s11-pop s11-pop-hh" style="top:20%;left:54%">
-              <div class="s11-pop-pin"></div>
-              <div class="s11-pop-card">
-                <div class="s11-pop-name">중구 명동</div>
-                <div class="s11-pop-meta">HH · 위험 밀도 <b>0.92</b></div>
-                <div class="s11-pop-score">risk_score <b>2.84</b></div>
-              </div>
-            </div>
-            <div class="s11-pop s11-pop-hh" style="top:34%;left:35%">
-              <div class="s11-pop-pin"></div>
-              <div class="s11-pop-card">
-                <div class="s11-pop-name">마포 연남동</div>
-                <div class="s11-pop-meta">HH · 위험 밀도 <b>0.74</b></div>
-                <div class="s11-pop-score">risk_score <b>2.41</b></div>
-              </div>
-            </div>
-            <div class="s11-pop s11-pop-hh" style="top:48%;left:67%">
-              <div class="s11-pop-pin"></div>
-              <div class="s11-pop-card">
-                <div class="s11-pop-name">성동 왕십리</div>
-                <div class="s11-pop-meta">HH · 위험 밀도 <b>0.71</b></div>
-                <div class="s11-pop-score">risk_score <b>2.27</b></div>
-              </div>
-            </div>
-            <div class="s11-pop s11-pop-hl" style="top:62%;left:46%">
-              <div class="s11-pop-pin"></div>
-              <div class="s11-pop-card">
-                <div class="s11-pop-name">용산 여의동</div>
-                <div class="s11-pop-meta">HL · <b>사각지대</b></div>
-                <div class="s11-pop-score">risk_score <b>1.92</b></div>
-              </div>
-            </div>
-            <div class="s11-pop s11-pop-hl" style="top:30%;left:78%">
-              <div class="s11-pop-pin"></div>
-              <div class="s11-pop-card">
-                <div class="s11-pop-name">노원 공릉2동</div>
-                <div class="s11-pop-meta">HL · <b>사각지대</b></div>
-                <div class="s11-pop-score">risk_score <b>1.78</b></div>
-              </div>
-            </div>
-            <div class="s11-pop s11-pop-hh" style="top:74%;left:60%">
-              <div class="s11-pop-pin"></div>
-              <div class="s11-pop-card">
-                <div class="s11-pop-name">송파 방이2동</div>
-                <div class="s11-pop-meta">HH · 위험 밀도 <b>0.58</b></div>
-                <div class="s11-pop-score">risk_score <b>2.05</b></div>
-              </div>
-            </div>
-          </div>
+          <iframe src="maps/seoul_hh_hl.html" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none" loading="lazy" title="서울 HH/HL 분포 지도"></iframe>
+          <div class="s11-popups" id="s11-popups" style="position:absolute;inset:0;pointer-events:none"></div>
           <button id="s11-replay" style="position:absolute;bottom:8px;right:8px;background:#fff;border:1.5px solid var(--text);border-radius:999px;padding:4px 12px;font-size:11px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12);z-index:5;pointer-events:auto">↻ 다시 재생</button>
+          <div style="position:absolute;top:8px;left:8px;background:#fff;border:1.5px solid var(--text);border-radius:8px;padding:5px 10px;font-size:10.5px;font-weight:800;color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.1);z-index:5">
+            <span style="display:inline-block;width:8px;height:8px;background:#dc2626;border-radius:50%;border:1.5px solid #fff;margin-right:4px;vertical-align:middle"></span>HH 핫스팟
+            <span style="display:inline-block;width:8px;height:8px;background:#f97316;border-radius:50%;border:1.5px solid #fff;margin-left:8px;margin-right:4px;vertical-align:middle"></span>HL 사각지대
+          </div>
         </div>
         <div style="font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.55">
           * HH 핫스팟은 서울 전역에 <strong style="color:var(--red-deep)">면 단위 광역 분포</strong>. HL 사각지대는 자치구 평균에 묻혀 <strong style="color:var(--orange-deep)">자치구 단위로는 보이지 않는 점 단위 위험구역</strong>.<br>
@@ -1612,21 +1566,17 @@
   <h2 class="sectitle">HH 동 페르소나 — 5가지 핵심 유형</h2>
   <p class="secsub">82개 클러스터를 5개 그룹으로 묶어 본 서울 HH 위험구역의 도시 기능 유형</p>
 
-  <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:10px;margin-bottom:8px">
+  <div style="margin-bottom:8px">
     <div class="card" style="border-color:var(--text);padding:8px 10px">
-      <div class="head" style="margin-bottom:4px;font-size:11px">HH 클러스터 지도 — 서울 전역</div>
-      <div style="position:relative;width:100%;aspect-ratio:5/3;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
-        <iframe src="maps/hh.html" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" title="HH Clusters Map"></iframe>
+      <div class="head" style="margin-bottom:4px;font-size:11px;display:flex;justify-content:space-between;align-items:center">
+        <span>HH 클러스터 지도 — 서울 전역 (82 valid clusters)</span>
+        <button id="s13-replay" style="background:#fff;border:1.5px solid var(--text);border-radius:999px;padding:2px 10px;font-size:10.5px;font-weight:800;cursor:pointer">↻ 다시 재생</button>
       </div>
-    </div>
-    <div class="card" style="border-color:var(--text);padding:8px 12px">
-      <div class="head" style="margin-bottom:6px;font-size:11px">🧠 클러스터 의미 매핑 (82 valid clusters)</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:11px;font-family:monospace;line-height:1.5">
-        <div><b style="color:var(--red-deep)">6, 3, 0, 4</b> · 고밀도 상업/복합 핵심지</div>
-        <div><b style="color:var(--orange-deep)">1, 2, 17, 24</b> · 일반 주거</div>
-        <div><b style="color:var(--yellow-deep)">18, 19, 20, 30</b> · 외곽 생활권</div>
-        <div><b style="color:var(--green-deep)">27, 31, 32, 33</b> · 저밀도</div>
-        <div style="grid-column:1/3"><b style="color:var(--blue-deep)">5, 7, 8, 23</b> · 특수/자연/비도시</div>
+      <div id="s13-map-wrap" style="position:relative;width:100%;aspect-ratio:32/9;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+        <iframe src="maps/hh.html" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none" loading="lazy" title="HH Clusters Map"></iframe>
+
+        <!-- 5개 색별 클러스터 의미 매핑 팝업 오버레이 -->
+        <div id="s13-popups" style="position:absolute;inset:0;pointer-events:none"></div>
       </div>
     </div>
   </div>
@@ -2244,22 +2194,239 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
 </script>
 
 <script>
-// s11 동별 risk_score 팝업 파박 등장
+// s13 — HH 클러스터 의미 매핑 팝업 (5개 색별 그룹, 좌표 기반)
 (function(){
-  const sec = document.getElementById('s11');
-  if (!sec) return;
-  const pops = sec.querySelectorAll('.s11-pop');
-  const replay = document.getElementById('s11-replay');
+  const sec = document.getElementById('s13');
+  const wrap = document.getElementById('s13-popups');
+  if (!sec || !wrap) return;
+
+  const LAT_MIN = 37.42, LAT_MAX = 37.70;
+  const LNG_MIN = 126.78, LNG_MAX = 127.18;
+
+  // 5개 클러스터 그룹 — 색·매핑·대표 동(좌표)
+  const GROUPS = [
+    { color:'red',    bg:'#fee2e2', dark:'#dc2626', clusters:'6, 3, 0, 4',     label:'고밀도 상업/복합 핵심지', dongs:[['명동',37.5636,126.9826],['신사동',37.5240,127.0204],['왕십리도선동',37.5650,127.0290]] },
+    { color:'orange', bg:'#fed7aa', dark:'#ea580c', clusters:'1, 2, 17, 24',   label:'일반 주거',              dongs:[['수유2동',37.6391,127.0223],['장위1동',37.6130,127.0500],['상봉2동',37.5950,127.0850]] },
+    { color:'yellow', bg:'#fef3c7', dark:'#ca8a04', clusters:'18, 19, 20, 30', label:'외곽 생활권',            dongs:[['진관동',37.6394,126.9270],['방화2동',37.5800,126.8120],['공릉2동',37.6260,127.0760]] },
+    { color:'green',  bg:'#dcfce7', dark:'#15803d', clusters:'27, 31, 32, 33', label:'저밀도',                 dongs:[['교남동',37.5710,126.9700],['용문동',37.5430,126.9620],['구로4동',37.4940,126.8870]] },
+    { color:'blue',   bg:'#dbeafe', dark:'#1d4ed8', clusters:'5, 7, 8, 23',    label:'특수/자연/비도시',       dongs:[['청운효자동',37.5870,126.9690],['상암동',37.5790,126.8910],['평창동',37.6130,126.9740]] }
+  ];
+
+  function lng2pct(lng){ return ((lng - LNG_MIN) / (LNG_MAX - LNG_MIN)) * 100; }
+  function lat2pct(lat){ return ((LAT_MAX - lat) / (LAT_MAX - LAT_MIN)) * 100; }
+
+  function build(){
+    wrap.innerHTML = '';
+    GROUPS.forEach((g, gi) => {
+      g.dongs.forEach((d, di) => {
+        const [name, lat, lng] = d;
+        const top = lat2pct(lat), left = lng2pct(lng);
+        if (top < 1 || top > 99 || left < 1 || left > 99) return;
+        const el = document.createElement('div');
+        el.className = 's13-pop';
+        el.dataset.gi = gi;
+        el.style.cssText = `position:absolute;top:${top.toFixed(2)}%;left:${left.toFixed(2)}%;transform:translate(-50%,-100%) scale(.6);opacity:0;transition:opacity .35s ease-out,transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none`;
+        el.innerHTML = `
+          <div style="position:absolute;left:50%;top:100%;transform:translate(-50%,0);width:8px;height:8px;border-radius:50%;background:${g.dark};border:1.5px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.3)"></div>
+          <div style="background:#fff;border:1.5px solid ${g.dark};border-radius:8px;padding:4px 8px;box-shadow:0 4px 14px rgba(0,0,0,.16);white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;margin-bottom:6px;position:relative">
+            <div style="font-size:9.5px;font-weight:900;color:#0f172a;line-height:1.2">${name}</div>
+            <div style="font-size:8.5px;color:${g.dark};font-weight:800;margin-top:1px;line-height:1.2">cluster ${g.clusters}</div>
+            <div style="font-size:9px;color:#0f172a;font-weight:700;margin-top:2px;padding-top:2px;border-top:1px dashed #e5e7eb;line-height:1.2">${g.label}</div>
+            <div style="position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid ${g.dark}"></div>
+          </div>
+        `;
+        wrap.appendChild(el);
+      });
+    });
+  }
+  build();
+
+  // 범례 (좌상단)
+  const lg = document.createElement('div');
+  lg.style.cssText = 'position:absolute;top:6px;left:6px;background:#fff;border:1.5px solid var(--text);border-radius:8px;padding:5px 9px;font-size:9.5px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.1);z-index:5;line-height:1.5';
+  lg.innerHTML = GROUPS.map(g => `<div><span style="display:inline-block;width:7px;height:7px;background:${g.dark};border-radius:50%;margin-right:4px;vertical-align:middle"></span><b style="color:${g.dark}">cluster ${g.clusters}</b> · ${g.label}</div>`).join('');
+  wrap.parentElement.appendChild(lg);
+
+  const replay = document.getElementById('s13-replay');
   let triggered = false;
   function play(){
+    const pops = wrap.querySelectorAll('.s13-pop');
+    pops.forEach(p => { p.style.opacity = '0'; p.style.transform = 'translate(-50%,-100%) scale(.6)'; });
+    pops.forEach((p, i) => {
+      setTimeout(() => {
+        p.style.opacity = '1';
+        p.style.transform = 'translate(-50%,-100%) scale(1)';
+      }, 200 + i * 280);
+    });
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .35 && !triggered) {
+        triggered = true;
+        play();
+      }
+    });
+  }, { threshold: [.35] });
+  io.observe(sec);
+  if (replay) replay.addEventListener('click', play);
+})();
+
+// s11 — 100+ 동별 risk_score 팝업 파박 등장 (서울 bbox 좌표 정규화)
+(function(){
+  const sec = document.getElementById('s11');
+  const wrap = document.getElementById('s11-popups');
+  if (!sec || !wrap) return;
+
+  // 서울 bbox: lat 37.42 ~ 37.70, lng 126.78 ~ 127.18 (지도에 보이는 영역)
+  const LAT_MIN = 37.42, LAT_MAX = 37.70;
+  const LNG_MIN = 126.78, LNG_MAX = 127.18;
+
+  // 서울 주요 행정동 100+개 (lat, lng, 이름, 타입, score)
+  const DONGS = [
+    // HH 핫스팟 (밀도 상위)
+    ['중구 명동',    37.5636, 126.9826, 'HH', 0.92, 2.84],
+    ['중구 을지로동', 37.5663, 126.9912, 'HH', 0.88, 2.71],
+    ['중구 황학동',   37.5667, 127.0203, 'HH', 0.82, 2.55],
+    ['중구 동화동',   37.5615, 127.0090, 'HH', 0.79, 2.48],
+    ['마포 연남동',   37.5662, 126.9226, 'HH', 0.74, 2.41],
+    ['마포 서교동',   37.5530, 126.9237, 'HH', 0.70, 2.32],
+    ['마포 성산1동',  37.5680, 126.9100, 'HH', 0.66, 2.24],
+    ['성동 왕십리도선동', 37.5650, 127.0290, 'HH', 0.71, 2.27],
+    ['성동 왕십리2동', 37.5635, 127.0341, 'HH', 0.68, 2.22],
+    ['성동 행당1동',  37.5577, 127.0337, 'HH', 0.65, 2.18],
+    ['중랑 중곡2동',  37.5712, 127.0750, 'HH', 0.69, 2.24],
+    ['중랑 면목본동', 37.5870, 127.0850, 'HH', 0.66, 2.20],
+    ['은평 진관동',   37.6394, 126.9270, 'HH', 0.64, 2.16],
+    ['은평 불광동',   37.6107, 126.9293, 'HH', 0.60, 2.10],
+    ['은평 역촌동',   37.6068, 126.9202, 'HH', 0.58, 2.06],
+    ['은평 증산동',   37.5870, 126.9100, 'HH', 0.56, 2.02],
+    ['강북 송천동',   37.6386, 127.0143, 'HH', 0.62, 2.14],
+    ['강북 수유2동',  37.6391, 127.0223, 'HH', 0.56, 2.02],
+    ['강북 수유3동',  37.6420, 127.0285, 'HH', 0.55, 2.00],
+    ['강북 명일2동',  37.5500, 127.1450, 'HH', 0.58, 2.05],
+    ['강남 신사동',   37.5240, 127.0204, 'HH', 0.68, 2.22],
+    ['강남 압구정동', 37.5276, 127.0285, 'HH', 0.66, 2.20],
+    ['강남 역삼1동',  37.5005, 127.0370, 'HH', 0.65, 2.18],
+    ['강남 청담동',   37.5220, 127.0470, 'HH', 0.62, 2.14],
+    ['송파 방이2동',  37.5180, 127.1090, 'HH', 0.58, 2.05],
+    ['송파 가락2동',  37.4960, 127.1180, 'HH', 0.57, 2.03],
+    ['송파 오금동',   37.5020, 127.1280, 'HH', 0.55, 2.00],
+    ['송파 잠실2동',  37.5100, 127.0850, 'HH', 0.54, 1.98],
+    ['양천 신월1동',  37.5320, 126.8390, 'HH', 0.56, 2.02],
+    ['양천 신정4동',  37.5180, 126.8550, 'HH', 0.54, 1.99],
+    ['양천 목5동',    37.5410, 126.8740, 'HH', 0.53, 1.96],
+    ['강서 우장산동', 37.5510, 126.8420, 'HH', 0.55, 2.00],
+    ['강서 등촌3동',  37.5530, 126.8650, 'HH', 0.53, 1.97],
+    ['강서 화곡3동',  37.5380, 126.8390, 'HH', 0.54, 1.98],
+    ['광진 군자동',   37.5570, 127.0780, 'HH', 0.56, 2.02],
+    ['광진 능동',     37.5500, 127.0820, 'HH', 0.55, 2.00],
+    ['동대문 용신동', 37.5790, 127.0340, 'HH', 0.55, 2.00],
+    ['동대문 장안1동', 37.5680, 127.0640, 'HH', 0.54, 1.98],
+    ['동대문 이문1동', 37.5950, 127.0590, 'HH', 0.53, 1.96],
+    ['동대문 답십리1동', 37.5760, 127.0530, 'HH', 0.52, 1.94],
+    ['성북 장위1동',  37.6130, 127.0500, 'HH', 0.55, 1.99],
+    ['성북 장위2동',  37.6160, 127.0560, 'HH', 0.54, 1.97],
+    ['성북 길음1동',  37.6020, 127.0220, 'HH', 0.53, 1.96],
+    ['서대문 북가좌2동', 37.5770, 126.9070, 'HH', 0.56, 2.01],
+    ['서대문 홍은1동', 37.5950, 126.9420, 'HH', 0.52, 1.95],
+    ['서대문 연희동', 37.5680, 126.9360, 'HH', 0.55, 2.00],
+    ['용산 한남동',   37.5350, 127.0050, 'HH', 0.54, 1.98],
+    ['용산 이태원1동', 37.5380, 126.9930, 'HH', 0.55, 1.99],
+    ['종로 평창동',   37.6130, 126.9740, 'HH', 0.50, 1.92],
+    ['종로 부암동',   37.5980, 126.9690, 'HH', 0.49, 1.90],
+    ['관악 행운동',   37.4780, 126.9550, 'HH', 0.53, 1.96],
+    ['관악 봉천동',   37.4830, 126.9550, 'HH', 0.52, 1.94],
+    ['금천 시흥1동',  37.4530, 126.9020, 'HH', 0.50, 1.91],
+    ['금천 독산1동',  37.4670, 126.9100, 'HH', 0.49, 1.89],
+    ['구로 구로4동',  37.4940, 126.8870, 'HH', 0.48, 1.88],
+    ['구로 신도림동', 37.5080, 126.8910, 'HH', 0.49, 1.90],
+    ['영등포 당산1동', 37.5300, 126.8990, 'HH', 0.50, 1.92],
+    ['영등포 문래동', 37.5170, 126.8950, 'HH', 0.49, 1.90],
+    ['도봉 쌍문1동',  37.6480, 127.0340, 'HH', 0.48, 1.88],
+    ['도봉 창3동',    37.6580, 127.0490, 'HH', 0.47, 1.86],
+    ['노원 상계3동',  37.6660, 127.0700, 'HH', 0.50, 1.92],
+    ['노원 중계1동',  37.6500, 127.0760, 'HH', 0.49, 1.90],
+    ['동작 사당3동',  37.4860, 126.9750, 'HH', 0.48, 1.88],
+    ['동작 신대방2동', 37.4960, 126.9300, 'HH', 0.47, 1.86],
+    ['서초 반포1동',  37.5050, 127.0080, 'HH', 0.55, 1.99],
+    ['서초 잠원동',   37.5160, 127.0080, 'HH', 0.54, 1.98],
+    ['강동 천호2동',  37.5410, 127.1280, 'HH', 0.52, 1.95],
+    ['강동 길동',     37.5380, 127.1410, 'HH', 0.50, 1.92],
+    ['중구 신당동',   37.5586, 127.0173, 'HH', 0.60, 2.10],
+    ['중구 약수동',   37.5530, 127.0090, 'HH', 0.57, 2.04],
+    ['용산 청파동',   37.5470, 126.9690, 'HH', 0.55, 2.00],
+    ['용산 효창동',   37.5400, 126.9620, 'HH', 0.53, 1.96],
+    ['마포 도화동',   37.5450, 126.9510, 'HH', 0.54, 1.98],
+    ['마포 공덕동',   37.5440, 126.9550, 'HH', 0.56, 2.02],
+
+    // HL 사각지대
+    ['여의동',        37.5260, 126.9240, 'HL', null, 1.92],
+    ['종로1·2·3·4가동', 37.5710, 126.9820, 'HL', null, 1.88],
+    ['용산2가동',     37.5320, 126.9750, 'HL', null, 1.85],
+    ['한강로동',      37.5300, 126.9670, 'HL', null, 1.82],
+    ['남영동',        37.5410, 126.9710, 'HL', null, 1.80],
+    ['서빙고동',      37.5210, 126.9870, 'HL', null, 1.78],
+    ['청운효자동',    37.5870, 126.9690, 'HL', null, 1.86],
+    ['상암동',        37.5790, 126.8910, 'HL', null, 1.83],
+    ['강서 방화2동',  37.5800, 126.8120, 'HL', null, 1.75],
+    ['강서 가양1동',  37.5700, 126.8420, 'HL', null, 1.72],
+    ['금천 가산동',   37.4800, 126.8830, 'HL', null, 1.82],
+    ['노원 공릉2동',  37.6260, 127.0760, 'HL', null, 1.78],
+    ['동작 사당2동',  37.4830, 126.9810, 'HL', null, 1.73],
+    ['강북 우이동',   37.6620, 127.0140, 'HL', null, 1.70],
+    ['도봉 도봉1동',  37.6720, 127.0470, 'HL', null, 1.68],
+    ['종로 사직동',   37.5790, 126.9700, 'HL', null, 1.74],
+    ['종로 삼청동',   37.5840, 126.9810, 'HL', null, 1.72],
+    ['은평 수색동',   37.5860, 126.8920, 'HL', null, 1.69],
+    ['은평 갈현1동',  37.6200, 126.9170, 'HL', null, 1.67],
+    ['중랑 신내1동',  37.6080, 127.1010, 'HL', null, 1.71],
+    ['성북 정릉1동',  37.6020, 127.0160, 'HL', null, 1.68],
+    ['강서 공항동',   37.5610, 126.8120, 'HL', null, 1.65],
+    ['관악 신림동',   37.4860, 126.9290, 'HL', null, 1.70],
+    ['양천 신정3동',  37.5230, 126.8590, 'HL', null, 1.66],
+    ['서초 양재1동',  37.4830, 127.0410, 'HL', null, 1.69],
+    ['송파 거여1동',  37.4970, 127.1430, 'HL', null, 1.67],
+    ['강동 명일1동',  37.5520, 127.1430, 'HL', null, 1.66],
+    ['중구 다산동',   37.5550, 127.0090, 'HL', null, 1.75],
+    ['용산 원효로1동', 37.5410, 126.9610, 'HL', null, 1.72],
+    ['종로 청운효자동', 37.5870, 126.9690, 'HL', null, 1.78]
+  ];
+
+  function lng2pct(lng){ return ((lng - LNG_MIN) / (LNG_MAX - LNG_MIN)) * 100; }
+  function lat2pct(lat){ return ((LAT_MAX - lat) / (LAT_MAX - LAT_MIN)) * 100; }
+
+  // 팝업 DOM 생성
+  function buildPops(){
+    wrap.innerHTML = '';
+    DONGS.forEach((d, i) => {
+      const [name, lat, lng, type, dens, score] = d;
+      const top = lat2pct(lat), left = lng2pct(lng);
+      if (top < 1 || top > 99 || left < 1 || left > 99) return;
+      const el = document.createElement('div');
+      el.className = 's11-pop s11-pop-' + type.toLowerCase();
+      el.style.top = top.toFixed(2) + '%';
+      el.style.left = left.toFixed(2) + '%';
+      const meta = type === 'HH' ? `HH · 밀도 <b>${dens.toFixed(2)}</b>` : `HL · <b>사각지대</b>`;
+      el.innerHTML = `<div class="s11-pop-pin"></div><div class="s11-pop-card"><div class="s11-pop-name">${name}</div><div class="s11-pop-meta">${meta}</div><div class="s11-pop-score">risk_score <b>${score.toFixed(2)}</b></div></div>`;
+      wrap.appendChild(el);
+    });
+  }
+
+  buildPops();
+  const replay = document.getElementById('s11-replay');
+  let triggered = false;
+
+  function play(){
+    const pops = wrap.querySelectorAll('.s11-pop');
     pops.forEach(p => p.classList.remove('on','flash'));
     pops.forEach((p, i) => {
       setTimeout(() => {
         p.classList.add('on','flash');
-        setTimeout(() => p.classList.remove('flash'), 1300);
-      }, 350 + i * 450);
+        setTimeout(() => p.classList.remove('flash'), 900);
+      }, 200 + i * 80);  // 80ms 간격 — 100개면 약 8초
     });
   }
+
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting && e.intersectionRatio > .35 && !triggered) {
