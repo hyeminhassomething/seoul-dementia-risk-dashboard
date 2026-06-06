@@ -445,7 +445,7 @@
   .persona-card .pdesc{font-size:11.5px;color:var(--text-soft);line-height:1.6;margin-bottom:8px}
   .persona-card .pdong{font-size:10.5px;color:var(--muted);border-top:1px dashed var(--border);padding-top:6px;line-height:1.55;font-weight:600}
   .persona-card .pemoji{position:absolute;top:8px;right:12px;font-size:20px}
-  #s13,#s14,#s17,#s18{margin-left:var(--sidebar-w);width:calc(100% - var(--sidebar-w))}
+  #s13,#s14,#s17,#s18,#s19{margin-left:var(--sidebar-w);width:calc(100% - var(--sidebar-w))}
   #s13,#s14{overflow:hidden}
   #s13 .sectitle,#s14 .sectitle{font-size:36px;margin-bottom:5px}
   #s13 .secsub,#s14 .secsub{font-size:15.5px;margin-bottom:14px}
@@ -623,41 +623,36 @@
   .step-list li::before{content:"Step "counter(stp);position:absolute;left:0;top:5px;font-family:monospace;font-size:9.5px;font-weight:900;color:var(--green-deep);background:var(--green-soft);padding:2px 6px;border-radius:5px;letter-spacing:.04em;width:46px;text-align:center;box-sizing:border-box}
   .step-list li b{color:var(--text);font-weight:800}
 
-  /* Section 18 — Myeongdong case sequence */
-  #s18{overflow:hidden;padding-top:34px;padding-bottom:30px}
-  #s18 .sectitle{font-size:33px;margin-bottom:4px}
-  #s18 .secsub{font-size:14px;margin-bottom:10px}
-  .s18-layout{display:grid;grid-template-columns:minmax(360px,.88fr) minmax(0,1.25fr);gap:14px;align-items:stretch}
-  .s18-left{display:flex;flex-direction:column;gap:8px;min-height:0}
-  .s18-why{padding:10px 12px!important}
-  .s18-why .head{font-size:13px!important;margin-bottom:6px!important}
-  .s18-why .bul li{font-size:10.8px!important;line-height:1.32!important;padding:1px 0 1px 13px!important}
-  .s18-map-row{display:grid;grid-template-columns:minmax(0,212px) 30px;gap:8px;align-items:stretch;margin-top:7px}
-  .s18-map-wrap{position:relative;width:100%;aspect-ratio:1315/1312;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid rgba(239,68,68,.22)}
+  /* Section 18 — Myeongdong case + Section 19 flow visuals */
+  #s18{overflow:hidden;padding:26px 40px 28px;justify-content:flex-start}
+  #s19{overflow:hidden;padding:32px 42px 30px;justify-content:flex-start}
+  #s18 .sectitle{font-size:32px;margin-bottom:3px}
+  #s18 .secsub{font-size:13.5px;margin-bottom:9px;line-height:1.42}
+  #s19 .sectitle{font-size:34px;margin-bottom:4px}
+  #s19 .secsub{font-size:14px;margin-bottom:11px;line-height:1.45}
+  .s18-case-layout{position:relative;display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);gap:18px;align-items:start}
+  .s18-map-zone{min-width:0}
+  .s18-map-shell{display:grid;grid-template-columns:minmax(0,1fr) 42px;gap:10px;align-items:stretch;height:min(590px,calc(100vh - 174px));min-height:500px}
+  .s18-map-wrap{position:relative;height:100%;aspect-ratio:1315/1312;justify-self:end;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid rgba(239,68,68,.2);box-shadow:0 16px 34px rgba(15,23,42,.1)}
   .s18-map-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none}
-  .s18-scale{width:30px;height:100%;object-fit:contain;align-self:stretch;filter:drop-shadow(0 2px 4px rgba(15,23,42,.14))}
-  .s18-map-note{font-size:9.5px;color:var(--muted);margin-top:4px;line-height:1.45}
-  .s18-origin{position:absolute;left:var(--x);top:var(--y);width:10px;height:10px;border-radius:50%;background:#7f1d1d;box-shadow:0 0 0 4px rgba(239,68,68,.24),0 0 16px rgba(127,29,29,.5);transform:translate(-50%,-50%);z-index:4}
-  .s18-wave-cell{position:absolute;left:var(--x);top:var(--y);width:17px;height:17px;border-radius:3px;background:rgba(239,68,68,.68);box-shadow:inset 0 0 0 1px rgba(255,255,255,.44),0 0 10px rgba(239,68,68,.32);transform:translate(-50%,-50%) scale(.25);opacity:0;z-index:3}
+  .s18-scale{width:42px;height:100%;object-fit:fill;align-self:stretch;filter:drop-shadow(0 3px 6px rgba(15,23,42,.16))}
+  .s18-map-note{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.45;text-align:right}
+  .s18-neon-grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,.44) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.44) 1px,transparent 1px);background-size:26px 26px;opacity:0;mix-blend-mode:screen;filter:drop-shadow(0 0 5px rgba(0,229,255,.7));z-index:2;pointer-events:none}
+  #s18.scene-live .s18-neon-grid-overlay{animation:s18GridDim 3.2s ease-in-out .25s infinite}
+  .s18-origin{position:absolute;left:var(--x);top:var(--y);width:10px;height:10px;border-radius:50%;background:#7f1d1d;box-shadow:0 0 0 4px rgba(239,68,68,.24),0 0 16px rgba(127,29,29,.5);transform:translate(-50%,-50%);z-index:5}
+  .s18-map-cell{position:absolute;left:var(--x);top:var(--y);width:30px;height:30px;border-radius:4px;background:rgba(0,229,255,.28);border:1.4px solid rgba(165,243,252,.96);box-shadow:0 0 14px rgba(0,229,255,.72),inset 0 0 12px rgba(0,229,255,.28);transform:translate(-50%,-50%) scale(.32);opacity:0;z-index:4}
   #s18.scene-live .s18-origin{animation:s18OriginPulse 2.2s ease-in-out infinite;animation-delay:var(--d,0s)}
-  #s18.scene-live .s18-wave-cell{animation:s18CellSpread 4.8s ease-in-out infinite;animation-delay:calc(.45s + var(--d,0s))}
-  .s18-stack-card{padding:8px 11px!important}
-  .s18-stack-card .head{font-size:11.4px!important;margin-bottom:4px!important}
-  .s18-stack-card .bul li{font-size:10.8px!important;line-height:1.38!important;padding:1px 0 1px 13px!important}
-  .s18-flow{position:relative;min-height:520px;border:2px solid var(--orange);border-radius:14px;background:linear-gradient(145deg,#fff7ed,#fff 42%,#f8fafc);padding:10px 12px;box-shadow:0 18px 34px rgba(15,23,42,.07);overflow:hidden}
-  .s18-flow::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 16%,rgba(249,115,22,.18),transparent 30%),radial-gradient(circle at 88% 92%,rgba(6,182,212,.13),transparent 34%);pointer-events:none}
-  .s18-flow-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
-  .s18-flow-head b{font-size:13px;font-weight:900;color:var(--orange-deep)}
-  .s18-flow-head span{font-size:9.5px;font-weight:800;color:var(--muted);letter-spacing:.08em}
-  .s18-steps{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-  .s18-step{position:relative;min-height:230px;background:rgba(255,255,255,.92);border:1.5px solid rgba(148,163,184,.5);border-radius:11px;padding:7px 9px;overflow:hidden;opacity:0;transform:translateY(16px);box-shadow:0 10px 18px rgba(15,23,42,.04)}
-  #s18.scene-live .s18-step:nth-child(1){animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) 3s both}
-  #s18.scene-live .s18-step:nth-child(2){animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) 4.35s both}
-  #s18.scene-live .s18-step:nth-child(3){animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) 5.7s both}
-  #s18.scene-live .s18-step:nth-child(4){animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) 7.05s both}
-  .s18-step-label{display:inline-flex;align-items:center;gap:5px;font-family:monospace;font-size:9.5px;font-weight:900;letter-spacing:.05em;color:#fff;background:var(--orange-deep);padding:2px 7px;border-radius:999px;margin-bottom:5px}
-  .s18-step-title{font-size:12px;font-weight:900;color:var(--text);line-height:1.25;margin-bottom:3px}
-  .s18-step-copy{font-size:9.8px;color:var(--text-soft);line-height:1.42;word-break:keep-all}
+  #s18.scene-live .s18-map-cell{animation:s18CellSpread 4.6s ease-in-out infinite;animation-delay:calc(.4s + var(--d,0s))}
+  .s18-info-side{display:flex;flex-direction:column;gap:10px;padding-top:6px}
+  .s18-info-card{opacity:0;transform:translateX(-20px) scale(.96);box-shadow:0 14px 30px rgba(15,23,42,.08)}
+  #s18.scene-live .s18-info-card{animation:s18StepIn .62s cubic-bezier(.2,.86,.25,1) both;animation-delay:var(--d,1s)}
+  .s18-why{padding:13px 15px!important;border-width:2.4px!important}
+  .s18-why .head,.s18-stack-card .head{font-size:12.3px!important;margin-bottom:6px!important}
+  .s18-why .bul li,.s18-stack-card .bul li{font-size:11.1px!important;line-height:1.45!important;padding:2px 0 2px 13px!important}
+  .s18-stack-card{padding:11px 14px!important;border-width:2.2px!important}
+  .s18-connector{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4;overflow:visible}
+  .s18-connector path{fill:none;stroke:#00e5ff;stroke-width:3px;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:7 7;opacity:0;filter:drop-shadow(0 0 8px rgba(0,229,255,.85));marker-end:url(#s18ArrowHead)}
+  #s18.scene-live .s18-connector path{animation:s18Dash 1.2s linear infinite,s18ConnectorIn .7s ease-out 1s both}
   .s18-neon-board{position:relative;height:116px;margin-top:7px;border-radius:10px;overflow:hidden;background:#071827;background-image:linear-gradient(rgba(34,211,238,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.34) 1px,transparent 1px),radial-gradient(circle at 50% 46%,rgba(34,211,238,.22),transparent 54%);background-size:22px 22px,22px 22px,100% 100%;border:1px solid rgba(34,211,238,.42);box-shadow:inset 0 0 25px rgba(34,211,238,.12),0 0 18px rgba(34,211,238,.1)}
   .s18-neon-cell{position:absolute;left:var(--x);top:var(--y);width:23px;height:23px;border-radius:4px;background:rgba(34,211,238,.26);border:1px solid rgba(125,249,255,.85);box-shadow:0 0 14px rgba(34,211,238,.8),inset 0 0 10px rgba(34,211,238,.35);animation:s18NeonBlink 1.2s ease-in-out infinite;animation-delay:var(--d,0s)}
   .s18-grid-id{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);font-family:monospace;font-size:13px;font-weight:900;color:#a5f3fc;background:rgba(8,47,73,.82);border:1px solid rgba(125,249,255,.75);border-radius:7px;padding:4px 10px;text-shadow:0 0 12px rgba(34,211,238,.9)}
@@ -665,12 +660,12 @@
   .s18-city-mini .s13-plane{width:min(98%,216px);height:96px}
   .s18-city-mini .s13-wanderer{animation-duration:5.4s}
   .s18-city-mini .s13-bldg,.s18-city-mini .s13-block,.s18-city-mini .s13-shop,.s18-city-mini .s13-house,.s18-city-mini .s13-tree,.s18-city-mini .s13-bus,.s18-city-mini .s13-facility,.s18-city-mini .s13-hill,.s18-city-mini .s13-signal{opacity:0;transform:var(--base,translateZ(0)) translateY(20px) scaleY(.08);transform-origin:50% 100%}
-  #s18.scene-live .s18-city-mini .s13-bldg,#s18.scene-live .s18-city-mini .s13-block,#s18.scene-live .s18-city-mini .s13-shop,#s18.scene-live .s18-city-mini .s13-house,#s18.scene-live .s18-city-mini .s13-tree,#s18.scene-live .s18-city-mini .s13-bus,#s18.scene-live .s18-city-mini .s13-facility,#s18.scene-live .s18-city-mini .s13-hill,#s18.scene-live .s18-city-mini .s13-signal{animation:s18TinyRise .78s cubic-bezier(.2,.82,.25,1.12) both;animation-delay:calc(4.65s + var(--rise,var(--d,0s)))}
+  #s19.scene-live .s18-city-mini .s13-bldg,#s19.scene-live .s18-city-mini .s13-block,#s19.scene-live .s18-city-mini .s13-shop,#s19.scene-live .s18-city-mini .s13-house,#s19.scene-live .s18-city-mini .s13-tree,#s19.scene-live .s18-city-mini .s13-bus,#s19.scene-live .s18-city-mini .s13-facility,#s19.scene-live .s18-city-mini .s13-hill,#s19.scene-live .s18-city-mini .s13-signal{animation:s18TinyRise .78s cubic-bezier(.2,.82,.25,1.12) both;animation-delay:calc(1.2s + var(--rise,var(--d,0s)))}
   .s18-route-scene{position:relative;height:120px;margin-top:8px;border-radius:10px;background:linear-gradient(180deg,#f8fafc,#e0f2fe 70%,#cbd5e1);overflow:hidden;border:1px solid rgba(148,163,184,.35)}
   .s18-route-scene svg{position:absolute;inset:8px;width:calc(100% - 16px);height:100px;overflow:visible}
   .s18-route-scene path{fill:none;stroke:#ef4444;stroke-width:4;stroke-linecap:round;stroke-dasharray:8 8;filter:drop-shadow(0 0 5px rgba(239,68,68,.42));animation:s18Dash 1.3s linear infinite}
   .s18-police-team{position:absolute;left:5%;top:38px;display:flex;align-items:flex-end;gap:4px;z-index:3}
-  #s18.scene-live .s18-police-team{animation:s18PoliceMove 4.8s ease-in-out 6.05s infinite}
+  #s19.scene-live .s18-police-team{animation:s18PoliceMove 4.8s ease-in-out 2.1s infinite}
   .s18-mini-police{position:relative;width:39px;height:77px}
   .s18-mini-police .head{position:absolute;left:12px;top:0;width:17px;height:18px;border-radius:50%;background:#f0b899;box-shadow:0 -3px 0 1px #111827}
   .s18-mini-police .body{position:absolute;left:7px;top:18px;width:26px;height:34px;border-radius:7px 7px 4px 4px;background:linear-gradient(180deg,#315b86,#1e3a5f);box-shadow:inset 0 5px 0 rgba(255,255,255,.16)}
@@ -689,7 +684,35 @@
   .s18-alert-msg::before{content:"!";position:absolute;left:11px;top:15px;width:18px;height:18px;border-radius:6px;background:#facc15;color:#111827;font-size:14px;font-weight:900;text-align:center;line-height:18px}
   .s18-alert-msg b{display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:2px}
   .s18-alert-msg small{font-size:8.5px;color:#64748b;font-weight:700}
-  #s18.scene-live .s18-alert-msg{animation:s18AlertPop 3.5s ease-in-out 7.85s infinite}
+  #s19.scene-live .s18-alert-msg{animation:s18AlertPop 3.5s ease-in-out 2.9s infinite}
+  .s19-step-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:10px}
+  .s19-step-card{padding:8px 9px!important;text-align:left;min-height:260px;overflow:hidden}
+  .s19-step-card .head{font-size:10.3px!important;margin-bottom:4px!important}
+  .s19-step-card .s19-icon{font-size:20px;line-height:1;margin-bottom:4px;text-align:center}
+  .s19-step-card .s19-title{font-size:11px;font-weight:900;color:var(--text);line-height:1.35;text-align:center;min-height:31px}
+  .s19-step-card .s19-copy{font-size:9.2px;color:var(--muted);line-height:1.35;text-align:center;margin-top:3px;min-height:27px}
+  .s19-step-visual{height:112px;margin-top:7px;opacity:0;transform:translateY(10px) scale(.96)}
+  #s19.scene-live .s19-step-card:nth-child(1) .s19-step-visual{animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) .25s both}
+  #s19.scene-live .s19-step-card:nth-child(2) .s19-step-visual{animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) .65s both}
+  #s19.scene-live .s19-step-card:nth-child(3) .s19-step-visual{animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) 1.05s both}
+  #s19.scene-live .s19-step-card:nth-child(4) .s19-step-visual{animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) 1.45s both}
+  #s19.scene-live .s19-step-card:nth-child(5) .s19-step-visual{animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) 1.85s both}
+  .s19-step-card .s18-neon-board{height:112px;margin-top:0}
+  .s19-step-card .s18-grid-id{font-size:10.5px;bottom:8px;padding:3px 7px}
+  .s19-step-card .s18-city-mini{height:112px;margin-top:0;transform:scale(.9)}
+  .s19-step-card .s18-route-scene,.s19-step-card .s18-step4-scene{height:112px;margin-top:0}
+  .s19-step-card .s18-route-scene svg{height:92px}
+  .s19-step-card .s18-mini-police{transform:scale(.82);transform-origin:left bottom}
+  .s19-mini-map{position:relative;height:112px;border-radius:10px;overflow:hidden;background:linear-gradient(145deg,#eff6ff,#f8fafc);border:1px solid rgba(148,163,184,.4)}
+  .s19-mini-map::before{content:"";position:absolute;inset:10px;background-image:linear-gradient(rgba(0,229,255,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.34) 1px,transparent 1px);background-size:18px 18px;filter:drop-shadow(0 0 4px rgba(0,229,255,.55))}
+  .s19-mini-map::after{content:"risk score";position:absolute;right:9px;top:8px;font-family:monospace;font-size:8.5px;font-weight:900;color:var(--red-deep);background:#fff;border-radius:999px;padding:2px 6px;border:1px solid rgba(239,68,68,.25)}
+  .s19-risk-cell{position:absolute;left:var(--x);top:var(--y);width:24px;height:24px;border-radius:5px;background:rgba(239,68,68,.64);box-shadow:0 0 14px rgba(239,68,68,.52);animation:s18CellSpread 2.8s ease-in-out infinite;animation-delay:var(--d,0s)}
+  .s19-bottom{display:grid;grid-template-columns:1.05fr .95fr;gap:10px}
+  .s19-bottom .card,.s19-bottom .callout{padding:12px 15px!important}
+  .s19-bottom .bul li{font-size:11.2px;line-height:1.45;padding-top:2px;padding-bottom:2px}
+  .s19-bottom .callout{font-size:13px}
+  @keyframes s18GridDim{0%,100%{opacity:.22}50%{opacity:.58}}
+  @keyframes s18ConnectorIn{0%{opacity:0;stroke-dashoffset:40}100%{opacity:.95;stroke-dashoffset:0}}
   @keyframes s18OriginPulse{0%,100%{transform:translate(-50%,-50%) scale(.9);opacity:.75}50%{transform:translate(-50%,-50%) scale(1.28);opacity:1}}
   @keyframes s18CellSpread{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}18%{opacity:.9;transform:translate(-50%,-50%) scale(1)}52%{opacity:.76;transform:translate(-50%,-50%) scale(1.08)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.16)}}
   @keyframes s18StepIn{0%{opacity:0;transform:translateY(16px) scale(.98)}100%{opacity:1;transform:translateY(0) scale(1)}}
@@ -2575,43 +2598,29 @@
 <section id="s18" data-section="18">
   <div class="secnum green">SLIDE 18 · CASE</div>
   <h2 class="sectitle">명동 케이스 — 서울 도심형 고밀도 복합 활동 중심지</h2>
-  <p class="secsub">위험 밀도 <strong>0.92 (355 / 386)</strong> — 행정동 대부분이 같은 "고활동 도시 패턴"으로 채워짐</p>
+  <p class="secsub">대표 사례로 명동을 살펴보면, <strong>전체 386개 격자 중 355개가 HH</strong>로 분류되어 위험 밀도 <strong>0.92</strong>를 기록했습니다.</p>
 
-  <div class="s18-layout">
-    <div class="s18-left">
-      <div class="card red s18-why">
-      <div class="head">🎯 왜 명동인가 — 위험 밀도 1위</div>
-      <ul class="bul red">
-        <li><strong>HH 355 / 전체 386 = 0.92</strong> — 서울 1위</li>
-        <li>행정동 전체가 <strong>하나의 거대한 중심상업지</strong>처럼 작동</li>
-        <li>상업·인프라·인구 노출·도로 복잡 <strong>↑</strong></li>
-        <li>일부 <strong>배후 공간(막다른길·경사)</strong> 포함</li>
-      </ul>
-      <div class="s18-map-row" aria-label="명동 HH 격자 분포 지도와 위험 척도">
+  <div class="s18-case-layout">
+    <div class="s18-map-zone">
+      <div class="s18-map-shell" aria-label="명동 HH 격자 분포 지도와 위험 척도">
         <div class="s18-map-wrap">
           <img src="maps/s18_v3.png?v=4" alt="명동 HH 격자 분포 지도" draggable="false">
+          <span class="s18-neon-grid-overlay"></span>
           <span class="s18-origin" style="--x:34%;--y:36%;--d:.1s"></span>
           <span class="s18-origin" style="--x:63%;--y:42%;--d:.35s"></span>
           <span class="s18-origin" style="--x:57%;--y:72%;--d:.55s"></span>
-          <span class="s18-wave-cell" style="--x:31%;--y:32%;--d:.1s"></span>
-          <span class="s18-wave-cell" style="--x:34%;--y:34%;--d:.25s"></span>
-          <span class="s18-wave-cell" style="--x:37%;--y:35%;--d:.42s"></span>
-          <span class="s18-wave-cell" style="--x:32%;--y:39%;--d:.62s"></span>
-          <span class="s18-wave-cell" style="--x:40%;--y:39%;--d:.8s"></span>
-          <span class="s18-wave-cell" style="--x:28%;--y:41%;--d:1s"></span>
-          <span class="s18-wave-cell" style="--x:35%;--y:43%;--d:1.18s"></span>
-          <span class="s18-wave-cell" style="--x:61%;--y:36%;--d:.16s"></span>
-          <span class="s18-wave-cell" style="--x:65%;--y:39%;--d:.34s"></span>
-          <span class="s18-wave-cell" style="--x:68%;--y:43%;--d:.56s"></span>
-          <span class="s18-wave-cell" style="--x:59%;--y:44%;--d:.76s"></span>
-          <span class="s18-wave-cell" style="--x:72%;--y:47%;--d:.98s"></span>
-          <span class="s18-wave-cell" style="--x:63%;--y:50%;--d:1.18s"></span>
-          <span class="s18-wave-cell" style="--x:53%;--y:66%;--d:.38s"></span>
-          <span class="s18-wave-cell" style="--x:57%;--y:69%;--d:.58s"></span>
-          <span class="s18-wave-cell" style="--x:60%;--y:72%;--d:.78s"></span>
-          <span class="s18-wave-cell" style="--x:51%;--y:74%;--d:1s"></span>
-          <span class="s18-wave-cell" style="--x:63%;--y:76%;--d:1.2s"></span>
-          <span class="s18-wave-cell" style="--x:55%;--y:80%;--d:1.4s"></span>
+          <span class="s18-map-cell" style="--x:32.5%;--y:34%;--d:.05s"></span>
+          <span class="s18-map-cell" style="--x:35%;--y:36%;--d:.24s"></span>
+          <span class="s18-map-cell" style="--x:31%;--y:38.5%;--d:.44s"></span>
+          <span class="s18-map-cell" style="--x:38%;--y:39%;--d:.64s"></span>
+          <span class="s18-map-cell" style="--x:61%;--y:39%;--d:.12s"></span>
+          <span class="s18-map-cell" style="--x:64%;--y:42%;--d:.32s"></span>
+          <span class="s18-map-cell" style="--x:67%;--y:44.5%;--d:.52s"></span>
+          <span class="s18-map-cell" style="--x:59%;--y:46%;--d:.72s"></span>
+          <span class="s18-map-cell" style="--x:55%;--y:69%;--d:.18s"></span>
+          <span class="s18-map-cell" style="--x:58%;--y:72%;--d:.38s"></span>
+          <span class="s18-map-cell" style="--x:60.5%;--y:75%;--d:.58s"></span>
+          <span class="s18-map-cell" style="--x:53%;--y:77%;--d:.78s"></span>
         </div>
         <img class="s18-scale" src="maps/s18_scale.png?v=1" alt="위험도 척도" draggable="false">
       </div>
@@ -2620,50 +2629,94 @@
       </div>
     </div>
 
-    <div class="card cyan s18-stack-card">
-      <div class="head">🎥 탐색 우선순위 추천</div>
-      <ul class="bul cyan">
-        <li>기존 AI에 <strong>추천 정보 공급</strong> 소프트웨어 레이어</li>
-        <li>HH + 도심 복합 페르소나 → <strong>우선순위 자동</strong></li>
-        <li>추가 인프라 비용 ≒ <strong>0원</strong></li>
-      </ul>
-    </div>
-    <div class="card green s18-stack-card">
-      <div class="head">💡 통합 페르소나</div>
-      <ul class="bul green">
-        <li><strong>"서울 도심형 고밀도 복합 활동 중심지"</strong></li>
-        <li>상업·인프라·인구·도로망 강함 + 배후 일부</li>
-        <li>행정동 92% 단일 패턴 → <strong>핫스팟 전체가 위험구역</strong></li>
-        <li>왕십리·중곡·행당 <strong>즉시 확장</strong></li>
-      </ul>
-    </div>
-    </div>
+    <svg class="s18-connector" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <marker id="s18ArrowHead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L7,4 L0,8 Z" fill="#00e5ff"></path>
+        </marker>
+      </defs>
+      <path d="M28,36 C44,29 57,16 72,14"></path>
+      <path d="M45,43 C56,34 63,22 72,18"></path>
+      <path d="M40,72 C54,58 63,30 72,22"></path>
+    </svg>
 
-    <div class="s18-flow">
-      <div class="s18-flow-head">
-        <b>신고 → 추천 → 분석 작동 순서</b>
-        <span>OPEN + 3s SEQUENCE</span>
+    <div class="s18-info-side">
+      <div class="card red s18-why s18-info-card" style="--d:1s">
+        <div class="head">🎯 왜 명동인가 — 위험 밀도 1위</div>
+        <ul class="bul red">
+          <li><strong>HH 355 / 전체 386 = 0.92</strong> — 위험 밀도 최상위</li>
+          <li>행정동 대부분이 <strong>동일한 고활동 도시 패턴</strong>으로 채워짐</li>
+          <li>상업시설·생활 인프라·유동인구·복잡한 도로망이 동시에 집중</li>
+          <li>일부 <strong>배후 골목·경사 지역</strong>까지 함께 존재</li>
+        </ul>
       </div>
-      <div class="s18-steps">
-        <div class="s18-step">
-          <div class="s18-step-label">STEP 1</div>
-          <div class="s18-step-title">신고 위치 → 50m 격자 ID 산출</div>
-          <div class="s18-step-copy">신고 좌표를 50m × 50m 단위로 매핑하고, 해당 격자의 위험 시그널을 즉시 조회합니다.</div>
-          <div class="s18-neon-board" aria-hidden="true">
+      <div class="card cyan s18-stack-card s18-info-card" style="--d:1s">
+        <div class="head">🎥 탐색 우선순위 추천</div>
+        <ul class="bul cyan">
+          <li>위험 지역 추천 기반 <strong>CCTV 탐색 우선순위</strong> 설정</li>
+          <li>HH 격자 중 위험 밀도 높은 지점부터 <strong>핀셋 탐색</strong></li>
+          <li>명동형 패턴을 다른 도심 활동지로 <strong>확장 적용</strong></li>
+        </ul>
+      </div>
+      <div class="card green s18-stack-card s18-info-card" style="--d:1s">
+        <div class="head">💡 통합 페르소나</div>
+        <ul class="bul green">
+          <li><strong>"서울 도심형 고밀도 복합 활동 중심지"</strong></li>
+          <li>단순 상업지구가 아니라 <strong>활동·노출·이동 복잡성</strong>이 결합된 공간</li>
+          <li>치매 노인의 방향 상실 가능성이 높은 <strong>대표 케이스</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <span class="pageno">SLIDE 18 / 23</span>
+</section>
+
+<!-- 19. 시스템 흐름 -->
+<section id="s19" data-section="19">
+  <div class="secnum green">SLIDE 19 · SYSTEM FLOW</div>
+  <h2 class="sectitle">시스템 흐름 — 신고 → 추천 → 영상 분석</h2>
+  <p class="secsub">실종 신고 입력 → LISA × HDBSCAN 격자 점수 → AI CCTV 검색 우선순위 → 인상착의 인식 → 안심 신고망 알림</p>
+
+  <div class="s19-step-grid">
+    <div class="card red s19-step-card">
+      <div class="head">STEP 1 · 신고</div>
+      <div class="s19-icon">📞</div>
+      <div class="s19-title">실종 신고 접수<br>(위치·시각)</div>
+      <div class="s19-copy">신고 격자 ID 자동 산출<br>G50-row-col</div>
+      <div class="s19-step-visual">
+        <div class="s18-neon-board" aria-hidden="true">
             <span class="s18-neon-cell" style="--x:38%;--y:28%;--d:.05s"></span>
             <span class="s18-neon-cell" style="--x:49%;--y:45%;--d:.2s"></span>
             <span class="s18-neon-cell" style="--x:60%;--y:62%;--d:.36s"></span>
             <span class="s18-neon-cell" style="--x:38%;--y:45%;--d:.5s"></span>
             <span class="s18-neon-cell" style="--x:49%;--y:62%;--d:.64s"></span>
             <div class="s18-grid-id">G50-MD-184</div>
-          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="s18-step">
-          <div class="s18-step-label">STEP 2</div>
-          <div class="s18-step-title">HH 페르소나 결합 → 우선 탐색지 추천</div>
-          <div class="s18-step-copy">상업 밀도, 도로 복잡도, 배후 공간을 결합해 도심형 HH 패턴을 한 장면으로 요약합니다.</div>
-          <div class="s13-city-scene s13-core s18-city-mini" aria-hidden="true">
+    <div class="card orange s19-step-card">
+      <div class="head">STEP 2 · 격자 매핑</div>
+      <div class="s19-icon">🗺</div>
+      <div class="s19-title">50m 격자 위험 점수<br>실시간 조회</div>
+      <div class="s19-copy">LISA HH 응집 +<br>HDBSCAN 군집 시그너처</div>
+      <div class="s19-step-visual">
+        <div class="s19-mini-map" aria-hidden="true">
+          <span class="s19-risk-cell" style="--x:34%;--y:46%;--d:.05s"></span>
+          <span class="s19-risk-cell" style="--x:50%;--y:58%;--d:.28s"></span>
+          <span class="s19-risk-cell" style="--x:63%;--y:39%;--d:.48s"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card yellow s19-step-card">
+      <div class="head">STEP 3 · 추천</div>
+      <div class="s19-icon">🎯</div>
+      <div class="s19-title">탐색 우선순위<br>격자 리스트 출력</div>
+      <div class="s19-copy">시간 t × 이동 반경<br>r(t) 가중</div>
+      <div class="s19-step-visual">
+        <div class="s13-city-scene s13-core s18-city-mini" aria-hidden="true">
             <span class="s13-plane"></span>
             <span class="s13-roadmark" style="--x:22%;--b:34px;--w:78px;--rot:13deg"></span>
             <span class="s13-roadmark" style="--x:51%;--b:33px;--w:88px;--rot:-13deg"></span>
@@ -2682,89 +2735,52 @@
             <span class="s13-wanderer" style="--x:20%;--b:38px;--walk:44px;--delay:.1s"><i></i></span>
             <span class="s13-wanderer" style="--x:48%;--b:39px;--walk:-40px;--delay:.65s"><i></i></span>
             <span class="s13-wanderer" style="--x:68%;--b:39px;--walk:36px;--delay:1.2s"><i></i></span>
-          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="s18-step">
-          <div class="s18-step-label">STEP 3</div>
-          <div class="s18-step-title">경찰 출동 → 붉은 동선 따라 이동</div>
-          <div class="s18-step-copy">신고 지점에서 예상 이동 반경을 좁히고, 현장 인력이 우선 경로를 따라 탐색합니다.</div>
-          <div class="s18-route-scene" aria-hidden="true">
-            <svg viewBox="0 0 240 120" preserveAspectRatio="none">
-              <path d="M10,88 C50,54 78,96 112,62 S175,38 228,72"></path>
-            </svg>
-            <div class="s18-police-team">
-              <div class="s18-mini-police">
-                <span class="head"></span><span class="body"></span><span class="legs"></span><span class="s18-phone"></span>
-              </div>
-              <div class="s18-mini-police">
-                <span class="head"></span><span class="body"></span><span class="legs"></span>
-              </div>
+    <div class="card green s19-step-card">
+      <div class="head">STEP 4 · AI CCTV</div>
+      <div class="s19-icon">📹</div>
+      <div class="s19-title">서울시 AI 고속검색<br>인상착의·이동방향</div>
+      <div class="s19-copy">100시간 영상 →<br>10분 분석</div>
+      <div class="s19-step-visual">
+        <div class="s18-route-scene" aria-hidden="true">
+          <svg viewBox="0 0 240 120" preserveAspectRatio="none">
+            <path d="M10,88 C50,54 78,96 112,62 S175,38 228,72"></path>
+          </svg>
+          <div class="s18-police-team">
+            <div class="s18-mini-police">
+              <span class="head"></span><span class="body"></span><span class="legs"></span><span class="s18-phone"></span>
+            </div>
+            <div class="s18-mini-police">
+              <span class="head"></span><span class="body"></span><span class="legs"></span>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="s18-step">
-          <div class="s18-step-label">STEP 4</div>
-          <div class="s18-step-title">편의시설·약국 → 실종경보문자 팝업</div>
-          <div class="s18-step-copy">200m 생활 거점에 알림을 띄워 시민 신고망이 현장 탐색을 보조하도록 연결합니다.</div>
-          <div class="s18-step4-scene" aria-hidden="true">
-            <span class="s18-facility-plane"></span>
-            <span class="s18-store"></span>
-            <span class="s18-pharmacy"></span>
-            <div class="s18-alert-msg">
-              <b>실종경보문자 <small>방금 전</small></b>
-              [서울경찰청] 명동 인근 실종 어르신 발견 시 112로 신고 바랍니다.
-            </div>
+    <div class="card blue s19-step-card">
+      <div class="head">STEP 5 · 발견</div>
+      <div class="s19-icon">🚨</div>
+      <div class="s19-title">안심 신고망 알림<br>골든타임 내 발견</div>
+      <div class="s19-copy">200m 반경 약국·편의시설<br>자동 SMS</div>
+      <div class="s19-step-visual">
+        <div class="s18-step4-scene" aria-hidden="true">
+          <span class="s18-facility-plane"></span>
+          <span class="s18-store"></span>
+          <span class="s18-pharmacy"></span>
+          <div class="s18-alert-msg">
+            <b>실종경보문자 <small>방금 전</small></b>
+            [서울경찰청] 명동 인근 실종 어르신 발견 시 112로 신고 바랍니다.
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <span class="pageno">SLIDE 18 / 23</span>
-</section>
-
-<!-- 19. 시스템 흐름 -->
-<section id="s19" data-section="19">
-  <div class="secnum green">SLIDE 19 · SYSTEM FLOW</div>
-  <h2 class="sectitle">시스템 흐름 — 신고 → 추천 → 영상 분석</h2>
-  <p class="secsub">실종 신고 입력 → LISA × HDBSCAN 격자 점수 → AI CCTV 검색 우선순위 → 인상착의 인식 → 안심 신고망 알림</p>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:8px;margin-bottom:14px">
-    <div class="card red" style="padding:10px 12px;text-align:center">
-      <div class="head" style="margin-bottom:4px">STEP 1 · 신고</div>
-      <div style="font-size:22px;margin-bottom:4px">📞</div>
-      <div style="font-size:11px;font-weight:800;color:var(--text);line-height:1.45">실종 신고 접수<br>(위치·시각)</div>
-      <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4">신고 격자 ID 자동 산출 (G50-row-col)</div>
-    </div>
-    <div class="card orange" style="padding:10px 12px;text-align:center">
-      <div class="head" style="margin-bottom:4px">STEP 2 · 격자 매핑</div>
-      <div style="font-size:22px;margin-bottom:4px">🗺</div>
-      <div style="font-size:11px;font-weight:800;color:var(--text);line-height:1.45">50m 격자 위험 점수<br>실시간 조회</div>
-      <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4">LISA HH 응집 + HDBSCAN 군집 시그너처</div>
-    </div>
-    <div class="card yellow" style="padding:10px 12px;text-align:center">
-      <div class="head" style="margin-bottom:4px">STEP 3 · 추천</div>
-      <div style="font-size:22px;margin-bottom:4px">🎯</div>
-      <div style="font-size:11px;font-weight:800;color:var(--text);line-height:1.45">탐색 우선순위<br>격자 리스트 출력</div>
-      <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4">시간 t × 이동 반경 r(t) 가중</div>
-    </div>
-    <div class="card green" style="padding:10px 12px;text-align:center">
-      <div class="head" style="margin-bottom:4px">STEP 4 · AI CCTV</div>
-      <div style="font-size:22px;margin-bottom:4px">📹</div>
-      <div style="font-size:11px;font-weight:800;color:var(--text);line-height:1.45">서울시 AI 고속검색<br>인상착의·이동방향</div>
-      <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4">100시간 영상 → 10분 분석</div>
-    </div>
-    <div class="card blue" style="padding:10px 12px;text-align:center">
-      <div class="head" style="margin-bottom:4px">STEP 5 · 발견</div>
-      <div style="font-size:22px;margin-bottom:4px">🚨</div>
-      <div style="font-size:11px;font-weight:800;color:var(--text);line-height:1.45">안심 신고망 알림<br>골든타임 내 발견</div>
-      <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4">200m 반경 약국·편의시설 자동 SMS</div>
-    </div>
-  </div>
-
-  <div class="grid-2" style="gap:12px;margin-bottom:10px">
+  <div class="s19-bottom">
     <div class="card purple">
       <div class="head">⭐ 소프트웨어 레이어 = 추가 인프라 0원</div>
       <ul class="bul purple">
@@ -2774,7 +2790,7 @@
         <li>API 연동 + 격자 데이터(parquet 243,920행) 정기 갱신만으로 운영</li>
       </ul>
     </div>
-    <div class="callout dark" style="padding:26px 32px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center">
+    <div class="callout dark" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center">
       <div style="font-size:18px;font-weight:900;color:var(--yellow);letter-spacing:.12em;margin-bottom:14px">⚡ END-TO-END</div>
       <div style="font-size:18px;line-height:1.8;font-weight:700">
         신고 발생부터 발견 알림까지 <strong style="color:var(--yellow);font-size:22px">10분 이내</strong>를 목표로 동작<br>
@@ -3116,9 +3132,9 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   io.observe(sec);
 })();
 
-// s13/s14/s18 — 미니 도시 빌딩 상승 및 케이스 시퀀스 등장
+// s13/s14/s18/s19 — 미니 도시 빌딩 상승 및 케이스/시스템 시퀀스 등장
 (function(){
-  const sections = ['s13','s14','s18'].map(id => document.getElementById(id)).filter(Boolean);
+  const sections = ['s13','s14','s18','s19'].map(id => document.getElementById(id)).filter(Boolean);
   if (!sections.length) return;
   function activate(sec){
     if (sec.dataset.cityLive === '1') return;
