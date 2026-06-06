@@ -278,34 +278,26 @@
   .ratio-card .rn .vs{font-size:14px;color:var(--text);margin:0 6px}
   .ratio-card .rl{font-size:12px;color:var(--text);font-weight:700;margin-top:6px}
 
-  /* Section 05 — 3-Layer: 허공에 떠 있는 3D 평면 3개 + 관통하는 점선 화살표 */
-  .pyramid-stage{position:relative;width:100%;height:calc(100vh - 230px);max-height:640px;margin-bottom:14px}
-  /* 좌측 평면 컨테이너 — 3D perspective */
-  .pyramid-tower{position:absolute;left:3%;top:0;width:52%;height:100%;perspective:1400px;perspective-origin:50% 50%;pointer-events:none}
-  /* 3D 평면 — 색 + 살짝 누운 perspective + 떠있는 그림자 */
-  .floating-plane{position:absolute;left:50%;width:62%;height:18%;border-radius:14px;transform-style:preserve-3d;transform:translate(-50%,0) rotateX(48deg) rotateY(-14deg);display:flex;align-items:center;justify-content:center;font-family:-apple-system,sans-serif;font-weight:900;letter-spacing:.04em;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.35);box-shadow:0 28px 60px rgba(15,23,42,.18);backdrop-filter:saturate(140%);-webkit-backdrop-filter:saturate(140%)}
-  .floating-plane::after{content:"";position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);width:55%;height:18px;background:radial-gradient(ellipse,rgba(15,23,42,.32),transparent 70%);filter:blur(4px);pointer-events:none}
-  .floating-plane .pl-content{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
-  .floating-plane .pl-tag{font-family:monospace;font-size:11px;font-weight:800;opacity:.92;letter-spacing:.14em}
-  .floating-plane .pl-name{font-size:24px;font-weight:900;line-height:1}
-  .floating-plane .pl-sub{font-size:12px;font-weight:800;opacity:.95}
-  .floating-plane.where{top:6%;background:linear-gradient(135deg,#ef4444,#b91c1c);border:1.5px solid rgba(127,29,29,.5);animation:planeFloat 5.4s ease-in-out infinite}
-  .floating-plane.why{top:40%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border:1.5px solid rgba(30,58,138,.5);animation:planeFloat 5.4s ease-in-out infinite;animation-delay:-1.8s}
-  .floating-plane.what{top:74%;background:linear-gradient(135deg,#22c55e,#15803d);border:1.5px solid rgba(20,83,45,.5);animation:planeFloat 5.4s ease-in-out infinite;animation-delay:-3.6s}
-  @keyframes planeFloat{
-    0%,100%{transform:translate(-50%,0) rotateX(48deg) rotateY(-14deg)}
-    50%{transform:translate(-50%,-6px) rotateX(48deg) rotateY(-14deg)}
-  }
-  /* 평면을 관통하는 세로 점선 화살표 (좌측 컨테이너 전체에 absolute) */
-  .pyramid-arrow{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:6}
-  .pyramid-arrow .arr-path{stroke:#0f172a;stroke-width:3;stroke-dasharray:6 6;fill:none;stroke-linecap:round;opacity:.82;stroke-dashoffset:600;animation:arrFlow 4.5s linear infinite}
-  .pyramid-arrow .arr-head{fill:#0f172a;opacity:.92}
-  @keyframes arrFlow{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
-  /* 우측 카드 — 애니메이션 없이 그냥 표시 */
-  .layer-card{position:absolute;right:2%;width:38%;background:#fff;border:2px solid;border-radius:14px;padding:11px 16px;box-shadow:0 18px 50px rgba(15,23,42,.12);z-index:5;box-sizing:border-box}
-  .layer-card.where{top:4%;border-color:var(--red);max-height:29%;overflow:hidden}
-  .layer-card.why{top:36%;border-color:var(--blue);max-height:29%;overflow:hidden}
-  .layer-card.what{top:68%;border-color:var(--green);max-height:29%;overflow:hidden}
+  /* Section 05 — 3-Layer: 3단 동심 도넛 (밑 WHERE 가장 큼 → WHY → WHAT 가장 작음) */
+  .pyramid-stage{position:relative;width:100%;height:calc(100vh - 230px);max-height:620px;margin-bottom:14px}
+  /* 좌측 컨테이너 — 도넛 3단을 SVG로 표현 */
+  .pyramid-tower{position:absolute;left:2%;top:0;width:48%;height:100%;pointer-events:none;display:flex;align-items:center;justify-content:center}
+  .donut-stack{width:100%;height:100%;display:block;overflow:visible}
+  /* 점선 연결자 — SVG 도넛 우측 끝점에서 우측 카드 좌측 끝점으로 (각 단계 색) */
+  .donut-link{position:absolute;pointer-events:none;z-index:4}
+  .donut-link line{stroke-dasharray:5 5;stroke-width:1.5;fill:none}
+  .donut-link circle{stroke-width:1.5;fill:#fff}
+  /* 우측 카드 — 첨부 사진처럼 좌측 둥근 모서리 색 강조 */
+  .layer-card{position:absolute;right:2%;width:38%;background:#fff;border-radius:14px;padding:14px 18px 14px 56px;box-shadow:0 12px 28px rgba(15,23,42,.08);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+  .layer-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:42px;border-top-left-radius:14px;border-bottom-left-radius:14px;display:flex;align-items:center;justify-content:center}
+  .layer-card::after{content:attr(data-icon);position:absolute;left:0;top:50%;transform:translateY(-50%);width:42px;text-align:center;font-size:22px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+  /* 카드 순서: 위에서부터 WHAT (작은 도넛에 대응) → WHY → WHERE (큰 도넛에 대응) */
+  .layer-card.what{top:5%;height:27%;border:1.5px solid var(--green-soft)}
+  .layer-card.what::before{background:var(--green)}
+  .layer-card.why{top:36.5%;height:27%;border:1.5px solid var(--blue-soft)}
+  .layer-card.why::before{background:var(--blue)}
+  .layer-card.where{top:68%;height:27%;border:1.5px solid var(--red-soft)}
+  .layer-card.where::before{background:var(--red)}
   .layer-tag{display:inline-block;font-family:monospace;font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;letter-spacing:.05em;margin-bottom:8px}
   .layer-card.where .layer-tag{background:var(--red-soft);color:var(--red-deep)}
   .layer-card.why .layer-tag{background:var(--blue-soft);color:var(--blue-deep)}
@@ -1156,43 +1148,83 @@
   <p class="secsub">Where (공간) × Why (환경) = What (정책) — 격자 단위 비지도 학습으로 <strong>어디 × 왜</strong> 동시 식별</p>
 
   <div class="pyramid-stage" id="s05-pyramid">
-    <!-- 좌측: 허공에 떠 있는 3D 평면 3개 + 관통하는 점선 화살표 -->
+    <!-- 좌측: 3단 동심 도넛 (밑 WHERE 가장 큼 → WHY → WHAT 가장 작음) -->
     <div class="pyramid-tower">
-      <!-- 관통 점선 화살표 (위→아래) -->
-      <svg class="pyramid-arrow" viewBox="0 0 100 600" preserveAspectRatio="none">
-        <path class="arr-path" d="M 50 20 L 50 560"/>
-        <polygon class="arr-head" points="50,590 42,572 58,572"/>
+      <svg class="donut-stack" viewBox="0 0 500 600" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <!-- WHERE 빨강 도넛 -->
+          <linearGradient id="donutRedTop" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#fca5a5"/>
+            <stop offset="100%" stop-color="#ef4444"/>
+          </linearGradient>
+          <linearGradient id="donutRedSide" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#dc2626"/>
+            <stop offset="100%" stop-color="#7f1d1d"/>
+          </linearGradient>
+          <!-- WHY 파랑 -->
+          <linearGradient id="donutBlueTop" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#93c5fd"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+          <linearGradient id="donutBlueSide" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#2563eb"/>
+            <stop offset="100%" stop-color="#1e3a8a"/>
+          </linearGradient>
+          <!-- WHAT 초록 -->
+          <linearGradient id="donutGreenTop" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#86efac"/>
+            <stop offset="100%" stop-color="#22c55e"/>
+          </linearGradient>
+          <linearGradient id="donutGreenSide" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#16a34a"/>
+            <stop offset="100%" stop-color="#14532d"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ① WHERE: 맨 아래 큰 도넛 (빨강) -->
+        <g id="donut-where">
+          <!-- 측면 (도넛 두께, 어두운 색) -->
+          <path d="M 60,440 A 190,55 0 1 0 440,440 L 440,470 A 190,55 0 1 1 60,470 Z" fill="url(#donutRedSide)"/>
+          <!-- 윗면 외측 타원 -->
+          <ellipse cx="250" cy="440" rx="190" ry="55" fill="url(#donutRedTop)"/>
+          <!-- 윗면 내측 구멍 (가운데가 비어있게) -->
+          <ellipse cx="250" cy="440" rx="80" ry="22" fill="#7f1d1d"/>
+          <ellipse cx="250" cy="437" rx="80" ry="22" fill="#fff"/>
+        </g>
+
+        <!-- ② WHY: 중간 도넛 (파랑) -->
+        <g id="donut-why">
+          <path d="M 110,300 A 140,40 0 1 0 390,300 L 390,326 A 140,40 0 1 1 110,326 Z" fill="url(#donutBlueSide)"/>
+          <ellipse cx="250" cy="300" rx="140" ry="40" fill="url(#donutBlueTop)"/>
+          <ellipse cx="250" cy="300" rx="60" ry="17" fill="#1e3a8a"/>
+          <ellipse cx="250" cy="297" rx="60" ry="17" fill="#fff"/>
+        </g>
+
+        <!-- ③ WHAT: 맨 위 작은 도넛 (초록) -->
+        <g id="donut-what">
+          <path d="M 160,180 A 90,26 0 1 0 340,180 L 340,202 A 90,26 0 1 1 160,202 Z" fill="url(#donutGreenSide)"/>
+          <ellipse cx="250" cy="180" rx="90" ry="26" fill="url(#donutGreenTop)"/>
+          <ellipse cx="250" cy="180" rx="38" ry="11" fill="#14532d"/>
+          <ellipse cx="250" cy="178" rx="38" ry="11" fill="#fff"/>
+        </g>
+
+        <!-- 연결 점선 + 끝점 동그라미 (도넛 우측 끝 → 우측 카드 좌측) -->
+        <!-- ① WHAT 위 도넛 → 카드 1 (top 약 18%, SVG viewBox y=108) -->
+        <line x1="338" y1="180" x2="500" y2="108" stroke="#22c55e" stroke-dasharray="5 5" stroke-width="1.5"/>
+        <circle cx="338" cy="180" r="5" fill="#fff" stroke="#22c55e" stroke-width="1.8"/>
+        <!-- ② WHY 중간 도넛 → 카드 2 (top 50%, SVG y=300) -->
+        <line x1="388" y1="300" x2="500" y2="300" stroke="#3b82f6" stroke-dasharray="5 5" stroke-width="1.5"/>
+        <circle cx="388" cy="300" r="5" fill="#fff" stroke="#3b82f6" stroke-width="1.8"/>
+        <!-- ③ WHERE 아래 도넛 → 카드 3 (top 82%, SVG y=492) -->
+        <line x1="438" y1="440" x2="500" y2="492" stroke="#ef4444" stroke-dasharray="5 5" stroke-width="1.5"/>
+        <circle cx="438" cy="440" r="5" fill="#fff" stroke="#ef4444" stroke-width="1.8"/>
       </svg>
-      <!-- WHERE 평면 (빨강) -->
-      <div class="floating-plane where">
-        <div class="pl-content">
-          <span class="pl-tag">LAYER 01 · 🗺</span>
-          <span class="pl-name">WHERE</span>
-          <span class="pl-sub">공간 자기상관</span>
-        </div>
-      </div>
-      <!-- WHY 평면 (파랑) -->
-      <div class="floating-plane why">
-        <div class="pl-content">
-          <span class="pl-tag">LAYER 02 · 🧬</span>
-          <span class="pl-name">WHY</span>
-          <span class="pl-sub">환경 군집화</span>
-        </div>
-      </div>
-      <!-- WHAT 평면 (초록) -->
-      <div class="floating-plane what">
-        <div class="pl-content">
-          <span class="pl-tag">LAYER 03 · 🎯</span>
-          <span class="pl-name">WHAT</span>
-          <span class="pl-sub">정책 매핑</span>
-        </div>
-      </div>
     </div>
 
-    <!-- 우측 카드 (애니메이션 없이 그대로 표시) -->
-    <div class="layer-card where">
+    <!-- 우측 카드 (위에서 WHAT → WHY → WHERE 순) -->
+    <div class="layer-card where" data-icon="🗺">
       <span class="layer-tag">LAYER 01 · WHERE</span>
-      <h3>🗺 공간 자기상관</h3>
+      <h3>공간 자기상관</h3>
       <div class="meth">
         LISA Local Moran's I (Anselin 1995)<br>
         Queen contiguity weight matrix<br>
@@ -1200,9 +1232,9 @@
       </div>
       <div class="result">HH 46,960 · HL 948<br><span style="font-weight:600;font-size:12px">(통계적 핫스팟 · 사각지대)</span></div>
     </div>
-    <div class="layer-card why">
+    <div class="layer-card why" data-icon="🧬">
       <span class="layer-tag">LAYER 02 · WHY</span>
-      <h3>🧬 환경 군집화</h3>
+      <h3>환경 군집화</h3>
       <div class="meth">
         HDBSCAN (Campello 2013)<br>
         min_cluster_size = 500<br>
@@ -1210,9 +1242,9 @@
       </div>
       <div class="result">82 valid clusters · 노이즈 76,461 (31.3%)<br><span style="font-weight:600;font-size:12px">환경 시그너처 자동 도출</span></div>
     </div>
-    <div class="layer-card what">
+    <div class="layer-card what" data-icon="🎯">
       <span class="layer-tag">LAYER 03 · WHAT</span>
-      <h3>🎯 정책 매핑</h3>
+      <h3>정책 매핑</h3>
       <div class="meth">
         LISA × HDBSCAN 교차<br>
         위험 밀도 TOP 20 행정동<br>
