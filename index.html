@@ -444,7 +444,7 @@
   .hdb-card .t{font-size:14px;font-weight:900;color:var(--text);margin-bottom:6px}
   .hdb-card .b{font-size:11.5px;color:var(--text-soft);line-height:1.6}
 
-  /* Section 13 — 4 persona */
+  /* Section 13 — HH persona */
   .persona-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:10px}
   .persona-card{background:#fff;border:2px solid;border-top:5px solid;border-radius:12px;padding:12px 16px;position:relative}
   .persona-card.a{border-color:var(--red)} .persona-card.b{border-color:var(--blue)} .persona-card.c{border-color:var(--green)} .persona-card.d{border-color:var(--purple)}
@@ -455,6 +455,58 @@
   .persona-card .pdong{font-size:10.5px;color:var(--muted);border-top:1px dashed var(--border);padding-top:6px;line-height:1.55;font-weight:600}
   .persona-card .pemoji{position:absolute;top:8px;right:12px;font-size:20px}
   #s13,#s17{margin-left:var(--sidebar-w);width:calc(100% - var(--sidebar-w))}
+  #s13{overflow:hidden}
+  #s13 .sectitle{font-size:36px;margin-bottom:5px}
+  #s13 .secsub{font-size:15.5px;margin-bottom:14px}
+  .s13-layout{display:grid;grid-template-columns:minmax(320px,34%) minmax(0,1fr);gap:20px;align-items:start;margin-bottom:10px}
+  .s13-map-panel{min-width:0;margin:0}
+  .s13-map-image{display:block;width:100%;height:auto;max-height:calc(100vh - 258px);object-fit:contain;margin:0 auto 8px;user-select:none}
+  .s13-map-caption{font-size:11.2px;line-height:1.55;color:var(--text-soft);font-weight:650;padding:0 3px}
+  .s13-map-caption strong{color:var(--red-deep);font-weight:900}
+  .s13-persona-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;align-items:stretch}
+  .s13-card{grid-column:span 2;display:flex;flex-direction:column;overflow:hidden;padding:8px 9px 9px!important;border-color:var(--accent)!important;border-top-color:var(--accent)!important;background:linear-gradient(180deg,#fff 0%,var(--soft) 160%);box-shadow:0 10px 22px rgba(15,23,42,.08)}
+  .s13-card:nth-child(4){grid-column:2 / span 2}
+  .s13-card:nth-child(5){grid-column:4 / span 2}
+  .s13-red{--accent:#ef4444;--accent-dark:#dc2626;--soft:#fee2e2;--scene-rgb:239,68,68}
+  .s13-orange{--accent:#f97316;--accent-dark:#ea580c;--soft:#fed7aa;--scene-rgb:249,115,22}
+  .s13-yellow{--accent:#eab308;--accent-dark:#ca8a04;--soft:#fef3c7;--scene-rgb:234,179,8}
+  .s13-green{--accent:#16a34a;--accent-dark:#15803d;--soft:#dcfce7;--scene-rgb:22,163,74}
+  .s13-blue{--accent:#2563eb;--accent-dark:#1d4ed8;--soft:#dbeafe;--scene-rgb:37,99,235}
+  .s13-card .pcode{font-size:8.7px!important;color:var(--accent-dark)!important;margin-bottom:2px}
+  .s13-card .ptitle{font-size:12.2px!important;line-height:1.22!important;margin-bottom:3px}
+  .s13-card .pdesc{font-size:9.4px!important;line-height:1.38!important;margin-bottom:5px}
+  .s13-card .pdong{font-size:8.8px!important;line-height:1.35!important;padding-top:4px;margin-bottom:6px}
+  .s13-city-scene{position:relative;height:86px;margin-top:auto;perspective:520px;isolation:isolate;overflow:visible}
+  .s13-plane{position:absolute;left:50%;bottom:0;width:min(82%,164px);height:68px;border-radius:50%;transform:translateX(-50%) rotateX(64deg) rotateZ(-8deg);background:radial-gradient(ellipse at 42% 36%,rgba(var(--scene-rgb),.26),rgba(var(--scene-rgb),.13) 54%,rgba(var(--scene-rgb),.07) 70%,rgba(15,23,42,.08) 72%);border:1px solid rgba(var(--scene-rgb),.42);box-shadow:0 16px 24px rgba(15,23,42,.12),inset 0 0 22px rgba(var(--scene-rgb),.17);z-index:1}
+  .s13-plane::before{content:"";position:absolute;left:18%;right:16%;top:46%;height:8px;border-radius:999px;background:rgba(255,255,255,.58);transform:rotate(9deg);box-shadow:0 0 0 1px rgba(var(--scene-rgb),.18)}
+  .s13-plane::after{content:"";position:absolute;left:47%;top:18%;width:8px;height:62%;border-radius:999px;background:rgba(255,255,255,.42);transform:rotate(-18deg)}
+  .s13-bldg,.s13-house,.s13-tree{position:absolute;z-index:3;filter:drop-shadow(6px 8px 6px rgba(15,23,42,.18))}
+  .s13-bldg{left:var(--x);bottom:28px;width:var(--w);height:var(--h);border-radius:3px 3px 1px 1px;background:linear-gradient(145deg,rgba(var(--scene-rgb),.95),var(--accent-dark));transform:skewY(-7deg);animation:s13CityPulse 4.8s ease-in-out infinite;animation-delay:var(--d,0s)}
+  .s13-bldg::before{content:"";position:absolute;inset:7px 4px 5px;border-radius:2px;background:repeating-linear-gradient(180deg,rgba(255,255,255,.72) 0 2px,transparent 2px 7px)}
+  .s13-bldg::after{content:"";position:absolute;right:-7px;top:5px;width:7px;height:calc(100% - 4px);background:rgba(15,23,42,.16);transform:skewY(35deg);transform-origin:left top}
+  .s13-house{left:var(--x);bottom:30px;width:var(--w);height:var(--h);border-radius:3px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(var(--scene-rgb),.88));border:1px solid rgba(var(--scene-rgb),.55)}
+  .s13-house::before{content:"";position:absolute;left:-5px;right:-5px;top:-11px;height:13px;background:var(--accent-dark);clip-path:polygon(50% 0,100% 100%,0 100%)}
+  .s13-house::after{content:"";position:absolute;left:45%;bottom:0;width:6px;height:10px;border-radius:2px 2px 0 0;background:rgba(15,23,42,.38)}
+  .s13-tree{left:var(--x);bottom:30px;width:8px;height:28px;background:#166534;border-radius:999px}
+  .s13-tree::before{content:"";position:absolute;left:50%;top:-7px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle,#86efac,#16a34a 62%,#15803d);transform:translateX(-50%)}
+  .s13-wanderer{position:absolute;left:var(--x);bottom:26px;width:16px;height:27px;z-index:5;transform-origin:50% 100%;animation:s13Wander 6.2s ease-in-out infinite;animation-delay:var(--delay,0s)}
+  .s13-wanderer::before{content:"";position:absolute;left:5px;top:0;width:8px;height:8px;border-radius:50%;background:#e8b89b;box-shadow:0 -2px 0 1px #cbd5e1}
+  .s13-wanderer::after{content:"";position:absolute;left:4px;top:9px;width:10px;height:12px;border-radius:5px 5px 3px 3px;background:#64748b}
+  .s13-wanderer i::before,.s13-wanderer i::after{content:"";position:absolute;top:20px;width:4px;height:8px;border-radius:999px;background:#475569;animation:s13Step .62s ease-in-out infinite}
+  .s13-wanderer i::before{left:4px}.s13-wanderer i::after{right:3px;animation-delay:.31s}
+  .s13-core .s13-bldg{box-shadow:0 0 18px rgba(var(--scene-rgb),.18)}
+  .s13-commercial .s13-bldg::before{background:repeating-linear-gradient(180deg,rgba(255,255,255,.82) 0 3px,transparent 3px 8px)}
+  .s13-residential .s13-house{filter:drop-shadow(4px 7px 5px rgba(15,23,42,.16))}
+  .s13-stable .s13-plane{background:radial-gradient(ellipse at 42% 36%,rgba(var(--scene-rgb),.24),rgba(187,247,208,.2) 54%,rgba(15,23,42,.06) 73%)}
+  .s13-mosaic .s13-bldg:nth-of-type(even){background:linear-gradient(145deg,rgba(147,51,234,.84),#1d4ed8)}
+  @keyframes s13CityPulse{0%,100%{transform:skewY(-7deg) translateY(0);filter:saturate(1)}50%{transform:skewY(-7deg) translateY(-2px);filter:saturate(1.18)}}
+  @keyframes s13Wander{0%,100%{transform:translateX(0) translateY(0) scale(.92)}35%{transform:translateX(var(--walk,54px)) translateY(-4px) scale(.98)}68%{transform:translateX(calc(var(--walk,54px) * .45)) translateY(1px) scale(.94)}}
+  @keyframes s13Step{0%,100%{transform:rotate(13deg)}50%{transform:rotate(-13deg)}}
+  @media (max-width:1100px){
+    .s13-layout{grid-template-columns:32% 1fr;gap:14px}
+    .s13-card .pdesc{font-size:8.8px!important}
+    .s13-city-scene{height:78px}
+  }
 
   /* Section 14 — HL persona */
   .gE-hero{background:linear-gradient(135deg,var(--orange-soft),#fff);border:3px solid var(--orange);border-radius:14px;padding:14px 18px}
@@ -1951,47 +2003,92 @@
   <h2 class="sectitle">HH 동 페르소나 — 5가지 핵심 유형</h2>
   <p class="secsub">82개 클러스터를 5개 그룹으로 묶어 본 서울 HH 위험구역의 도시 기능 유형</p>
 
-  <div style="margin-bottom:8px">
-    <div class="card" style="border-color:var(--text);padding:8px 10px">
-      <div class="head" style="margin-bottom:4px;font-size:11px;display:flex;justify-content:space-between;align-items:center">
-        <span>HH 클러스터 지도 — 서울 전역 (82 valid clusters)</span>
-      </div>
-      <div id="s13-map-wrap" style="position:relative;width:100%;max-width:380px;aspect-ratio:1392/1186;margin:0 auto;background:#fff;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
-        <img src="maps/s13_map.png?v=20260605-2140" alt="HH 클러스터 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
-      </div>
-    </div>
-  </div>
+  <div class="s13-layout">
+    <figure class="s13-map-panel">
+      <img class="s13-map-image" src="maps/s13_map.png?v=20260605-2140" alt="HH 클러스터 지도" draggable="false">
+      <figcaption class="s13-map-caption">
+        <strong>HH 클러스터 지도</strong> — 서울 전역 82개 valid cluster. 색상별 군집 조합이 오른쪽 5개 도시 기능 페르소나로 요약된다.
+      </figcaption>
+    </figure>
 
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:10px">
-    <div class="persona-card a" style="padding:10px 12px">
-      <div class="pcode" style="font-size:9.5px">cluster [6,1,4,0+...]</div>
-      <div class="ptitle" style="font-size:13px;line-height:1.3">🔴 ① 초고위험<br>코어형</div>
-      <div class="pdesc" style="font-size:10.5px;line-height:1.5">상업(6·4·0) + 주거(1) + 생활 클러스터 대량 혼합. 도시 기능이 가장 격렬히 충돌. cluster diversity 매우 높음.</div>
-      <div class="pdong" style="font-size:10px">명동 · 왕십리2동 · 왕십리도선동 · 중곡2동 · 행당1동</div>
-    </div>
-    <div class="persona-card b" style="padding:7px 10px;border-color:var(--orange);border-top-color:var(--orange)">
-      <div class="pcode" style="font-size:9.5px;color:var(--orange-deep)">cluster [1,0,4,6]</div>
-      <div class="ptitle" style="font-size:13px;line-height:1.3">🟠 ② 전통 고밀도<br>상업 중심형</div>
-      <div class="pdesc" style="font-size:10.5px;line-height:1.5">상업 클러스터 중심(6·0·4), 주거 비중 낮음. 구조 단순하지만 밀도 극단적 — 관광·유통·업무 집중.</div>
-      <div class="pdong" style="font-size:10px">명동 · 을지로동 · 황학동 · 동화동</div>
-    </div>
-    <div class="persona-card" style="padding:7px 10px;border:2px solid var(--yellow);border-top:5px solid var(--yellow)">
-      <div class="pcode" style="font-size:9.5px;color:var(--yellow-deep)">cluster [6,1,4,0+15,22,17]</div>
-      <div class="ptitle" style="font-size:13px;line-height:1.3">🟡 ③ 주거 기반<br>혼합형 위험</div>
-      <div class="pdesc" style="font-size:10.5px;line-height:1.5">주거 클러스터(1) 강함 + 상업 일부 침투. 외곽 생활권에 상업 확장 — 골목상권 발달.</div>
-      <div class="pdong" style="font-size:10px">수유2동 · 수유3동 · 화곡3동 · 상봉2동</div>
-    </div>
-    <div class="persona-card c" style="padding:10px 12px">
-      <div class="pcode" style="font-size:9.5px">cluster [6,1,4,0] 소수</div>
-      <div class="ptitle" style="font-size:13px;line-height:1.3">🟢 ④ 중간 밀도<br>안정 혼합형</div>
-      <div class="pdesc" style="font-size:10.5px;line-height:1.5">핵심 클러스터는 있으나 다양성 낮음. 서울 평균형 구조 + 일부 상업 기능.</div>
-      <div class="pdong" style="font-size:10px">교남동 · 구로4동 · 용문동</div>
-    </div>
-    <div class="persona-card d" style="padding:10px 12px">
-      <div class="pcode" style="font-size:9.5px">15~20개 클러스터 동시</div>
-      <div class="ptitle" style="font-size:13px;line-height:1.3">🔵 ⑤ 확장된 다중<br>클러스터 복합형</div>
-      <div class="pdesc" style="font-size:10.5px;line-height:1.5">거의 모든 도시 기능 존재. urban mosaic + 기능 충돌 + 다양성 최대. <strong>정책적으로 가장 어려운 지역</strong>.</div>
-      <div class="pdong" style="font-size:10px">중곡2동 · 왕십리도선동 · 행당1동</div>
+    <div class="s13-persona-grid">
+      <div class="persona-card s13-card s13-red">
+        <div class="pcode">cluster [6,1,4,0+...]</div>
+        <div class="ptitle">🔴 ① 초고위험<br>코어형</div>
+        <div class="pdesc">상업(6·4·0) + 주거(1) + 생활 클러스터 대량 혼합. 도시 기능이 가장 격렬히 충돌. cluster diversity 매우 높음.</div>
+        <div class="pdong">명동 · 왕십리2동 · 왕십리도선동 · 중곡2동 · 행당1동</div>
+        <div class="s13-city-scene s13-core" aria-hidden="true">
+          <span class="s13-plane"></span>
+          <span class="s13-bldg" style="--x:18%;--w:18px;--h:48px;--d:.1s"></span>
+          <span class="s13-bldg" style="--x:34%;--w:16px;--h:58px;--d:.4s"></span>
+          <span class="s13-bldg" style="--x:51%;--w:20px;--h:42px;--d:.7s"></span>
+          <span class="s13-bldg" style="--x:68%;--w:15px;--h:54px;--d:1s"></span>
+          <span class="s13-bldg" style="--x:79%;--w:13px;--h:36px;--d:1.3s"></span>
+          <span class="s13-wanderer" style="--x:12%;--walk:72px;--delay:-.6s"><i></i></span>
+          <span class="s13-wanderer" style="--x:56%;--walk:-54px;--delay:-3s"><i></i></span>
+        </div>
+      </div>
+      <div class="persona-card s13-card s13-orange">
+        <div class="pcode">cluster [1,0,4,6]</div>
+        <div class="ptitle">🟠 ② 전통 고밀도<br>상업 중심형</div>
+        <div class="pdesc">상업 클러스터 중심(6·0·4), 주거 비중 낮음. 구조 단순하지만 밀도 극단적 — 관광·유통·업무 집중.</div>
+        <div class="pdong">명동 · 을지로동 · 황학동 · 동화동</div>
+        <div class="s13-city-scene s13-commercial" aria-hidden="true">
+          <span class="s13-plane"></span>
+          <span class="s13-bldg" style="--x:22%;--w:20px;--h:46px;--d:.2s"></span>
+          <span class="s13-bldg" style="--x:40%;--w:18px;--h:34px;--d:.5s"></span>
+          <span class="s13-bldg" style="--x:57%;--w:21px;--h:52px;--d:.8s"></span>
+          <span class="s13-bldg" style="--x:74%;--w:16px;--h:38px;--d:1.1s"></span>
+          <span class="s13-wanderer" style="--x:15%;--walk:80px;--delay:-1.4s"><i></i></span>
+          <span class="s13-wanderer" style="--x:66%;--walk:-46px;--delay:-3.6s"><i></i></span>
+        </div>
+      </div>
+      <div class="persona-card s13-card s13-yellow">
+        <div class="pcode">cluster [6,1,4,0+15,22,17]</div>
+        <div class="ptitle">🟡 ③ 주거 기반<br>혼합형 위험</div>
+        <div class="pdesc">주거 클러스터(1) 강함 + 상업 일부 침투. 외곽 생활권에 상업 확장 — 골목상권 발달.</div>
+        <div class="pdong">수유2동 · 수유3동 · 화곡3동 · 상봉2동</div>
+        <div class="s13-city-scene s13-residential" aria-hidden="true">
+          <span class="s13-plane"></span>
+          <span class="s13-house" style="--x:18%;--w:22px;--h:22px"></span>
+          <span class="s13-house" style="--x:36%;--w:20px;--h:20px"></span>
+          <span class="s13-bldg" style="--x:54%;--w:18px;--h:42px;--d:.7s"></span>
+          <span class="s13-house" style="--x:72%;--w:22px;--h:24px"></span>
+          <span class="s13-wanderer" style="--x:17%;--walk:68px;--delay:-2.1s"><i></i></span>
+          <span class="s13-wanderer" style="--x:62%;--walk:-48px;--delay:-4.1s"><i></i></span>
+        </div>
+      </div>
+      <div class="persona-card s13-card s13-green">
+        <div class="pcode">cluster [6,1,4,0] 소수</div>
+        <div class="ptitle">🟢 ④ 중간 밀도<br>안정 혼합형</div>
+        <div class="pdesc">핵심 클러스터는 있으나 다양성 낮음. 서울 평균형 구조 + 일부 상업 기능.</div>
+        <div class="pdong">교남동 · 구로4동 · 용문동</div>
+        <div class="s13-city-scene s13-stable" aria-hidden="true">
+          <span class="s13-plane"></span>
+          <span class="s13-tree" style="--x:18%"></span>
+          <span class="s13-bldg" style="--x:31%;--w:19px;--h:34px;--d:.3s"></span>
+          <span class="s13-house" style="--x:54%;--w:23px;--h:22px"></span>
+          <span class="s13-tree" style="--x:74%"></span>
+          <span class="s13-wanderer" style="--x:18%;--walk:64px;--delay:-.9s"><i></i></span>
+          <span class="s13-wanderer" style="--x:65%;--walk:-42px;--delay:-3.8s"><i></i></span>
+        </div>
+      </div>
+      <div class="persona-card s13-card s13-blue">
+        <div class="pcode">15~20개 클러스터 동시</div>
+        <div class="ptitle">🔵 ⑤ 확장된 다중<br>클러스터 복합형</div>
+        <div class="pdesc">거의 모든 도시 기능 존재. urban mosaic + 기능 충돌 + 다양성 최대. <strong>정책적으로 가장 어려운 지역</strong>.</div>
+        <div class="pdong">중곡2동 · 왕십리도선동 · 행당1동</div>
+        <div class="s13-city-scene s13-mosaic" aria-hidden="true">
+          <span class="s13-plane"></span>
+          <span class="s13-bldg" style="--x:16%;--w:17px;--h:38px;--d:.2s"></span>
+          <span class="s13-house" style="--x:34%;--w:20px;--h:20px"></span>
+          <span class="s13-bldg" style="--x:50%;--w:18px;--h:50px;--d:.6s"></span>
+          <span class="s13-tree" style="--x:66%"></span>
+          <span class="s13-bldg" style="--x:78%;--w:16px;--h:34px;--d:1s"></span>
+          <span class="s13-wanderer" style="--x:13%;--walk:74px;--delay:-1.8s"><i></i></span>
+          <span class="s13-wanderer" style="--x:68%;--walk:-56px;--delay:-4.4s"><i></i></span>
+        </div>
+      </div>
     </div>
   </div>
 
