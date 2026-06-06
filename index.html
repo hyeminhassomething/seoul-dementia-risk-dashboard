@@ -216,18 +216,17 @@
   .s11-pop-pin{position:absolute;left:50%;top:100%;transform:translate(-50%,0);width:10px;height:10px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
   .s11-pop-hh .s11-pop-pin{background:#dc2626}
   .s11-pop-hl .s11-pop-pin{background:#f97316}
-  .s11-pop-card{background:#fff;border:1.5px solid;border-radius:8px;padding:3px 8px;box-shadow:0 4px 14px rgba(0,0,0,.16);white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;position:relative;margin-bottom:6px}
-  .s11-pop-hh .s11-pop-card{border-color:#dc2626}
-  .s11-pop-hl .s11-pop-card{border-color:#f97316}
+  .s11-pop-card{border:1.5px solid;border-radius:8px;padding:5px 9px;box-shadow:0 6px 18px rgba(15,23,42,.24);white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;position:relative;margin-bottom:6px}
+  .s11-pop-hh .s11-pop-card{background:linear-gradient(145deg,#ef4444,#b91c1c);border-color:#991b1b;color:#fff}
+  .s11-pop-hl .s11-pop-card{background:linear-gradient(145deg,#fb923c,#ea580c);border-color:#c2410c;color:#fff}
   .s11-pop-card::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid;}
   .s11-pop-hh .s11-pop-card::after{border-top-color:#dc2626}
   .s11-pop-hl .s11-pop-card::after{border-top-color:#f97316}
-  .s11-pop-name{font-size:9.5px;font-weight:900;color:#0f172a;line-height:1.2}
-  .s11-pop-meta{font-size:8.5px;color:#64748b;font-weight:700;margin-top:1px;line-height:1.2}
-  .s11-pop-hh .s11-pop-meta b{color:#dc2626}
-  .s11-pop-hl .s11-pop-meta b{color:#f97316}
-  .s11-pop-score{font-size:8.5px;font-family:"SF Mono",monospace;color:#0f172a;font-weight:700;margin-top:2px;padding-top:2px;border-top:1px dashed #e5e7eb;line-height:1.2}
-  .s11-pop-score b{color:#dc2626;font-size:10px}
+  .s11-pop-name{font-size:9.5px;font-weight:900;color:#fff;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,.22)}
+  .s11-pop-meta{font-size:8.5px;color:rgba(255,255,255,.9);font-weight:800;margin-top:1px;line-height:1.2}
+  .s11-pop-meta b{color:#fff;font-weight:950}
+  .s11-pop-score{font-size:8.5px;font-family:"SF Mono",monospace;color:rgba(255,255,255,.92);font-weight:800;margin-top:2px;padding-top:2px;border-top:1px dashed rgba(255,255,255,.42);line-height:1.2}
+  .s11-pop-score b{color:#fff;font-size:10px;font-weight:950}
   .s11-pop-pin{width:7px;height:7px;border-width:1.5px}
   /* 펄스 효과 — 새로 등장한 팝업 강조 */
   .s11-pop.flash .s11-pop-pin{animation:s11PinPulse 1.2s ease-out 2}
@@ -2722,7 +2721,7 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   // plot area = 컨테이너의 [PAD_L%, PAD_R%] × [PAD_T%, PAD_B%]
   const PAD_L = 8, PAD_R = 92, PAD_T = 4, PAD_B = 96;
 
-  // 서울 주요 행정동 100+개 (lat, lng, 이름, 타입, score)
+  // 서울 주요 행정동 후보군 (lat, lng, 이름, 타입, 밀도, score)
   const DONGS = [
     // HH 핫스팟 (밀도 상위)
     ['중구 명동',    37.5636, 126.9826, 'HH', 0.92, 2.84],
@@ -2833,6 +2832,15 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
     ['종로 청운효자동', 37.5870, 126.9690, 'HL', null, 1.78]
   ];
 
+  const POPUPS_PER_TYPE = 15;
+  function pickEvenly(arr, count){
+    if (arr.length <= count) return arr;
+    return Array.from({length: count}, (_, i) => arr[Math.round(i * (arr.length - 1) / (count - 1))]);
+  }
+  const hhPops = pickEvenly(DONGS.filter(d => d[3] === 'HH'), POPUPS_PER_TYPE);
+  const hlPops = pickEvenly(DONGS.filter(d => d[3] === 'HL'), POPUPS_PER_TYPE);
+  const DISPLAY_DONGS = Array.from({length: POPUPS_PER_TYPE}, (_, i) => [hhPops[i], hlPops[i]]).flat();
+
   function lng2pct(lng){
     const inner = (lng - LNG_MIN) / (LNG_MAX - LNG_MIN);
     return PAD_L + inner * (PAD_R - PAD_L);
@@ -2845,7 +2853,7 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   // 팝업 DOM 생성
   function buildPops(){
     wrap.innerHTML = '';
-    DONGS.forEach((d, i) => {
+    DISPLAY_DONGS.forEach((d, i) => {
       const [name, lat, lng, type, dens, score] = d;
       const top = lat2pct(lat), left = lng2pct(lng);
       if (top < 1 || top > 99 || left < 1 || left > 99) return;
@@ -2870,7 +2878,7 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
       setTimeout(() => {
         p.classList.add('on','flash');
         setTimeout(() => p.classList.remove('flash'), 900);
-      }, 200 + i * 80);  // 80ms 간격 — 100개면 약 8초
+      }, 200 + i * 80);  // 80ms 간격 — 30개면 약 2.4초
     });
   }
 
