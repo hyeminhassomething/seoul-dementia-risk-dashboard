@@ -124,12 +124,12 @@
   .cover-title .h1{color:var(--red)}
   .cover-sub{font-size:16px;color:var(--muted);margin-bottom:24px;line-height:1.6}
   .cover-left{min-height:550px;position:relative;z-index:5}
-  .cover-action-scene{position:absolute;left:22px;bottom:18px;width:min(68%,840px);height:455px;z-index:2;pointer-events:none;transform:scale(1.05);transform-origin:left bottom}
+  .cover-action-scene{position:absolute;left:22px;bottom:18px;width:min(58%,760px);height:455px;z-index:2;pointer-events:none;transform:scale(1.05);transform-origin:left bottom}
   .scene-skyline{position:absolute;left:-40px;right:-20px;bottom:118px;height:150px;background:linear-gradient(180deg,rgba(226,232,240,.18),rgba(148,163,184,.34));clip-path:polygon(0 78%,8% 54%,16% 70%,25% 40%,32% 66%,42% 38%,50% 68%,61% 42%,70% 64%,80% 35%,90% 60%,100% 43%,100% 100%,0 100%);opacity:.7}
   .scene-ground{position:absolute;left:-80px;right:-70px;bottom:0;height:170px;background:linear-gradient(180deg,#dbeafe 0,#dbeafe 15%,#cbd5e1 15%,#f8fafc 72%,rgba(255,255,255,.2));border-top:2px solid rgba(59,130,246,.18)}
   .scene-ground::before{content:"";position:absolute;left:0;right:0;top:82px;border-top:4px dashed rgba(100,116,139,.38)}
   .route-arc{position:absolute;left:150px;bottom:148px;width:270px;height:96px;border:3px dashed rgba(239,68,68,.52);border-left:0;border-bottom:0;border-radius:0 96px 0 0;animation:pathBlink 1.5s ease-in-out infinite}
-  .missing-alert{position:absolute;left:calc(50% - 165px);top:90px;width:min(500px,38vw);display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:center;background:rgba(255,255,255,.92);border:1px solid rgba(148,163,184,.45);border-radius:24px;padding:14px 18px;box-shadow:0 24px 52px rgba(15,23,42,.18);z-index:7;opacity:1;transform:translateY(0) scale(1);animation:alertPop 8.5s ease-in-out infinite;backdrop-filter:blur(10px)}
+  .missing-alert{position:absolute;left:230px;top:405px;width:min(515px,43vw);display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:center;background:rgba(255,255,255,.94);border:1px solid rgba(148,163,184,.45);border-radius:24px;padding:14px 18px;box-shadow:0 24px 52px rgba(15,23,42,.18);z-index:8;opacity:0;transform:translateY(16px) scale(.96);animation:alertPop 9s ease-in-out infinite;backdrop-filter:blur(10px)}
   .alert-icon{width:42px;height:42px;border-radius:14px;background:#facc15;color:#111827;display:flex;align-items:center;justify-content:center;font-size:29px;font-weight:900}
   .alert-title{font-size:17px;font-weight:900;color:#111827;line-height:1.2}
   .alert-body{font-size:13px;line-height:1.45;color:#111827;font-weight:750;margin-top:3px}
@@ -148,13 +148,13 @@
   .human .leg.l{left:29px}.human .leg.r{right:29px}
   .human .shoe{position:absolute;top:196px;width:25px;height:8px;border-radius:999px;background:#111827}
   .human .shoe.l{left:23px}.human .shoe.r{right:19px}
-  .elder-real{left:54px;bottom:28px;animation:elderWander 8.5s ease-in-out infinite}
+  .elder-real{left:54px;bottom:28px;opacity:0;transform:translateX(-130px);animation:elderWander 9s ease-in-out infinite}
   .elder-real .torso{background:linear-gradient(145deg,#9ca3af,#64748b)}
   .elder-real .torso::before{content:"";position:absolute;left:8px;right:8px;top:26px;height:2px;background:rgba(255,255,255,.35);box-shadow:0 15px 0 rgba(255,255,255,.28)}
   .elder-real .hair{background:#cbd5e1}
   .elder-real .cane{position:absolute;right:9px;top:104px;width:4px;height:92px;border-radius:999px;background:#475569;transform:rotate(-8deg);transform-origin:top}
   .elder-real .leg.l{animation:walkLegA .72s ease-in-out infinite}.elder-real .leg.r{animation:walkLegB .72s ease-in-out infinite}
-  .officer-group{position:absolute;right:360px;bottom:24px;width:290px;height:218px;z-index:5;opacity:1;transform:translateX(0);animation:policeEnter 8.5s ease-in-out infinite}
+  .officer-group{position:absolute;left:320px;bottom:24px;width:250px;height:218px;z-index:5;opacity:0;transform:translateX(230px);animation:policeEnter 9s ease-in-out infinite}
   .officer{bottom:0}
   .officer.one{left:0}.officer.two{right:0}
   .officer .hair{background:#1e3a8a;height:24px;border-radius:16px 16px 6px 6px}
@@ -162,19 +162,22 @@
   .officer .torso{background:linear-gradient(145deg,#2563eb,#1d4ed8)}
   .officer .torso::before{content:"";position:absolute;left:36px;top:24px;width:9px;height:9px;border-radius:50%;background:#facc15;border:1px solid rgba(255,255,255,.7)}
   .officer .leg{background:#1e293b}
-  .scene-phone{position:absolute;left:126px;top:56px;width:38px;height:58px;border-radius:9px;background:#0f172a;border:2px solid #334155;box-shadow:0 8px 18px rgba(15,23,42,.26)}
+  .scene-phone{position:absolute;left:82px;top:66px;width:38px;height:58px;border-radius:9px;background:#0f172a;border:2px solid #334155;box-shadow:0 8px 18px rgba(15,23,42,.26);opacity:0;transform:translateY(14px) rotate(-8deg);animation:phoneRaise 9s ease-in-out infinite}
   .scene-phone::after{content:"";position:absolute;left:8px;right:8px;top:9px;bottom:9px;border-radius:4px;background:linear-gradient(180deg,#dbeafe,#fff)}
-  .joined-hands{position:absolute;left:410px;bottom:147px;width:130px;height:5px;border-radius:999px;background:#1d4ed8;opacity:1;transform:translateX(0) rotate(-6deg) scaleX(1);animation:handReach 8.5s ease-in-out infinite;z-index:6}
+  .joined-hands{position:absolute;bottom:147px;height:5px;border-radius:999px;background:#1d4ed8;opacity:0;animation:handReach 9s ease-in-out infinite;z-index:6}
+  .joined-hands.hand-left{--hand-rot:-6deg;left:292px;width:100px;transform:translateX(22px) rotate(var(--hand-rot)) scaleX(.45)}
+  .joined-hands.hand-right{--hand-rot:5deg;left:310px;width:210px;transform:translateX(28px) rotate(var(--hand-rot)) scaleX(.45);animation-delay:.08s}
   .joined-hands::before,.joined-hands::after{content:"";position:absolute;top:-5px;width:14px;height:14px;border-radius:50%;background:#eab08c}
   .joined-hands::before{left:-5px}.joined-hands::after{right:-5px}
-  @keyframes elderWander{0%,12%{transform:translateX(0)}36%,51%{transform:translateX(230px)}72%,100%{transform:translateX(390px)}}
-  @keyframes policeEnter{0%,18%{opacity:.72;transform:translateX(46px)}34%,100%{opacity:1;transform:translateX(0)}}
-  @keyframes alertPop{0%,12%{opacity:.86;transform:translateY(-10px) scale(.98)}22%,86%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:.94;transform:translateY(-2px) scale(.995)}}
-  @keyframes handReach{0%,24%{opacity:.35;transform:translateX(22px) rotate(-6deg) scaleX(.55)}38%,100%{opacity:1;transform:translateX(0) rotate(-6deg) scaleX(1)}}
+  @keyframes elderWander{0%{opacity:0;transform:translateX(-130px)}9%,22%{opacity:1;transform:translateX(0)}38%,100%{opacity:1;transform:translateX(160px)}}
+  @keyframes policeEnter{0%,32%{opacity:0;transform:translateX(230px)}44%{opacity:1;transform:translateX(70px)}54%,100%{opacity:1;transform:translateX(0)}}
+  @keyframes phoneRaise{0%,40%{opacity:0;transform:translateY(14px) rotate(-8deg)}48%,67%{opacity:1;transform:translateY(0) rotate(-8deg)}74%,100%{opacity:.88;transform:translateY(0) rotate(-8deg)}}
+  @keyframes alertPop{0%,48%{opacity:0;transform:translateY(16px) scale(.96)}54%,66%{opacity:1;transform:translateY(0) scale(1)}76%,100%{opacity:0;transform:translateY(-8px) scale(.98)}}
+  @keyframes handReach{0%,68%{opacity:0;transform:translateX(28px) rotate(var(--hand-rot,-7deg)) scaleX(.45)}78%,100%{opacity:1;transform:translateX(0) rotate(var(--hand-rot,-7deg)) scaleX(1)}}
   @keyframes walkLegA{0%,100%{transform:rotate(13deg)}50%{transform:rotate(-13deg)}}@keyframes walkLegB{0%,100%{transform:rotate(-13deg)}50%{transform:rotate(13deg)}}
   @keyframes pathBlink{0%,100%{opacity:.3}50%{opacity:.92}}
-  .cover-map-wrap{position:relative;width:100%;max-width:680px;aspect-ratio:1500/1180;margin-left:auto;overflow:visible;transform:translateY(18px)}
-  .cover-map-wrap img{display:block;width:100%;height:100%;object-fit:contain;filter:contrast(1.08) saturate(.9);opacity:.96}
+  .cover-map-wrap{position:relative;width:100%;max-width:680px;aspect-ratio:1354/1119;margin-left:auto;overflow:visible;transform:translateY(18px)}
+  .cover-map-wrap img{display:block;width:100%;height:100%;object-fit:contain;filter:contrast(1.08) saturate(.9);opacity:.98}
   .map-caption{position:absolute;left:16px;top:14px;background:rgba(255,255,255,.86);border:1px solid rgba(148,163,184,.36);border-radius:999px;padding:6px 12px;font-size:11px;font-weight:900;color:#1e3a8a;box-shadow:0 8px 20px rgba(15,23,42,.08)}
   .map-seed{position:absolute;width:14px;height:14px;border-radius:50%;background:#0ea5e9;border:2px solid #fff;box-shadow:0 0 0 5px rgba(14,165,233,.2),0 6px 16px rgba(14,165,233,.32);z-index:4}
   .map-seed.mapo{left:34%;top:48%}.map-seed.seongdong{left:58%;top:50%}.map-seed.gangnam{left:61%;top:67%}
@@ -620,7 +623,8 @@
         <div class="shoe l"></div><div class="shoe r"></div>
       </div>
     </div>
-    <div class="joined-hands"></div>
+    <div class="joined-hands hand-left"></div>
+    <div class="joined-hands hand-right"></div>
   </div>
 
   <div class="cover-grid">
@@ -630,7 +634,7 @@
       <p class="cover-sub">50m 격자 단위 비지도 진단으로 자치구 평균에 가려진 사각지대를 찾아냅니다.</p>
     </div>
     <div class="cover-map-wrap" aria-label="서울시 지도 위험 확산 애니메이션">
-      <img src="maps/cover_seoul_map_crop.jpg?v=cover3" alt="서울시 지도">
+      <img src="maps/cover_seoul_map_cutout.png?v=cover4" alt="서울시 지도">
       <div class="map-caption">마포 · 성동 · 강남 시작점에서 확산되는 위험 신호</div>
       <span class="map-seed mapo"></span>
       <span class="map-seed seongdong"></span>
