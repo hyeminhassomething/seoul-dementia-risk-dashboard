@@ -639,13 +639,13 @@
   .s18-map-note{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.45;text-align:right}
   .s18-neon-grid-overlay{position:absolute;inset:0;opacity:0;z-index:2;pointer-events:none}
   .s18-neon-grid-overlay::before,.s18-neon-grid-overlay::after{content:"";position:absolute;inset:0;filter:drop-shadow(0 0 4px rgba(0,229,255,.85));opacity:.9}
-  .s18-neon-grid-overlay::before{background-image:linear-gradient(90deg,rgba(0,216,255,.74) 1px,rgba(0,216,255,.22) 2px,transparent 2px);background-size:calc(100% / 50) 100%;clip-path:inset(0 100% 0 0)}
-  .s18-neon-grid-overlay::after{background-image:linear-gradient(rgba(0,216,255,.66) 1px,rgba(0,216,255,.18) 2px,transparent 2px);background-size:100% calc(100% / 70);clip-path:inset(0 0 100% 0)}
+  .s18-neon-grid-overlay::before{background-image:linear-gradient(90deg,rgba(0,216,255,.7) 1px,rgba(0,216,255,.16) 2px,transparent 2px);background-size:calc(100% / 20) 100%;clip-path:inset(0 100% 0 0)}
+  .s18-neon-grid-overlay::after{background-image:linear-gradient(rgba(0,216,255,.62) 1px,rgba(0,216,255,.14) 2px,transparent 2px);background-size:100% calc(100% / 28);clip-path:inset(0 0 100% 0)}
   #s18.scene-live .s18-neon-grid-overlay{opacity:1;animation:s18GridLayerPulse 3.2s ease-in-out 1.35s infinite}
   #s18.scene-live .s18-neon-grid-overlay::before{animation:s18GridDrawX 1.15s ease-out .18s both}
   #s18.scene-live .s18-neon-grid-overlay::after{animation:s18GridDrawY 1.15s ease-out .42s both}
   .s18-origin{position:absolute;left:var(--x);top:var(--y);width:10px;height:10px;border-radius:50%;background:#7f1d1d;box-shadow:0 0 0 4px rgba(239,68,68,.24),0 0 16px rgba(127,29,29,.5);transform:translate(-50%,-50%);z-index:5}
-  .s18-map-cell{position:absolute;left:var(--x);top:var(--y);width:calc(100% / 50);height:calc(100% / 70);border-radius:2px;background:rgba(0,229,255,.38);border:1px solid rgba(165,243,252,.96);box-shadow:0 0 12px rgba(0,229,255,.82),inset 0 0 8px rgba(0,229,255,.34);transform:scale(.35);transform-origin:center;opacity:0;z-index:4}
+  .s18-map-cell{position:absolute;left:var(--x);top:var(--y);width:calc(100% / 20);height:calc(100% / 28);border-radius:3px;background:rgba(0,229,255,.34);border:1px solid rgba(165,243,252,.92);box-shadow:0 0 12px rgba(0,229,255,.78),inset 0 0 8px rgba(0,229,255,.3);transform:scale(.35);transform-origin:center;opacity:0;z-index:4}
   #s18.scene-live .s18-origin{animation:s18OriginPulse 2.2s ease-in-out infinite;animation-delay:var(--d,0s)}
   #s18.scene-live .s18-map-cell{animation:s18GridCellGlow 4.4s ease-in-out infinite;animation-delay:calc(.78s + var(--d,0s))}
   .s18-info-side{display:flex;flex-direction:column;gap:10px;padding-top:6px}
@@ -716,7 +716,7 @@
   .s19-bottom .card,.s19-bottom .callout{padding:12px 15px!important}
   .s19-bottom .bul li{font-size:11.2px;line-height:1.45;padding-top:2px;padding-bottom:2px}
   .s19-bottom .callout{font-size:13px}
-  @keyframes s18GridLayerPulse{0%,100%{opacity:.58}50%{opacity:.9}}
+  @keyframes s18GridLayerPulse{0%,100%{opacity:.5}50%{opacity:.78}}
   @keyframes s18GridDrawX{0%{clip-path:inset(0 100% 0 0)}100%{clip-path:inset(0 0 0 0)}}
   @keyframes s18GridDrawY{0%{clip-path:inset(0 0 100% 0)}100%{clip-path:inset(0 0 0 0)}}
   @keyframes s18GridCellGlow{0%{opacity:0;transform:scale(.35)}18%{opacity:1;transform:scale(1)}54%{opacity:.88;transform:scale(1.05)}100%{opacity:.24;transform:scale(.86)}}
@@ -2617,30 +2617,18 @@
           <span class="s18-origin" style="--x:34%;--y:36%;--d:.1s"></span>
           <span class="s18-origin" style="--x:63%;--y:42%;--d:.35s"></span>
           <span class="s18-origin" style="--x:57%;--y:72%;--d:.55s"></span>
-          <span class="s18-map-cell" style="--x:31%;--y:33%;--d:.04s"></span>
-          <span class="s18-map-cell" style="--x:33%;--y:33%;--d:.16s"></span>
-          <span class="s18-map-cell" style="--x:35%;--y:33%;--d:.28s"></span>
-          <span class="s18-map-cell" style="--x:31%;--y:35%;--d:.40s"></span>
-          <span class="s18-map-cell" style="--x:33%;--y:35%;--d:.52s"></span>
-          <span class="s18-map-cell" style="--x:35%;--y:35%;--d:.64s"></span>
-          <span class="s18-map-cell" style="--x:33%;--y:37%;--d:.76s"></span>
-          <span class="s18-map-cell" style="--x:37%;--y:37%;--d:.88s"></span>
+          <span class="s18-map-cell" style="--x:30%;--y:32%;--d:.04s"></span>
+          <span class="s18-map-cell" style="--x:35%;--y:32%;--d:.20s"></span>
+          <span class="s18-map-cell" style="--x:30%;--y:35.6%;--d:.36s"></span>
+          <span class="s18-map-cell" style="--x:35%;--y:35.6%;--d:.52s"></span>
           <span class="s18-map-cell" style="--x:60%;--y:39%;--d:.08s"></span>
-          <span class="s18-map-cell" style="--x:62%;--y:39%;--d:.20s"></span>
-          <span class="s18-map-cell" style="--x:64%;--y:39%;--d:.32s"></span>
-          <span class="s18-map-cell" style="--x:60%;--y:41%;--d:.44s"></span>
-          <span class="s18-map-cell" style="--x:62%;--y:41%;--d:.56s"></span>
-          <span class="s18-map-cell" style="--x:64%;--y:41%;--d:.68s"></span>
-          <span class="s18-map-cell" style="--x:62%;--y:43%;--d:.80s"></span>
-          <span class="s18-map-cell" style="--x:66%;--y:43%;--d:.92s"></span>
+          <span class="s18-map-cell" style="--x:65%;--y:39%;--d:.24s"></span>
+          <span class="s18-map-cell" style="--x:60%;--y:42.6%;--d:.40s"></span>
+          <span class="s18-map-cell" style="--x:65%;--y:42.6%;--d:.56s"></span>
           <span class="s18-map-cell" style="--x:55%;--y:68%;--d:.12s"></span>
-          <span class="s18-map-cell" style="--x:57%;--y:68%;--d:.24s"></span>
-          <span class="s18-map-cell" style="--x:59%;--y:68%;--d:.36s"></span>
-          <span class="s18-map-cell" style="--x:55%;--y:70%;--d:.48s"></span>
-          <span class="s18-map-cell" style="--x:57%;--y:70%;--d:.60s"></span>
-          <span class="s18-map-cell" style="--x:59%;--y:70%;--d:.72s"></span>
-          <span class="s18-map-cell" style="--x:57%;--y:72%;--d:.84s"></span>
-          <span class="s18-map-cell" style="--x:55%;--y:72%;--d:.96s"></span>
+          <span class="s18-map-cell" style="--x:60%;--y:68%;--d:.28s"></span>
+          <span class="s18-map-cell" style="--x:55%;--y:71.6%;--d:.44s"></span>
+          <span class="s18-map-cell" style="--x:60%;--y:71.6%;--d:.60s"></span>
         </div>
         <img class="s18-scale" src="maps/s18_scale.png?v=1" alt="위험도 척도" draggable="false">
       </div>
