@@ -278,25 +278,35 @@
   .ratio-card .rn .vs{font-size:14px;color:var(--text);margin:0 6px}
   .ratio-card .rl{font-size:12px;color:var(--text);font-weight:700;margin-top:6px}
 
-  /* Section 05 — 3-Layer: 3단 동심 도넛 (밑 WHERE 가장 큼 → WHY → WHAT 가장 작음) */
-  .pyramid-stage{position:relative;width:100%;height:calc(100vh - 230px);max-height:620px;margin-bottom:14px}
-  /* 좌측 컨테이너 — 도넛 3단을 SVG로 표현 */
+  /* Section 05 — 3-Layer: 솔리드 원기둥 + 도넛 + 솔리드 원기둥 (합쳐진 상태 → 분리 애니메이션) */
+  .pyramid-stage{position:relative;width:100%;height:calc(100vh - 220px);max-height:620px;margin-bottom:14px}
   .pyramid-tower{position:absolute;left:2%;top:0;width:48%;height:100%;pointer-events:none;display:flex;align-items:center;justify-content:center}
   .donut-stack{width:100%;height:100%;display:block;overflow:visible}
-  /* 점선 연결자 — SVG 도넛 우측 끝점에서 우측 카드 좌측 끝점으로 (각 단계 색) */
-  .donut-link{position:absolute;pointer-events:none;z-index:4}
-  .donut-link line{stroke-dasharray:5 5;stroke-width:1.5;fill:none}
-  .donut-link circle{stroke-width:1.5;fill:#fff}
-  /* 우측 카드 — 첨부 사진처럼 좌측 둥근 모서리 색 강조 */
-  .layer-card{position:absolute;right:2%;width:38%;background:#fff;border-radius:14px;padding:14px 18px 14px 56px;box-shadow:0 12px 28px rgba(15,23,42,.08);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
-  .layer-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:42px;border-top-left-radius:14px;border-bottom-left-radius:14px;display:flex;align-items:center;justify-content:center}
-  .layer-card::after{content:attr(data-icon);position:absolute;left:0;top:50%;transform:translateY(-50%);width:42px;text-align:center;font-size:22px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.2)}
-  /* 카드 순서: 위에서부터 WHAT (작은 도넛에 대응) → WHY → WHERE (큰 도넛에 대응) */
-  .layer-card.what{top:5%;height:27%;border:1.5px solid var(--green-soft)}
+  /* 분리 애니메이션: 처음엔 WHY/WHAT이 아래로 내려가서 WHERE 위에 합쳐진 형태 → 위로 분리 */
+  .donut-stack .layer-g{transition:transform 1.3s cubic-bezier(.22,1,.36,1)}
+  .donut-stack .layer-why{transform:translateY(140px);transform-box:fill-box;transform-origin:center}
+  .donut-stack .layer-what{transform:translateY(260px);transform-box:fill-box;transform-origin:center}
+  .pyramid-stage.split .donut-stack .layer-why{transform:translateY(0);transition-delay:.5s}
+  .pyramid-stage.split .donut-stack .layer-what{transform:translateY(0);transition-delay:1.0s}
+  /* 점선 연결자는 분리 후에만 등장 */
+  .donut-stack .link-line{opacity:0;transition:opacity .5s ease-out}
+  .pyramid-stage.split .donut-stack .link-what{opacity:1;transition-delay:1.7s}
+  .pyramid-stage.split .donut-stack .link-why{opacity:1;transition-delay:2.0s}
+  .pyramid-stage.split .donut-stack .link-where{opacity:1;transition-delay:.3s}
+  /* 우측 카드 — 좌측 색 strip + 아이콘 */
+  .layer-card{position:absolute;right:2%;width:38%;background:#fff;border-radius:14px;padding:14px 18px 14px 60px;box-shadow:0 12px 28px rgba(15,23,42,.08);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(-14px);transition:opacity .6s ease-out,transform .6s ease-out}
+  .layer-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:46px;border-top-left-radius:14px;border-bottom-left-radius:14px}
+  .layer-card::after{content:attr(data-icon);position:absolute;left:0;top:50%;transform:translateY(-50%);width:46px;text-align:center;font-size:22px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+  .pyramid-stage.split .layer-card{opacity:1;transform:translateX(0)}
+  .pyramid-stage.split .layer-card.what{transition-delay:1.6s}
+  .pyramid-stage.split .layer-card.why{transition-delay:1.9s}
+  .pyramid-stage.split .layer-card.where{transition-delay:2.2s}
+  /* 카드 위치: 위에서 WHAT → WHY → WHERE (도넛 순서와 매칭) */
+  .layer-card.what{top:3%;height:30%;border:1.5px solid var(--green-soft)}
   .layer-card.what::before{background:var(--green)}
-  .layer-card.why{top:36.5%;height:27%;border:1.5px solid var(--blue-soft)}
+  .layer-card.why{top:35%;height:30%;border:1.5px solid var(--blue-soft)}
   .layer-card.why::before{background:var(--blue)}
-  .layer-card.where{top:68%;height:27%;border:1.5px solid var(--red-soft)}
+  .layer-card.where{top:67%;height:30%;border:1.5px solid var(--red-soft)}
   .layer-card.where::before{background:var(--red)}
   .layer-tag{display:inline-block;font-family:monospace;font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;letter-spacing:.05em;margin-bottom:8px}
   .layer-card.where .layer-tag{background:var(--red-soft);color:var(--red-deep)}
@@ -1152,72 +1162,72 @@
     <div class="pyramid-tower">
       <svg class="donut-stack" viewBox="0 0 500 600" preserveAspectRatio="xMidYMid meet">
         <defs>
-          <!-- WHERE 빨강 도넛 -->
           <linearGradient id="donutRedTop" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#fca5a5"/>
-            <stop offset="100%" stop-color="#ef4444"/>
+            <stop offset="0%" stop-color="#fca5a5"/><stop offset="100%" stop-color="#ef4444"/>
           </linearGradient>
           <linearGradient id="donutRedSide" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#dc2626"/>
-            <stop offset="100%" stop-color="#7f1d1d"/>
+            <stop offset="0%" stop-color="#dc2626"/><stop offset="100%" stop-color="#7f1d1d"/>
           </linearGradient>
-          <!-- WHY 파랑 -->
           <linearGradient id="donutBlueTop" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#93c5fd"/>
-            <stop offset="100%" stop-color="#3b82f6"/>
+            <stop offset="0%" stop-color="#93c5fd"/><stop offset="100%" stop-color="#3b82f6"/>
           </linearGradient>
           <linearGradient id="donutBlueSide" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#2563eb"/>
-            <stop offset="100%" stop-color="#1e3a8a"/>
+            <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#1e3a8a"/>
           </linearGradient>
-          <!-- WHAT 초록 -->
           <linearGradient id="donutGreenTop" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#86efac"/>
-            <stop offset="100%" stop-color="#22c55e"/>
+            <stop offset="0%" stop-color="#86efac"/><stop offset="100%" stop-color="#22c55e"/>
           </linearGradient>
           <linearGradient id="donutGreenSide" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#16a34a"/>
-            <stop offset="100%" stop-color="#14532d"/>
+            <stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#14532d"/>
           </linearGradient>
         </defs>
 
-        <!-- ① WHERE: 맨 아래 큰 도넛 (빨강) -->
-        <g id="donut-where">
-          <!-- 측면 (도넛 두께, 어두운 색) -->
-          <path d="M 60,440 A 190,55 0 1 0 440,440 L 440,470 A 190,55 0 1 1 60,470 Z" fill="url(#donutRedSide)"/>
-          <!-- 윗면 외측 타원 -->
+        <!--
+          ① WHERE 큰 원기둥 (rx=190 ry=55) — 윗면 y=440, 바닥 y=510 (높이 70)
+             윗면 가운데에 WHY 원기둥 윗면 자국이 보임 (rx=140 ry=40, 더 진한 색)
+          ② WHY 도넛 (외경 rx=140 ry=40, 내경 rx=90 ry=26)
+             분리 전: 윗면 y=440 (WHERE 위에 얹혀 합쳐진 형태)
+             분리 후: y=300 (위로 떠오름)
+          ③ WHAT 솔리드 원기둥 (rx=90 ry=26) — WHY의 구멍과 동일 크기
+             분리 전: 윗면 y=440 (전체가 하나의 합쳐진 원기둥처럼 보임)
+             분리 후: y=180 (가장 위)
+        -->
+
+        <!-- ① WHERE 큰 원기둥 (맨 아래, 고정) -->
+        <g class="layer-g layer-where">
+          <!-- 측면 -->
+          <path d="M 60,440 A 190,55 0 1 0 440,440 L 440,510 A 190,55 0 1 1 60,510 Z" fill="url(#donutRedSide)"/>
+          <!-- 윗면 (꽉 찬 타원 — 도넛 X) -->
           <ellipse cx="250" cy="440" rx="190" ry="55" fill="url(#donutRedTop)"/>
-          <!-- 윗면 내측 구멍 (가운데가 비어있게) -->
-          <ellipse cx="250" cy="440" rx="80" ry="22" fill="#7f1d1d"/>
-          <ellipse cx="250" cy="437" rx="80" ry="22" fill="#fff"/>
+          <!-- 윗면 안쪽 가운데에 WHY 자국 (어두운 분리선) — WHY가 떠오를 자리 표시 -->
+          <ellipse cx="250" cy="440" rx="140" ry="40" fill="rgba(127,29,29,.18)"/>
         </g>
 
-        <!-- ② WHY: 중간 도넛 (파랑) -->
-        <g id="donut-why">
-          <path d="M 110,300 A 140,40 0 1 0 390,300 L 390,326 A 140,40 0 1 1 110,326 Z" fill="url(#donutBlueSide)"/>
+        <!-- ② WHY 도넛 — 분리 후 윗면 y=300 -->
+        <g class="layer-g layer-why">
+          <path d="M 110,300 A 140,40 0 1 0 390,300 L 390,338 A 140,40 0 1 1 110,338 Z" fill="url(#donutBlueSide)"/>
           <ellipse cx="250" cy="300" rx="140" ry="40" fill="url(#donutBlueTop)"/>
-          <ellipse cx="250" cy="300" rx="60" ry="17" fill="#1e3a8a"/>
-          <ellipse cx="250" cy="297" rx="60" ry="17" fill="#fff"/>
+          <!-- 가운데 구멍 (어두운 측면 보이게) -->
+          <ellipse cx="250" cy="302" rx="90" ry="26" fill="#1e3a8a"/>
+          <ellipse cx="250" cy="300" rx="90" ry="26" fill="#fff"/>
         </g>
 
-        <!-- ③ WHAT: 맨 위 작은 도넛 (초록) -->
-        <g id="donut-what">
-          <path d="M 160,180 A 90,26 0 1 0 340,180 L 340,202 A 90,26 0 1 1 160,202 Z" fill="url(#donutGreenSide)"/>
+        <!-- ③ WHAT 솔리드 원기둥 — 분리 후 윗면 y=180 -->
+        <g class="layer-g layer-what">
+          <path d="M 160,180 A 90,26 0 1 0 340,180 L 340,204 A 90,26 0 1 1 160,204 Z" fill="url(#donutGreenSide)"/>
           <ellipse cx="250" cy="180" rx="90" ry="26" fill="url(#donutGreenTop)"/>
-          <ellipse cx="250" cy="180" rx="38" ry="11" fill="#14532d"/>
-          <ellipse cx="250" cy="178" rx="38" ry="11" fill="#fff"/>
         </g>
 
-        <!-- 연결 점선 + 끝점 동그라미 (도넛 우측 끝 → 우측 카드 좌측) -->
-        <!-- ① WHAT 위 도넛 → 카드 1 (top 약 18%, SVG viewBox y=108) -->
-        <line x1="338" y1="180" x2="500" y2="108" stroke="#22c55e" stroke-dasharray="5 5" stroke-width="1.5"/>
-        <circle cx="338" cy="180" r="5" fill="#fff" stroke="#22c55e" stroke-width="1.8"/>
-        <!-- ② WHY 중간 도넛 → 카드 2 (top 50%, SVG y=300) -->
-        <line x1="388" y1="300" x2="500" y2="300" stroke="#3b82f6" stroke-dasharray="5 5" stroke-width="1.5"/>
-        <circle cx="388" cy="300" r="5" fill="#fff" stroke="#3b82f6" stroke-width="1.8"/>
-        <!-- ③ WHERE 아래 도넛 → 카드 3 (top 82%, SVG y=492) -->
-        <line x1="438" y1="440" x2="500" y2="492" stroke="#ef4444" stroke-dasharray="5 5" stroke-width="1.5"/>
-        <circle cx="438" cy="440" r="5" fill="#fff" stroke="#ef4444" stroke-width="1.8"/>
+        <!-- 연결 점선 + 끝점 — 도넛 분리된 위치 기준 -->
+        <!-- WHAT (분리 후 윗면 y=180) → 카드 1 (top 18%, viewBox y≈108) -->
+        <line class="link-line link-what" x1="340" y1="180" x2="500" y2="100" stroke="#22c55e" stroke-dasharray="5 5" stroke-width="1.5"/>
+        <circle class="link-line link-what" cx="340" cy="180" r="5" fill="#fff" stroke="#22c55e" stroke-width="1.8"/>
+        <!-- WHY (분리 후 윗면 y=300) → 카드 2 (top 50%, viewBox y=300) -->
+        <line class="link-line link-why" x1="390" y1="300" x2="500" y2="300" stroke="#3b82f6" stroke-dasharray="5 5" stroke-width="1.5"/>
+        <circle class="link-line link-why" cx="390" cy="300" r="5" fill="#fff" stroke="#3b82f6" stroke-width="1.8"/>
+        <!-- WHERE (고정 윗면 y=440) → 카드 3 (top 82%, viewBox y≈492) -->
+        <line class="link-line link-where" x1="440" y1="440" x2="500" y2="492" stroke="#ef4444" stroke-dasharray="5 5" stroke-width="1.5"/>
+        <circle class="link-line link-where" cx="440" cy="440" r="5" fill="#fff" stroke="#ef4444" stroke-width="1.8"/>
       </svg>
     </div>
 
@@ -3449,7 +3459,21 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   io.observe(sec);
 })();
 
-// s05 — 평면 등장 애니메이션 제거 (CSS planeFloat + arrFlow만 사용)
+// s05 — 도넛 스택 분리 애니메이션: 진입 시 WHY/WHAT이 위로 떠오름
+(function(){
+  const stage = document.getElementById('s05-pyramid');
+  if (!stage) return;
+  let triggered = false;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .35 && !triggered) {
+        triggered = true;
+        setTimeout(() => stage.classList.add('split'), 300);
+      }
+    });
+  }, { threshold: [.35] });
+  io.observe(stage);
+})();
 
 // s06 — 격자 시스템 시퀀스 애니메이션
 (function(){
