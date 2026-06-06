@@ -376,9 +376,12 @@
 
   /* Section 10 — LISA def */
   .lisa-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;align-items:stretch}
-  .moran-card{background:#fff;border:2px solid var(--text);border-radius:12px;padding:14px 18px}
-  .moran-svg{width:100%;aspect-ratio:5/4.2}
+  .moran-card{background:#fff;border:2px solid var(--text);border-radius:12px;padding:14px 18px;display:flex;flex-direction:column}
+  .moran-svg{width:100%;aspect-ratio:5/4.2;flex:1}
   .moran-svg .qrect{stroke:var(--text);stroke-width:1.2}
+  /* 우측 2 박스가 좌측 모란 카드 높이에 맞춰 균등 분배 (flex-basis:0 으로 컨텐츠 무시하고 균등) */
+  .lisa-side .card{flex:1 1 0;min-height:0;display:flex;flex-direction:column}
+  /* 슬라이드 10 LISA 산점도 단계별 등장 — JS로 SVG opacity attribute 직접 제어 */
   .moran-svg text.qlabel{font-weight:900;font-size:22px}
   .moran-svg text.qsub{font-weight:700;font-size:10.5px}
   .moran-svg text.ax{font-weight:700;font-size:10.5px;fill:var(--muted)}
@@ -1459,6 +1462,11 @@
           </radialGradient>
         </defs>
 
+        <!-- 애니메이션 트리거 (보이지 않는 더미 — JS가 beginElement() 호출) -->
+        <rect x="-10" y="-10" width="1" height="1" fill="none">
+          <animate id="s10-trigger" attributeName="x" from="-10" to="-9" dur="0.01s" begin="indefinite" fill="freeze"/>
+        </rect>
+
         <!-- 배경 격자 (얇은) -->
         <g stroke="#f1f5f9" stroke-width="1">
           <line x1="60" y1="100" x2="470" y2="100"/>
@@ -1479,37 +1487,43 @@
         <polygon points="475,400 463,394 463,406" fill="#0f172a"/>
         <polygon points="60,35 54,47 66,47" fill="#0f172a"/>
 
-        <!-- LH 좌상: 초록 블롭 + 안전 섬 (안전구역과 같은 톤) -->
-        <g>
-          <ellipse cx="155" cy="125" rx="78" ry="52" fill="url(#blobGreenSoft)"/>
+        <!-- ① Step 1: 이웃 셀 위험도 높음 (상단) — LH·HH 빨강 바탕 동그라미 동시 등장 -->
+        <g class="s10-step1" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="s10-trigger.begin+0.2s" fill="freeze"/>
+          <!-- LH 외곽 빨강 (이웃 위험도 높음 → 핫스팟 색과 동일) -->
+          <ellipse cx="155" cy="125" rx="78" ry="52" fill="url(#blobRedDeep)"/>
+          <text x="92" y="65" fill="#ef4444" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">LH</text>
+          <!-- HH 외곽 빨강 -->
+          <ellipse cx="365" cy="125" rx="88" ry="58" fill="url(#blobRedDeep)"/>
+          <text x="280" y="65" fill="#ef4444" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">HH</text>
+        </g>
+
+        <!-- ② Step 2: 이웃 셀 위험도 낮음 (하단) — LL·HL 초록 바탕 동그라미 -->
+        <g class="s10-step2" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="s10-trigger.begin+0.9s" fill="freeze"/>
+          <ellipse cx="155" cy="310" rx="80" ry="54" fill="url(#blobGreen)"/>
+          <text x="92" y="252" fill="#16a34a" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">LL</text>
+          <ellipse cx="365" cy="310" rx="88" ry="58" fill="url(#blobGreenDeep)"/>
+          <text x="280" y="252" fill="#16a34a" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">HL</text>
+        </g>
+
+        <!-- ③ Step 3: 자기 셀 위험도 낮음 (좌측 컬럼) — 안전 섬·안전구역 초록 배지 -->
+        <g class="s10-step3" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="s10-trigger.begin+1.7s" fill="freeze"/>
           <rect x="115" y="113" width="80" height="28" rx="14" fill="#166534"/>
           <text x="155" y="132" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,'Apple SD Gothic Neo',sans-serif">안전 섬</text>
-        </g>
-        <text x="92" y="65" fill="#16a34a" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">LH</text>
-
-        <!-- HH 우상: 연한 빨강 + 핫스팟 -->
-        <g>
-          <ellipse cx="365" cy="125" rx="88" ry="58" fill="url(#blobRedDeep)"/>
-          <rect x="323" y="113" width="84" height="28" rx="14" fill="#b91c1c"/>
-          <text x="365" y="132" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,sans-serif">핫스팟</text>
-        </g>
-        <text x="280" y="65" fill="#ef4444" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">HH</text>
-
-        <!-- LL 좌하: 연한 초록 + 안전구역 -->
-        <g>
-          <ellipse cx="155" cy="310" rx="80" ry="54" fill="url(#blobGreen)"/>
           <rect x="113" y="298" width="84" height="28" rx="14" fill="#166534"/>
-          <text x="155" y="317" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,sans-serif">안전구역</text>
+          <text x="155" y="317" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,'Apple SD Gothic Neo',sans-serif">안전구역</text>
         </g>
-        <text x="92" y="252" fill="#16a34a" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">LL</text>
 
-        <!-- HL 우하: 연한 초록 + HL 사각지대 (브라운 라벨) -->
-        <g>
-          <ellipse cx="365" cy="310" rx="88" ry="58" fill="url(#blobGreenDeep)"/>
-          <rect x="313" y="298" width="104" height="28" rx="14" fill="#9a3412"/>
-          <text x="365" y="317" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,sans-serif">HL 사각지대</text>
+        <!-- ④ Step 4: 자기 셀 위험도 높음 (우측 컬럼) — 핫스팟·HL 사각지대 빨강 배지 -->
+        <g class="s10-step4" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="s10-trigger.begin+2.5s" fill="freeze"/>
+          <rect x="323" y="113" width="84" height="28" rx="14" fill="#b91c1c"/>
+          <text x="365" y="132" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,'Apple SD Gothic Neo',sans-serif">핫스팟</text>
+          <rect x="313" y="298" width="104" height="28" rx="14" fill="#b91c1c"/>
+          <text x="365" y="317" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,'Apple SD Gothic Neo',sans-serif">HL 사각지대</text>
         </g>
-        <text x="280" y="252" fill="#f97316" font-size="22" font-weight="900" font-family="-apple-system,sans-serif">HL</text>
 
         <!-- 축 라벨 -->
         <g font-family="-apple-system,'Apple SD Gothic Neo',sans-serif" fill="#64748b" font-size="11" font-weight="700">
@@ -2937,6 +2951,37 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   }, { threshold: [.35] });
   io.observe(sec);
   window.addEventListener('resize', () => { if (triggered) { drawConnector(); drawZoomLines(); } });
+})();
+
+// s10 LISA 4-Cluster 산점도 4단계 등장 애니메이션 (SMIL 기반 — opacity attribute 직접 제어)
+(function(){
+  const sec = document.getElementById('s10');
+  if (!sec) return;
+  const trigger = document.getElementById('s10-trigger');
+  let triggered = false;
+  function play(){
+    if (trigger && typeof trigger.beginElement === 'function') {
+      try { trigger.beginElement(); } catch(e) {}
+    }
+    // 폴백: SMIL 미지원 시 직접 opacity attribute 변경
+    const s1 = sec.querySelector('.s10-step1');
+    const s2 = sec.querySelector('.s10-step2');
+    const s3 = sec.querySelector('.s10-step3');
+    const s4 = sec.querySelector('.s10-step4');
+    setTimeout(() => { if (s1) s1.setAttribute('opacity', '1'); }, 200);
+    setTimeout(() => { if (s2) s2.setAttribute('opacity', '1'); }, 900);
+    setTimeout(() => { if (s3) s3.setAttribute('opacity', '1'); }, 1700);
+    setTimeout(() => { if (s4) s4.setAttribute('opacity', '1'); }, 2500);
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .35 && !triggered) {
+        triggered = true;
+        play();
+      }
+    });
+  }, { threshold: [.35] });
+  io.observe(sec);
 })();
 
 // s07 파이프라인 단계별 글로우
