@@ -2991,15 +2991,18 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
       drawSpotBeam();
       spotbeam.style.opacity = '1';
     }, 2000);
-    // ④ 격자 보드 확대 등장 (빔을 따라 위로 떠오름)
+    // ④ 격자 보드 확대 등장 (빔을 따라 위로 떠오름) — 보드 transition 1.4s 동안 매 프레임 빔 갱신
     setTimeout(() => {
       spot.style.opacity = '1';
       spot.style.transform = 'translate(-50%,0) rotateX(58deg) scale(1)';
-      // 보드 확장 중 빔 좌표 재계산
-      setTimeout(drawSpotBeam, 200);
-      setTimeout(drawSpotBeam, 600);
-      setTimeout(drawSpotBeam, 1100);
-      setTimeout(drawSpotBeam, 1600);
+      // 매 프레임(~16ms) 빔 좌표 재계산 → 사다리꼴이 보드 확장 속도와 정확히 동기화되어 부드럽게 벌어짐
+      const beamStart = performance.now();
+      const beamDuration = 1700; // 보드 transition 1.4s + 여유 0.3s
+      function syncBeam(now){
+        drawSpotBeam();
+        if (now - beamStart < beamDuration) requestAnimationFrame(syncBeam);
+      }
+      requestAnimationFrame(syncBeam);
     }, 2200);
     // ⑤ 격자 보드의 픽 셀 빛남
     setTimeout(() => {
