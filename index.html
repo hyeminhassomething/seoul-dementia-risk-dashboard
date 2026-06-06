@@ -941,8 +941,8 @@
             </filter>
           </defs>
           <g id="s06-zoom-target" opacity="0">
-            <!-- 빛나는 격자 셀 -->
-            <rect x="48" y="49" width="6" height="4.5" fill="#00e5ff" fill-opacity=".55" stroke="#00e5ff" stroke-width=".7" filter="url(#s06MapCellGlow)"/>
+            <!-- 빛나는 격자 셀 (빔이 정확히 이 셀의 좌·우변을 터치하도록 측정 대상) -->
+            <rect id="s06-zoom-cell" x="48" y="49" width="6" height="4.5" fill="#00e5ff" fill-opacity=".55" stroke="#00e5ff" stroke-width=".7" filter="url(#s06MapCellGlow)"/>
             <!-- 퍼져나가는 울림 1 -->
             <circle cx="51" cy="51.3" r="3" fill="none" stroke="#00e5ff" stroke-width=".5" filter="url(#s06MapCellGlow)">
               <animate attributeName="r" values="3;28;3" dur="2.8s" begin="0s" repeatCount="indefinite"/>
@@ -2856,6 +2856,7 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   const zoomL2 = document.getElementById('s06-zoom-l2');
   const seoulWrap = document.getElementById('s06-seoul-wrap');
   const zoomTarget = document.getElementById('s06-zoom-target');
+  const zoomCell = document.getElementById('s06-zoom-cell');
   let triggered = false;
 
   function countUp(el, target, duration){
@@ -2899,11 +2900,11 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   }
 
   function drawSpotBeam(){
-    if (!spotbeam || !beamPoly || !zoomL1 || !zoomL2 || !spot || !zoomTarget) return;
+    if (!spotbeam || !beamPoly || !zoomL1 || !zoomL2 || !spot || !zoomCell) return;
     const wrap = document.getElementById('s06-stage');
     const wrapRect = wrap.getBoundingClientRect();
-    // 지도 위 셀(zoom-target) 좌·우 사이드 (양변)
-    const tRect = zoomTarget.getBoundingClientRect();
+    // 지도 위 단일 격자 셀(rect만!)의 좌·우 변 — 펄스 울림 circle 무시
+    const tRect = zoomCell.getBoundingClientRect();
     const tLeft = tRect.left - wrapRect.left;     // 셀 좌변 x
     const tRight = tRect.right - wrapRect.left;   // 셀 우변 x
     const tMid = (tRect.top + tRect.bottom) / 2 - wrapRect.top;  // 셀 세로 중심
