@@ -296,9 +296,10 @@
   .pyramid-tower .p3d-label .lb-tag{font-family:monospace;font-size:10px;font-weight:800;opacity:.78;letter-spacing:.12em;display:block}
   .pyramid-tower .p3d-label .lb-name{font-size:20px;font-weight:900;line-height:1;display:block;margin-top:1px}
   .pyramid-tower .p3d-label .lb-sub{font-size:10.5px;font-weight:800;opacity:.85;display:block;margin-top:2px}
-  .pyramid-tower .p3d-label.where{top:6%;color:#7f1d1d}
-  .pyramid-tower .p3d-label.why{top:34%;color:#1e3a8a}
-  .pyramid-tower .p3d-label.what{top:62%;color:#14532d}
+  .pyramid-tower .p3d-label{color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.35),0 0 8px rgba(0,0,0,.2)}
+  .pyramid-tower .p3d-label.where{top:14%}
+  .pyramid-tower .p3d-label.why{top:42%}
+  .pyramid-tower .p3d-label.what{top:68%}
   .pyramid-stage.show .p3d-label.where{opacity:1;transition-delay:.6s}
   .pyramid-stage.show .p3d-label.why{opacity:1;transition-delay:2.2s}
   .pyramid-stage.show .p3d-label.what{opacity:1;transition-delay:3.8s}
@@ -969,76 +970,87 @@
 
     <!-- 좌측: 3D 입체 역피라미드 (WHERE 사다리꼴 → WHY 사다리꼴 → WHAT 삼각뿔 꼭짓점) -->
     <div class="pyramid-tower">
-      <svg class="pyramid3d" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid meet">
+      <svg class="pyramid3d" viewBox="0 0 600 580" preserveAspectRatio="xMidYMid meet">
         <defs>
-          <!-- WHERE 빨강 — 윗면(반투명) -->
-          <linearGradient id="p3dWhereTop" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stop-color="#fecaca" stop-opacity=".75"/>
-            <stop offset="100%" stop-color="#fca5a5" stop-opacity=".55"/>
+          <!-- 보석 facet 그라데이션 (좌→우, 좌측이 밝고 우측이 어둡게) -->
+          <!-- WHERE 빨강 -->
+          <linearGradient id="gemWhereTop" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#fecaca"/>
+            <stop offset="100%" stop-color="#f87171"/>
           </linearGradient>
-          <!-- WHERE 빨강 — 정면(살짝 더 진하게) -->
-          <linearGradient id="p3dWhereFront" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#fca5a5" stop-opacity=".7"/>
-            <stop offset="100%" stop-color="#ef4444" stop-opacity=".55"/>
+          <linearGradient id="gemWhereLeft" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#fca5a5"/>
+            <stop offset="100%" stop-color="#dc2626"/>
+          </linearGradient>
+          <linearGradient id="gemWhereRight" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#b91c1c"/>
+            <stop offset="100%" stop-color="#7f1d1d"/>
           </linearGradient>
           <!-- WHY 파랑 -->
-          <linearGradient id="p3dWhyTop" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stop-color="#bfdbfe" stop-opacity=".75"/>
-            <stop offset="100%" stop-color="#93c5fd" stop-opacity=".55"/>
+          <linearGradient id="gemWhyTop" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#bfdbfe"/>
+            <stop offset="100%" stop-color="#60a5fa"/>
           </linearGradient>
-          <linearGradient id="p3dWhyFront" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#93c5fd" stop-opacity=".7"/>
-            <stop offset="100%" stop-color="#2563eb" stop-opacity=".55"/>
+          <linearGradient id="gemWhyLeft" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#93c5fd"/>
+            <stop offset="100%" stop-color="#2563eb"/>
+          </linearGradient>
+          <linearGradient id="gemWhyRight" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#1d4ed8"/>
+            <stop offset="100%" stop-color="#1e3a8a"/>
           </linearGradient>
           <!-- WHAT 초록 -->
-          <linearGradient id="p3dWhatTop" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stop-color="#bbf7d0" stop-opacity=".8"/>
-            <stop offset="100%" stop-color="#86efac" stop-opacity=".6"/>
+          <linearGradient id="gemWhatTop" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#bbf7d0"/>
+            <stop offset="100%" stop-color="#4ade80"/>
           </linearGradient>
-          <linearGradient id="p3dWhatFront" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#86efac" stop-opacity=".75"/>
-            <stop offset="100%" stop-color="#16a34a" stop-opacity=".6"/>
+          <linearGradient id="gemWhatLeft" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#86efac"/>
+            <stop offset="100%" stop-color="#16a34a"/>
           </linearGradient>
-          <!-- 글로스 (위에서 빛 반사) -->
-          <linearGradient id="p3dGloss" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stop-color="#fff" stop-opacity=".5"/>
-            <stop offset="50%" stop-color="#fff" stop-opacity=".15"/>
-            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          <linearGradient id="gemWhatRight" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#15803d"/>
+            <stop offset="100%" stop-color="#14532d"/>
           </linearGradient>
         </defs>
 
-        <!-- WHERE: 윗변 넓고(x=10~390) 아랫변 살짝 좁음(x=50~350) — 1단 -->
+        <!-- 참고 이미지처럼 위 매우 넓음 (윗변 600px) → 깔때기로 좁아짐, WHAT은 한 점 -->
+        <!-- WHERE 1단 (윗변 0~600, 아래 60~540) -->
         <g class="p3d-layer where">
-          <!-- 윗면 타원(투시) -->
-          <ellipse cx="200" cy="40" rx="190" ry="18" fill="url(#p3dWhereTop)" stroke="rgba(127,29,29,.4)" stroke-width="1"/>
-          <!-- 정면(앞쪽 사다리꼴) -->
-          <polygon points="10,40 390,40 350,170 50,170" fill="url(#p3dWhereFront)" stroke="rgba(127,29,29,.5)" stroke-width="1.2"/>
-          <!-- 아랫면 타원 (점선으로 살짝) -->
-          <ellipse cx="200" cy="170" rx="150" ry="14" fill="rgba(252,165,165,.45)" stroke="rgba(127,29,29,.35)" stroke-width="1"/>
-          <!-- 글로스(좌상→우하 사선광) -->
-          <polygon points="10,40 390,40 350,170 50,170" fill="url(#p3dGloss)" opacity=".6"/>
+          <!-- 윗면 (사다리꼴 깊이감 — V자로 살짝 들어감) -->
+          <polygon points="0,30 600,30 540,80 60,80" fill="url(#gemWhereTop)"/>
+          <!-- 좌측 facet (밝은 면) -->
+          <polygon points="0,30 60,80 300,200 300,80" fill="url(#gemWhereLeft)"/>
+          <!-- 우측 facet (어두운 면) -->
+          <polygon points="600,30 540,80 300,200 300,80" fill="url(#gemWhereRight)"/>
+          <!-- 정면 라벨 영역 (큰 사다리꼴) -->
+          <polygon points="60,80 540,80 470,200 130,200" fill="url(#gemWhereLeft)" opacity=".95"/>
+          <!-- 정면 facet 음영 (정면 우측 살짝 어둡게) -->
+          <polygon points="300,80 540,80 470,200 300,200" fill="url(#gemWhereRight)" opacity=".4"/>
         </g>
 
-        <!-- WHY: 윗변(150~350) 좁아진 사다리꼴, 아랫변 더 좁음(80~320) — 2단 -->
+        <!-- WHY 2단 (윗변 60~540, 아래 130~470) -->
         <g class="p3d-layer why">
-          <ellipse cx="200" cy="190" rx="150" ry="14" fill="url(#p3dWhyTop)" stroke="rgba(30,58,138,.4)" stroke-width="1"/>
-          <polygon points="50,190 350,190 310,330 90,330" fill="url(#p3dWhyFront)" stroke="rgba(30,58,138,.5)" stroke-width="1.2"/>
-          <ellipse cx="200" cy="330" rx="110" ry="11" fill="rgba(147,197,253,.5)" stroke="rgba(30,58,138,.35)" stroke-width="1"/>
-          <polygon points="50,190 350,190 310,330 90,330" fill="url(#p3dGloss)" opacity=".55"/>
+          <polygon points="60,205 540,205 470,255 130,255" fill="url(#gemWhyTop)"/>
+          <polygon points="60,205 130,255 300,360 300,255" fill="url(#gemWhyLeft)"/>
+          <polygon points="540,205 470,255 300,360 300,255" fill="url(#gemWhyRight)"/>
+          <polygon points="130,255 470,255 410,360 190,360" fill="url(#gemWhyLeft)" opacity=".95"/>
+          <polygon points="300,255 470,255 410,360 300,360" fill="url(#gemWhyRight)" opacity=".4"/>
         </g>
 
-        <!-- WHAT: 윗변(80~320) 좁음, 아래는 한 점(200,520) — 삼각뿔 꼭짓점 -->
+        <!-- WHAT 3단 — 보석 뾰족한 꼭짓점 (윗변 130~470, 아래는 한 점 300,560) -->
         <g class="p3d-layer what">
-          <ellipse cx="200" cy="350" rx="110" ry="11" fill="url(#p3dWhatTop)" stroke="rgba(20,83,45,.4)" stroke-width="1"/>
-          <!-- 좌측면(어두운) -->
-          <polygon points="90,350 200,560 200,560" fill="rgba(22,101,52,.35)"/>
-          <!-- 정면 삼각뿔 (윗변=좌우 110px → 한 점) -->
-          <polygon points="90,350 310,350 200,560" fill="url(#p3dWhatFront)" stroke="rgba(20,83,45,.55)" stroke-width="1.2"/>
-          <!-- 글로스 -->
-          <polygon points="90,350 310,350 200,560" fill="url(#p3dGloss)" opacity=".6"/>
-          <!-- 꼭짓점 강조 (작은 글로우) -->
-          <circle cx="200" cy="560" r="6" fill="#16a34a" opacity=".5"/>
-          <circle cx="200" cy="560" r="3" fill="#bbf7d0"/>
+          <polygon points="130,365 470,365 410,415 190,415" fill="url(#gemWhatTop)"/>
+          <!-- 좌측 삼각 facet (윗변 좌점 → 꼭짓점) -->
+          <polygon points="130,365 190,415 300,560 300,415" fill="url(#gemWhatLeft)"/>
+          <!-- 우측 삼각 facet (윗변 우점 → 꼭짓점, 어두움) -->
+          <polygon points="470,365 410,415 300,560 300,415" fill="url(#gemWhatRight)"/>
+          <!-- 정면 V자 (좌하 → 꼭짓점, 우하 → 꼭짓점) -->
+          <polygon points="190,415 300,415 300,560" fill="url(#gemWhatLeft)" opacity=".95"/>
+          <polygon points="300,415 410,415 300,560" fill="url(#gemWhatRight)" opacity=".95"/>
+          <!-- 꼭짓점 글로우 -->
+          <circle cx="300" cy="560" r="8" fill="#16a34a" opacity=".4"/>
+          <circle cx="300" cy="560" r="4" fill="#bbf7d0"/>
         </g>
       </svg>
 
