@@ -280,8 +280,8 @@
 
   /* Section 05 — 3-Layer 역삼각형(깔때기) 유리 피라미드 */
   .pyramid-stage{position:relative;width:100%;height:calc(100vh - 230px);max-height:640px;margin-bottom:14px}
-  /* 좌측: 3D 입체 역피라미드 SVG 컨테이너 */
-  .pyramid-tower{position:absolute;left:3%;top:4%;width:46%;height:92%;pointer-events:none}
+  /* 좌측: 3D 입체 역피라미드 SVG 컨테이너 — 더 넓은 폭으로 참고 이미지 비율 재현 */
+  .pyramid-tower{position:absolute;left:2%;top:4%;width:52%;height:92%;pointer-events:none}
   .pyramid-tower svg.pyramid3d{width:100%;height:100%;display:block;overflow:visible}
   .pyramid-tower .p3d-layer{opacity:0;transform-origin:center center;transition:opacity .9s ease-out,transform 1.1s cubic-bezier(.22,1,.36,1)}
   .pyramid-tower .p3d-layer.where{transform:translateY(-30px) scale(.9)}
@@ -296,15 +296,15 @@
   .pyramid-tower .p3d-label .lb-tag{font-family:monospace;font-size:10px;font-weight:800;opacity:.78;letter-spacing:.12em;display:block}
   .pyramid-tower .p3d-label .lb-name{font-size:20px;font-weight:900;line-height:1;display:block;margin-top:1px}
   .pyramid-tower .p3d-label .lb-sub{font-size:10.5px;font-weight:800;opacity:.85;display:block;margin-top:2px}
-  .pyramid-tower .p3d-label{color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.35),0 0 8px rgba(0,0,0,.2)}
+  .pyramid-tower .p3d-label{color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.4),0 0 10px rgba(0,0,0,.25)}
   .pyramid-tower .p3d-label.where{top:14%}
   .pyramid-tower .p3d-label.why{top:42%}
-  .pyramid-tower .p3d-label.what{top:68%}
+  .pyramid-tower .p3d-label.what{top:74%}
   .pyramid-stage.show .p3d-label.where{opacity:1;transition-delay:.6s}
   .pyramid-stage.show .p3d-label.why{opacity:1;transition-delay:2.2s}
   .pyramid-stage.show .p3d-label.what{opacity:1;transition-delay:3.8s}
   /* 카드 — 우측, 카드끼리 절대 겹치지 않도록 top/height 균등 분배 */
-  .layer-card{position:absolute;right:3%;width:42%;background:#fff;border:2px solid;border-radius:14px;padding:11px 16px;opacity:0;transform:translateX(-30%) scale(.3);transform-origin:0% 50%;transition:opacity .7s ease-out,transform 1s cubic-bezier(.34,1.36,.64,1);box-shadow:0 18px 50px rgba(15,23,42,.16);z-index:5;box-sizing:border-box}
+  .layer-card{position:absolute;right:2%;width:38%;background:#fff;border:2px solid;border-radius:14px;padding:11px 16px;opacity:0;transform:translateX(-30%) scale(.3);transform-origin:0% 50%;transition:opacity .7s ease-out,transform 1s cubic-bezier(.34,1.36,.64,1);box-shadow:0 18px 50px rgba(15,23,42,.16);z-index:5;box-sizing:border-box}
   .layer-card.where{top:4%;border-color:var(--red);max-height:29%;overflow:hidden}
   .layer-card.why{top:36%;border-color:var(--blue);max-height:29%;overflow:hidden}
   .layer-card.what{top:68%;border-color:var(--green);max-height:29%;overflow:hidden}
@@ -1042,7 +1042,7 @@
 
     <!-- 좌측: 3D 입체 역피라미드 (WHERE 사다리꼴 → WHY 사다리꼴 → WHAT 삼각뿔 꼭짓점) -->
     <div class="pyramid-tower">
-      <svg class="pyramid3d" viewBox="0 0 600 580" preserveAspectRatio="xMidYMid meet">
+      <svg class="pyramid3d" viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid meet">
         <defs>
           <!-- 보석 facet 그라데이션 (좌→우, 좌측이 밝고 우측이 어둡게) -->
           <!-- WHERE 빨강 -->
@@ -1086,43 +1086,48 @@
           </linearGradient>
         </defs>
 
-        <!-- 참고 이미지처럼 위 매우 넓음 (윗변 600px) → 깔때기로 좁아짐, WHAT은 한 점 -->
-        <!-- WHERE 1단 (윗변 0~600, 아래 60~540) -->
+        <!-- 참고 이미지(3D Inverted Pyramid) 비율: 위 매우 넓음 → 단계적으로 좁아짐 → 끝은 한 점 -->
+        <!-- 1단 WHERE: 윗변 0~1000 (풀폭), 아래 100~900, 높이 130 -->
         <g class="p3d-layer where">
-          <!-- 윗면 (사다리꼴 깊이감 — V자로 살짝 들어감) -->
-          <polygon points="0,30 600,30 540,80 60,80" fill="url(#gemWhereTop)"/>
-          <!-- 좌측 facet (밝은 면) -->
-          <polygon points="0,30 60,80 300,200 300,80" fill="url(#gemWhereLeft)"/>
-          <!-- 우측 facet (어두운 면) -->
-          <polygon points="600,30 540,80 300,200 300,80" fill="url(#gemWhereRight)"/>
-          <!-- 정면 라벨 영역 (큰 사다리꼴) -->
-          <polygon points="60,80 540,80 470,200 130,200" fill="url(#gemWhereLeft)" opacity=".95"/>
-          <!-- 정면 facet 음영 (정면 우측 살짝 어둡게) -->
-          <polygon points="300,80 540,80 470,200 300,200" fill="url(#gemWhereRight)" opacity=".4"/>
+          <!-- 윗면 사다리꼴 (V자로 살짝 안쪽 들어감 — 원근감) -->
+          <polygon points="0,20 1000,20 900,75 100,75" fill="url(#gemWhereTop)"/>
+          <!-- 정면 사다리꼴 (큰 면) — 좌측 밝게, 우측 어둡게 분할 -->
+          <polygon points="100,75 500,75 460,200 180,200" fill="url(#gemWhereLeft)"/>
+          <polygon points="500,75 900,75 820,200 460,200" fill="url(#gemWhereRight)"/>
+          <!-- 좌측 입체 면 (아주 좁은 삼각) -->
+          <polygon points="0,20 100,75 180,200" fill="#7f1d1d" opacity=".55"/>
+          <!-- 우측 입체 면 (어두운) -->
+          <polygon points="1000,20 900,75 820,200" fill="#7f1d1d" opacity=".75"/>
+          <!-- 상단 하이라이트 (얇은 밝은 줄) -->
+          <polygon points="0,20 1000,20 985,30 15,30" fill="#fff" opacity=".18"/>
         </g>
 
-        <!-- WHY 2단 (윗변 60~540, 아래 130~470) -->
+        <!-- 2단 WHY: 윗변 100~900, 아래 220~780, 높이 130 -->
         <g class="p3d-layer why">
-          <polygon points="60,205 540,205 470,255 130,255" fill="url(#gemWhyTop)"/>
-          <polygon points="60,205 130,255 300,360 300,255" fill="url(#gemWhyLeft)"/>
-          <polygon points="540,205 470,255 300,360 300,255" fill="url(#gemWhyRight)"/>
-          <polygon points="130,255 470,255 410,360 190,360" fill="url(#gemWhyLeft)" opacity=".95"/>
-          <polygon points="300,255 470,255 410,360 300,360" fill="url(#gemWhyRight)" opacity=".4"/>
+          <polygon points="100,205 900,205 820,260 180,260" fill="url(#gemWhyTop)"/>
+          <polygon points="180,260 500,260 460,385 250,385" fill="url(#gemWhyLeft)"/>
+          <polygon points="500,260 820,260 750,385 460,385" fill="url(#gemWhyRight)"/>
+          <polygon points="100,205 180,260 250,385" fill="#1e3a8a" opacity=".55"/>
+          <polygon points="900,205 820,260 750,385" fill="#1e3a8a" opacity=".75"/>
+          <polygon points="100,205 900,205 885,215 115,215" fill="#fff" opacity=".18"/>
         </g>
 
-        <!-- WHAT 3단 — 보석 뾰족한 꼭짓점 (윗변 130~470, 아래는 한 점 300,560) -->
+        <!-- 3단 WHAT: 윗변 180~820, 아래는 한 점 500,540 (뾰족한 꼭짓점) -->
         <g class="p3d-layer what">
-          <polygon points="130,365 470,365 410,415 190,415" fill="url(#gemWhatTop)"/>
-          <!-- 좌측 삼각 facet (윗변 좌점 → 꼭짓점) -->
-          <polygon points="130,365 190,415 300,560 300,415" fill="url(#gemWhatLeft)"/>
-          <!-- 우측 삼각 facet (윗변 우점 → 꼭짓점, 어두움) -->
-          <polygon points="470,365 410,415 300,560 300,415" fill="url(#gemWhatRight)"/>
-          <!-- 정면 V자 (좌하 → 꼭짓점, 우하 → 꼭짓점) -->
-          <polygon points="190,415 300,415 300,560" fill="url(#gemWhatLeft)" opacity=".95"/>
-          <polygon points="300,415 410,415 300,560" fill="url(#gemWhatRight)" opacity=".95"/>
-          <!-- 꼭짓점 글로우 -->
-          <circle cx="300" cy="560" r="8" fill="#16a34a" opacity=".4"/>
-          <circle cx="300" cy="560" r="4" fill="#bbf7d0"/>
+          <!-- 윗면 사다리꼴 -->
+          <polygon points="180,390 820,390 750,440 250,440" fill="url(#gemWhatTop)"/>
+          <!-- 정면 삼각형 (좌측 밝음 + 우측 어둡게) — V자로 꼭짓점에 모임 -->
+          <polygon points="250,440 500,440 500,540" fill="url(#gemWhatLeft)"/>
+          <polygon points="500,440 750,440 500,540" fill="url(#gemWhatRight)"/>
+          <!-- 좌측 입체 면 (윗변 좌점 → 꼭짓점) -->
+          <polygon points="180,390 250,440 500,540" fill="#14532d" opacity=".55"/>
+          <!-- 우측 입체 면 (윗변 우점 → 꼭짓점, 가장 어두움) -->
+          <polygon points="820,390 750,440 500,540" fill="#14532d" opacity=".78"/>
+          <!-- 상단 하이라이트 -->
+          <polygon points="180,390 820,390 810,400 190,400" fill="#fff" opacity=".2"/>
+          <!-- 꼭짓점 글로우 강조 -->
+          <circle cx="500" cy="540" r="12" fill="#16a34a" opacity=".35"/>
+          <circle cx="500" cy="540" r="6" fill="#bbf7d0"/>
         </g>
       </svg>
 
