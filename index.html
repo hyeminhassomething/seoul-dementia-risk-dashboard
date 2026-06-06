@@ -279,29 +279,34 @@
   .ratio-card .rl{font-size:12px;color:var(--text);font-weight:700;margin-top:6px}
 
   /* Section 05 — 3-Layer 역삼각형(깔때기) 유리 피라미드 */
-  .pyramid-stage{position:relative;width:100%;height:calc(100vh - 240px);max-height:600px;perspective:1800px;perspective-origin:50% 50%;margin-bottom:14px}
-  /* 유리 평면 — 좌측, 위에서 아래로 점점 좁아짐 (clip-path 사다리꼴) */
-  .glass-plane{position:absolute;left:5%;height:20%;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .8s ease-out,transform 1.1s cubic-bezier(.22,1,.36,1);box-shadow:0 12px 30px rgba(15,23,42,.14),inset 0 1px 0 rgba(255,255,255,.55);display:flex;align-items:center;justify-content:flex-start;padding-left:8%;font-family:-apple-system,sans-serif;font-weight:900;letter-spacing:.08em}
-  .glass-plane .pl-icon{font-size:32px;margin-right:14px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.18))}
-  .glass-plane .pl-text{display:flex;flex-direction:column;align-items:flex-start}
-  .glass-plane .pl-tag{font-family:monospace;font-size:10.5px;font-weight:800;opacity:.78;letter-spacing:.1em}
-  .glass-plane .pl-name{font-size:24px;font-weight:900;line-height:1;margin-top:2px}
-  .glass-plane .pl-sub{font-size:11.5px;font-weight:800;margin-top:3px;opacity:.85}
-  /* WHERE — 맨 위, 가장 넓음 (역삼각형 윗변) */
-  .glass-plane.where{top:4%;width:42%;clip-path:polygon(0 0, 100% 8%, 95% 100%, 3% 92%);background:linear-gradient(135deg,rgba(254,202,202,.45),rgba(252,165,165,.32));border:1.5px solid rgba(220,38,38,.5);color:#7f1d1d;transform:translateX(-50%) rotateX(20deg) rotateY(-22deg)}
-  /* WHY — 중간 */
-  .glass-plane.why{top:38%;width:34%;clip-path:polygon(2% 5%, 100% 0, 92% 100%, 8% 95%);background:linear-gradient(135deg,rgba(191,219,254,.48),rgba(147,197,253,.35));border:1.5px solid rgba(37,99,235,.5);color:#1e3a8a;transform:translateX(-50%) rotateX(20deg) rotateY(-22deg)}
-  /* WHAT — 맨 아래, 가장 좁음 (깔때기 끝점 — 결론) */
-  .glass-plane.what{top:72%;width:24%;clip-path:polygon(4% 8%, 100% 0, 88% 100%, 12% 92%);background:linear-gradient(135deg,rgba(187,247,208,.55),rgba(134,239,172,.4));border:1.5px solid rgba(22,163,74,.55);color:#14532d;transform:translateX(-50%) rotateX(20deg) rotateY(-22deg)}
-  .pyramid-stage.show .glass-plane{opacity:1;transform:translateX(0) rotateX(20deg) rotateY(-22deg)}
-  .pyramid-stage.show .glass-plane.where{transition-delay:0s}
-  .pyramid-stage.show .glass-plane.why{transition-delay:1.6s}
-  .pyramid-stage.show .glass-plane.what{transition-delay:3.2s}
-  /* 카드 — 우측, 평면 옆에서 줌업되어 등장 */
-  .layer-card{position:absolute;right:3%;width:42%;background:#fff;border:2px solid;border-radius:14px;padding:14px 18px;opacity:0;transform:translateX(-30%) scale(.3);transform-origin:0% 50%;transition:opacity .7s ease-out,transform 1s cubic-bezier(.34,1.36,.64,1);box-shadow:0 18px 50px rgba(15,23,42,.16);z-index:5}
-  .layer-card.where{top:4%;border-color:var(--red)}
-  .layer-card.why{top:36%;border-color:var(--blue)}
-  .layer-card.what{top:68%;border-color:var(--green)}
+  .pyramid-stage{position:relative;width:100%;height:calc(100vh - 230px);max-height:640px;margin-bottom:14px}
+  /* 좌측: 3D 입체 역피라미드 SVG 컨테이너 */
+  .pyramid-tower{position:absolute;left:3%;top:4%;width:46%;height:92%;pointer-events:none}
+  .pyramid-tower svg.pyramid3d{width:100%;height:100%;display:block;overflow:visible}
+  .pyramid-tower .p3d-layer{opacity:0;transform-origin:center center;transition:opacity .9s ease-out,transform 1.1s cubic-bezier(.22,1,.36,1)}
+  .pyramid-tower .p3d-layer.where{transform:translateY(-30px) scale(.9)}
+  .pyramid-tower .p3d-layer.why{transform:translateY(-30px) scale(.9)}
+  .pyramid-tower .p3d-layer.what{transform:translateY(-30px) scale(.9)}
+  .pyramid-stage.show .pyramid-tower .p3d-layer{opacity:1;transform:translateY(0) scale(1)}
+  .pyramid-stage.show .pyramid-tower .p3d-layer.where{transition-delay:0s}
+  .pyramid-stage.show .pyramid-tower .p3d-layer.why{transition-delay:1.6s}
+  .pyramid-stage.show .pyramid-tower .p3d-layer.what{transition-delay:3.2s}
+  /* 평면 라벨 (SVG 위에 absolute) */
+  .pyramid-tower .p3d-label{position:absolute;left:50%;transform:translateX(-50%);text-align:center;font-family:-apple-system,sans-serif;font-weight:900;letter-spacing:-.01em;pointer-events:none;text-shadow:0 1px 2px rgba(255,255,255,.55);opacity:0;transition:opacity .8s ease-out}
+  .pyramid-tower .p3d-label .lb-tag{font-family:monospace;font-size:10px;font-weight:800;opacity:.78;letter-spacing:.12em;display:block}
+  .pyramid-tower .p3d-label .lb-name{font-size:20px;font-weight:900;line-height:1;display:block;margin-top:1px}
+  .pyramid-tower .p3d-label .lb-sub{font-size:10.5px;font-weight:800;opacity:.85;display:block;margin-top:2px}
+  .pyramid-tower .p3d-label.where{top:6%;color:#7f1d1d}
+  .pyramid-tower .p3d-label.why{top:34%;color:#1e3a8a}
+  .pyramid-tower .p3d-label.what{top:62%;color:#14532d}
+  .pyramid-stage.show .p3d-label.where{opacity:1;transition-delay:.6s}
+  .pyramid-stage.show .p3d-label.why{opacity:1;transition-delay:2.2s}
+  .pyramid-stage.show .p3d-label.what{opacity:1;transition-delay:3.8s}
+  /* 카드 — 우측, 카드끼리 절대 겹치지 않도록 top/height 균등 분배 */
+  .layer-card{position:absolute;right:3%;width:42%;background:#fff;border:2px solid;border-radius:14px;padding:11px 16px;opacity:0;transform:translateX(-30%) scale(.3);transform-origin:0% 50%;transition:opacity .7s ease-out,transform 1s cubic-bezier(.34,1.36,.64,1);box-shadow:0 18px 50px rgba(15,23,42,.16);z-index:5;box-sizing:border-box}
+  .layer-card.where{top:4%;border-color:var(--red);max-height:29%;overflow:hidden}
+  .layer-card.why{top:36%;border-color:var(--blue);max-height:29%;overflow:hidden}
+  .layer-card.what{top:68%;border-color:var(--green);max-height:29%;overflow:hidden}
   .pyramid-stage.show .layer-card.where{opacity:1;transform:translateX(0) scale(1);transition-delay:.8s}
   .pyramid-stage.show .layer-card.why{opacity:1;transform:translateX(0) scale(1);transition-delay:2.4s}
   .pyramid-stage.show .layer-card.what{opacity:1;transform:translateX(0) scale(1);transition-delay:4.0s}
@@ -315,12 +320,12 @@
   .layer-card.where .layer-tag{background:var(--red-soft);color:var(--red-deep)}
   .layer-card.why .layer-tag{background:var(--blue-soft);color:var(--blue-deep)}
   .layer-card.what .layer-tag{background:var(--green-soft);color:var(--green-deep)}
-  .layer-card h3{font-size:20px;font-weight:900;letter-spacing:-.02em;margin-bottom:4px}
+  .layer-card h3{font-size:17px;font-weight:900;letter-spacing:-.02em;margin-bottom:3px}
   .layer-card.where h3{color:var(--red-deep)}
   .layer-card.why h3{color:var(--blue-deep)}
   .layer-card.what h3{color:var(--green-deep)}
-  .layer-card .meth{font-family:monospace;font-size:11.5px;color:var(--text-soft);line-height:1.6;border-top:1px dashed var(--border);padding-top:6px;margin-top:6px;margin-bottom:8px}
-  .layer-card .result{font-size:13px;font-weight:800;line-height:1.45}
+  .layer-card .meth{font-family:monospace;font-size:10.5px;color:var(--text-soft);line-height:1.45;border-top:1px dashed var(--border);padding-top:5px;margin-top:5px;margin-bottom:6px}
+  .layer-card .result{font-size:11.5px;font-weight:800;line-height:1.35}
   .layer-card.where .result{color:var(--red-deep)} .layer-card.why .result{color:var(--blue-deep)} .layer-card.what .result{color:var(--green-deep)}
 
   /* Section 06 — 50m grid */
@@ -962,18 +967,97 @@
       <line id="s05-line-what-bot" x1="0" y1="0" x2="0" y2="0" stroke="#16a34a" stroke-width="2" stroke-opacity=".9" style="filter:drop-shadow(0 0 5px rgba(22,163,74,.7))"/>
     </svg>
 
-    <!-- 유리 평면 — 역삼각형 (위 넓음 → 아래 좁음) -->
-    <div class="glass-plane where">
-      <span class="pl-icon">🗺</span>
-      <div class="pl-text"><span class="pl-tag">LAYER 01</span><span class="pl-name">WHERE</span><span class="pl-sub">공간 자기상관</span></div>
-    </div>
-    <div class="glass-plane why">
-      <span class="pl-icon">🧬</span>
-      <div class="pl-text"><span class="pl-tag">LAYER 02</span><span class="pl-name">WHY</span><span class="pl-sub">환경 군집화</span></div>
-    </div>
-    <div class="glass-plane what">
-      <span class="pl-icon">🎯</span>
-      <div class="pl-text"><span class="pl-tag">LAYER 03</span><span class="pl-name">WHAT</span><span class="pl-sub">정책 매핑</span></div>
+    <!-- 좌측: 3D 입체 역피라미드 (WHERE 사다리꼴 → WHY 사다리꼴 → WHAT 삼각뿔 꼭짓점) -->
+    <div class="pyramid-tower">
+      <svg class="pyramid3d" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <!-- WHERE 빨강 — 윗면(반투명) -->
+          <linearGradient id="p3dWhereTop" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#fecaca" stop-opacity=".75"/>
+            <stop offset="100%" stop-color="#fca5a5" stop-opacity=".55"/>
+          </linearGradient>
+          <!-- WHERE 빨강 — 정면(살짝 더 진하게) -->
+          <linearGradient id="p3dWhereFront" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#fca5a5" stop-opacity=".7"/>
+            <stop offset="100%" stop-color="#ef4444" stop-opacity=".55"/>
+          </linearGradient>
+          <!-- WHY 파랑 -->
+          <linearGradient id="p3dWhyTop" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#bfdbfe" stop-opacity=".75"/>
+            <stop offset="100%" stop-color="#93c5fd" stop-opacity=".55"/>
+          </linearGradient>
+          <linearGradient id="p3dWhyFront" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#93c5fd" stop-opacity=".7"/>
+            <stop offset="100%" stop-color="#2563eb" stop-opacity=".55"/>
+          </linearGradient>
+          <!-- WHAT 초록 -->
+          <linearGradient id="p3dWhatTop" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#bbf7d0" stop-opacity=".8"/>
+            <stop offset="100%" stop-color="#86efac" stop-opacity=".6"/>
+          </linearGradient>
+          <linearGradient id="p3dWhatFront" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#86efac" stop-opacity=".75"/>
+            <stop offset="100%" stop-color="#16a34a" stop-opacity=".6"/>
+          </linearGradient>
+          <!-- 글로스 (위에서 빛 반사) -->
+          <linearGradient id="p3dGloss" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".5"/>
+            <stop offset="50%" stop-color="#fff" stop-opacity=".15"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+
+        <!-- WHERE: 윗변 넓고(x=10~390) 아랫변 살짝 좁음(x=50~350) — 1단 -->
+        <g class="p3d-layer where">
+          <!-- 윗면 타원(투시) -->
+          <ellipse cx="200" cy="40" rx="190" ry="18" fill="url(#p3dWhereTop)" stroke="rgba(127,29,29,.4)" stroke-width="1"/>
+          <!-- 정면(앞쪽 사다리꼴) -->
+          <polygon points="10,40 390,40 350,170 50,170" fill="url(#p3dWhereFront)" stroke="rgba(127,29,29,.5)" stroke-width="1.2"/>
+          <!-- 아랫면 타원 (점선으로 살짝) -->
+          <ellipse cx="200" cy="170" rx="150" ry="14" fill="rgba(252,165,165,.45)" stroke="rgba(127,29,29,.35)" stroke-width="1"/>
+          <!-- 글로스(좌상→우하 사선광) -->
+          <polygon points="10,40 390,40 350,170 50,170" fill="url(#p3dGloss)" opacity=".6"/>
+        </g>
+
+        <!-- WHY: 윗변(150~350) 좁아진 사다리꼴, 아랫변 더 좁음(80~320) — 2단 -->
+        <g class="p3d-layer why">
+          <ellipse cx="200" cy="190" rx="150" ry="14" fill="url(#p3dWhyTop)" stroke="rgba(30,58,138,.4)" stroke-width="1"/>
+          <polygon points="50,190 350,190 310,330 90,330" fill="url(#p3dWhyFront)" stroke="rgba(30,58,138,.5)" stroke-width="1.2"/>
+          <ellipse cx="200" cy="330" rx="110" ry="11" fill="rgba(147,197,253,.5)" stroke="rgba(30,58,138,.35)" stroke-width="1"/>
+          <polygon points="50,190 350,190 310,330 90,330" fill="url(#p3dGloss)" opacity=".55"/>
+        </g>
+
+        <!-- WHAT: 윗변(80~320) 좁음, 아래는 한 점(200,520) — 삼각뿔 꼭짓점 -->
+        <g class="p3d-layer what">
+          <ellipse cx="200" cy="350" rx="110" ry="11" fill="url(#p3dWhatTop)" stroke="rgba(20,83,45,.4)" stroke-width="1"/>
+          <!-- 좌측면(어두운) -->
+          <polygon points="90,350 200,560 200,560" fill="rgba(22,101,52,.35)"/>
+          <!-- 정면 삼각뿔 (윗변=좌우 110px → 한 점) -->
+          <polygon points="90,350 310,350 200,560" fill="url(#p3dWhatFront)" stroke="rgba(20,83,45,.55)" stroke-width="1.2"/>
+          <!-- 글로스 -->
+          <polygon points="90,350 310,350 200,560" fill="url(#p3dGloss)" opacity=".6"/>
+          <!-- 꼭짓점 강조 (작은 글로우) -->
+          <circle cx="200" cy="560" r="6" fill="#16a34a" opacity=".5"/>
+          <circle cx="200" cy="560" r="3" fill="#bbf7d0"/>
+        </g>
+      </svg>
+
+      <!-- 라벨 (3단 SVG 위에 절대 위치) -->
+      <div class="p3d-label where">
+        <span class="lb-tag">LAYER 01 · 🗺</span>
+        <span class="lb-name">WHERE</span>
+        <span class="lb-sub">공간 자기상관</span>
+      </div>
+      <div class="p3d-label why">
+        <span class="lb-tag">LAYER 02 · 🧬</span>
+        <span class="lb-name">WHY</span>
+        <span class="lb-sub">환경 군집화</span>
+      </div>
+      <div class="p3d-label what">
+        <span class="lb-tag">LAYER 03 · 🎯</span>
+        <span class="lb-name">WHAT</span>
+        <span class="lb-sub">정책 매핑</span>
+      </div>
     </div>
 
     <!-- 평면 옆에서 줌업 등장하는 카드 -->
@@ -2957,7 +3041,8 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   function drawBeams(){
     const sRect = stage.getBoundingClientRect();
     layers.forEach(name => {
-      const plane = stage.querySelector('.glass-plane.' + name);
+      // 평면은 이제 SVG 그룹 (.p3d-layer.<name>) — bounding rect로 우측 위치 잡기
+      const plane = stage.querySelector('.p3d-layer.' + name);
       const card = stage.querySelector('.layer-card.' + name);
       const poly = document.getElementById('s05-poly-' + name);
       const lTop = document.getElementById('s05-line-' + name + '-top');
