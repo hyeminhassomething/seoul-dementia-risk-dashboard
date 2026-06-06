@@ -730,7 +730,7 @@
   .s20-stage{position:relative;width:100%;height:100%;min-height:380px;display:grid;grid-template-columns:1.05fr 1fr;gap:8px;align-items:center}
   .s20-mapwrap{position:relative;width:100%;max-width:360px;aspect-ratio:477/502;margin:0 auto}
   .s20-map-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
-  .s20-dot{fill:#64748b;opacity:.85;transition:fill 1s ease-out,opacity 1s ease-out,filter 1s ease-out}
+  .s20-dot{fill:#1e293b;opacity:.92;transition:fill 1s ease-out,opacity 1s ease-out,filter 1s ease-out}
   /* 단계별 활성화 — 옅은 네온 사이안 (촌스럽지 않게 dimmed) */
   .s20-dots-seoul.on circle.s20-dot,
   .s20-dots-metro.on circle.s20-dot,
@@ -747,6 +747,15 @@
   .s20-tc{flex:1;padding-top:3px}
   .s20-tt{font-size:14px;font-weight:900;color:var(--text);line-height:1.2;letter-spacing:-.01em}
   .s20-td{font-size:11.5px;color:var(--text-soft);font-weight:600;line-height:1.45;margin-top:4px}
+  /* 다음 버튼 + 단계 인디케이터 */
+  .s20-controls{display:flex;align-items:center;gap:14px;margin-top:14px;padding-left:46px}
+  .s20-next-btn{background:linear-gradient(135deg,#0891b2,#06b6d4);color:#fff;border:none;border-radius:999px;padding:8px 18px;font-size:12.5px;font-weight:900;letter-spacing:.03em;cursor:pointer;box-shadow:0 4px 14px rgba(8,145,178,.32);transition:transform .15s ease-out,box-shadow .2s ease-out,opacity .3s}
+  .s20-next-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(8,145,178,.4)}
+  .s20-next-btn:active{transform:translateY(0)}
+  .s20-next-btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+  .s20-step-dots{display:flex;gap:6px}
+  .s20-step-dots span{width:8px;height:8px;border-radius:50%;background:#cbd5e1;transition:background .3s,box-shadow .3s}
+  .s20-step-dots span.on{background:#06b6d4;box-shadow:0 0 8px rgba(6,182,212,.6)}
 
   .closing{text-align:center;padding:14px 18px;background:linear-gradient(90deg,#fff,var(--bg-soft) 30%,var(--bg-soft) 70%,#fff);border-top:2px solid var(--text);border-bottom:2px solid var(--text);font-size:18px;font-weight:900;color:var(--text);letter-spacing:-.02em;margin-top:14px}
   .closing .red{color:var(--red)} .closing .green{color:var(--green)}
@@ -2923,6 +2932,13 @@
             </div>
           </li>
         </ol>
+        <!-- 다음 버튼 + 단계 인디케이터 -->
+        <div class="s20-controls">
+          <button type="button" class="s20-next-btn" id="s20-next">다음 ▸</button>
+          <div class="s20-step-dots" id="s20-stepdots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -3729,38 +3745,41 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   window.addEventListener('resize', () => { if (triggered) { drawConnector(); drawSpotBeam(); } });
 })();
 
-// s20 — 확장 계획: 페이지 진입 후 2초 뒤 단계별 한반도 도트 네온 블루 글로우 + 타임라인
+// s20 — 확장 계획: "다음 ▸" 버튼으로 단계별 한반도 도트 + 타임라인 진행
 (function(){
   const sec = document.getElementById('s20');
   if (!sec) return;
-  let triggered = false;
-  function play(){
-    // ① 서울 도트 + 타임라인 1단계
-    setTimeout(() => {
-      sec.querySelector('.s20-dots-seoul')?.classList.add('on');
-      sec.querySelectorAll('li.s20-step1').forEach(el => el.classList.add('on'));
-    }, 0);
-    // ② 6대 광역시 도트 + 타임라인 2단계
-    setTimeout(() => {
-      sec.querySelector('.s20-dots-metro')?.classList.add('on');
-      sec.querySelectorAll('li.s20-step2').forEach(el => el.classList.add('on'));
-    }, 2200);
-    // ③ 전국 나머지 도트 + 타임라인 3단계 (오픈 데이터화)
-    setTimeout(() => {
-      sec.querySelector('.s20-dots-rest')?.classList.add('on');
-      sec.querySelectorAll('li.s20-step3').forEach(el => el.classList.add('on'));
-    }, 4400);
+  const btn = document.getElementById('s20-next');
+  const stepDots = document.querySelectorAll('#s20-stepdots span');
+  const stages = [
+    { dots: '.s20-dots-seoul', li: 'li.s20-step1' },
+    { dots: '.s20-dots-metro', li: 'li.s20-step2' },
+    { dots: '.s20-dots-rest',  li: 'li.s20-step3' },
+  ];
+  let step = 0; // 0 → 1 → 2 → 3 (3은 완료 상태)
+  function reveal(i){
+    if (i < 0 || i >= stages.length) return;
+    sec.querySelector(stages[i].dots)?.classList.add('on');
+    sec.querySelectorAll(stages[i].li).forEach(el => el.classList.add('on'));
+    if (stepDots[i]) stepDots[i].classList.add('on');
   }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting && e.intersectionRatio > .35 && !triggered) {
-        triggered = true;
-        // 페이지 진입 후 2초 대기 후 애니메이션 시작
-        setTimeout(play, 2000);
-      }
+  function reset(){
+    stages.forEach(s => {
+      sec.querySelector(s.dots)?.classList.remove('on');
+      sec.querySelectorAll(s.li).forEach(el => el.classList.remove('on'));
     });
-  }, { threshold: [.35] });
-  io.observe(sec);
+    stepDots.forEach(d => d.classList.remove('on'));
+    step = 0;
+    if (btn) btn.textContent = '다음 ▸';
+  }
+  if (btn) {
+    btn.addEventListener('click', () => {
+      if (step >= stages.length) { reset(); return; }
+      reveal(step);
+      step++;
+      if (step >= stages.length) btn.textContent = '↻ 처음으로';
+    });
+  }
 })();
 
 // s10 LISA 4-Cluster 산점도 4단계 등장 애니메이션 (SMIL 기반 — opacity attribute 직접 제어)
