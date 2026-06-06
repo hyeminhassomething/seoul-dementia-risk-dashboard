@@ -123,15 +123,56 @@
   .cover-title{font-size:56px;font-weight:900;letter-spacing:-.04em;line-height:1.05;margin-bottom:14px}
   .cover-title .h1{color:var(--red)}
   .cover-sub{font-size:16px;color:var(--muted);margin-bottom:24px;line-height:1.6}
-  .cover-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-  .cover-meta{font-size:12.5px;color:var(--text-soft);line-height:1.85;border-top:2px solid var(--text);padding-top:12px}
-  .cover-meta strong{color:var(--text);font-weight:800}
-  .scatter-wrap{background:#fff;border:2px solid var(--text);border-radius:16px;padding:14px 16px;aspect-ratio:5/4;box-shadow:0 14px 40px rgba(15,23,42,.10)}
-  .scatter-wrap .hs-head{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);font-family:monospace;margin-bottom:6px}
-  .scatter-wrap .hs-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px}
-  .scatter-wrap .hs-legend .lg{display:inline-flex;align-items:center;gap:5px;font-size:11px}
-  .scatter-wrap .hs-legend .sw{width:9px;height:9px;border-radius:50%}
-  .scatter-wrap svg{width:100%;height:calc(100% - 50px)}
+  .cover-story{position:relative;min-height:260px;border:2px solid var(--text);border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#eef6ff 0%,#f8fafc 54%,#e5e7eb 54%,#f8fafc 100%);box-shadow:0 14px 34px rgba(15,23,42,.12)}
+  .cover-story::before{content:"";position:absolute;left:0;right:0;top:76px;height:62px;background:linear-gradient(90deg,rgba(148,163,184,.2),rgba(203,213,225,.35),rgba(148,163,184,.2));clip-path:polygon(0 72%,11% 46%,22% 61%,32% 28%,43% 55%,54% 22%,66% 58%,78% 30%,90% 56%,100% 36%,100% 100%,0 100%)}
+  .cover-road{position:absolute;left:-3%;right:-3%;bottom:0;height:120px;background:linear-gradient(180deg,#cbd5e1,#e2e8f0 48%,#f8fafc);border-top:2px solid rgba(100,116,139,.22)}
+  .cover-road::before{content:"";position:absolute;left:0;right:0;top:45px;border-top:3px dashed rgba(100,116,139,.35)}
+  .story-label{position:absolute;left:16px;top:14px;font-size:10.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--red-deep);background:#fff;border:1.5px solid var(--red);border-radius:999px;padding:4px 10px;z-index:5}
+  .elder{position:absolute;left:34px;bottom:64px;width:62px;height:104px;z-index:4;animation:elderWander 8.5s ease-in-out infinite}
+  .elder .head{position:absolute;left:19px;top:0;width:26px;height:26px;border-radius:50%;background:#f0c7a5;border:2px solid #9ca3af}
+  .elder .body{position:absolute;left:15px;top:27px;width:34px;height:48px;border-radius:16px 16px 10px 10px;background:#94a3b8;border:2px solid #64748b}
+  .elder .leg{position:absolute;top:72px;width:8px;height:27px;border-radius:8px;background:#6b7280}
+  .elder .leg.l{left:20px;animation:walkLegA .65s ease-in-out infinite}
+  .elder .leg.r{right:20px;animation:walkLegB .65s ease-in-out infinite}
+  .elder .cane{position:absolute;right:6px;top:50px;width:3px;height:51px;background:#475569;border-radius:4px;transform:rotate(-7deg);transform-origin:top}
+  .wander-path{position:absolute;left:78px;bottom:96px;width:132px;height:52px;border:2px dashed rgba(239,68,68,.45);border-left:0;border-bottom:0;border-radius:0 48px 0 0;z-index:2;animation:pathBlink 1.6s ease-in-out infinite}
+  .police-pair{position:absolute;right:32px;bottom:57px;width:152px;height:112px;z-index:4;animation:policeEnter 8.5s ease-in-out infinite}
+  .police{position:absolute;bottom:0;width:54px;height:100px}
+  .police.p1{left:0}.police.p2{right:0}
+  .police .cap{position:absolute;left:13px;top:0;width:28px;height:12px;border-radius:12px 12px 4px 4px;background:#1d4ed8}
+  .police .face{position:absolute;left:14px;top:10px;width:26px;height:25px;border-radius:50%;background:#f0c7a5}
+  .police .body{position:absolute;left:10px;top:38px;width:34px;height:43px;border-radius:10px;background:#2563eb;border:2px solid #1d4ed8}
+  .police .leg{position:absolute;top:78px;width:8px;height:22px;background:#1e293b;border-radius:6px}
+  .police .leg.l{left:16px}.police .leg.r{right:16px}
+  .phone{position:absolute;left:56px;top:28px;width:28px;height:42px;border-radius:6px;background:#0f172a;border:2px solid #334155;box-shadow:0 6px 14px rgba(15,23,42,.25)}
+  .phone::after{content:"";position:absolute;left:7px;right:7px;top:7px;bottom:7px;border-radius:3px;background:linear-gradient(180deg,#dbeafe,#fff)}
+  .help-hand{position:absolute;right:121px;bottom:92px;width:88px;height:3px;background:#1d4ed8;border-radius:999px;transform:rotate(-6deg);opacity:0;animation:handReach 8.5s ease-in-out infinite}
+  .alert-card{position:absolute;left:112px;right:18px;top:42px;display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;background:rgba(255,255,255,.9);border:1px solid rgba(148,163,184,.42);border-radius:22px;padding:12px 16px;box-shadow:0 18px 40px rgba(15,23,42,.16);z-index:6;opacity:0;transform:translateY(-18px) scale(.96);animation:alertPop 8.5s ease-in-out infinite;backdrop-filter:blur(8px)}
+  .alert-icon{width:38px;height:38px;border-radius:12px;background:#facc15;color:#111827;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:900}
+  .alert-title{font-size:16px;font-weight:900;color:#111827;line-height:1.25}
+  .alert-body{font-size:12.4px;line-height:1.45;color:#111827;font-weight:700;margin-top:3px}
+  .alert-time{align-self:start;font-size:11.5px;color:#64748b;font-weight:800;white-space:nowrap}
+  @keyframes elderWander{0%,13%{transform:translateX(0)}35%,48%{transform:translateX(126px)}70%,100%{transform:translateX(218px)}}
+  @keyframes policeEnter{0%,44%{opacity:0;transform:translateX(70px)}58%,100%{opacity:1;transform:translateX(0)}}
+  @keyframes alertPop{0%,27%{opacity:0;transform:translateY(-18px) scale(.96)}34%,76%{opacity:1;transform:translateY(0) scale(1)}86%,100%{opacity:.86;transform:translateY(0) scale(.99)}}
+  @keyframes handReach{0%,56%{opacity:0;transform:translateX(20px) rotate(-6deg) scaleX(.5)}66%,100%{opacity:1;transform:translateX(0) rotate(-6deg) scaleX(1)}}
+  @keyframes walkLegA{0%,100%{transform:rotate(12deg)}50%{transform:rotate(-12deg)}}@keyframes walkLegB{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+  @keyframes pathBlink{0%,100%{opacity:.35}50%{opacity:.9}}
+  .risk-map{background:#fff;border:2px solid var(--text);border-radius:16px;padding:14px 16px;aspect-ratio:5/4;box-shadow:0 14px 40px rgba(15,23,42,.10);overflow:hidden}
+  .risk-map .hs-head{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);font-family:monospace;margin-bottom:6px}
+  .risk-map .hs-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .risk-map .lg{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--text-soft)}
+  .risk-map .sw{width:36px;height:9px;border-radius:999px;background:linear-gradient(90deg,#fee2e2,#f97316,#dc2626)}
+  .risk-map svg{width:100%;height:calc(100% - 50px)}
+  .risk-city{fill:#f8fafc;stroke:#94a3b8;stroke-width:2}
+  .risk-river{fill:none;stroke:#93c5fd;stroke-width:18;stroke-linecap:round;opacity:.65}
+  .district-line{fill:none;stroke:#cbd5e1;stroke-width:1.1;opacity:.8}
+  .heat{transform-box:fill-box;transform-origin:center;mix-blend-mode:multiply;animation:heatPulse 2.8s ease-in-out infinite}
+  .heat.seongdong{animation-delay:.2s}.heat.mapo{animation-delay:.7s}.heat.gangnam{animation-delay:1.1s}
+  .heat-ring{fill:none;stroke-width:2.2;opacity:.7;animation:ringPulse 2.8s ease-out infinite}
+  .heat-label{font-size:11px;font-weight:900;fill:#7f1d1d}
+  @keyframes heatPulse{0%,100%{opacity:.62;transform:scale(.94)}50%{opacity:.96;transform:scale(1.08)}}
+  @keyframes ringPulse{0%{opacity:.62;transform:scale(.65)}75%,100%{opacity:0;transform:scale(1.45)}}
 
   /* Section 02 — Contents */
   .contents-grid{display:flex;flex-direction:column;gap:10px}
@@ -621,34 +662,73 @@
       <span class="cover-tag">데이터로 진단하고, 정책으로 연결합니다</span>
       <h1 class="cover-title">서울시 <span class="h1">치매 노인</span><br>실종 <span class="h1">위험구역 진단</span></h1>
       <p class="cover-sub">50m 격자 단위 비지도 진단으로 자치구 평균에 가려진 사각지대를 찾아냅니다.</p>
-      <div class="cover-pills">
-        <span class="pill red">서울 65+ 192만 명</span>
-        <span class="pill orange">치매환자 추정 20만 명</span>
-        <span class="pill blue">50m × 50m 격자 243,920개</span>
-        <span class="pill green">LISA × HDBSCAN</span>
-        <span class="pill yellow">8개 출처 13개 변수</span>
-      </div>
-      <div class="cover-meta" style="background:rgba(255,255,255,.75);backdrop-filter:blur(2px);border-radius:10px;padding:12px 16px;border-top:3px solid var(--text)">
-        <div style="font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px">DATA · METHOD</div>
-        <div style="margin-bottom:4px"><strong style="color:var(--red-deep)">분석 기간</strong> 2023.09 ~ 2024.11 (15개월) · <strong style="color:var(--blue-deep)">분석 단위</strong> 50m × 50m 격자 243,920개</div>
-        <div><strong style="color:var(--green-deep)">데이터 출처</strong>
-          <span style="display:inline-block;background:var(--green-soft);color:var(--green-deep);padding:1px 7px;border-radius:4px;font-weight:700;margin:1px 2px;font-size:11.5px">서울 열린데이터광장</span>
-          <span style="display:inline-block;background:var(--blue-soft);color:var(--blue-deep);padding:1px 7px;border-radius:4px;font-weight:700;margin:1px 2px;font-size:11.5px">서울 빅데이터캠퍼스</span>
-          <span style="display:inline-block;background:var(--orange-soft);color:var(--orange-deep);padding:1px 7px;border-radius:4px;font-weight:700;margin:1px 2px;font-size:11.5px">행정안전부 도로명주소</span>
-          <span style="display:inline-block;background:var(--purple-soft);color:var(--purple);padding:1px 7px;border-radius:4px;font-weight:700;margin:1px 2px;font-size:11.5px">OpenStreetMap</span>
-          <span style="display:inline-block;background:var(--yellow-soft);color:var(--yellow-deep);padding:1px 7px;border-radius:4px;font-weight:700;margin:1px 2px;font-size:11.5px">Kakao Local API</span>
+      <div class="cover-story" aria-label="치매 노인 실종 신고 대응 애니메이션">
+        <div class="story-label">FIELD RESPONSE · LIVE SCENE</div>
+        <div class="cover-road"></div>
+        <div class="wander-path"></div>
+        <div class="elder" aria-hidden="true">
+          <div class="head"></div><div class="body"></div><div class="leg l"></div><div class="leg r"></div><div class="cane"></div>
         </div>
+        <div class="alert-card">
+          <div class="alert-icon">!</div>
+          <div>
+            <div class="alert-title">안전안내문자</div>
+            <div class="alert-body">[서울경찰청] 송파구에서 실종된 김○○씨(남, 81세)를 찾습니다. 회색 자켓, 갈색 바지, 카키색 모자 착용. 발견 시 ☎112</div>
+          </div>
+          <div class="alert-time">방금 전</div>
+        </div>
+        <div class="police-pair" aria-hidden="true">
+          <div class="police p1"><div class="cap"></div><div class="face"></div><div class="body"></div><div class="leg l"></div><div class="leg r"></div></div>
+          <div class="phone"></div>
+          <div class="police p2"><div class="cap"></div><div class="face"></div><div class="body"></div><div class="leg l"></div><div class="leg r"></div></div>
+        </div>
+        <div class="help-hand"></div>
       </div>
     </div>
-    <div class="scatter-wrap" style="background:rgba(255,255,255,.92);backdrop-filter:blur(2px)">
-      <div class="hs-head"><span>HH(핫스팟) · HL(사각지대) 분포 — 서울 전역 50m 격자</span></div>
+    <div class="risk-map" style="background:rgba(255,255,255,.92);backdrop-filter:blur(2px)">
+      <div class="hs-head"><span>서울 위험도 히트맵 — 고위험 구역 파동</span></div>
       <div class="hs-legend">
-        <span class="lg"><span class="sw" style="background:var(--red)"></span>HH 46,960개</span>
-        <span class="lg"><span class="sw" style="background:var(--orange)"></span>HL 948개 (사각지대)</span>
-        <span class="lg"><span class="sw" style="background:var(--blue)"></span>LL · 안전구역</span>
+        <span class="lg"><span class="sw"></span>낮음 → 높음</span>
+        <span class="lg">마포 · 성동 · 강남 중심 고위험 신호</span>
       </div>
       <svg viewBox="0 0 500 380" preserveAspectRatio="xMidYMid meet">
-        <g id="scatter-dots"></g>
+        <defs>
+          <radialGradient id="heatStrong" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#dc2626" stop-opacity=".92"/>
+            <stop offset="42%" stop-color="#f97316" stop-opacity=".52"/>
+            <stop offset="100%" stop-color="#fee2e2" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="heatMid" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ef4444" stop-opacity=".76"/>
+            <stop offset="58%" stop-color="#fb923c" stop-opacity=".32"/>
+            <stop offset="100%" stop-color="#fee2e2" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <path class="risk-city" d="M72 183 C54 143 75 93 119 77 C157 63 191 85 221 70 C270 45 322 61 356 99 C392 139 442 144 451 198 C459 249 417 282 377 301 C335 321 293 298 251 316 C201 338 158 317 126 286 C96 258 89 219 72 183 Z"/>
+        <path class="risk-river" d="M65 213 C130 190 160 226 218 205 C270 186 310 213 365 195 C407 182 428 194 454 177"/>
+        <path class="district-line" d="M130 86 C137 142 125 188 96 238"/>
+        <path class="district-line" d="M205 75 C212 132 198 187 162 254"/>
+        <path class="district-line" d="M282 62 C265 137 287 189 251 310"/>
+        <path class="district-line" d="M354 100 C326 150 340 211 310 302"/>
+        <path class="district-line" d="M103 160 C190 139 257 155 346 116"/>
+        <path class="district-line" d="M86 244 C178 267 258 246 377 300"/>
+        <g class="heat mapo">
+          <ellipse cx="178" cy="165" rx="76" ry="56" fill="url(#heatStrong)"/>
+          <ellipse class="heat-ring" cx="178" cy="165" rx="46" ry="33" stroke="#dc2626"/>
+          <text class="heat-label" x="144" y="139">마포</text>
+        </g>
+        <g class="heat seongdong">
+          <ellipse cx="300" cy="172" rx="68" ry="52" fill="url(#heatStrong)"/>
+          <ellipse class="heat-ring" cx="300" cy="172" rx="40" ry="29" stroke="#dc2626"/>
+          <text class="heat-label" x="279" y="143">성동</text>
+        </g>
+        <g class="heat gangnam">
+          <ellipse cx="330" cy="260" rx="88" ry="58" fill="url(#heatStrong)"/>
+          <ellipse class="heat-ring" cx="330" cy="260" rx="54" ry="34" stroke="#dc2626"/>
+          <text class="heat-label" x="309" y="241">강남</text>
+        </g>
+        <ellipse class="heat" cx="248" cy="206" rx="62" ry="42" fill="url(#heatMid)" style="animation-delay:1.5s"/>
+        <text x="92" y="328" font-size="11" fill="#64748b" font-weight="700">50m 격자 위험도 · red intensity gradient</text>
       </svg>
     </div>
   </div>
