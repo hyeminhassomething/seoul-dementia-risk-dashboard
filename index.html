@@ -912,53 +912,84 @@
   <h2 class="sectitle">분석 단위 — 50m 격자</h2>
   <p class="secsub">서울 bbox 243,920개 격자 · <strong>정책 집행 단위와 정책 대상 단위의 일치</strong></p>
 
-  <div id="s06-stage" style="position:relative;width:100%;height:calc(100vh - 200px);max-height:680px">
+  <div id="s06-stage" style="position:relative;width:100%;height:calc(100vh - 200px);max-height:680px;perspective:1500px;perspective-origin:50% 30%">
 
-    <!-- ① 누운 서울시 지도 (isometric, perspective) -->
-    <svg id="s06-seoul" viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet" style="position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);width:48%;max-width:520px;height:auto;z-index:1">
+    <!-- ① 서울특별시 지도 (실제 지도 이미지, 흰 배경 제거 + 테두리 없음, 바닥에 누운 perspective) — 하단 중앙 -->
+    <div id="s06-seoul-wrap" style="position:absolute;left:50%;bottom:6%;width:52%;max-width:620px;transform:translateX(-50%) rotateX(58deg);transform-style:preserve-3d;transform-origin:50% 100%;z-index:1">
+      <div style="position:relative;width:100%">
+        <img src="maps/seoul_real.jpg?v=2" alt="Seoul map" draggable="false" style="display:block;width:100%;height:auto;pointer-events:none;user-select:none;mix-blend-mode:multiply;background:transparent"/>
+        <!-- 줌인 마크 (이미지 위에 오버레이) — 종로·중구 도심부 -->
+        <svg id="s06-zoom-target-svg" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+          <g id="s06-zoom-target">
+            <rect x="48" y="49" width="6" height="4.5" fill="rgba(0,229,255,.2)" stroke="#00e5ff" stroke-width=".6" opacity="0">
+              <animate attributeName="opacity" values="0;1" dur="0.4s" begin="0.6s" fill="freeze"/>
+            </rect>
+            <circle cx="51" cy="51.3" r="5" fill="none" stroke="#00e5ff" stroke-width=".5" opacity="0">
+              <animate attributeName="r" values="5;10;5" dur="1.8s" begin="1s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;.9;0" dur="1.8s" begin="1s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 줌 라인 (서울 마크 → 위 격자 보드 네 모서리) -->
+    <svg id="s06-zoom-lines" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;opacity:0;transition:opacity .6s ease-out">
       <defs>
-        <linearGradient id="s06SeoulGrad" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color="#dbeafe"/>
-          <stop offset="100%" stop-color="#93c5fd"/>
+        <linearGradient id="s06ZoomGrad" x1="0" x2="0" y1="1" y2="0">
+          <stop offset="0%" stop-color="#00e5ff" stop-opacity=".5"/>
+          <stop offset="100%" stop-color="#00e5ff" stop-opacity=".95"/>
         </linearGradient>
       </defs>
-      <!-- 누운 평면 (perspective) -->
-      <g transform="translate(250,140) skewX(-30) scale(1,.55)">
-        <!-- 서울시 단순화된 외곽 -->
-        <path d="M-180,-40 Q-200,-50 -210,-30 L-200,0 Q-220,30 -200,50 L-160,60 Q-130,70 -100,60 L-60,70 Q-30,80 0,70 L40,80 Q80,70 120,60 L160,40 Q200,30 210,0 L200,-20 Q190,-50 160,-50 L100,-60 Q60,-70 20,-60 L-20,-60 Q-60,-70 -100,-60 L-150,-50 Q-170,-50 -180,-40 Z"
-              fill="url(#s06SeoulGrad)" stroke="#1d4ed8" stroke-width="2"/>
-        <!-- 한강 (가로지르는 곡선) -->
-        <path d="M-200,10 Q-100,30 0,15 T200,5" stroke="#93c5fd" stroke-width="14" fill="none" opacity=".75"/>
-      </g>
-      <!-- 라벨 -->
-      <text x="250" y="252" text-anchor="middle" font-size="14" font-weight="900" fill="#1d4ed8" font-family="-apple-system,sans-serif">서울특별시</text>
+      <line id="s06-zoom-l1" x1="0" y1="0" x2="0" y2="0" stroke="url(#s06ZoomGrad)" stroke-width="2" stroke-dasharray="6 4" style="filter:drop-shadow(0 0 4px rgba(0,229,255,.6))"/>
+      <line id="s06-zoom-l2" x1="0" y1="0" x2="0" y2="0" stroke="url(#s06ZoomGrad)" stroke-width="2" stroke-dasharray="6 4" style="filter:drop-shadow(0 0 4px rgba(0,229,255,.6))"/>
     </svg>
 
-    <!-- ② 스포트라이트 격자 보드 (서울 위로 확대되어 나타남) -->
-    <div id="s06-spotlight" style="position:absolute;left:50%;top:36%;transform:translate(-50%,-50%) scale(.15);opacity:0;transform-origin:center center;transition:opacity 1s ease-out,transform 1.6s cubic-bezier(.34,1.26,.64,1);z-index:5">
-      <!-- 스포트라이트 콘 -->
-      <div style="position:absolute;left:50%;top:100%;transform:translate(-50%,0);width:0;height:0;border-left:120px solid transparent;border-right:120px solid transparent;border-top:160px solid rgba(251,191,36,.15);pointer-events:none"></div>
-      <!-- 격자 보드 (누운 perspective) -->
-      <svg id="s06-grid-svg" viewBox="0 0 400 300" style="width:380px;height:285px;display:block">
-        <g transform="translate(200,150) skewX(-30) scale(1,.55) translate(-150,-100)">
-          <rect x="0" y="0" width="300" height="200" fill="#fff" stroke="#0f172a" stroke-width="2.5" filter="drop-shadow(0 10px 20px rgba(0,0,0,.25))"/>
-          <!-- 7x5 격자 라인 -->
-          <g stroke="#0f172a" stroke-width="1.5">
-            <line x1="42"  y1="0" x2="42"  y2="200"/>
-            <line x1="84"  y1="0" x2="84"  y2="200"/>
-            <line x1="126" y1="0" x2="126" y2="200"/>
-            <line x1="170" y1="0" x2="170" y2="200"/>
-            <line x1="214" y1="0" x2="214" y2="200"/>
-            <line x1="258" y1="0" x2="258" y2="200"/>
-            <line x1="0" y1="40"  x2="300" y2="40"/>
-            <line x1="0" y1="80"  x2="300" y2="80"/>
-            <line x1="0" y1="120" x2="300" y2="120"/>
-            <line x1="0" y1="160" x2="300" y2="160"/>
+    <!-- ② 격자 보드 (서울 한 지점에서 확대되어 위에 떠있는 형태, 동일한 perspective로 누워 있음, 네온 하늘색) -->
+    <div id="s06-spotlight" style="position:absolute;left:50%;top:9%;transform:translate(-50%,0) rotateX(58deg) scale(.2);transform-style:preserve-3d;transform-origin:50% 100%;opacity:0;transition:opacity .8s ease-out,transform 1.4s cubic-bezier(.34,1.26,.64,1);z-index:5">
+      <div style="background:transparent;padding:6px">
+        <svg id="s06-grid-svg" viewBox="0 0 320 200" style="width:320px;height:200px;display:block;overflow:visible">
+          <defs>
+            <filter id="s06NeonGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="2.4" result="b1"/>
+              <feGaussianBlur stdDeviation="5" result="b2"/>
+              <feMerge>
+                <feMergeNode in="b2"/>
+                <feMergeNode in="b1"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="s06CellGlow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="6" result="b1"/>
+              <feGaussianBlur stdDeviation="12" result="b2"/>
+              <feMerge>
+                <feMergeNode in="b2"/>
+                <feMergeNode in="b1"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- 격자 라인 (네온 하늘색, glow 효과) -->
+          <g stroke="#00e5ff" stroke-width="1.4" fill="none" filter="url(#s06NeonGlow)" opacity=".95">
+            <line x1="40"  y1="0" x2="40"  y2="200"/>
+            <line x1="80"  y1="0" x2="80"  y2="200"/>
+            <line x1="120" y1="0" x2="120" y2="200"/>
+            <line x1="160" y1="0" x2="160" y2="200"/>
+            <line x1="200" y1="0" x2="200" y2="200"/>
+            <line x1="240" y1="0" x2="240" y2="200"/>
+            <line x1="280" y1="0" x2="280" y2="200"/>
+            <line x1="0"   y1="40"  x2="320" y2="40"/>
+            <line x1="0"   y1="80"  x2="320" y2="80"/>
+            <line x1="0"   y1="120" x2="320" y2="120"/>
+            <line x1="0"   y1="160" x2="320" y2="160"/>
           </g>
-          <!-- ⭐ 픽된 격자 하나 (빛남) -->
-          <rect id="s06-pickcell" x="126" y="80" width="44" height="40" fill="#fbbf24" opacity="0" stroke="#dc2626" stroke-width="3"/>
-        </g>
-      </svg>
+          <!-- ⭐ 픽된 격자 (네온 하늘빛 글로우) -->
+          <rect id="s06-pickcell" x="120" y="80" width="40" height="40" fill="#00e5ff" opacity="0" stroke="#a5f3fc" stroke-width="2" filter="url(#s06CellGlow)"/>
+        </svg>
+        <div style="font-size:10px;font-family:'SF Mono',monospace;font-weight:800;color:#00e5ff;text-align:center;margin-top:10px;letter-spacing:.06em;text-shadow:0 0 8px rgba(0,229,255,.7),0 0 16px rgba(0,229,255,.4)">
+          50m × 50m · ZOOM ×10,000
+        </div>
+      </div>
     </div>
 
     <!-- ③ 격자 시스템 정의 박스 (우측) -->
@@ -1002,10 +1033,10 @@
     <svg id="s06-connector" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity .5s ease-out;z-index:6">
       <defs>
         <marker id="s06arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+          <path d="M0,0 L10,5 L0,10 z" fill="#00e5ff"/>
         </marker>
       </defs>
-      <path id="s06-conn-line" d="" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#s06arr)"/>
+      <path id="s06-conn-line" d="" stroke="#00e5ff" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#s06arr)" style="filter:drop-shadow(0 0 4px rgba(0,229,255,.7))"/>
     </svg>
   </div>
 
@@ -2771,6 +2802,10 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   const counter = document.getElementById('s06-counter');
   const conn = document.getElementById('s06-connector');
   const connLine = document.getElementById('s06-conn-line');
+  const zoomLines = document.getElementById('s06-zoom-lines');
+  const zoomL1 = document.getElementById('s06-zoom-l1');
+  const zoomL2 = document.getElementById('s06-zoom-l2');
+  const seoul = document.getElementById('s06-seoul');
   let triggered = false;
 
   function countUp(el, target, duration){
@@ -2813,12 +2848,49 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
     connLine.setAttribute('d', `M ${px.toFixed(1)} ${py.toFixed(1)} Q ${cx.toFixed(1)} ${py.toFixed(1)}, ${dx.toFixed(1)} ${dy.toFixed(1)}`);
   }
 
+  function drawZoomLines(){
+    if (!zoomLines || !zoomL1 || !zoomL2 || !seoul || !spot) return;
+    const wrap = document.getElementById('s06-stage');
+    const wrapRect = wrap.getBoundingClientRect();
+    // Seoul map 안의 zoom-target rect (SVG viewBox 좌표 → 화면 좌표)
+    const target = document.getElementById('s06-zoom-target');
+    if (!target) return;
+    const tRect = target.getBoundingClientRect();
+    const tLeft = tRect.left - wrapRect.left;
+    const tRight = tRect.right - wrapRect.left;
+    const tTop = tRect.top - wrapRect.top;
+    // 격자 보드 좌상/우상 모서리
+    const sRect = spot.getBoundingClientRect();
+    const gLeft = sRect.left - wrapRect.left;
+    const gRight = sRect.right - wrapRect.left;
+    const gBottom = sRect.bottom - wrapRect.top;
+    // line1: 마크 좌상 → 격자 좌하
+    zoomL1.setAttribute('x1', tLeft.toFixed(1));
+    zoomL1.setAttribute('y1', tTop.toFixed(1));
+    zoomL1.setAttribute('x2', gLeft.toFixed(1));
+    zoomL1.setAttribute('y2', gBottom.toFixed(1));
+    // line2: 마크 우상 → 격자 우하
+    zoomL2.setAttribute('x1', tRight.toFixed(1));
+    zoomL2.setAttribute('y1', tTop.toFixed(1));
+    zoomL2.setAttribute('x2', gRight.toFixed(1));
+    zoomL2.setAttribute('y2', gBottom.toFixed(1));
+  }
+
   function play(){
-    // ① 서울 지도는 처음부터 보임
-    // ② 스포트라이트 격자 보드 확대 등장
+    // ① 서울 지도는 처음부터 보임 (마크는 0.6s에 페이드인, 1s부터 펄스)
+    // ② 줌 라인 등장 (마크 → 격자 보드 모서리)
+    setTimeout(() => {
+      drawZoomLines();
+      zoomLines.style.opacity = '1';
+    }, 1100);
+    // ③ 스포트라이트 격자 보드 확대 등장 (누운 perspective 유지)
     setTimeout(() => {
       spot.style.opacity = '1';
-      spot.style.transform = 'translate(-50%,-50%) scale(1)';
+      spot.style.transform = 'translate(-50%,0) rotateX(58deg) scale(1)';
+      // 보드가 확장되는 동안 줌 라인 재계산
+      setTimeout(drawZoomLines, 400);
+      setTimeout(drawZoomLines, 900);
+      setTimeout(drawZoomLines, 1400);
     }, 400);
     // 격자 하나 픽 — 빛남
     setTimeout(() => {
@@ -2827,7 +2899,7 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
         pulseAnim(pick);
       }
     }, 2100);
-    // ③ 정의 박스 등장
+    // ④ 정의 박스 등장
     setTimeout(() => {
       def.style.opacity = '1';
       def.style.transform = 'translateX(0)';
@@ -2838,15 +2910,16 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
       cnt.style.transform = 'translateX(0)';
       countUp(counter, 243920, 1800);
     }, 2900);
-    // 연결선 그리기
+    // 연결선 그리기 (격자 → 정의 박스)
     setTimeout(() => {
       drawConnector();
       conn.style.opacity = '1';
     }, 3400);
-    // ④ 왜 50m 박스 등장
+    // ⑥ 왜 50m 박스 등장 — 줌 라인은 페이드아웃 (보드 정착 후 더 깔끔하게)
     setTimeout(() => {
       why.style.opacity = '1';
       why.style.transform = 'translateX(-50%) translateY(0)';
+      zoomLines.style.opacity = '.75';
     }, 4500);
   }
 
@@ -2859,7 +2932,7 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
     });
   }, { threshold: [.35] });
   io.observe(sec);
-  window.addEventListener('resize', () => { if (triggered) drawConnector(); });
+  window.addEventListener('resize', () => { if (triggered) { drawConnector(); drawZoomLines(); } });
 })();
 
 // s07 파이프라인 단계별 글로우
