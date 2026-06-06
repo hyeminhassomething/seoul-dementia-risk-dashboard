@@ -279,23 +279,43 @@
   .ratio-card .rn .vs{font-size:14px;color:var(--text);margin:0 6px}
   .ratio-card .rl{font-size:12px;color:var(--text);font-weight:700;margin-top:6px}
 
-  /* Section 05 — 3-Layer */
-  .layer3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
-  .layer-card{background:#fff;border:2px solid;border-radius:14px;padding:18px 20px;transition:transform .2s,box-shadow .22s}
-  .layer-card:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(0,0,0,.08)}
-  .layer-card.where{border-color:var(--red)}
-  .layer-card.why{border-color:var(--blue)}
-  .layer-card.what{border-color:var(--green)}
-  .layer-tag{display:inline-block;font-family:monospace;font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;letter-spacing:.05em;margin-bottom:10px}
+  /* Section 05 — 3-Layer Glass Pyramid */
+  .pyramid-stage{position:relative;width:100%;height:calc(100vh - 240px);max-height:600px;perspective:1800px;perspective-origin:50% 35%;margin-bottom:14px}
+  /* 유리 평면 — 좌측에 위치, 우측 카드를 향해 비스듬히 누움 */
+  .glass-plane{position:absolute;left:8%;width:38%;height:18%;border-radius:14px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transform-style:preserve-3d;opacity:0;transition:opacity .8s ease-out,transform 1.1s cubic-bezier(.22,1,.36,1);box-shadow:0 16px 40px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-family:-apple-system,sans-serif;font-weight:900;letter-spacing:.08em;text-shadow:0 2px 8px rgba(255,255,255,.4)}
+  .glass-plane .pl-icon{font-size:36px;margin-right:14px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
+  .glass-plane .pl-text{display:flex;flex-direction:column;align-items:flex-start}
+  .glass-plane .pl-tag{font-family:monospace;font-size:10.5px;font-weight:800;opacity:.78;letter-spacing:.1em}
+  .glass-plane .pl-name{font-size:26px;font-weight:900;line-height:1;margin-top:2px}
+  .glass-plane .pl-sub{font-size:12px;font-weight:800;margin-top:4px;opacity:.85}
+  /* 평면별 색상 + 위치 (피라미드: bottom→top) */
+  .glass-plane.where{bottom:6%;background:linear-gradient(135deg,rgba(254,202,202,.42),rgba(252,165,165,.32));border:1.5px solid rgba(220,38,38,.55);color:#7f1d1d;transform:translate(-30%,40px) rotateX(58deg) rotateY(-18deg)}
+  .glass-plane.why{bottom:30%;background:linear-gradient(135deg,rgba(191,219,254,.45),rgba(147,197,253,.35));border:1.5px solid rgba(37,99,235,.55);color:#1e3a8a;transform:translate(-30%,40px) rotateX(58deg) rotateY(-18deg)}
+  .glass-plane.what{bottom:54%;background:linear-gradient(135deg,rgba(187,247,208,.5),rgba(134,239,172,.38));border:1.5px solid rgba(22,163,74,.55);color:#14532d;transform:translate(-30%,40px) rotateX(58deg) rotateY(-18deg)}
+  .pyramid-stage.show .glass-plane{opacity:1}
+  .pyramid-stage.show .glass-plane.where{transform:translate(0,0) rotateX(58deg) rotateY(-18deg);transition-delay:0s}
+  .pyramid-stage.show .glass-plane.why{transform:translate(0,0) rotateX(58deg) rotateY(-18deg);transition-delay:1.6s}
+  .pyramid-stage.show .glass-plane.what{transform:translate(0,0) rotateX(58deg) rotateY(-18deg);transition-delay:3.2s}
+  /* 카드 — 우측, 평면 옆에서 줌업되어 등장 */
+  .layer-card{position:absolute;right:4%;width:46%;background:#fff;border:2px solid;border-radius:14px;padding:14px 18px;opacity:0;transform:translateX(-30%) scale(.3);transform-origin:0% 50%;transition:opacity .7s ease-out,transform 1s cubic-bezier(.34,1.36,.64,1);box-shadow:0 18px 50px rgba(15,23,42,.18);z-index:5}
+  .layer-card.where{bottom:7%;border-color:var(--red)}
+  .layer-card.why{bottom:31%;border-color:var(--blue)}
+  .layer-card.what{bottom:55%;border-color:var(--green)}
+  .pyramid-stage.show .layer-card.where{opacity:1;transform:translateX(0) scale(1);transition-delay:.8s}
+  .pyramid-stage.show .layer-card.why{opacity:1;transform:translateX(0) scale(1);transition-delay:2.4s}
+  .pyramid-stage.show .layer-card.what{opacity:1;transform:translateX(0) scale(1);transition-delay:4.0s}
+  /* 평면 → 카드 줌 빔 (네온) */
+  .pyramid-stage .zoom-beam{position:absolute;height:2px;background:linear-gradient(to right,#fbbf24,rgba(251,191,36,0));transform-origin:0 50%;opacity:0;pointer-events:none;z-index:3;filter:drop-shadow(0 0 4px rgba(251,191,36,.7))}
+  .layer-tag{display:inline-block;font-family:monospace;font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;letter-spacing:.05em;margin-bottom:8px}
   .layer-card.where .layer-tag{background:var(--red-soft);color:var(--red-deep)}
   .layer-card.why .layer-tag{background:var(--blue-soft);color:var(--blue-deep)}
   .layer-card.what .layer-tag{background:var(--green-soft);color:var(--green-deep)}
-  .layer-card h3{font-size:22px;font-weight:900;letter-spacing:-.02em;margin-bottom:4px}
+  .layer-card h3{font-size:20px;font-weight:900;letter-spacing:-.02em;margin-bottom:4px}
   .layer-card.where h3{color:var(--red-deep)}
   .layer-card.why h3{color:var(--blue-deep)}
   .layer-card.what h3{color:var(--green-deep)}
-  .layer-card .meth{font-family:monospace;font-size:11.5px;color:var(--text-soft);line-height:1.65;border-top:1px dashed var(--border);padding-top:8px;margin-top:8px;margin-bottom:10px}
-  .layer-card .result{font-size:13.5px;font-weight:800;line-height:1.5}
+  .layer-card .meth{font-family:monospace;font-size:11.5px;color:var(--text-soft);line-height:1.6;border-top:1px dashed var(--border);padding-top:6px;margin-top:6px;margin-bottom:8px}
+  .layer-card .result{font-size:13px;font-weight:800;line-height:1.45}
   .layer-card.where .result{color:var(--red-deep)} .layer-card.why .result{color:var(--blue-deep)} .layer-card.what .result{color:var(--green-deep)}
 
   /* Section 06 — 50m grid */
@@ -916,11 +936,25 @@
   <h2 class="sectitle">연구 접근법 — 3-Layer 진단 프레임</h2>
   <p class="secsub">Where (공간) × Why (환경) = What (정책) — 격자 단위 비지도 학습으로 <strong>어디 × 왜</strong> 동시 식별</p>
 
-  <div class="layer3">
+  <div class="pyramid-stage" id="s05-pyramid">
+    <!-- 유리 평면 — 피라미드 (하단부터 WHERE → WHY → WHAT) -->
+    <div class="glass-plane where">
+      <span class="pl-icon">🗺</span>
+      <div class="pl-text"><span class="pl-tag">LAYER 01</span><span class="pl-name">WHERE</span><span class="pl-sub">공간 자기상관</span></div>
+    </div>
+    <div class="glass-plane why">
+      <span class="pl-icon">🧬</span>
+      <div class="pl-text"><span class="pl-tag">LAYER 02</span><span class="pl-name">WHY</span><span class="pl-sub">환경 군집화</span></div>
+    </div>
+    <div class="glass-plane what">
+      <span class="pl-icon">🎯</span>
+      <div class="pl-text"><span class="pl-tag">LAYER 03</span><span class="pl-name">WHAT</span><span class="pl-sub">정책 매핑</span></div>
+    </div>
+
+    <!-- 평면 옆에서 줌업 등장하는 카드 -->
     <div class="layer-card where">
-      <span class="layer-tag">LAYER 01</span>
-      <h3>🗺 WHERE</h3>
-      <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:6px">공간 자기상관</div>
+      <span class="layer-tag">LAYER 01 · WHERE</span>
+      <h3>🗺 공간 자기상관</h3>
       <div class="meth">
         LISA Local Moran's I (Anselin 1995)<br>
         Queen contiguity weight matrix<br>
@@ -929,20 +963,18 @@
       <div class="result">HH 46,960 · HL 948<br><span style="font-weight:600;font-size:12px">(통계적 핫스팟 · 사각지대)</span></div>
     </div>
     <div class="layer-card why">
-      <span class="layer-tag">LAYER 02</span>
-      <h3>🧬 WHY</h3>
-      <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:6px">환경 군집화</div>
+      <span class="layer-tag">LAYER 02 · WHY</span>
+      <h3>🧬 환경 군집화</h3>
       <div class="meth">
         HDBSCAN (Campello 2013)<br>
         min_cluster_size = 500<br>
         metric = euclidean (cuML GPU)
       </div>
-      <div class="result">82 valid clusters<br>노이즈 76,461 (31.3%)<br><span style="font-weight:600;font-size:12px">환경 시그너처 자동 도출</span></div>
+      <div class="result">82 valid clusters · 노이즈 76,461 (31.3%)<br><span style="font-weight:600;font-size:12px">환경 시그너처 자동 도출</span></div>
     </div>
     <div class="layer-card what">
-      <span class="layer-tag">LAYER 03</span>
-      <h3>🎯 WHAT</h3>
-      <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:6px">정책 매핑</div>
+      <span class="layer-tag">LAYER 03 · WHAT</span>
+      <h3>🎯 정책 매핑</h3>
       <div class="meth">
         LISA × HDBSCAN 교차<br>
         위험 밀도 TOP 20 행정동<br>
@@ -2881,6 +2913,22 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
     });
   }, { threshold: [.35] });
   io.observe(sec);
+})();
+
+// s05 — 3-Layer 유리 피라미드 등장 (WHERE → WHY → WHAT)
+(function(){
+  const stage = document.getElementById('s05-pyramid');
+  if (!stage) return;
+  let triggered = false;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .35 && !triggered) {
+        triggered = true;
+        stage.classList.add('show');
+      }
+    });
+  }, { threshold: [.35] });
+  io.observe(stage);
 })();
 
 // s06 — 격자 시스템 시퀀스 애니메이션
