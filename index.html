@@ -124,12 +124,10 @@
   .cover-title .h1{color:var(--red)}
   .cover-sub{font-size:16px;color:var(--muted);margin-bottom:24px;line-height:1.6}
   .cover-left{min-height:550px;position:relative;z-index:5}
+  .cover-cityscape{position:absolute;left:0;right:0;bottom:0;width:100%;height:330px;z-index:1;pointer-events:none}
   .cover-action-scene{position:absolute;left:22px;bottom:18px;width:min(58%,760px);height:455px;z-index:2;pointer-events:none;transform:scale(1.05);transform-origin:left bottom}
-  .scene-skyline{position:absolute;left:-40px;right:-20px;bottom:118px;height:150px;background:linear-gradient(180deg,rgba(226,232,240,.18),rgba(148,163,184,.34));clip-path:polygon(0 78%,8% 54%,16% 70%,25% 40%,32% 66%,42% 38%,50% 68%,61% 42%,70% 64%,80% 35%,90% 60%,100% 43%,100% 100%,0 100%);opacity:.7}
-  .scene-ground{position:absolute;left:-80px;right:-70px;bottom:0;height:170px;background:linear-gradient(180deg,#dbeafe 0,#dbeafe 15%,#cbd5e1 15%,#f8fafc 72%,rgba(255,255,255,.2));border-top:2px solid rgba(59,130,246,.18)}
-  .scene-ground::before{content:"";position:absolute;left:0;right:0;top:82px;border-top:4px dashed rgba(100,116,139,.38)}
-  .route-arc{position:absolute;left:150px;bottom:148px;width:270px;height:96px;border:3px dashed rgba(239,68,68,.52);border-left:0;border-bottom:0;border-radius:0 96px 0 0;animation:pathBlink 1.5s ease-in-out infinite}
-  .missing-alert{position:absolute;left:230px;top:405px;width:min(515px,43vw);display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:center;background:rgba(255,255,255,.94);border:1px solid rgba(148,163,184,.45);border-radius:24px;padding:14px 18px;box-shadow:0 24px 52px rgba(15,23,42,.18);z-index:8;opacity:0;transform:translateY(16px) scale(.96);animation:alertPop 9s ease-in-out infinite;backdrop-filter:blur(10px)}
+  .scene-skyline,.scene-ground,.route-arc{display:none}
+  .missing-alert{position:absolute;left:230px;top:405px;width:min(515px,43vw);display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:center;background:rgba(255,255,255,.94);border:1px solid rgba(148,163,184,.45);border-radius:24px;padding:14px 18px;box-shadow:0 24px 52px rgba(15,23,42,.18);z-index:8;opacity:0;transform:translateY(16px) scale(.96);animation:alertPop 9s ease-in-out 1 both;backdrop-filter:blur(10px)}
   .alert-icon{width:42px;height:42px;border-radius:14px;background:#facc15;color:#111827;display:flex;align-items:center;justify-content:center;font-size:29px;font-weight:900}
   .alert-title{font-size:17px;font-weight:900;color:#111827;line-height:1.2}
   .alert-body{font-size:13px;line-height:1.45;color:#111827;font-weight:750;margin-top:3px}
@@ -148,37 +146,42 @@
   .human .leg.l{left:29px}.human .leg.r{right:29px}
   .human .shoe{position:absolute;top:196px;width:25px;height:8px;border-radius:999px;background:#111827}
   .human .shoe.l{left:23px}.human .shoe.r{right:19px}
-  .elder-real{left:54px;bottom:28px;opacity:0;transform:translateX(-130px);animation:elderWander 9s ease-in-out infinite}
+  .elder-real{left:54px;bottom:28px;opacity:0;transform:translateX(-130px);animation:elderWander 9s ease-in-out 1 both}
   .elder-real .torso{background:linear-gradient(145deg,#9ca3af,#64748b)}
   .elder-real .torso::before{content:"";position:absolute;left:8px;right:8px;top:26px;height:2px;background:rgba(255,255,255,.35);box-shadow:0 15px 0 rgba(255,255,255,.28)}
   .elder-real .hair{background:#cbd5e1}
   .elder-real .cane{position:absolute;right:9px;top:104px;width:4px;height:92px;border-radius:999px;background:#475569;transform:rotate(-8deg);transform-origin:top}
+  .elder-real .shoe{display:none}
   .elder-real .leg.l{animation:walkLegA .72s ease-in-out infinite}.elder-real .leg.r{animation:walkLegB .72s ease-in-out infinite}
-  .officer-group{position:absolute;left:320px;bottom:24px;width:250px;height:218px;z-index:5;opacity:0;transform:translateX(230px);animation:policeEnter 9s ease-in-out infinite}
+  .officer-group{position:absolute;left:320px;bottom:24px;width:250px;height:218px;z-index:5;opacity:0;transform:translateX(230px);animation:policeEnter 9s ease-in-out 1 both}
   .officer{bottom:0}
   .officer.one{left:0}.officer.two{right:0}
-  .officer .hair{background:#1e3a8a;height:24px;border-radius:16px 16px 6px 6px}
-  .officer .hair::before{content:"";position:absolute;left:-4px;right:-4px;top:10px;height:7px;background:#1d4ed8;border-radius:999px}
-  .officer .torso{background:linear-gradient(145deg,#2563eb,#1d4ed8)}
-  .officer .torso::before{content:"";position:absolute;left:36px;top:24px;width:9px;height:9px;border-radius:50%;background:#facc15;border:1px solid rgba(255,255,255,.7)}
-  .officer .leg{background:#1e293b}
-  .scene-phone{position:absolute;left:82px;top:66px;width:38px;height:58px;border-radius:9px;background:#0f172a;border:2px solid #334155;box-shadow:0 8px 18px rgba(15,23,42,.26);opacity:0;transform:translateY(14px) rotate(-8deg);animation:phoneRaise 9s ease-in-out infinite}
-  .scene-phone::after{content:"";position:absolute;left:8px;right:8px;top:9px;bottom:9px;border-radius:4px;background:linear-gradient(180deg,#dbeafe,#fff)}
-  .joined-hands{position:absolute;bottom:147px;height:5px;border-radius:999px;background:#1d4ed8;opacity:0;animation:handReach 9s ease-in-out infinite;z-index:6}
-  .joined-hands.hand-left{--hand-rot:-6deg;left:292px;width:100px;transform:translateX(22px) rotate(var(--hand-rot)) scaleX(.45)}
-  .joined-hands.hand-right{--hand-rot:5deg;left:310px;width:210px;transform:translateX(28px) rotate(var(--hand-rot)) scaleX(.45);animation-delay:.08s}
-  .joined-hands::before,.joined-hands::after{content:"";position:absolute;top:-5px;width:14px;height:14px;border-radius:50%;background:#eab08c}
-  .joined-hands::before{left:-5px}.joined-hands::after{right:-5px}
+  .officer.two{right:2px}
+  .officer .hair{background:#1f2937;height:30px;border-radius:48% 52% 28% 28%}
+  .officer.one .hair{left:26px;width:42px;transform:rotate(-4deg)}
+  .officer.two .hair{left:24px;top:2px;width:46px;height:36px;border-radius:50% 50% 34% 34%}
+  .officer .hair::before{content:"";position:absolute;left:2px;right:2px;top:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.12)}
+  .officer.two .hair::after{content:"";position:absolute;left:5px;right:5px;bottom:-8px;height:18px;border-radius:0 0 18px 18px;background:#1f2937;z-index:-1}
+  .officer .torso{background:linear-gradient(145deg,#2f5f82,#1f4a6a);border-radius:16px 16px 9px 9px;box-shadow:inset 0 -26px 0 #1e293b}
+  .officer .torso::before{content:"";position:absolute;left:7px;top:16px;width:14px;height:9px;border-radius:2px;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.08);box-shadow:31px 0 0 rgba(255,255,255,.08),31px 0 0 1px rgba(255,255,255,.45)}
+  .officer .torso::after{content:"";position:absolute;left:27px;top:0;width:7px;height:62px;background:#172554;box-shadow:0 58px 0 #111827}
+  .officer .leg{background:#111827}
+  .officer .arm{background:#d6a17f;border-top:28px solid #2f5f82}
+  .officer .badge{position:absolute;left:41px;top:83px;width:12px;height:14px;border-radius:50% 50% 45% 45%;background:#fbbf24;border:1px solid rgba(255,255,255,.65);z-index:3}
+  .officer .belt{position:absolute;left:17px;top:128px;width:60px;height:8px;background:#111827;border-radius:999px;z-index:3}
+  .officer .belt::after{content:"";position:absolute;left:27px;top:-1px;width:10px;height:10px;border-radius:2px;border:1px solid #f8fafc;background:#334155}
+  .scene-phone{position:absolute;left:82px;top:66px;width:38px;height:58px;border-radius:9px;background:#0f172a;border:2px solid #334155;box-shadow:0 8px 18px rgba(15,23,42,.26);opacity:0;transform:translateY(14px) rotate(-8deg);animation:phoneRaise 9s ease-in-out 1 both}
+  .scene-phone::before{content:"";position:absolute;inset:-8px;border-radius:16px;background:rgba(14,165,233,.22);filter:blur(10px);opacity:0;animation:phoneNeon 9s ease-in-out 1 both}
+  .scene-phone::after{content:"";position:absolute;left:8px;right:8px;top:9px;bottom:9px;border-radius:4px;background:linear-gradient(180deg,#dbeafe,#fff);animation:phoneScreenGlow 9s ease-in-out 1 both}
   @keyframes elderWander{0%{opacity:0;transform:translateX(-130px)}9%,22%{opacity:1;transform:translateX(0)}38%,100%{opacity:1;transform:translateX(160px)}}
   @keyframes policeEnter{0%,32%{opacity:0;transform:translateX(230px)}44%{opacity:1;transform:translateX(70px)}54%,100%{opacity:1;transform:translateX(0)}}
-  @keyframes phoneRaise{0%,40%{opacity:0;transform:translateY(14px) rotate(-8deg)}48%,67%{opacity:1;transform:translateY(0) rotate(-8deg)}74%,100%{opacity:.88;transform:translateY(0) rotate(-8deg)}}
-  @keyframes alertPop{0%,48%{opacity:0;transform:translateY(16px) scale(.96)}54%,66%{opacity:1;transform:translateY(0) scale(1)}76%,100%{opacity:0;transform:translateY(-8px) scale(.98)}}
-  @keyframes handReach{0%,68%{opacity:0;transform:translateX(28px) rotate(var(--hand-rot,-7deg)) scaleX(.45)}78%,100%{opacity:1;transform:translateX(0) rotate(var(--hand-rot,-7deg)) scaleX(1)}}
+  @keyframes phoneRaise{0%,40%{opacity:0;transform:translateY(14px) rotate(-8deg)}48%,100%{opacity:1;transform:translateY(0) rotate(-8deg)}}
+  @keyframes phoneNeon{0%,49%{opacity:0;transform:scale(.9)}54%,68%{opacity:1;transform:scale(1.18)}76%,100%{opacity:.42;transform:scale(1)}}
+  @keyframes phoneScreenGlow{0%,49%{background:linear-gradient(180deg,#dbeafe,#fff);box-shadow:none}54%,68%{background:linear-gradient(180deg,#38bdf8,#0ea5e9 55%,#0369a1);box-shadow:0 0 18px #38bdf8,0 0 34px rgba(14,165,233,.7)}76%,100%{background:linear-gradient(180deg,#7dd3fc,#e0f2fe);box-shadow:0 0 10px rgba(56,189,248,.42)}}
+  @keyframes alertPop{0%,48%{opacity:0;transform:translateY(16px) scale(.96)}54%,100%{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes walkLegA{0%,100%{transform:rotate(13deg)}50%{transform:rotate(-13deg)}}@keyframes walkLegB{0%,100%{transform:rotate(-13deg)}50%{transform:rotate(13deg)}}
-  @keyframes pathBlink{0%,100%{opacity:.3}50%{opacity:.92}}
   .cover-map-wrap{position:relative;width:100%;max-width:680px;aspect-ratio:1354/1119;margin-left:auto;overflow:visible;transform:translateY(18px)}
   .cover-map-wrap img{display:block;width:100%;height:100%;object-fit:contain;filter:contrast(1.08) saturate(.9);opacity:.98}
-  .map-caption{position:absolute;left:16px;top:14px;background:rgba(255,255,255,.86);border:1px solid rgba(148,163,184,.36);border-radius:999px;padding:6px 12px;font-size:11px;font-weight:900;color:#1e3a8a;box-shadow:0 8px 20px rgba(15,23,42,.08)}
   .map-seed{position:absolute;width:14px;height:14px;border-radius:50%;background:#0ea5e9;border:2px solid #fff;box-shadow:0 0 0 5px rgba(14,165,233,.2),0 6px 16px rgba(14,165,233,.32);z-index:4}
   .map-seed.mapo{left:34%;top:48%}.map-seed.seongdong{left:58%;top:50%}.map-seed.gangnam{left:61%;top:67%}
   .blue-wave{position:absolute;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,.72) 0 18%,rgba(59,130,246,.38) 36%,rgba(37,99,235,.16) 58%,rgba(37,99,235,0) 72%);transform:translate(-50%,-50%) scale(.2);animation:blueSpread 4.2s ease-out infinite;mix-blend-mode:normal;z-index:3}
@@ -591,6 +594,52 @@
 
 <!-- 1. COVER -->
 <section id="s01" data-section="1">
+  <svg class="cover-cityscape" viewBox="0 0 1200 330" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="coverRiver" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#dbeafe" stop-opacity=".92"/>
+        <stop offset="1" stop-color="#bfdbfe" stop-opacity=".7"/>
+      </linearGradient>
+      <linearGradient id="coverRoad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e2e8f0"/>
+        <stop offset=".42" stop-color="#cbd5e1"/>
+        <stop offset="1" stop-color="#f8fafc"/>
+      </linearGradient>
+      <linearGradient id="coverBuilding" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#94a3b8" stop-opacity=".72"/>
+        <stop offset="1" stop-color="#64748b" stop-opacity=".5"/>
+      </linearGradient>
+    </defs>
+    <path d="M0 134 L74 104 L128 124 L198 82 L270 118 L346 70 L428 118 L516 80 L612 126 L706 78 L802 124 L898 75 L990 116 L1080 86 L1200 124 L1200 192 L0 192 Z" fill="#cbd5e1" opacity=".5"/>
+    <path d="M0 162 C92 116 154 148 238 118 C320 89 374 132 454 100 C548 62 638 126 722 93 C820 55 896 125 982 90 C1062 58 1130 92 1200 70 L1200 214 L0 214 Z" fill="#e2e8f0" opacity=".54"/>
+    <g fill="url(#coverBuilding)" opacity=".9">
+      <rect x="18" y="155" width="34" height="76"/><rect x="62" y="128" width="48" height="103"/><rect x="119" y="146" width="30" height="85"/>
+      <rect x="166" y="118" width="44" height="113"/><rect x="220" y="151" width="58" height="80"/><rect x="292" y="132" width="34" height="99"/>
+      <rect x="340" y="108" width="52" height="123"/><rect x="408" y="143" width="38" height="88"/><rect x="462" y="126" width="48" height="105"/>
+      <rect x="526" y="153" width="36" height="78"/><rect x="582" y="92" width="58" height="139"/><rect x="658" y="135" width="40" height="96"/>
+      <rect x="716" y="116" width="50" height="115"/><rect x="784" y="146" width="38" height="85"/><rect x="838" y="102" width="56" height="129"/>
+      <rect x="910" y="143" width="42" height="88"/><rect x="970" y="122" width="54" height="109"/><rect x="1042" y="149" width="34" height="82"/>
+      <rect x="1096" y="116" width="48" height="115"/><rect x="1154" y="142" width="32" height="89"/>
+      <polygon points="754,63 775,63 770,231 760,231"/>
+      <rect x="530" y="65" width="8" height="166"/>
+      <circle cx="534" cy="56" r="14"/>
+      <path d="M521 72 Q534 44 547 72" fill="none" stroke="#94a3b8" stroke-width="3" opacity=".85"/>
+      <path d="M526 96 H542" stroke="#e2e8f0" stroke-width="3" opacity=".8"/>
+    </g>
+    <g fill="#fff" opacity=".32">
+      <rect x="72" y="145" width="6" height="6"/><rect x="91" y="145" width="6" height="6"/><rect x="72" y="167" width="6" height="6"/><rect x="91" y="167" width="6" height="6"/>
+      <rect x="176" y="137" width="6" height="6"/><rect x="194" y="137" width="6" height="6"/><rect x="176" y="160" width="6" height="6"/><rect x="194" y="160" width="6" height="6"/>
+      <rect x="353" y="126" width="6" height="6"/><rect x="374" y="126" width="6" height="6"/><rect x="353" y="149" width="6" height="6"/><rect x="374" y="149" width="6" height="6"/>
+      <rect x="598" y="112" width="6" height="6"/><rect x="622" y="112" width="6" height="6"/><rect x="646" y="153" width="6" height="6"/>
+      <rect x="730" y="134" width="6" height="6"/><rect x="748" y="134" width="6" height="6"/><rect x="856" y="120" width="6" height="6"/><rect x="877" y="120" width="6" height="6"/>
+      <rect x="983" y="139" width="6" height="6"/><rect x="1005" y="139" width="6" height="6"/><rect x="1110" y="134" width="6" height="6"/><rect x="1129" y="134" width="6" height="6"/>
+    </g>
+    <path d="M0 225 C114 206 188 238 300 218 C418 197 510 236 640 211 C762 188 846 234 962 210 C1040 194 1124 205 1200 186 L1200 252 L0 252 Z" fill="url(#coverRiver)"/>
+    <path d="M0 247 H1200 V330 H0 Z" fill="url(#coverRoad)"/>
+    <path d="M0 286 H1200" stroke="#94a3b8" stroke-width="4" stroke-dasharray="10 10" opacity=".56"/>
+    <path d="M0 248 H1200" stroke="#93c5fd" stroke-width="4" opacity=".55"/>
+  </svg>
+
   <div class="missing-alert" aria-label="실종경보문자 팝업">
     <div class="alert-icon">!</div>
     <div>
@@ -601,9 +650,6 @@
   </div>
 
   <div class="cover-action-scene" aria-label="노인 배회와 경찰 대응 애니메이션">
-    <div class="scene-skyline"></div>
-    <div class="scene-ground"></div>
-    <div class="route-arc"></div>
     <div class="human elder-real" aria-hidden="true">
       <div class="hair"></div><div class="face"></div><div class="neck"></div><div class="torso"></div>
       <div class="arm l"></div><div class="arm r"></div>
@@ -617,6 +663,7 @@
         <div class="arm l"></div><div class="arm r"></div>
         <div class="leg l"></div><div class="leg r"></div>
         <div class="shoe l"></div><div class="shoe r"></div>
+        <div class="badge"></div><div class="belt"></div>
       </div>
       <div class="scene-phone"></div>
       <div class="human officer two">
@@ -624,10 +671,9 @@
         <div class="arm l"></div><div class="arm r"></div>
         <div class="leg l"></div><div class="leg r"></div>
         <div class="shoe l"></div><div class="shoe r"></div>
+        <div class="badge"></div><div class="belt"></div>
       </div>
     </div>
-    <div class="joined-hands hand-left"></div>
-    <div class="joined-hands hand-right"></div>
   </div>
 
   <div class="cover-grid">
@@ -638,7 +684,6 @@
     </div>
     <div class="cover-map-wrap" aria-label="서울시 지도 위험 확산 애니메이션">
       <img src="maps/cover_seoul_map_cutout.png?v=cover4" alt="서울시 지도">
-      <div class="map-caption">마포 · 성동 · 강남 시작점에서 확산되는 위험 신호</div>
       <span class="map-seed mapo"></span>
       <span class="map-seed seongdong"></span>
       <span class="map-seed gangnam"></span>
