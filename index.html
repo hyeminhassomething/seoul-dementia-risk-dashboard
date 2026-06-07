@@ -72,6 +72,7 @@
   .topbar{position:fixed;top:12px;right:20px;background:#fff;border:1px solid var(--border-strong);padding:6px 14px;border-radius:999px;font-size:11.5px;color:var(--muted);z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.04);font-weight:600}
   .topbar .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-right:7px;vertical-align:middle;animation:blink 1.6s ease-in-out infinite}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+  @keyframes s10HlPulse{0%,100%{box-shadow:0 0 0 4px rgba(239,68,68,.22),0 4px 12px rgba(239,68,68,.4)}50%{box-shadow:0 0 0 8px rgba(239,68,68,.34),0 4px 18px rgba(239,68,68,.6)}}
 
   main{margin-left:var(--sidebar-w);width:calc(100% - var(--sidebar-w));transition:margin-left .25s ease,width .25s ease}
   .sidebar{transition:width .25s ease}
@@ -2155,10 +2156,29 @@
       </div>
       <div class="card orange">
         <div class="head">② 핵심 가설 제안</div>
-        <ul class="bul orange">
-          <li>LL에서 실종 발생 → <strong>인접 HL에서 발견 가능성↑</strong></li>
-          <li>HL은 「<strong>사각지대 + 발견 거점</strong>」 이중 의미</li>
-        </ul>
+        <!-- 좌:안전구역 셀 / 우:HL 사각지대 셀 — 옆 산점도의 LL/HL 분면 시각화 -->
+        <div style="position:relative;background:radial-gradient(ellipse at 50% 50%,rgba(187,247,208,.75),rgba(134,239,172,.45) 60%,rgba(134,239,172,.25) 90%);border:1.5px dashed rgba(22,163,74,.55);border-radius:14px;padding:16px 18px;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-around;align-items:center;gap:18px">
+            <!-- 안전구역 셀 (좌, 초록) -->
+            <div style="position:relative">
+              <div style="width:54px;height:54px;border-radius:8px;background:linear-gradient(145deg,#86efac,#16a34a);box-shadow:0 4px 12px rgba(22,163,74,.35);border:2px solid #15803d"></div>
+              <div style="position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:6px;font-size:11px;font-weight:900;color:#14532d;white-space:nowrap">LL · 안전구역</div>
+            </div>
+            <!-- HL 사각지대 셀 (우, 빨강) -->
+            <div style="position:relative">
+              <!-- HL 화살표 + 라벨 -->
+              <div style="position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);background:#fff;border:2px solid var(--red);color:var(--red-deep);font-size:11px;font-weight:900;padding:4px 10px;border-radius:999px;white-space:nowrap;box-shadow:0 4px 10px rgba(239,68,68,.25)">사각지대 + 발견 거점</div>
+              <div style="position:absolute;left:50%;top:-13px;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid var(--red)"></div>
+              <div style="width:54px;height:54px;border-radius:8px;background:linear-gradient(145deg,#fca5a5,#dc2626);box-shadow:0 0 0 4px rgba(239,68,68,.25),0 4px 12px rgba(239,68,68,.4);border:2px solid #991b1b;animation:s10HlPulse 2s ease-in-out infinite"></div>
+              <div style="position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:6px;font-size:11px;font-weight:900;color:#7f1d1d;white-space:nowrap">HL · 사각지대</div>
+            </div>
+          </div>
+        </div>
+        <!-- 설명 -->
+        <div style="font-size:12.5px;line-height:1.6;color:var(--text);font-weight:700;margin-top:14px">
+          LL에서 실종 발생 → <strong style="color:var(--orange-deep)">인접 HL에서 발견 가능성↑</strong><br>
+          HL은 「<strong style="color:var(--red-deep)">사각지대 + 발견 거점</strong>」 이중 의미
+        </div>
         <div style="font-size:10.5px;color:var(--muted);margin-top:8px;font-style:italic">Anselin L. (1995). LISA. Geogr Anal.</div>
       </div>
     </div>
