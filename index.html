@@ -759,6 +759,8 @@
   #s18.scene-live .s18-info-left .s18-mini-scene .s13-bldg,#s18.scene-live .s18-info-left .s18-mini-scene .s13-block,#s18.scene-live .s18-info-left .s18-mini-scene .s13-shop,#s18.scene-live .s18-info-left .s18-mini-scene .s13-house,#s18.scene-live .s18-info-left .s18-mini-scene .s13-tree,#s18.scene-live .s18-info-left .s18-mini-scene .s13-bus,#s18.scene-live .s18-info-left .s18-mini-scene .s13-facility,#s18.scene-live .s18-info-left .s18-mini-scene .s13-signal,#s18.scene-live .s18-info-left .s18-mini-scene .s13-hill,#s18.scene-live .s18-info-left .s18-mini-scene .s13-rail{animation:s18TinyRise .72s cubic-bezier(.2,.82,.25,1.12) both;animation-delay:calc(1.6s + var(--rise,var(--d,0s)))}
   #s18.scene-live .s18-info-left .s18-mini-scene .s13-wanderer{opacity:1;animation:s13Wander 5.8s ease-in-out infinite;animation-delay:calc(2.4s + var(--delay,0s))}
   #s18.scene-live .s18-info-card{animation:s18StepIn .62s cubic-bezier(.2,.86,.25,1) both;animation-delay:var(--d,1s)}
+  /* 좌측 미니씬은 s18-mini transition만으로 등장 — 마지막 움찔(StepIn) 제거 */
+  #s18.scene-live .s18-info-left .s18-info-card{animation:none}
   .s18-why{padding:16px 20px!important;border-width:2.4px!important}
   .s18-why .head,.s18-stack-card .head{font-size:15.5px!important;margin-bottom:10px!important;font-weight:900!important}
   .s18-why .bul li,.s18-stack-card .bul li{font-size:13.5px!important;line-height:1.55!important;padding:4px 0 4px 17px!important;font-weight:600}
@@ -805,7 +807,7 @@
   .s19-step-label span{display:block;font-family:monospace;font-size:11.5px;font-weight:900;color:var(--accent);letter-spacing:.08em;margin-bottom:6px}
   .s19-step-label b{display:block;font-size:14px;line-height:1.25;color:#0f172a;word-break:keep-all;font-weight:900}
   .s19-step-label em{display:block;margin-top:7px;padding-top:7px;border-top:1px solid rgba(var(--glow,34,211,238),.28);font-style:normal;font-size:12px;line-height:1.32;color:#1e293b;font-weight:900;word-break:keep-all}
-  .s19-step-label small{display:block;margin-top:3px;font-family:monospace;font-size:10.5px;color:var(--accent);font-weight:900}
+  .s19-step-label small{display:block;margin-top:3px;font-family:monospace;font-size:10.5px;color:#0f172a;font-weight:900}
   #s19.scene-live .s19-step-label{animation:s19PersistIn .62s cubic-bezier(.2,.86,.25,1) both,s19StepGlow 2.8s ease-in-out infinite;animation-delay:var(--step-delay),calc(var(--step-delay) + .45s)}
   .s19-floor{position:absolute;left:-48px;right:-48px;top:-16px;bottom:-96px;border-radius:24px;overflow:hidden;transform:perspective(900px) rotateX(42deg);transform-origin:50% 100%;background:radial-gradient(ellipse at 50% 52%,rgba(34,211,238,.22),transparent 66%),linear-gradient(90deg,rgba(2,6,23,.58),transparent 16% 84%,rgba(2,6,23,.62)),#071827;box-shadow:0 0 52px rgba(34,211,238,.34),inset 0 0 60px rgba(34,211,238,.15);z-index:1;opacity:0}
   #s19.scene-live .s19-floor{animation:s19FloorBoardIn .38s ease-out both}
