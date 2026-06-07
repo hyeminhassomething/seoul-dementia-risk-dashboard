@@ -128,11 +128,11 @@
   .cover-cityscape{position:absolute;left:0;right:0;bottom:0;width:100%;height:330px;z-index:1;pointer-events:none}
   .cover-action-scene{position:absolute;left:22px;bottom:18px;width:min(58%,760px);height:455px;z-index:7;pointer-events:none;transform:scale(1.05);transform-origin:left bottom}
   .scene-skyline,.scene-ground,.route-arc{display:none}
-  .missing-alert{position:absolute;left:230px;top:405px;width:min(515px,43vw);display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:center;background:rgba(255,255,255,.94);border:1px solid rgba(148,163,184,.45);border-radius:24px;padding:14px 18px;box-shadow:0 24px 52px rgba(15,23,42,.18);z-index:8;opacity:0;transform:translateY(16px) scale(.96);animation:alertPop 9s ease-in-out 1 both;backdrop-filter:blur(10px)}
-  .alert-icon{width:42px;height:42px;border-radius:14px;background:#facc15;color:#111827;display:flex;align-items:center;justify-content:center;font-size:29px;font-weight:900}
-  .alert-title{font-size:17px;font-weight:900;color:#111827;line-height:1.2}
-  .alert-body{font-size:13px;line-height:1.45;color:#111827;font-weight:750;margin-top:3px}
-  .alert-time{align-self:start;font-size:12px;color:#64748b;font-weight:800;white-space:nowrap}
+  .missing-alert{position:absolute;left:80px;top:30px;width:min(720px,54vw);display:grid;grid-template-columns:78px 1fr auto;gap:20px;align-items:center;background:rgba(255,255,255,.995);border:1.5px solid rgba(148,163,184,.65);border-radius:28px;padding:20px 26px;box-shadow:0 30px 64px rgba(15,23,42,.28),0 0 0 1px rgba(255,255,255,.4) inset;z-index:8;opacity:0;transform:translateY(16px) scale(.96);animation:alertPop 9s ease-in-out 1 both;backdrop-filter:blur(14px)}
+  .alert-icon{width:74px;height:74px;border-radius:20px;background:#facc15;color:#111827;display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:900;flex-shrink:0}
+  .alert-title{font-size:30px;font-weight:900;color:#111827;line-height:1.18;letter-spacing:-.01em}
+  .alert-body{font-size:22px;line-height:1.4;color:#111827;font-weight:700;margin-top:5px}
+  .alert-time{align-self:start;font-size:18px;color:#64748b;font-weight:800;white-space:nowrap}
   .human{position:absolute;width:92px;height:205px;filter:drop-shadow(0 12px 14px rgba(15,23,42,.16));z-index:4}
   .human .hair{position:absolute;left:28px;top:4px;width:38px;height:32px;border-radius:50% 50% 45% 45%;background:#64748b}
   .human .face{position:absolute;left:30px;top:16px;width:36px;height:38px;border-radius:46% 46% 50% 50%;background:linear-gradient(180deg,#f2c7a7,#eab08c)}
@@ -209,6 +209,12 @@
   @keyframes pipeShineC{0%{box-shadow:0 0 0 4px rgba(6,182,212,.08);transform:scale(1)}30%{box-shadow:0 0 0 10px rgba(6,182,212,.35),0 0 30px rgba(6,182,212,.55);transform:scale(1.02)}100%{box-shadow:0 0 0 4px rgba(6,182,212,.18);transform:scale(1)}}
   @keyframes pipeShineO{0%{box-shadow:0 0 0 4px rgba(249,115,22,.08);transform:scale(1)}30%{box-shadow:0 0 0 10px rgba(249,115,22,.35),0 0 30px rgba(249,115,22,.55);transform:scale(1.02)}100%{box-shadow:0 0 0 4px rgba(249,115,22,.18);transform:scale(1)}}
   @keyframes pipeShineG{0%{box-shadow:0 0 0 4px rgba(22,163,74,.08);transform:scale(1)}30%{box-shadow:0 0 0 10px rgba(22,163,74,.35),0 0 30px rgba(22,163,74,.55);transform:scale(1.02)}100%{box-shadow:0 0 0 4px rgba(22,163,74,.18);transform:scale(1)}}
+  /* 슬라이드 7 황금 연결선 */
+  .pipe-link{position:relative;width:4px;height:30px;border-radius:4px;background:linear-gradient(180deg,rgba(234,179,8,.25),rgba(234,179,8,.55),rgba(234,179,8,.25));overflow:hidden;box-shadow:0 0 12px rgba(234,179,8,.45)}
+  .pipe-link::before{content:"";position:absolute;left:-2px;right:-2px;top:-30%;height:50%;background:linear-gradient(180deg,transparent,rgba(255,235,150,.95) 40%,rgba(255,255,255,1) 50%,rgba(255,235,150,.95) 60%,transparent);filter:blur(2px);animation:goldShine 1.8s linear infinite}
+  .pipe-link::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle,rgba(255,236,150,.9),rgba(234,179,8,0) 70%);transform:translate(-50%,-50%);animation:goldPulse 1.8s ease-in-out infinite}
+  @keyframes goldShine{0%{top:-50%}100%{top:120%}}
+  @keyframes goldPulse{0%,100%{opacity:.0;transform:translate(-50%,-150%)}50%{opacity:1;transform:translate(-50%,-50%)}}
   @keyframes axSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
   /* 슬라이드 11 — 동별 risk_score 팝업 오버레이 */
@@ -287,7 +293,7 @@
   #s05 .secsub{font-size:15.5px;margin-bottom:14px;line-height:1.45}
   #s05 .callout.yellow{font-size:12.3px;line-height:1.45;padding:8px 14px;border-width:1.5px}
   .pyramid-stage{position:relative;width:100%;height:min(560px,calc(100vh - 220px));min-height:480px;margin-bottom:10px;background:transparent;border:none;box-shadow:none;overflow:visible}
-  .pyramid-stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(148,163,184,.16) 1px,transparent 1px),linear-gradient(rgba(148,163,184,.12) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(90deg,#000,transparent 74%);opacity:.55;pointer-events:none}
+  .pyramid-stage::before{content:none}
   .pyramid-stage::after{content:"WHERE × WHY → WHAT";position:absolute;left:28px;top:24px;font-family:monospace;font-size:12px;font-weight:900;letter-spacing:.12em;color:#0f172a;background:rgba(255,255,255,.78);border:1px solid rgba(203,213,225,.85);border-radius:999px;padding:5px 12px;box-shadow:0 8px 18px rgba(15,23,42,.06)}
   .pyramid-tower{position:absolute;left:0;top:0;width:55%;height:100%;pointer-events:none;display:flex;align-items:center;justify-content:center}
   .pyramid-tower::after{content:"";position:absolute;left:14%;right:10%;bottom:35px;height:46px;border-radius:50%;background:radial-gradient(ellipse,rgba(15,23,42,.18),transparent 68%);filter:blur(3px);opacity:.72}
@@ -311,9 +317,9 @@
   .pyramid-stage.split .donut-stack .link-where{opacity:.62;transition-delay:.45s}
   .pyramid-stage.split .donut-stack .link-why{opacity:.72;transition-delay:1.08s}
   .pyramid-stage.split .donut-stack .link-what{opacity:.78;transition-delay:1.55s}
-  .donut-stack .layer-label{font-family:monospace;font-size:26px;font-weight:900;letter-spacing:.12em;fill:#0f172a;text-anchor:middle}
-  .donut-stack .layer-sub{font-family:monospace;font-size:11px;font-weight:900;letter-spacing:.08em;fill:#1e293b;text-anchor:middle}
-  .layer-card{position:absolute;right:1.6%;width:42%;background:rgba(255,255,255,.96);border-radius:15px;padding:16px 20px 16px 72px;box-shadow:0 16px 32px rgba(15,23,42,.12);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(-10px);transition:opacity .52s ease-out,transform .52s ease-out;backdrop-filter:blur(8px)}
+  .donut-stack .layer-label{font-family:monospace;font-size:26px;font-weight:900;letter-spacing:.12em;fill:#0f172a;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.85);stroke-width:3.5px;stroke-linejoin:round}
+  .donut-stack .layer-sub{font-family:monospace;font-size:11px;font-weight:900;letter-spacing:.08em;fill:#0f172a;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.75);stroke-width:2.5px;stroke-linejoin:round}
+  .layer-card{position:absolute;right:1.6%;width:46%;background:rgba(255,255,255,.96);border-radius:16px;padding:20px 24px 20px 80px;box-shadow:0 16px 32px rgba(15,23,42,.12);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(-10px);transition:opacity .52s ease-out,transform .52s ease-out;backdrop-filter:blur(8px)}
   .layer-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:9px;border-top-left-radius:15px;border-bottom-left-radius:15px}
   .layer-card::after{content:attr(data-icon);position:absolute;left:20px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:monospace;font-size:14px;font-weight:900;color:#fff;box-shadow:0 8px 16px rgba(15,23,42,.18)}
   /* 카드도 WHAT 먼저 등장 */
@@ -692,8 +698,10 @@
   .s18-info-left{gap:6px}
   .s18-info-left .s18-mini{position:relative;background:transparent;border:none;box-shadow:none;padding:0;flex:1 1 0;min-height:0;display:flex;flex-direction:column;opacity:0;transform:translateY(14px);transition:opacity .7s ease-out,transform .9s cubic-bezier(.2,.84,.25,1.06)}
   #s18.scene-live .s18-info-left .s18-mini{opacity:1;transform:translateY(0)}
-  /* 3개 동시 떠오름 (도시 바닥 동시 등장) */
-  #s18.scene-live .s18-info-left .s18-mini{transition-delay:1.05s}
+  /* 3개 순차 등장 — 위에서 아래로 (commerce → alley → edge) */
+  #s18.scene-live .s18-info-left .s18-mini.commerce{transition-delay:1.05s}
+  #s18.scene-live .s18-info-left .s18-mini.alley{transition-delay:1.65s}
+  #s18.scene-live .s18-info-left .s18-mini.edge{transition-delay:2.25s}
   .s18-info-left .s18-mini-scene{height:54%;min-height:118px;position:relative;perspective:620px;isolation:isolate;overflow:hidden;border-radius:14px}
   .s18-info-left .s18-mini-text{padding:6px 6px 0 6px}
   .s18-info-left .s18-mini-text .head{font-size:14px;font-weight:900;margin-bottom:4px;color:var(--text);letter-spacing:-.01em}
@@ -739,7 +747,10 @@
   .s18-stack-card{padding:16px 20px!important;border-width:2.2px!important}
   .s18-connector{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
   .s18-connector path{fill:none;stroke:rgba(0,184,216,.74);stroke-width:2px;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;opacity:0;filter:drop-shadow(0 0 4px rgba(0,229,255,.42))}
-  #s18.scene-live .s18-connector path{animation:s18ConnectorIn .7s ease-out 1s both}
+  #s18.scene-live .s18-connector path{animation:s18ConnectorIn .7s ease-out both}
+  #s18.scene-live .s18-connector #s18-conn-1{animation-delay:1.35s}
+  #s18.scene-live .s18-connector #s18-conn-2{animation-delay:1.95s}
+  #s18.scene-live .s18-connector #s18-conn-3{animation-delay:2.55s}
   .s18-neon-board{position:relative;height:116px;margin-top:7px;border-radius:10px;overflow:hidden;background:#071827;background-image:linear-gradient(rgba(34,211,238,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.34) 1px,transparent 1px),radial-gradient(circle at 50% 46%,rgba(34,211,238,.22),transparent 54%);background-size:22px 22px,22px 22px,100% 100%;border:1px solid rgba(34,211,238,.42);box-shadow:inset 0 0 25px rgba(34,211,238,.12),0 0 18px rgba(34,211,238,.1)}
   .s18-neon-cell{position:absolute;left:var(--x);top:var(--y);width:23px;height:23px;border-radius:4px;background:rgba(34,211,238,.26);border:1px solid rgba(125,249,255,.85);box-shadow:0 0 14px rgba(34,211,238,.8),inset 0 0 10px rgba(34,211,238,.35);animation:s18NeonBlink 1.2s ease-in-out infinite;animation-delay:var(--d,0s)}
   .s18-grid-id{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);font-family:monospace;font-size:13px;font-weight:900;color:#a5f3fc;background:rgba(8,47,73,.82);border:1px solid rgba(125,249,255,.75);border-radius:7px;padding:4px 10px;text-shadow:0 0 12px rgba(34,211,238,.9)}
@@ -787,8 +798,8 @@
   .s19-floor::after{background-image:linear-gradient(rgba(0,216,255,.64) 1px,rgba(0,216,255,.15) 2px,transparent 2px);background-size:100% 42px;clip-path:inset(0 0 100% 0)}
   #s19.scene-live .s19-floor::before{animation:s18GridDrawX 1.15s ease-out .18s both}
   #s19.scene-live .s19-floor::after{animation:s18GridDrawY 1.15s ease-out .42s both}
-  .s19-floor-cell{position:absolute;left:var(--x);top:var(--y);width:40px;height:40px;border-radius:5px;background:linear-gradient(145deg,#7dd3fc,#006fff 58%,#0f3ea8);border:1.5px solid rgba(191,246,255,.98);box-shadow:0 0 18px rgba(0,111,255,.9),inset 0 0 14px rgba(125,249,255,.45);opacity:0;transform:translate(-50%,-50%) scale(.35);z-index:4}
-  .s19-floor-cell::after{content:"";position:absolute;left:5px;right:5px;bottom:-10px;height:10px;border-radius:0 0 5px 5px;background:linear-gradient(180deg,rgba(14,165,233,.7),rgba(14,116,144,.12));filter:blur(.1px);opacity:.8}
+  .s19-floor-cell{position:absolute;left:var(--x);top:var(--y);width:40px;height:40px;border-radius:5px;background:linear-gradient(145deg,#ccfbff,#00e5ff 50%,#00b8d4);border:1.5px solid rgba(207,250,254,1);box-shadow:0 0 22px rgba(0,229,255,.95),0 0 8px rgba(125,249,255,.85),inset 0 0 14px rgba(207,250,254,.6);opacity:0;transform:translate(-50%,-50%) scale(.35);z-index:4}
+  .s19-floor-cell::after{content:"";position:absolute;left:5px;right:5px;bottom:-10px;height:10px;border-radius:0 0 5px 5px;background:linear-gradient(180deg,rgba(0,229,255,.78),rgba(0,184,212,.16));filter:blur(.1px);opacity:.85}
   .s19-floor-cell.red{background:linear-gradient(145deg,#fecaca,#ef4444 58%,#991b1b);box-shadow:0 0 18px rgba(239,68,68,.88),inset 0 0 14px rgba(254,202,202,.42);border-color:rgba(254,202,202,.95)}
   #s19.scene-live .s19-floor-cell{animation:s19FloorCellOn .92s cubic-bezier(.2,.84,.25,1.12) both;animation-delay:calc(var(--step-delay) + var(--d,0s))}
   .s19-floor-cell.to-city{z-index:7}
@@ -998,7 +1009,7 @@
   /* References */
   .refs-grid{display:grid;grid-template-columns:1.1fr 1fr 1.1fr;gap:14px}
   .refs-col{background:#fff;border:2px solid;border-radius:12px;padding:12px 16px;font-size:11px;line-height:1.6}
-  .refs-col.a{border-color:var(--green)} .refs-col.b{border-color:var(--yellow)} .refs-col.c{border-color:var(--cyan)}
+  .refs-col.a{border-color:var(--green)} .refs-col.b{border-color:var(--yellow);display:flex;flex-direction:column} .refs-col.c{border-color:var(--cyan)}
   .refs-col h4{font-size:13px;font-weight:900;margin-bottom:8px;display:flex;align-items:center;gap:5px}
   .refs-col.a h4{color:var(--green-deep)} .refs-col.b h4{color:var(--yellow-deep)} .refs-col.c h4{color:var(--cyan)}
   .refs-col h5{font-size:11px;font-weight:800;color:var(--text);margin-top:8px;margin-bottom:4px}
@@ -1440,9 +1451,9 @@
           <!-- 가운데 구멍 (분리 후 드러남) — WHY 외경 크기 -->
           <ellipse class="where-hole-side" cx="250" cy="442" rx="140" ry="40" fill="#7f1d1d"/>
           <ellipse class="where-hole-top" cx="250" cy="444" rx="134" ry="36" fill="#991b1b"/>
-          <!-- 라벨 (도넛 윗면 위쪽 — 구멍 비켜서 배치) -->
-          <text class="layer-label" x="250" y="412">WHERE</text>
-          <text class="layer-sub" x="250" y="500">LISA HOTSPOT</text>
+          <!-- 라벨 (도넛 외측 윗면 가운데 — 띠 위쪽에 안착해서 잘 보임) -->
+          <text class="layer-label" x="250" y="445">WHERE</text>
+          <text class="layer-sub" x="250" y="492">LISA HOTSPOT</text>
         </g>
 
         <!-- ② WHY 도넛 — 분리 후 윗면 y=300, 합쳐진 상태에서는 측면/구멍 안쪽 숨김 -->
@@ -1454,8 +1465,8 @@
           <!-- 가운데 구멍 안쪽 (합쳐진 상태엔 WHAT이 채워서 숨김) -->
           <ellipse class="hole-inside" cx="250" cy="302" rx="90" ry="26" fill="#92400e"/>
           <ellipse class="hole-inside" cx="250" cy="304" rx="84" ry="23" fill="#b45309"/>
-          <text class="layer-label" x="250" y="278">WHY</text>
-          <text class="layer-sub" x="250" y="358">HDBSCAN</text>
+          <text class="layer-label" x="250" y="305">WHY</text>
+          <text class="layer-sub" x="250" y="346">HDBSCAN</text>
         </g>
 
         <!-- ③ WHAT 솔리드 원기둥 — 분리 후 윗면 y=180 -->
@@ -1717,7 +1728,7 @@
         <div style="font-size:13px;color:var(--text-soft);margin-top:2px;line-height:1.5">50m × 50m · <strong>13개 환경 변수</strong> · 243,920 격자 · 65+ 유효 121,051</div>
       </div>
     </div>
-    <div style="font-size:22px;color:var(--muted)">▼</div>
+    <div class="pipe-link" aria-hidden="true"></div>
 
     <!-- Step 2A + 2B -->
     <div style="display:flex;gap:14px;align-items:stretch">
@@ -1736,7 +1747,7 @@
         </div>
       </div>
     </div>
-    <div style="font-size:22px;color:var(--muted)">▼</div>
+    <div class="pipe-link" aria-hidden="true"></div>
 
     <!-- Step 3 -->
     <div class="pipe-step" data-c="orange" style="background:#fff;border:2.5px solid var(--orange);border-radius:14px;padding:14px 22px;display:flex;align-items:center;gap:14px;min-width:460px">
@@ -1746,7 +1757,7 @@
         <div style="font-size:13px;color:var(--text-soft);margin-top:2px;line-height:1.5">HH/HL 비율 큰 클러스터 도출 · 환경 페르소나 자동 명명</div>
       </div>
     </div>
-    <div style="font-size:22px;color:var(--muted)">▼</div>
+    <div class="pipe-link" aria-hidden="true"></div>
 
     <!-- Step 4 -->
     <div class="pipe-step" data-c="green" style="background:#fff;border:2.5px solid var(--green);border-radius:14px;padding:14px 22px;display:flex;align-items:center;gap:14px;min-width:460px">
@@ -2008,17 +2019,19 @@
       <div class="card orange" style="padding:16px 20px">
         <div class="head" style="margin-bottom:8px;font-size:15px">📈 Spearman 상관계수</div>
         <div style="font-family:monospace;font-size:54px;font-weight:900;color:var(--orange-deep);line-height:1;letter-spacing:-.02em">0.7427</div>
-        <div style="font-size:13.5px;color:var(--text-soft);margin-top:10px;line-height:1.6;font-weight:700">
-          risk_score ↔ Target_y 간 <strong style="color:var(--text)">강한 양의 순위 상관</strong><br>
-          → PCA 합성 점수가 실제 위험 분포 잘 따름
+        <div style="font-size:13.5px;color:var(--text-soft);margin-top:10px;line-height:1.7;font-weight:700">
+          risk_score ↔ Target_y 간<br>
+          <strong style="color:var(--text)">강한 양의 순위 상관</strong><br>
+          <span style="color:var(--yellow-deep);font-weight:900">→</span> PCA 합성 점수가<br>
+          실제 위험 분포 잘 따름
         </div>
       </div>
       <div class="card" style="border-color:var(--text);padding:16px 20px">
         <div class="head" style="margin-bottom:8px;font-size:15px">🧪 검증 설계</div>
         <ul class="bul" style="font-size:13.5px">
-          <li style="font-size:13.5px;padding:5px 0 5px 16px;line-height:1.5;font-weight:700">5-Fold <strong>공간 블록 CV</strong> (지리적 누수 차단)</li>
-          <li style="font-size:13.5px;padding:5px 0 5px 16px;line-height:1.5;font-weight:700">단독 risk_score vs 원변수 13개</li>
-          <li style="font-size:13.5px;padding:5px 0 5px 16px;line-height:1.5;font-weight:700">개별 변수 CV R² 순위 산출</li>
+          <li style="font-size:13.5px;padding:6px 0 6px 16px;line-height:1.6;font-weight:700">5-Fold <strong>공간 블록 CV</strong><br><span style="color:var(--text-soft);font-weight:600">(지리적 누수 차단)</span></li>
+          <li style="font-size:13.5px;padding:6px 0 6px 16px;line-height:1.6;font-weight:700">단독 risk_score<br>vs 원변수 13개</li>
+          <li style="font-size:13.5px;padding:6px 0 6px 16px;line-height:1.6;font-weight:700">개별 변수 CV R²<br>순위 산출</li>
         </ul>
       </div>
     </div>
@@ -2096,7 +2109,7 @@
 <section id="s10" data-section="10">
   <div class="secnum orange">SLIDE 10 · LISA</div>
   <h2 class="sectitle">LISA 4-Cluster — 정의 · 근거</h2>
-  <p class="secsub">Local Moran's I · Anselin (1995) · 공간 자기상관 학계 표준 — 각 격자와 이웃의 위험도를 비교해 <strong>HH/HL/LH/LL 4가지 유형</strong>으로 분류. Queen contiguity weight + permutation test (p&lt;0.05) 적용.</p>
+  <p class="secsub" style="line-height:1.6"><strong style="color:var(--text)">Local Moran's I</strong> · Anselin (1995) · 공간 자기상관 학계 표준<br>각 격자와 이웃의 위험도를 비교해 <strong>HH / HL / LH / LL 4가지 유형</strong>으로 분류<br>Queen contiguity weight + permutation test <strong>(p&lt;0.05)</strong> 적용</p>
 
   <div class="lisa-grid">
     <div class="moran-card" style="background:#fff">
@@ -2210,12 +2223,12 @@
     </div>
 
     <div class="lisa-side">
-      <div class="card red">
-        <div class="head">① 채택 근거</div>
-        <ul class="bul red">
-          <li><strong>자치구 평균에 묻힌 outlier(HL) 직접 식별</strong> — HL 948개 = 안전구역 사이 핫스팟, 자치구로는 보이지 않는 사각지대</li>
-          <li><strong>통계적 유의성 검정 (p&lt;0.05)</strong> — Queen contiguity + permutation test → 우연이 아닌 핫스팟만 추출</li>
-          <li><strong>학계 표준 — 공간 역학</strong> — 범죄·전염병·자살·교통사고 등 공간 클러스터 분석의 표준 방법론 (Anselin 1995)</li>
+      <div class="card red" style="padding:18px 22px">
+        <div class="head" style="font-size:17px;margin-bottom:14px">① 채택 근거</div>
+        <ul class="bul red" style="display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:15.5px;line-height:1.6;padding:6px 0 6px 20px"><strong style="font-size:16px">자치구 평균에 묻힌 outlier(HL) 직접 식별</strong><br><span style="color:var(--text-soft)">HL 948개 = 안전구역 사이 핫스팟<br>자치구로는 보이지 않는 사각지대</span></li>
+          <li style="font-size:15.5px;line-height:1.6;padding:6px 0 6px 20px"><strong style="font-size:16px">통계적 유의성 검정 (p&lt;0.05)</strong><br><span style="color:var(--text-soft)">Queen contiguity + permutation test<br>→ 우연이 아닌 핫스팟만 추출</span></li>
+          <li style="font-size:15.5px;line-height:1.6;padding:6px 0 6px 20px"><strong style="font-size:16px">학계 표준 — 공간 역학</strong><br><span style="color:var(--text-soft)">범죄·전염병·자살·교통사고 등<br>공간 클러스터 분석의 표준 방법론 (Anselin 1995)</span></li>
         </ul>
       </div>
       <div class="card orange">
@@ -3365,21 +3378,22 @@
 
     <div class="refs-col b">
       <h4>🛠 활용툴</h4>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px">
-        <div style="background:var(--yellow-soft);padding:6px 10px;border-radius:8px;text-align:center;font-weight:800;color:var(--yellow-deep)">🐍 Python</div>
-        <div style="background:var(--yellow-soft);padding:6px 10px;border-radius:8px;text-align:center;font-weight:800;color:var(--yellow-deep)">Pandas / NumPy</div>
-        <div style="background:var(--yellow-soft);padding:6px 10px;border-radius:8px;text-align:center;font-weight:800;color:var(--yellow-deep)">GeoPandas</div>
-        <div style="background:var(--yellow-soft);padding:6px 10px;border-radius:8px;text-align:center;font-weight:800;color:var(--yellow-deep)">scikit-learn</div>
-        <div style="background:var(--yellow-soft);padding:6px 10px;border-radius:8px;text-align:center;font-weight:800;color:var(--yellow-deep)">libpysal / esda</div>
-        <div style="background:var(--yellow-soft);padding:6px 10px;border-radius:8px;text-align:center;font-weight:800;color:var(--yellow-deep)">NVIDIA cuML</div>
-        <div style="background:var(--yellow-soft);padding:6px 10px;border-radius:8px;text-align:center;font-weight:800;color:var(--yellow-deep)">matplotlib · seaborn</div>
-        <div style="background:var(--yellow-soft);padding:6px 10px;border-radius:8px;text-align:center;font-weight:800;color:var(--yellow-deep)">Plotly · folium</div>
-        <div style="background:var(--yellow-soft);padding:6px 10px;border-radius:8px;text-align:center;font-weight:800;color:var(--yellow-deep)">Google Colab (T4 GPU)</div>
-        <div style="background:var(--yellow-soft);padding:6px 10px;border-radius:8px;text-align:center;font-weight:800;color:var(--yellow-deep)">Kakao Local API</div>
-      </div>
-      <div style="font-size:11px;color:var(--text-soft);margin-top:10px;line-height:1.65">
-        <b style="color:var(--text)">분석 환경</b>: Google Colab Pro · T4 GPU<br>
-        <b style="color:var(--text)">협업·발표</b>: GitHub · Canva · ChatGPT · Claude Code
+      <div style="display:flex;flex-direction:column;height:calc(100% - 44px);gap:10px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;font-size:12px;flex:1;align-content:space-between">
+          <div style="background:var(--yellow-soft);padding:10px 12px;border-radius:9px;text-align:center;font-weight:800;color:var(--yellow-deep);display:flex;align-items:center;justify-content:center">Python</div>
+          <div style="background:var(--yellow-soft);padding:10px 12px;border-radius:9px;text-align:center;font-weight:800;color:var(--yellow-deep);display:flex;align-items:center;justify-content:center">Pandas / NumPy</div>
+          <div style="background:var(--yellow-soft);padding:10px 12px;border-radius:9px;text-align:center;font-weight:800;color:var(--yellow-deep);display:flex;align-items:center;justify-content:center">GeoPandas</div>
+          <div style="background:var(--yellow-soft);padding:10px 12px;border-radius:9px;text-align:center;font-weight:800;color:var(--yellow-deep);display:flex;align-items:center;justify-content:center">scikit-learn</div>
+          <div style="background:var(--yellow-soft);padding:10px 12px;border-radius:9px;text-align:center;font-weight:800;color:var(--yellow-deep);display:flex;align-items:center;justify-content:center">libpysal / esda</div>
+          <div style="background:var(--yellow-soft);padding:10px 12px;border-radius:9px;text-align:center;font-weight:800;color:var(--yellow-deep);display:flex;align-items:center;justify-content:center">NVIDIA cuML</div>
+          <div style="background:var(--yellow-soft);padding:10px 12px;border-radius:9px;text-align:center;font-weight:800;color:var(--yellow-deep);display:flex;align-items:center;justify-content:center">matplotlib · seaborn</div>
+          <div style="background:var(--yellow-soft);padding:10px 12px;border-radius:9px;text-align:center;font-weight:800;color:var(--yellow-deep);display:flex;align-items:center;justify-content:center">Plotly · folium</div>
+          <div style="background:var(--yellow-soft);padding:10px 12px;border-radius:9px;text-align:center;font-weight:800;color:var(--yellow-deep);display:flex;align-items:center;justify-content:center">Google Colab (T4 GPU)</div>
+          <div style="background:var(--yellow-soft);padding:10px 12px;border-radius:9px;text-align:center;font-weight:800;color:var(--yellow-deep);display:flex;align-items:center;justify-content:center">Kakao Local API</div>
+        </div>
+        <div style="font-size:11.5px;color:var(--text-soft);line-height:1.7;padding-top:8px;border-top:1px dashed rgba(148,163,184,.45)">
+          <b style="color:var(--text)">분석 환경</b>: Google Colab Pro · T4 GPU
+        </div>
       </div>
     </div>
 
