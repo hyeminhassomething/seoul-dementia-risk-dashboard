@@ -282,15 +282,22 @@
   .pyramid-stage{position:relative;width:100%;height:calc(100vh - 220px);max-height:620px;margin-bottom:14px}
   .pyramid-tower{position:absolute;left:2%;top:0;width:48%;height:100%;pointer-events:none;display:flex;align-items:center;justify-content:center}
   .donut-stack{width:100%;height:100%;display:block;overflow:visible}
-  /* 분리 애니메이션: 초기 = WHERE만 보임 (WHY/WHAT 숨김) → 위로 떠오르며 등장 */
-  .donut-stack .layer-g{transition:transform 1.3s cubic-bezier(.22,1,.36,1),opacity .4s ease-out}
-  .donut-stack .layer-why{transform:translateY(140px);transform-box:fill-box;transform-origin:center;opacity:0}
-  .donut-stack .layer-what{transform:translateY(260px);transform-box:fill-box;transform-origin:center;opacity:0}
-  .pyramid-stage.split .donut-stack .layer-why{transform:translateY(0);opacity:1;transition-delay:.5s,.5s}
-  .pyramid-stage.split .donut-stack .layer-what{transform:translateY(0);opacity:1;transition-delay:1.0s,1.0s}
-  /* WHERE 윗면의 자국 — 분리 후 드러남 (WHY/WHAT이 빠져나간 자리) */
+  /* 분리 애니메이션: 초기 = WHERE 윗면에 WHY/WHAT 윗면이 끼워져 있음 → 위로 빠져나오듯 분리 */
+  .donut-stack .layer-g{transition:transform 1.3s cubic-bezier(.22,1,.36,1)}
+  .donut-stack .layer-why{transform:translateY(140px);transform-box:fill-box;transform-origin:center}
+  .donut-stack .layer-what{transform:translateY(260px);transform-box:fill-box;transform-origin:center}
+  .pyramid-stage.split .donut-stack .layer-why{transform:translateY(0);transition-delay:.5s}
+  .pyramid-stage.split .donut-stack .layer-what{transform:translateY(0);transition-delay:1.0s}
+  /* 측면 / 도넛 안쪽 — 합쳐진 상태엔 숨김 (분리 시 등장) */
+  .donut-stack .layer-why .side,
+  .donut-stack .layer-why .hole-inside,
+  .donut-stack .layer-what .side{opacity:0;transition:opacity .4s ease-out}
+  .pyramid-stage.split .donut-stack .layer-why .side,
+  .pyramid-stage.split .donut-stack .layer-why .hole-inside{opacity:1;transition-delay:.7s}
+  .pyramid-stage.split .donut-stack .layer-what .side{opacity:1;transition-delay:1.2s}
+  /* WHERE 윗면의 자국 — 분리되어 위로 올라간 후에만 드러남 */
   .donut-stack .where-marks{opacity:0;transition:opacity .5s ease-out}
-  .pyramid-stage.split .donut-stack .where-marks{opacity:1;transition-delay:.4s}
+  .pyramid-stage.split .donut-stack .where-marks{opacity:1;transition-delay:1.6s}
   /* 점선 연결자는 분리 후에만 등장 */
   .donut-stack .link-line{opacity:0;transition:opacity .5s ease-out}
   .pyramid-stage.split .donut-stack .link-what{opacity:1;transition-delay:1.7s}
@@ -1242,21 +1249,22 @@
           </g>
         </g>
 
-        <!-- ② WHY 도넛 — 분리 후 윗면 y=300, 구멍 안쪽은 어두운 측면만 (흰 칠 X) -->
+        <!-- ② WHY 도넛 — 분리 후 윗면 y=300, 합쳐진 상태에서는 측면/구멍 안쪽 숨김 -->
         <g class="layer-g layer-why">
-          <!-- 외측 측면 -->
-          <path d="M 110,300 A 140,40 0 1 0 390,300 L 390,338 A 140,40 0 1 1 110,338 Z" fill="url(#donutBlueSide)"/>
-          <!-- 윗면 외측 타원 -->
+          <!-- 외측 측면 (합쳐진 상태에선 WHERE 안에 박혀있어 숨김) -->
+          <path class="side" d="M 110,300 A 140,40 0 1 0 390,300 L 390,338 A 140,40 0 1 1 110,338 Z" fill="url(#donutBlueSide)"/>
+          <!-- 윗면 외측 타원 (항상 보임 — 합쳐진 상태에서도 WHERE 윗면에 끼워진 모습) -->
           <ellipse cx="250" cy="300" rx="140" ry="40" fill="url(#donutBlueTop)"/>
-          <!-- 가운데 구멍 안쪽 측면 (어두운 파랑 — 안쪽 벽) -->
-          <ellipse cx="250" cy="300" rx="90" ry="26" fill="#1e3a8a"/>
-          <!-- 안쪽 윗면 (도넛 안쪽 깊이 표현 — 살짝 더 진한 파랑) -->
-          <ellipse cx="250" cy="304" rx="84" ry="23" fill="#1e40af"/>
+          <!-- 가운데 구멍 안쪽 (합쳐진 상태엔 WHAT이 채워서 숨김) -->
+          <ellipse class="hole-inside" cx="250" cy="302" rx="90" ry="26" fill="#1e3a8a"/>
+          <ellipse class="hole-inside" cx="250" cy="304" rx="84" ry="23" fill="#1e40af"/>
         </g>
 
         <!-- ③ WHAT 솔리드 원기둥 — 분리 후 윗면 y=180 -->
         <g class="layer-g layer-what">
-          <path d="M 160,180 A 90,26 0 1 0 340,180 L 340,204 A 90,26 0 1 1 160,204 Z" fill="url(#donutGreenSide)"/>
+          <!-- 측면 (합쳐진 상태엔 WHY 구멍 안에 박혀있어 숨김) -->
+          <path class="side" d="M 160,180 A 90,26 0 1 0 340,180 L 340,204 A 90,26 0 1 1 160,204 Z" fill="url(#donutGreenSide)"/>
+          <!-- 윗면 (항상 보임) -->
           <ellipse cx="250" cy="180" rx="90" ry="26" fill="url(#donutGreenTop)"/>
         </g>
 
