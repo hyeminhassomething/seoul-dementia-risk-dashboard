@@ -811,17 +811,17 @@
   .s19-floor-risk{position:absolute;left:var(--x);top:var(--y);width:var(--w,150px);height:var(--h,72px);border-radius:50%;background:radial-gradient(ellipse,rgba(248,113,113,.56),rgba(239,68,68,.2) 48%,transparent 72%);filter:drop-shadow(0 0 16px rgba(239,68,68,.66));opacity:0;transform:translate(-50%,-50%) scale(.42);z-index:3}
   .s19-floor-risk.hotspot{background:radial-gradient(ellipse,rgba(254,202,202,.82),rgba(239,68,68,.46) 36%,rgba(14,165,233,.18) 58%,transparent 74%);filter:drop-shadow(0 0 24px rgba(239,68,68,.86));z-index:5}
   #s19.scene-live .s19-floor-risk{animation:s19FloorSignal .56s ease-out both;animation-delay:calc(var(--step-delay) + .55s)}
-  #s19.scene-live .s19-floor-risk.hotspot{animation:s19MergeFlare 2.6s ease-out both;animation-delay:4.82s}
+  #s19.scene-live .s19-floor-risk.hotspot{animation:s19MergeFlare 2.6s ease-out both;animation-delay:5.62s}
   .s19-floor-ripple{position:absolute;left:var(--x);top:var(--y);width:var(--w,150px);height:var(--h,72px);border-radius:50%;border:2.5px solid rgba(248,113,113,.88);box-shadow:0 0 18px rgba(239,68,68,.7),inset 0 0 12px rgba(239,68,68,.25);opacity:0;transform:translate(-50%,-50%) scale(.34);z-index:5}
   #s19.scene-live .s19-floor-ripple{animation:s19FloorRipple 2.9s ease-out infinite;animation-delay:calc(var(--step-delay) + .86s + var(--r,0s))}
   .s19-floor-route{display:none}
   .s19-floor-route svg{width:100%;height:100%;overflow:visible}.s19-floor-route path{fill:none;stroke:#facc15;stroke-width:8.5;stroke-linecap:round;stroke-dasharray:15 10;filter:drop-shadow(0 0 14px rgba(250,204,21,.96));opacity:.98}
-  #s19.scene-live .s19-floor-route{animation:s19FloorTagOn .65s ease-out both;animation-delay:5.15s}
+  #s19.scene-live .s19-floor-route{animation:s19FloorTagOn .65s ease-out both;animation-delay:6.75s}
   .s19-floor-radius{display:none}
-  #s19.scene-live .s19-floor-radius{animation:s19FloorRadius 2.8s ease-in-out infinite;animation-delay:6.65s}
+  #s19.scene-live .s19-floor-radius{animation:s19FloorRadius 2.8s ease-in-out infinite;animation-delay:8.75s}
   .s19-floor-radius-label{display:none}
   .s19-floor-spark{display:none}
-  #s19.scene-live .s19-floor-spark{animation:s19FloorSpark 1.35s ease-in-out infinite;animation-delay:calc(5.4s + var(--d,0s))}
+  #s19.scene-live .s19-floor-spark{animation:s19FloorSpark 1.35s ease-in-out infinite;animation-delay:calc(7s + var(--d,0s))}
   .s19-stage-layer{position:absolute;left:18px;right:18px;top:70px;bottom:0;z-index:5}
   .s19-zone{position:absolute;bottom:0;width:19%;height:372px;opacity:0;transform:translateY(18px) scale(.96);pointer-events:none}
   #s19.scene-live .s19-zone{animation:s19PersistIn .62s cubic-bezier(.2,.86,.25,1) both;animation-delay:var(--step-delay)}
@@ -875,10 +875,10 @@
   .s19-found-stage{position:absolute;left:0;right:0;bottom:14px;height:230px;z-index:6}
   .s19-found-stage::before{content:"";position:absolute;left:50%;bottom:22px;width:174px;height:82px;border-radius:50%;border:4px solid rgba(250,204,21,.98);box-shadow:0 0 34px rgba(250,204,21,1),0 0 70px rgba(250,204,21,.58),inset 0 0 30px rgba(250,204,21,.38);background:radial-gradient(ellipse,rgba(250,204,21,.3),transparent 66%);opacity:0;transform:translateX(-50%) scale(.84);z-index:5}
   .s19-found-stage::after{content:"";position:absolute;left:50%;bottom:28px;width:196px;height:104px;border-radius:50%;background:radial-gradient(ellipse at 10% 100%,rgba(250,204,21,.95),transparent 20%),radial-gradient(ellipse at 50% 100%,rgba(255,237,120,.92),transparent 25%),radial-gradient(ellipse at 90% 100%,rgba(250,204,21,.95),transparent 20%),linear-gradient(0deg,rgba(250,204,21,.7),transparent 78%);-webkit-mask:radial-gradient(ellipse at 50% 100%,transparent 0 50%,#000 51% 65%,transparent 67%);mask:radial-gradient(ellipse at 50% 100%,transparent 0 50%,#000 51% 65%,transparent 67%);filter:drop-shadow(0 0 32px rgba(250,204,21,1));opacity:0;transform:translateX(-50%) translateY(10px) scale(.88);z-index:6;pointer-events:none}
-  #s19.scene-live .s19-found-stage::before{animation:s19RingPulse 2.8s ease-in-out infinite;animation-delay:6.44s}
-  #s19.scene-live .s19-found-stage::after{animation:s19HaloRise 2.8s ease-in-out infinite;animation-delay:6.52s}
+  #s19.scene-live .s19-found-stage::before{animation:s19RingPulse 2.8s ease-in-out infinite;animation-delay:8.54s}
+  #s19.scene-live .s19-found-stage::after{animation:s19HaloRise 2.8s ease-in-out infinite;animation-delay:8.62s}
   .s19-found-group{position:absolute;left:50%;bottom:49px;display:flex;align-items:flex-end;gap:5px;z-index:30;opacity:0;transform:translateX(-50%)}.s19-found-group .s18-mini-police{transform:scale(.74);transform-origin:left bottom;filter:drop-shadow(0 0 8px rgba(255,255,255,.9)) drop-shadow(0 0 14px rgba(59,130,246,.7))}
-  #s19.scene-live .s19-found-group{animation:s19FoundIn .6s ease-out both;animation-delay:6.58s}
+  #s19.scene-live .s19-found-group{animation:s19FoundIn .6s ease-out both;animation-delay:8.68s}
   .s19-mini-elder{position:relative;width:31px;height:63px;margin:0}.s19-mini-elder::before{content:"";position:absolute;left:11px;top:0;width:13px;height:14px;border-radius:50%;background:#e8b89b;box-shadow:0 -3px 0 1px #cbd5e1}.s19-mini-elder::after{content:"";position:absolute;left:8px;top:15px;width:20px;height:28px;border-radius:8px 8px 4px 4px;background:linear-gradient(180deg,#94a3b8,#475569)}
   .s19-mini-elder i::before,.s19-mini-elder i::after{content:"";position:absolute;top:41px;width:5px;height:19px;border-radius:999px;background:#475569}.s19-mini-elder i::before{left:10px}.s19-mini-elder i::after{right:8px}
   .s19-facility{position:absolute;bottom:0;width:58px;height:48px;border-radius:7px 7px 5px 5px;z-index:12;filter:drop-shadow(8px 10px 8px rgba(15,23,42,.32));opacity:0;box-shadow:inset 0 6px 0 rgba(255,255,255,.32),0 0 0 1px rgba(255,255,255,.42)}
@@ -3104,9 +3104,9 @@
     <div class="s19-step-strip">
       <div class="s19-step-label" style="--accent:#06b6d4;--pastel:#cffafe;--glow:6,182,212;--step-delay:.85s"><span>STEP 1 · 신고</span><b>실종 신고 접수<br>(위치·시각)</b><em>신고 격자 ID 자동 산출<small>G50-row-col</small></em></div>
       <div class="s19-step-label" style="--accent:#ef4444;--pastel:#fee2e2;--glow:239,68,68;--step-delay:2.15s"><span>STEP 2 · 격자 매핑</span><b>50m 격자 위험 점수<br>실시간 조회</b><em>LISA HH 응집 +<br>HDBSCAN 군집 시그니처</em></div>
-      <div class="s19-step-label" style="--accent:#eab308;--pastel:#fef3c7;--glow:234,179,8;--step-delay:3.55s"><span>STEP 3 · 추천</span><b>탐색 우선순위<br>격자 리스트 출력</b><em>시간 t × 이동 반경<br>r(t) 가중</em></div>
-      <div class="s19-step-label" style="--accent:#16a34a;--pastel:#dcfce7;--glow:22,163,74;--step-delay:5.05s"><span>STEP 4 · AI CCTV</span><b>서울시 AI 고속검색<br>인상착의·이동방향</b><em>100시간 영상 →<br>10분 분석</em></div>
-      <div class="s19-step-label" style="--accent:#2563eb;--pastel:#dbeafe;--glow:37,99,235;--step-delay:6.35s"><span>STEP 5 · 발견</span><b>안심 신고망 알림<br>골든타임 내 발견</b><em>200m 반경 약국·편의시설<br>자동 SMS</em></div>
+      <div class="s19-step-label" style="--accent:#eab308;--pastel:#fef3c7;--glow:234,179,8;--step-delay:4.35s"><span>STEP 3 · 추천</span><b>탐색 우선순위<br>격자 리스트 출력</b><em>시간 t × 이동 반경<br>r(t) 가중</em></div>
+      <div class="s19-step-label" style="--accent:#16a34a;--pastel:#dcfce7;--glow:22,163,74;--step-delay:6.65s"><span>STEP 4 · AI CCTV</span><b>서울시 AI 고속검색<br>인상착의·이동방향</b><em>100시간 영상 →<br>10분 분석</em></div>
+      <div class="s19-step-label" style="--accent:#2563eb;--pastel:#dbeafe;--glow:37,99,235;--step-delay:8.45s"><span>STEP 5 · 발견</span><b>안심 신고망 알림<br>골든타임 내 발견</b><em>200m 반경 약국·편의시설<br>자동 SMS</em></div>
     </div>
     <div class="s19-floor" aria-hidden="true">
       <span class="s19-floor-cell" style="--x:7.2%;--y:52%;--step-delay:.85s;--d:.02s"></span>
@@ -3144,7 +3144,7 @@
       <span class="s19-floor-cell red to-city" style="--x:35%;--y:58%;--tx:52.2%;--ty:54.9%;--step-delay:2.15s;--d:.02s;--move-delay:4.08s"></span>
       <span class="s19-floor-tag red" style="--x:30%;--y:70%;--step-delay:2.15s">risk score</span>
 
-      <span class="s19-floor-risk hotspot" style="--x:52.3%;--y:56.5%;--w:214px;--h:90px;--step-delay:3.55s"></span>
+      <span class="s19-floor-risk hotspot" style="--x:52.3%;--y:56.5%;--w:214px;--h:90px;--step-delay:4.35s"></span>
       <span class="s19-floor-ripple" style="--x:52.3%;--y:56.5%;--w:206px;--h:86px;--step-delay:4.15s;--r:0s"></span>
       <span class="s19-floor-ripple" style="--x:52.3%;--y:56.5%;--w:206px;--h:86px;--step-delay:4.15s;--r:.45s"></span>
 
@@ -3165,7 +3165,7 @@
 
       <div class="s19-zone step2" style="--step-delay:2.15s"></div>
 
-      <div class="s19-zone step3" style="--step-delay:3.55s">
+      <div class="s19-zone step3" style="--step-delay:4.35s">
         <div class="s13-city-scene s13-core s19-city">
           <span class="s13-roadmark" style="--x:18%;--b:35px;--w:94px;--rot:14deg"></span>
           <span class="s13-roadmark" style="--x:48%;--b:34px;--w:110px;--rot:-12deg"></span>
@@ -3202,7 +3202,7 @@
         </div>
       </div>
 
-      <div class="s19-zone step4" style="--step-delay:5.05s">
+      <div class="s19-zone step4" style="--step-delay:6.65s">
         <div class="s19-route">
           <svg class="s19-route-line" viewBox="0 0 230 130" preserveAspectRatio="none">
             <path class="route-halo" d="M0,94 C34,84 62,82 92,76 C128,69 158,70 184,79 C202,85 216,88 230,88"></path>
@@ -3216,7 +3216,7 @@
         </div>
       </div>
 
-      <div class="s19-zone step5" style="--step-delay:6.35s">
+      <div class="s19-zone step5" style="--step-delay:8.45s">
         <div class="s19-found-stage">
           <div class="s19-found-group">
             <div class="s18-mini-police"><span class="head"></span><span class="body"></span><span class="legs"></span><span class="s18-phone"></span></div>
