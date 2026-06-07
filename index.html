@@ -733,7 +733,7 @@
   .s19-floor-route{display:none}
   .s19-floor-route svg{width:100%;height:100%;overflow:visible}.s19-floor-route path{fill:none;stroke:#facc15;stroke-width:8.5;stroke-linecap:round;stroke-dasharray:15 10;filter:drop-shadow(0 0 14px rgba(250,204,21,.96));opacity:.98}
   #s19.scene-live .s19-floor-route{animation:s19FloorTagOn .65s ease-out both;animation-delay:5.15s}
-  .s19-floor-radius{position:absolute;left:87.8%;top:54%;width:232px;height:108px;border-radius:50%;border:3px solid rgba(250,204,21,.95);box-shadow:0 0 28px rgba(250,204,21,.78),0 0 54px rgba(250,204,21,.34),inset 0 0 28px rgba(250,204,21,.28);background:radial-gradient(ellipse,rgba(250,204,21,.22),rgba(239,68,68,.06) 50%,transparent 70%);opacity:0;transform:translate(-50%,-50%) scale(.88);z-index:4}
+  .s19-floor-radius{display:none}
   #s19.scene-live .s19-floor-radius{animation:s19FloorRadius 2.8s ease-in-out infinite;animation-delay:6.65s}
   .s19-floor-radius-label{display:none}
   .s19-floor-spark{display:none}
@@ -754,7 +754,7 @@
   #s19.scene-live .s19-city .s13-bldg,#s19.scene-live .s19-city .s13-block,#s19.scene-live .s19-city .s13-shop,#s19.scene-live .s19-city .s13-house,#s19.scene-live .s19-city .s13-tree,#s19.scene-live .s19-city .s13-bus,#s19.scene-live .s19-city .s13-facility,#s19.scene-live .s19-city .s13-signal,#s19.scene-live .s19-city .s13-hill{animation:s18TinyRise .78s cubic-bezier(.2,.82,.25,1.12) both;animation-delay:calc(var(--step-delay) + .42s + var(--rise,var(--d,0s)))}
   #s19.scene-live .s19-city .s13-wanderer{opacity:1;animation:s13Wander 6s ease-in-out infinite;animation-delay:calc(var(--step-delay) + 1.2s + var(--delay,0s))}
   .s19-zone.step3 .s19-popup{top:0;left:24px;width:160px}
-  .s19-route{position:absolute;left:-16px;right:-160px;bottom:4px;height:132px;z-index:9}
+  .s19-route{position:absolute;left:-22px;right:50px;bottom:4px;height:132px;z-index:9}
   .s19-route svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
   .s19-route-line{position:absolute;left:0;right:0;bottom:5px;height:110px;opacity:0;z-index:8;transform:perspective(560px) rotateX(42deg);transform-origin:50% 100%}
   .s19-route-line path{fill:none;stroke-linecap:round;stroke-linejoin:round}
@@ -2893,10 +2893,10 @@
 
       <div class="s19-zone step4" style="--step-delay:5.05s">
         <div class="s19-route">
-          <svg class="s19-route-line" viewBox="0 0 430 130" preserveAspectRatio="none">
-            <path class="route-halo" d="M8,93 C54,82 90,82 122,72 C169,57 210,48 252,58 C304,70 352,84 421,86"></path>
-            <path class="route-stream" d="M8,93 C54,82 90,82 122,72 C169,57 210,48 252,58 C304,70 352,84 421,86"></path>
-            <path class="route-core" d="M8,93 C54,82 90,82 122,72 C169,57 210,48 252,58 C304,70 352,84 421,86"></path>
+          <svg class="s19-route-line" viewBox="0 0 230 130" preserveAspectRatio="none">
+            <path class="route-halo" d="M0,94 C34,84 62,82 92,76 C128,69 158,70 184,79 C202,85 216,88 230,88"></path>
+            <path class="route-stream" d="M0,94 C34,84 62,82 92,76 C128,69 158,70 184,79 C202,85 216,88 230,88"></path>
+            <path class="route-core" d="M0,94 C34,84 62,82 92,76 C128,69 158,70 184,79 C202,85 216,88 230,88"></path>
           </svg>
           <div class="s19-police-track">
             <div class="s18-mini-police"><span class="head"></span><span class="body"></span><span class="legs"></span><span class="s18-phone"></span></div>
