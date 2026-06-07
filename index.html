@@ -356,6 +356,13 @@
   .data-cell .n{font-family:monospace;font-size:11px;color:#bfdbfe;font-weight:800;margin-bottom:3px}
   .data-cell .t{font-size:13px;font-weight:800;color:#fff;margin-bottom:4px}
   .data-cell .src{font-size:10.5px;color:#a5f3fc;font-weight:700;margin-bottom:3px}
+  /* 출처 컬러 태그 — 제목 아래, 설명 위에 배치 (같은 출처 = 같은 색) */
+  .data-cell .src-tag{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:900;padding:3px 9px;border-radius:999px;margin-bottom:6px;letter-spacing:.02em;line-height:1.2;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .data-cell .src-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 6px currentColor}
+  .data-cell .src-tag.opendata{background:#fde047;color:#78350f}
+  .data-cell .src-tag.juso{background:#fb923c;color:#7c2d12}
+  .data-cell .src-tag.bigdata{background:#f472b6;color:#831843}
+  .data-cell .src-tag::before{background:rgba(0,0,0,.45);box-shadow:none}
   .data-cell .d{font-size:11px;color:#dbeafe;line-height:1.5}
 
   /* Section 09 — PCA */
@@ -465,7 +472,7 @@
   .s13-layout{display:grid;grid-template-columns:minmax(320px,34%) minmax(0,1fr);gap:20px;align-items:start;margin-bottom:10px}
   .s13-map-panel{min-width:0;margin:0;display:flex;flex-direction:column}
   /* 13/14 지도 영역 동일 높이로 통일 — aspect ratio 다른 두 PNG가 동일한 외부 박스에 contain */
-  .s13-map-image{display:block;width:100%;height:320px;object-fit:contain;margin:0 auto 10px;user-select:none}
+  .s13-map-image{display:block;width:100%;height:320px;object-fit:cover;object-position:center;margin:0 auto 10px;user-select:none;border-radius:8px}
   .s13-map-caption{font-size:12.5px;line-height:1.7;color:var(--text-soft);font-weight:700;padding:0 3px}
   .s13-map-caption strong{color:var(--red-deep);font-weight:900;font-size:13.5px}
   .s13-map-caption .ar{color:var(--text);font-weight:800}
@@ -1669,15 +1676,23 @@
   <h2 class="sectitle">데이터 — 8개 출처 통합</h2>
   <p class="secsub">공공 데이터 8종 → 50m 격자 ID 기준 join → <strong>13개 환경 변수 추출</strong></p>
 
+  <!-- 출처 범례 -->
+  <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:12px;font-size:12.5px;font-weight:800;color:var(--text-soft)">
+    <span style="font-weight:900;color:var(--text)">데이터 출처:</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;background:#fde047;color:#78350f;padding:3px 12px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.12)"><span style="width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.45)"></span>서울 열린데이터광장 <small style="opacity:.8">×5</small></span>
+    <span style="display:inline-flex;align-items:center;gap:6px;background:#fb923c;color:#7c2d12;padding:3px 12px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.12)"><span style="width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.45)"></span>행정안전부 도로명주소 <small style="opacity:.8">×1</small></span>
+    <span style="display:inline-flex;align-items:center;gap:6px;background:#f472b6;color:#831843;padding:3px 12px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.12)"><span style="width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.45)"></span>서울시 빅데이터캠퍼스 <small style="opacity:.8">×2</small></span>
+  </div>
+
   <div class="data8-grid">
-    <div class="data-cell"><div class="n">① 도로망</div><div class="t">서울 도로망</div><div class="src">서울 열린데이터광장</div><div class="d">도로 12.5만 노드 + 교차로 9.8만 + 막다른길</div></div>
-    <div class="data-cell"><div class="n">② 건물·도로 SHP</div><div class="t">건물·도로 SHP</div><div class="src">행정안전부 도로명주소</div><div class="d">243,920개 50m 격자 매핑 기준</div></div>
-    <div class="data-cell"><div class="n">③ 노인복지시설</div><div class="t">노인복지시설</div><div class="src">서울시 빅데이터캠퍼스 (B428)</div><div class="d">서울 192개 시설</div></div>
-    <div class="data-cell"><div class="n">④ CCTV 개수</div><div class="t">CCTV 개수</div><div class="src">서울 열린데이터광장</div><div class="d">서울시 격자별 CCTV 개수 추정</div></div>
-    <div class="data-cell"><div class="n">⑤ 상권발달 개별지수</div><div class="t">상권발달지수</div><div class="src">서울시 빅데이터캠퍼스 (B069)</div><div class="d">STORE · SALES · DEPOSIT · POPULATION · INFRASTRUCTURE 지수</div></div>
-    <div class="data-cell"><div class="n">⑥ 편의시설</div><div class="t">편의시설</div><div class="src">서울 열린데이터광장</div><div class="d">약국 + 의료시설 + 종교 시설 + 도서관</div></div>
-    <div class="data-cell"><div class="n">⑦ 표준 용도지역</div><div class="t">서울시 표준 용도지역</div><div class="src">서울 열린데이터광장</div><div class="d">주거 · 상업 · 공업 · 녹지 등 지목 분류</div></div>
-    <div class="data-cell"><div class="n">⑧ 경사도</div><div class="t">서울시 경사도</div><div class="src">서울 열린데이터광장</div><div class="d">표고 기반 기울기 추정</div></div>
+    <div class="data-cell"><div class="n">① 도로망</div><div class="t">서울 도로망</div><div class="src-tag opendata">서울 열린데이터광장</div><div class="d">도로 12.5만 노드 + 교차로 9.8만 + 막다른길</div></div>
+    <div class="data-cell"><div class="n">② 건물·도로 SHP</div><div class="t">건물·도로 SHP</div><div class="src-tag juso">행정안전부 도로명주소</div><div class="d">243,920개 50m 격자 매핑 기준</div></div>
+    <div class="data-cell"><div class="n">③ 노인복지시설</div><div class="t">노인복지시설</div><div class="src-tag bigdata">서울시 빅데이터캠퍼스 (B428)</div><div class="d">서울 192개 시설</div></div>
+    <div class="data-cell"><div class="n">④ CCTV 개수</div><div class="t">CCTV 개수</div><div class="src-tag opendata">서울 열린데이터광장</div><div class="d">서울시 격자별 CCTV 개수 추정</div></div>
+    <div class="data-cell"><div class="n">⑤ 상권발달 개별지수</div><div class="t">상권발달지수</div><div class="src-tag bigdata">서울시 빅데이터캠퍼스 (B069)</div><div class="d">STORE · SALES · DEPOSIT · POPULATION · INFRASTRUCTURE 지수</div></div>
+    <div class="data-cell"><div class="n">⑥ 편의시설</div><div class="t">편의시설</div><div class="src-tag opendata">서울 열린데이터광장</div><div class="d">약국 + 의료시설 + 종교 시설 + 도서관</div></div>
+    <div class="data-cell"><div class="n">⑦ 표준 용도지역</div><div class="t">서울시 표준 용도지역</div><div class="src-tag opendata">서울 열린데이터광장</div><div class="d">주거 · 상업 · 공업 · 녹지 등 지목 분류</div></div>
+    <div class="data-cell"><div class="n">⑧ 경사도</div><div class="t">서울시 경사도</div><div class="src-tag opendata">서울 열린데이터광장</div><div class="d">표고 기반 기울기 추정</div></div>
   </div>
 
   <div class="card yellow" style="padding:12px 16px">
