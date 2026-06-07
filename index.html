@@ -1344,7 +1344,26 @@
       <div>
         <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px">자치구<br>평균 49 km²</div>
         <div style="position:relative;width:100%;aspect-ratio:5/3;background:#f1f5f9;border:1.5px solid var(--text);border-radius:6px;overflow:hidden">
-          <svg viewBox="0 0 250 150" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%">
+          <svg viewBox="0 0 250 150" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%;overflow:visible">
+            <defs>
+              <filter id="s3RedBeacon" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="1.6" result="b1"/>
+                <feGaussianBlur stdDeviation="4" result="b2"/>
+                <feGaussianBlur stdDeviation="8" result="b3"/>
+                <feMerge>
+                  <feMergeNode in="b3"/>
+                  <feMergeNode in="b2"/>
+                  <feMergeNode in="b1"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <radialGradient id="s3RedHalo" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ef4444" stop-opacity="0.55"/>
+                <stop offset="60%" stop-color="#ef4444" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+              </radialGradient>
+              <marker id="s3arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ef4444"/></marker>
+            </defs>
             <!-- 도로망 -->
             <g stroke="#cbd5e1" stroke-width="1.2" fill="none">
               <line x1="0" y1="40" x2="250" y2="40"/>
@@ -1357,11 +1376,41 @@
             </g>
             <!-- 하천 -->
             <path d="M0,95 Q60,88 120,100 T250,92" stroke="#93c5fd" stroke-width="3" fill="none" opacity=".7"/>
-            <!-- 실종자 발견 점 -->
-            <circle cx="120" cy="65" r="5" fill="#ef4444"/>
+
+            <!-- 잔잔한 빨간 동그라미 (반경 작음 강조 — 약하게 일렁) -->
+            <circle cx="120" cy="65" r="6" fill="none" stroke="#ef4444" stroke-width="0.7" opacity="0">
+              <animate attributeName="r" values="5;18" dur="2.6s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.55;0" dur="2.6s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-width" values="1.2;0.4" dur="2.6s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="120" cy="65" r="6" fill="none" stroke="#ef4444" stroke-width="0.7" opacity="0">
+              <animate attributeName="r" values="5;18" dur="2.6s" begin="0.87s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.5;0" dur="2.6s" begin="0.87s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-width" values="1.2;0.4" dur="2.6s" begin="0.87s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="120" cy="65" r="6" fill="none" stroke="#ef4444" stroke-width="0.7" opacity="0">
+              <animate attributeName="r" values="5;18" dur="2.6s" begin="1.73s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.45;0" dur="2.6s" begin="1.73s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-width" values="1.2;0.4" dur="2.6s" begin="1.73s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- 빛나는 halo (강한 글로우) -->
+            <circle cx="120" cy="65" r="14" fill="url(#s3RedHalo)" filter="url(#s3RedBeacon)">
+              <animate attributeName="r" values="11;16;11" dur="1.3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.7;1;0.7" dur="1.3s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- 실종자 발견 점 (강한 비콘) -->
+            <circle cx="120" cy="65" r="5" fill="#ef4444" filter="url(#s3RedBeacon)">
+              <animate attributeName="r" values="4;5.6;4" dur="1.3s" repeatCount="indefinite"/>
+            </circle>
+            <!-- 중심 하이라이트 -->
+            <circle cx="120" cy="65" r="1.8" fill="#fff">
+              <animate attributeName="opacity" values="0.7;1;0.7" dur="1.3s" repeatCount="indefinite"/>
+            </circle>
+
             <!-- 화살표 + 라벨 -->
             <line x1="160" y1="105" x2="128" y2="72" stroke="#ef4444" stroke-width="1.5" marker-end="url(#s3arr)"/>
-            <defs><marker id="s3arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ef4444"/></marker></defs>
             <text x="165" y="120" font-size="9" font-weight="700" fill="#dc2626">실종자 발견 반경</text>
             <text x="165" y="132" font-size="9" font-weight="700" fill="#dc2626">250 m (0.2 km²)</text>
           </svg>
@@ -1370,11 +1419,11 @@
 
       <!-- 245× 큰 텍스트 -->
       <div style="text-align:center">
-        <div style="display:flex;align-items:baseline;justify-content:center;gap:12px;line-height:1">
-          <span style="font-size:18px;font-weight:800;color:var(--text)">약</span>
+        <div style="display:flex;align-items:baseline;justify-content:center;gap:14px;line-height:1;flex-wrap:nowrap">
+          <span style="font-size:22px;font-weight:800;color:var(--text)">약</span>
           <span style="font-family:'SF Mono',monospace;font-size:96px;font-weight:900;color:var(--red-deep);letter-spacing:-.04em">245</span>
-          <span style="font-size:48px;font-weight:900;color:var(--text)">×</span>
-          <span style="font-size:18px;font-weight:800;color:var(--text)">공간 미스매치</span>
+          <span style="font-size:54px;font-weight:900;color:var(--red-deep);letter-spacing:-.02em">×</span>
+          <span style="font-size:34px;font-weight:900;color:var(--text);letter-spacing:-.02em">공간 미스매치</span>
         </div>
         <div style="border-top:1.5px solid var(--text);width:80%;margin:10px auto 8px"></div>
         <div style="font-size:13px;font-weight:700;color:var(--text-soft);line-height:1.55">
