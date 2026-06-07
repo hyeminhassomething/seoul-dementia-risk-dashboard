@@ -217,16 +217,16 @@
   .s11-pop-hh .s11-pop-pin{background:#dc2626}
   .s11-pop-hl .s11-pop-pin{background:#f97316}
   .s11-pop-card{border:1.5px solid;border-radius:8px;padding:5px 9px;box-shadow:0 6px 18px rgba(15,23,42,.24);white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;position:relative;margin-bottom:6px}
-  .s11-pop-hh .s11-pop-card{background:linear-gradient(145deg,#ef4444,#b91c1c);border-color:#991b1b;color:#fff}
-  .s11-pop-hl .s11-pop-card{background:linear-gradient(145deg,#fb923c,#ea580c);border-color:#c2410c;color:#fff}
+  .s11-pop-hh .s11-pop-card{background:linear-gradient(145deg,rgba(239,68,68,.55),rgba(185,28,28,.55));border-color:rgba(153,27,27,.6);color:#0f172a;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+  .s11-pop-hl .s11-pop-card{background:linear-gradient(145deg,rgba(251,146,60,.55),rgba(234,88,12,.55));border-color:rgba(194,65,12,.6);color:#0f172a;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
   .s11-pop-card::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid;}
-  .s11-pop-hh .s11-pop-card::after{border-top-color:#dc2626}
-  .s11-pop-hl .s11-pop-card::after{border-top-color:#f97316}
-  .s11-pop-name{font-size:9.5px;font-weight:900;color:#fff;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,.22)}
-  .s11-pop-meta{font-size:8.5px;color:rgba(255,255,255,.9);font-weight:800;margin-top:1px;line-height:1.2}
-  .s11-pop-meta b{color:#fff;font-weight:950}
-  .s11-pop-score{font-size:8.5px;font-family:"SF Mono",monospace;color:rgba(255,255,255,.92);font-weight:800;margin-top:2px;padding-top:2px;border-top:1px dashed rgba(255,255,255,.42);line-height:1.2}
-  .s11-pop-score b{color:#fff;font-size:10px;font-weight:950}
+  .s11-pop-hh .s11-pop-card::after{border-top-color:rgba(220,38,38,.55)}
+  .s11-pop-hl .s11-pop-card::after{border-top-color:rgba(249,115,22,.55)}
+  .s11-pop-name{font-size:9.5px;font-weight:900;color:#0f172a;line-height:1.2}
+  .s11-pop-meta{font-size:8.5px;color:#0f172a;font-weight:800;margin-top:1px;line-height:1.2}
+  .s11-pop-meta b{color:#000;font-weight:950}
+  .s11-pop-score{font-size:8.5px;font-family:"SF Mono",monospace;color:#0f172a;font-weight:800;margin-top:2px;padding-top:2px;border-top:1px dashed rgba(15,23,42,.42);line-height:1.2}
+  .s11-pop-score b{color:#000;font-size:10px;font-weight:950}
   .s11-pop-pin{width:7px;height:7px;border-width:1.5px}
   /* 펄스 효과 — 새로 등장한 팝업 강조 */
   .s11-pop.flash .s11-pop-pin{animation:s11PinPulse 1.2s ease-out 2}
@@ -3444,14 +3444,20 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
     ['종로 청운효자동', 37.5870, 126.9690, 'HL', null, 1.78]
   ];
 
-  const POPUPS_PER_TYPE = 15;
+  // 총 15개 (HH 8 + HL 7), HH/HL 교차 등장 — 비슷한 비율로 균등 분포
+  const HH_COUNT = 8, HL_COUNT = 7;
   function pickEvenly(arr, count){
     if (arr.length <= count) return arr;
     return Array.from({length: count}, (_, i) => arr[Math.round(i * (arr.length - 1) / (count - 1))]);
   }
-  const hhPops = pickEvenly(DONGS.filter(d => d[3] === 'HH'), POPUPS_PER_TYPE);
-  const hlPops = pickEvenly(DONGS.filter(d => d[3] === 'HL'), POPUPS_PER_TYPE);
-  const DISPLAY_DONGS = Array.from({length: POPUPS_PER_TYPE}, (_, i) => [hhPops[i], hlPops[i]]).flat();
+  const hhPops = pickEvenly(DONGS.filter(d => d[3] === 'HH'), HH_COUNT);
+  const hlPops = pickEvenly(DONGS.filter(d => d[3] === 'HL'), HL_COUNT);
+  // 교차로 인터리브: HH HL HH HL ... (마지막 HH는 단독)
+  const DISPLAY_DONGS = [];
+  for (let i = 0; i < HH_COUNT; i++) {
+    DISPLAY_DONGS.push(hhPops[i]);
+    if (i < HL_COUNT) DISPLAY_DONGS.push(hlPops[i]);
+  }
 
   function lng2pct(lng){
     const inner = (lng - LNG_MIN) / (LNG_MAX - LNG_MIN);
