@@ -731,10 +731,14 @@
   .s19-floor-cell::after{content:"";position:absolute;left:5px;right:5px;bottom:-10px;height:10px;border-radius:0 0 5px 5px;background:linear-gradient(180deg,rgba(14,165,233,.7),rgba(14,116,144,.12));filter:blur(.1px);opacity:.8}
   .s19-floor-cell.red{background:linear-gradient(145deg,#fecaca,#ef4444 58%,#991b1b);box-shadow:0 0 18px rgba(239,68,68,.88),inset 0 0 14px rgba(254,202,202,.42);border-color:rgba(254,202,202,.95)}
   #s19.scene-live .s19-floor-cell{animation:s19FloorCellOn .92s cubic-bezier(.2,.84,.25,1.12) both;animation-delay:calc(var(--step-delay) + var(--d,0s))}
+  .s19-floor-cell.to-city{z-index:7}
+  .s19-floor-cell.to-city.red{z-index:8}
+  #s19.scene-live .s19-floor-cell.to-city{animation:s19FloorCellOn .92s cubic-bezier(.2,.84,.25,1.12) both,s19CellToCity 1.38s cubic-bezier(.2,.78,.24,1) both;animation-delay:calc(var(--step-delay) + var(--d,0s)),var(--move-delay,3.15s)}
   .s19-floor-tag{position:absolute;left:var(--x);top:var(--y);font-family:monospace;font-size:11px;font-weight:900;color:#a5f3fc;background:rgba(8,47,73,.88);border:1px solid rgba(125,249,255,.82);border-radius:7px;padding:4px 8px;text-shadow:0 0 10px rgba(34,211,238,.9);box-shadow:0 0 14px rgba(34,211,238,.3);opacity:0;transform:translate(-50%,-50%) scale(.9);z-index:7;white-space:nowrap}
   .s19-floor-tag.red{color:#fecaca;border-color:rgba(248,113,113,.75);background:rgba(69,10,10,.88);box-shadow:0 0 14px rgba(239,68,68,.34)}
   #s19.scene-live .s19-floor-tag{animation:s19FloorTagOn .55s ease-out both;animation-delay:calc(var(--step-delay) + .75s)}
   .s19-floor-risk{position:absolute;left:var(--x);top:var(--y);width:var(--w,150px);height:var(--h,72px);border-radius:50%;background:radial-gradient(ellipse,rgba(248,113,113,.56),rgba(239,68,68,.2) 48%,transparent 72%);filter:drop-shadow(0 0 16px rgba(239,68,68,.66));opacity:0;transform:translate(-50%,-50%) scale(.42);z-index:3}
+  .s19-floor-risk.hotspot{background:radial-gradient(ellipse,rgba(254,202,202,.82),rgba(239,68,68,.46) 36%,rgba(14,165,233,.18) 58%,transparent 74%);filter:drop-shadow(0 0 24px rgba(239,68,68,.86));z-index:5}
   #s19.scene-live .s19-floor-risk{animation:s19FloorSignal .56s ease-out both;animation-delay:calc(var(--step-delay) + .55s)}
   .s19-floor-ripple{position:absolute;left:var(--x);top:var(--y);width:var(--w,150px);height:var(--h,72px);border-radius:50%;border:2.5px solid rgba(248,113,113,.88);box-shadow:0 0 18px rgba(239,68,68,.7),inset 0 0 12px rgba(239,68,68,.25);opacity:0;transform:translate(-50%,-50%) scale(.34);z-index:5}
   #s19.scene-live .s19-floor-ripple{animation:s19FloorRipple 2.9s ease-out infinite;animation-delay:calc(var(--step-delay) + .86s + var(--r,0s))}
@@ -833,6 +837,7 @@
   @keyframes s19PersistIn{0%{opacity:0;transform:translateY(18px) scale(.96)}100%{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes s19StepGlow{0%,100%{box-shadow:0 10px 22px rgba(15,23,42,.16),0 0 12px rgba(var(--glow,34,211,238),.18)}50%{box-shadow:0 12px 26px rgba(15,23,42,.18),0 0 26px rgba(var(--glow,34,211,238),.42)}}
   @keyframes s19FloorCellOn{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}70%{opacity:1;transform:translate(-50%,-64%) scale(1.08)}100%{opacity:1;transform:translate(-50%,-58%) scale(1)}}
+  @keyframes s19CellToCity{0%{left:var(--x);top:var(--y);opacity:1;transform:translate(-50%,-58%) scale(1);filter:brightness(1)}38%{opacity:1;transform:translate(-50%,-82%) scale(1.12);filter:brightness(1.35)}78%{left:var(--tx);top:var(--ty);transform:translate(-50%,-72%) scale(1.08);filter:brightness(1.28)}100%{left:var(--tx);top:var(--ty);opacity:1;transform:translate(-50%,-58%) scale(1.04);filter:brightness(1.18)}}
   @keyframes s19FloorTagOn{0%{opacity:0;transform:translate(-50%,-35%) scale(.9)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
   @keyframes s19TagIn{0%{opacity:0;transform:translateY(10px) scale(.9)}100%{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes s19FoundIn{0%{opacity:0;transform:translateX(-50%) translateY(10px) scale(.9)}100%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
@@ -2876,23 +2881,42 @@
       <div class="s19-step-label" style="--accent:#2563eb;--pastel:#dbeafe;--glow:37,99,235;--step-delay:6.35s"><span>STEP 5 · 발견</span><b>안심 신고망 알림<br>골든타임 내 발견</b><em>200m 반경 약국·편의시설<br>자동 SMS</em></div>
     </div>
     <div class="s19-floor" aria-hidden="true">
-      <span class="s19-floor-cell" style="--x:8.5%;--y:55%;--step-delay:.85s;--d:.04s"></span>
-      <span class="s19-floor-cell" style="--x:11.5%;--y:52%;--step-delay:.85s;--d:.14s"></span>
-      <span class="s19-floor-cell" style="--x:14.5%;--y:55%;--step-delay:.85s;--d:.24s"></span>
-      <span class="s19-floor-cell" style="--x:8.5%;--y:61%;--step-delay:.85s;--d:.34s"></span>
-      <span class="s19-floor-cell" style="--x:11.5%;--y:58%;--step-delay:.85s;--d:.44s"></span>
+      <span class="s19-floor-cell" style="--x:7.2%;--y:52%;--step-delay:.85s;--d:.02s"></span>
+      <span class="s19-floor-cell" style="--x:9.5%;--y:49%;--step-delay:.85s;--d:.06s"></span>
+      <span class="s19-floor-cell" style="--x:12%;--y:50.5%;--step-delay:.85s;--d:.1s"></span>
+      <span class="s19-floor-cell" style="--x:14.6%;--y:53%;--step-delay:.85s;--d:.14s"></span>
+      <span class="s19-floor-cell" style="--x:17%;--y:56%;--step-delay:.85s;--d:.18s"></span>
+      <span class="s19-floor-cell" style="--x:7.6%;--y:58%;--step-delay:.85s;--d:.22s"></span>
+      <span class="s19-floor-cell" style="--x:10.4%;--y:61%;--step-delay:.85s;--d:.26s"></span>
+      <span class="s19-floor-cell" style="--x:13.4%;--y:59%;--step-delay:.85s;--d:.3s"></span>
+      <span class="s19-floor-cell" style="--x:16%;--y:62%;--step-delay:.85s;--d:.34s"></span>
+      <span class="s19-floor-cell to-city" style="--x:8.5%;--y:55%;--tx:49.6%;--ty:55.7%;--step-delay:.85s;--d:.38s;--move-delay:3.05s"></span>
+      <span class="s19-floor-cell to-city" style="--x:11.5%;--y:52%;--tx:51.6%;--ty:56.4%;--step-delay:.85s;--d:.42s;--move-delay:3.12s"></span>
+      <span class="s19-floor-cell to-city" style="--x:14.5%;--y:55%;--tx:50.3%;--ty:58.1%;--step-delay:.85s;--d:.46s;--move-delay:3.18s"></span>
+      <span class="s19-floor-cell to-city" style="--x:8.5%;--y:61%;--tx:48.7%;--ty:57.6%;--step-delay:.85s;--d:.5s;--move-delay:3.24s"></span>
+      <span class="s19-floor-cell to-city" style="--x:11.5%;--y:58%;--tx:52.2%;--ty:54.9%;--step-delay:.85s;--d:.54s;--move-delay:3.3s"></span>
       <span class="s19-floor-tag" style="--x:11.5%;--y:69%;--step-delay:.85s">G50-MD-184</span>
 
       <span class="s19-floor-risk" style="--x:30%;--y:58%;--w:150px;--h:70px;--step-delay:2.15s"></span>
       <span class="s19-floor-ripple" style="--x:30%;--y:58%;--w:150px;--h:70px;--step-delay:2.15s;--r:0s"></span>
       <span class="s19-floor-ripple" style="--x:30%;--y:58%;--w:150px;--h:70px;--step-delay:2.15s;--r:.55s"></span>
-      <span class="s19-floor-cell red" style="--x:27%;--y:56%;--step-delay:2.15s;--d:.03s"></span>
-      <span class="s19-floor-cell red" style="--x:30%;--y:53%;--step-delay:2.15s;--d:.13s"></span>
-      <span class="s19-floor-cell red" style="--x:33%;--y:57%;--step-delay:2.15s;--d:.23s"></span>
-      <span class="s19-floor-cell red" style="--x:30%;--y:62%;--step-delay:2.15s;--d:.33s"></span>
+      <span class="s19-floor-cell red" style="--x:25.6%;--y:53%;--step-delay:2.15s;--d:.02s"></span>
+      <span class="s19-floor-cell red" style="--x:28.2%;--y:50.5%;--step-delay:2.15s;--d:.06s"></span>
+      <span class="s19-floor-cell red" style="--x:31%;--y:52.8%;--step-delay:2.15s;--d:.1s"></span>
+      <span class="s19-floor-cell red" style="--x:34%;--y:55.2%;--step-delay:2.15s;--d:.14s"></span>
+      <span class="s19-floor-cell red" style="--x:26%;--y:58.5%;--step-delay:2.15s;--d:.18s"></span>
+      <span class="s19-floor-cell red" style="--x:28.8%;--y:61%;--step-delay:2.15s;--d:.22s"></span>
+      <span class="s19-floor-cell red" style="--x:32%;--y:60%;--step-delay:2.15s;--d:.26s"></span>
+      <span class="s19-floor-cell red" style="--x:35%;--y:62%;--step-delay:2.15s;--d:.3s"></span>
+      <span class="s19-floor-cell red" style="--x:29.8%;--y:56%;--step-delay:2.15s;--d:.34s"></span>
+      <span class="s19-floor-cell red to-city" style="--x:27%;--y:56%;--tx:49.8%;--ty:55.9%;--step-delay:2.15s;--d:.38s;--move-delay:3.22s"></span>
+      <span class="s19-floor-cell red to-city" style="--x:30%;--y:53%;--tx:51.4%;--ty:56.5%;--step-delay:2.15s;--d:.42s;--move-delay:3.28s"></span>
+      <span class="s19-floor-cell red to-city" style="--x:33%;--y:57%;--tx:50.2%;--ty:58.2%;--step-delay:2.15s;--d:.46s;--move-delay:3.34s"></span>
+      <span class="s19-floor-cell red to-city" style="--x:30%;--y:62%;--tx:48.7%;--ty:57.6%;--step-delay:2.15s;--d:.5s;--move-delay:3.4s"></span>
+      <span class="s19-floor-cell red to-city" style="--x:35%;--y:58%;--tx:52.2%;--ty:54.9%;--step-delay:2.15s;--d:.54s;--move-delay:3.46s"></span>
       <span class="s19-floor-tag red" style="--x:30%;--y:70%;--step-delay:2.15s">risk score</span>
 
-      <span class="s19-floor-risk" style="--x:50.5%;--y:56%;--w:184px;--h:78px;--step-delay:3.55s"></span>
+      <span class="s19-floor-risk hotspot" style="--x:50.5%;--y:56%;--w:198px;--h:86px;--step-delay:3.55s"></span>
       <span class="s19-floor-ripple" style="--x:50.5%;--y:56%;--w:184px;--h:78px;--step-delay:3.55s;--r:0s"></span>
       <span class="s19-floor-ripple" style="--x:50.5%;--y:56%;--w:184px;--h:78px;--step-delay:3.55s;--r:.45s"></span>
 
