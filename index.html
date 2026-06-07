@@ -901,6 +901,7 @@
   .s20-kpi{grid-template-columns:repeat(2,1fr) !important;gap:12px}
   .s20-kpi .kpi-card{padding:14px 16px;border-width:2.5px}
   .s20-kpi .kpi-card .n{font-size:34px;letter-spacing:-.02em}
+  .s20-kpi .kpi-card .n.s20-kpi-text{font-size:22px;font-family:inherit;letter-spacing:-.01em}
   .s20-kpi .kpi-card .n .unit{font-size:17px;font-weight:800}
   .s20-kpi .kpi-card .l{font-size:13px;margin-top:8px;font-weight:800;line-height:1.4}
   .s20-limits{padding:16px 20px;flex:1}
@@ -2175,26 +2176,35 @@
       </div>
       <div class="card orange">
         <div class="head">② 핵심 가설 제안</div>
-        <!-- 좌:안전구역 셀 / 우:HL 사각지대 셀 — 옆 산점도의 LL/HL 분면 시각화 -->
-        <div style="position:relative;background:radial-gradient(ellipse at 50% 50%,rgba(187,247,208,.75),rgba(134,239,172,.45) 60%,rgba(134,239,172,.25) 90%);border:1.5px dashed rgba(22,163,74,.55);border-radius:14px;padding:16px 18px;margin-bottom:10px">
-          <div style="display:flex;justify-content:space-around;align-items:center;gap:18px">
-            <!-- 안전구역 셀 (좌, 초록) -->
-            <div style="position:relative">
-              <div style="width:54px;height:54px;border-radius:8px;background:linear-gradient(145deg,#86efac,#16a34a);box-shadow:0 4px 12px rgba(22,163,74,.35);border:2px solid #15803d"></div>
-              <div style="position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:6px;font-size:11px;font-weight:900;color:#14532d;white-space:nowrap">LL · 안전구역</div>
-            </div>
-            <!-- HL 사각지대 셀 (우, 빨강) -->
-            <div style="position:relative">
-              <!-- HL 화살표 + 라벨 -->
-              <div style="position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);background:#fff;border:2px solid var(--red);color:var(--red-deep);font-size:11px;font-weight:900;padding:4px 10px;border-radius:999px;white-space:nowrap;box-shadow:0 4px 10px rgba(239,68,68,.25)">사각지대 + 발견 거점</div>
-              <div style="position:absolute;left:50%;top:-13px;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid var(--red)"></div>
-              <div style="width:54px;height:54px;border-radius:8px;background:linear-gradient(145deg,#fca5a5,#dc2626);box-shadow:0 0 0 4px rgba(239,68,68,.25),0 4px 12px rgba(239,68,68,.4);border:2px solid #991b1b;animation:s10HlPulse 2s ease-in-out infinite"></div>
-              <div style="position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:6px;font-size:11px;font-weight:900;color:#7f1d1d;white-space:nowrap">HL · 사각지대</div>
-            </div>
-          </div>
-        </div>
+        <!-- 좌측 산점도의 LL(안전구역) 분면 그대로 — 초록 블롭 + 안전구역 배지 + 그 안에 HL 사각지대 배지를 함께 배치 (LL 안에 박혀있는 HL을 한 분면에 합쳐 시각화) -->
+        <svg viewBox="0 0 280 130" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block">
+          <defs>
+            <radialGradient id="s10HypoGreen" cx="50%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#bbf7d0" stop-opacity=".75"/>
+              <stop offset="60%" stop-color="#86efac" stop-opacity=".4"/>
+              <stop offset="100%" stop-color="#86efac" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- 큰 초록 블롭 (좌측 산점도의 LL 분면) -->
+          <ellipse cx="140" cy="65" rx="130" ry="58" fill="url(#s10HypoGreen)"/>
+          <!-- 좌측: LL 안전구역 배지 (좌측 산점도와 동일 스타일) -->
+          <rect x="22" y="50" width="84" height="28" rx="14" fill="#166534"/>
+          <text x="64" y="69" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,'Apple SD Gothic Neo',sans-serif">안전구역</text>
+          <!-- 우측: HL 사각지대 배지 (LL 안에 박힌 형태) -->
+          <rect x="160" y="50" width="104" height="28" rx="14" fill="#b91c1c"/>
+          <text x="212" y="69" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="-apple-system,'Apple SD Gothic Neo',sans-serif">HL 사각지대</text>
+          <!-- HL 가리키는 화살표 + '사각지대 + 발견 거점' 라벨 -->
+          <line x1="212" y1="38" x2="212" y2="46" stroke="#dc2626" stroke-width="2"/>
+          <polygon points="212,48 207,40 217,40" fill="#dc2626"/>
+          <rect x="146" y="14" width="132" height="22" rx="11" fill="#fff" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="212" y="29" text-anchor="middle" fill="#7f1d1d" font-size="11" font-weight="900" font-family="-apple-system,'Apple SD Gothic Neo',sans-serif">사각지대 + 발견 거점</text>
+          <!-- LL → HL 인접 화살표 (가설 흐름) -->
+          <path d="M 108 64 Q 134 64 158 64" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
+          <polygon points="159,64 152,60 152,68" fill="#16a34a"/>
+          <text x="134" y="98" text-anchor="middle" fill="#15803d" font-size="10.5" font-weight="800" font-family="-apple-system,'Apple SD Gothic Neo',sans-serif">인접</text>
+        </svg>
         <!-- 설명 -->
-        <div style="font-size:12.5px;line-height:1.6;color:var(--text);font-weight:700;margin-top:14px">
+        <div style="font-size:12.5px;line-height:1.6;color:var(--text);font-weight:700;margin-top:10px">
           LL에서 실종 발생 → <strong style="color:var(--orange-deep)">인접 HL에서 발견 가능성↑</strong><br>
           HL은 「<strong style="color:var(--red-deep)">사각지대 + 발견 거점</strong>」 이중 의미
         </div>
@@ -3106,7 +3116,7 @@
           <div class="l">골든타임 4시간 내<br>발견율 추정 상승</div>
         </div>
         <div class="kpi-card">
-          <div class="n">0<span class="unit">건</span></div>
+          <div class="n s20-kpi-text">개인정보보호</div>
           <div class="l">CCTV 영상 미접근<br>격자 ID만 전달</div>
         </div>
       </div>
