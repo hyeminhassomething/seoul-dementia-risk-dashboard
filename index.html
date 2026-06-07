@@ -679,6 +679,19 @@
   .s17-gridline{color:#f8fafc}
   .s17-gridline strong{color:#fff}
   .s17-effect-title{display:block;font-weight:900;margin-bottom:3px;color:#fff}
+  /* Slide 17 — 6박스 전체 폰트 굵게 (back-of-room 가독성) */
+  #s17 .limit-card .h{font-weight:900}
+  #s17 .limit-card ul.bul li{font-weight:700;color:var(--text)}
+  #s17 .limit-card ul.bul li strong{font-weight:900}
+  #s17 .s17-card-body{font-weight:700}
+  #s17 .s17-card-body strong{font-weight:900}
+  #s17 .s17-gridline{font-weight:700}
+  #s17 .s17-gridline strong{font-weight:900}
+  #s17 .s17-input-tag{font-weight:900}
+  #s17 .callout.green.s17-effect{font-weight:700}
+  #s17 .callout.green.s17-effect strong{font-weight:900}
+  #s17 .callout.dark.s17-reality{font-weight:700}
+  #s17 .callout.dark.s17-reality strong{font-weight:900}
   .s17-source{font-size:11px;color:var(--muted);text-align:right}
 
   .step-list{counter-reset:stp;list-style:none;padding:0}
@@ -1680,7 +1693,7 @@
       <div style="font-family:'SF Mono',monospace;font-size:46px;font-weight:900;color:var(--yellow-deep);line-height:1;letter-spacing:-.02em" id="s06-counter">0</div>
       <div style="font-size:12px;font-weight:800;color:var(--text);margin-top:6px">서울 전역 분석 격자</div>
       <div style="border-top:1px dashed var(--yellow);margin-top:10px;padding-top:8px">
-        <div style="font-family:'SF Mono',monospace;font-size:26px;font-weight:900;color:var(--blue-deep);line-height:1">121,051</div>
+        <div style="font-family:'SF Mono',monospace;font-size:26px;font-weight:900;color:var(--blue-deep);line-height:1" id="s06-counter-2">0</div>
         <div style="font-size:11px;color:var(--muted);font-weight:700;margin-top:4px">65+ 거주인구 유효 격자</div>
       </div>
     </div>
@@ -4075,6 +4088,7 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   const cnt = document.getElementById('s06-countbox');
   const why = document.getElementById('s06-whybox');
   const counter = document.getElementById('s06-counter');
+  const counter2 = document.getElementById('s06-counter-2');
   const conn = document.getElementById('s06-connector');
   const connLine = document.getElementById('s06-conn-line');
   const spotbeam = document.getElementById('s06-spotbeam');
@@ -4203,6 +4217,7 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
       cnt.style.opacity = '1';
       cnt.style.transform = 'translateX(0)';
       countUp(counter, 243920, 1800);
+      setTimeout(() => countUp(counter2, 121051, 1800), 600);
     }, 4500);
     // ⑧ 연결선 (격자 → 정의 박스)
     setTimeout(() => {
