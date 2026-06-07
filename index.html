@@ -1952,8 +1952,8 @@
         <div class="s09b-avg-line" style="position:relative;height:3px;margin:12px 0 10px;background:linear-gradient(90deg,#fca5a5 0%,#fca5a5 var(--p,0%),transparent var(--p,0%));box-shadow:0 0 8px rgba(252,165,165,.7),0 0 16px rgba(239,68,68,.45);transition:none"></div>
         <div class="s09b-avg" data-r2="0.2223" data-r2sd="0.0571" data-mse="0.0097" data-msesd="0.0043" style="font-weight:900;display:grid;grid-template-columns:64px 1fr 1fr;gap:10px;color:#fca5a5;font-size:24px;text-shadow:0 0 12px rgba(252,165,165,.85),0 0 24px rgba(239,68,68,.55)">
           <div>평균</div>
-          <div style="text-align:right" class="r2-cell">0<small style="color:#94a3b8;font-weight:600;font-size:14px"></small></div>
-          <div style="text-align:right" class="mse-cell">0<small style="color:#94a3b8;font-weight:600;font-size:14px"></small></div>
+          <div style="text-align:right" class="r2-cell"><span class="num">0.0000</span><small style="color:#94a3b8;font-weight:600;font-size:14px;margin-left:3px">±0.0571</small></div>
+          <div style="text-align:right" class="mse-cell"><span class="num">0.0000</span><small style="color:#94a3b8;font-weight:600;font-size:14px;margin-left:3px">±0.0043</small></div>
         </div>
       </div>
     </div>
@@ -1972,8 +1972,8 @@
         <div class="s09b-avg-line" style="position:relative;height:3px;margin:12px 0 10px;background:linear-gradient(90deg,#86efac 0%,#86efac var(--p,0%),transparent var(--p,0%));box-shadow:0 0 8px rgba(134,239,172,.7),0 0 16px rgba(34,197,94,.45);transition:none"></div>
         <div class="s09b-avg" data-r2="0.3515" data-r2sd="0.0900" data-mse="0.0079" data-msesd="0.0030" style="font-weight:900;display:grid;grid-template-columns:64px 1fr 1fr;gap:10px;color:#86efac;font-size:24px;text-shadow:0 0 12px rgba(134,239,172,.85),0 0 24px rgba(34,197,94,.55)">
           <div>평균</div>
-          <div style="text-align:right" class="r2-cell">0<small style="color:#94a3b8;font-weight:600;font-size:14px"></small></div>
-          <div style="text-align:right" class="mse-cell">0<small style="color:#94a3b8;font-weight:600;font-size:14px"></small></div>
+          <div style="text-align:right" class="r2-cell"><span class="num">0.0000</span><small style="color:#94a3b8;font-weight:600;font-size:14px;margin-left:3px">±0.0900</small></div>
+          <div style="text-align:right" class="mse-cell"><span class="num">0.0000</span><small style="color:#94a3b8;font-weight:600;font-size:14px;margin-left:3px">±0.0030</small></div>
         </div>
       </div>
     </div>
@@ -3970,36 +3970,27 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
           requestAnimationFrame(drawLine);
         }, lineDelay);
       }
-      // 3) 평균 행: R²/MSE 카운트업 + ±SD 표시
+      // 3) 평균 행: R²/MSE 카운트업 (±SD는 처음부터 표시되어 있어 레이아웃 흔들림 없음)
       const avg = box.querySelector('.s09b-avg');
       if (avg) {
         const r2Target = parseFloat(avg.dataset.r2);
-        const r2sd = avg.dataset.r2sd;
         const mseTarget = parseFloat(avg.dataset.mse);
-        const msesd = avg.dataset.msesd;
-        const r2Cell = avg.querySelector('.r2-cell');
-        const mseCell = avg.querySelector('.mse-cell');
-        const r2Small = r2Cell.querySelector('small');
-        const mseSmall = mseCell.querySelector('small');
+        const r2NumEl = avg.querySelector('.r2-cell .num');
+        const mseNumEl = avg.querySelector('.mse-cell .num');
         const avgStart = lineDelay + 600;
         setTimeout(() => {
-          // 카운트업 동안 텍스트 노드를 갱신 (small은 별도 보존)
-          const r2Text = document.createTextNode('0');
-          r2Cell.firstChild.replaceWith(r2Text);
-          const mseText = document.createTextNode('0');
-          mseCell.firstChild.replaceWith(mseText);
+          if (r2NumEl) r2NumEl.textContent = '0.0000';
+          if (mseNumEl) mseNumEl.textContent = '0.0000';
           const start = performance.now();
           function step(now){
             const t = Math.min(1, (now - start) / 1100);
             const eased = 1 - Math.pow(1 - t, 3);
-            r2Text.nodeValue = tickFmt(r2Target * eased, 4);
-            mseText.nodeValue = tickFmt(mseTarget * eased, 4);
+            if (r2NumEl) r2NumEl.textContent = tickFmt(r2Target * eased, 4);
+            if (mseNumEl) mseNumEl.textContent = tickFmt(mseTarget * eased, 4);
             if (t < 1) requestAnimationFrame(step);
             else {
-              r2Text.nodeValue = tickFmt(r2Target, 4);
-              mseText.nodeValue = tickFmt(mseTarget, 4);
-              if (r2Small) r2Small.textContent = '±' + r2sd;
-              if (mseSmall) mseSmall.textContent = '±' + msesd;
+              if (r2NumEl) r2NumEl.textContent = tickFmt(r2Target, 4);
+              if (mseNumEl) mseNumEl.textContent = tickFmt(mseTarget, 4);
             }
           }
           requestAnimationFrame(step);
