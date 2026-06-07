@@ -128,7 +128,7 @@
   .cover-cityscape{position:absolute;left:0;right:0;bottom:0;width:100%;height:330px;z-index:1;pointer-events:none}
   .cover-action-scene{position:absolute;left:22px;bottom:18px;width:min(58%,760px);height:455px;z-index:7;pointer-events:none;transform:scale(1.05);transform-origin:left bottom}
   .scene-skyline,.scene-ground,.route-arc{display:none}
-  .missing-alert{position:absolute;left:80px;top:340px;width:min(720px,54vw);display:grid;grid-template-columns:78px 1fr auto;gap:20px;align-items:center;background:rgba(255,255,255,.68);border:1.5px solid rgba(148,163,184,.55);border-radius:28px;padding:18px 24px;box-shadow:0 30px 64px rgba(15,23,42,.22),0 0 0 1px rgba(255,255,255,.35) inset;z-index:8;opacity:0;transform:translateY(16px) scale(.96);animation:alertPop 9s ease-in-out 1 both;backdrop-filter:blur(14px)}
+  .missing-alert{position:absolute;left:80px;top:340px;width:min(720px,54vw);display:grid;grid-template-columns:78px 1fr auto;gap:20px;align-items:center;background:rgba(255,255,255,.38);border:1px solid rgba(255,255,255,.5);border-radius:28px;padding:18px 24px;box-shadow:0 30px 64px rgba(15,23,42,.18),0 0 0 1px rgba(255,255,255,.4) inset;z-index:8;opacity:0;transform:translateY(16px) scale(.96);animation:alertPop 9s ease-in-out 1 both;backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%)}
   .alert-icon{width:74px;height:74px;border-radius:20px;background:#facc15;color:#111827;display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:900;flex-shrink:0}
   .alert-title{font-size:30px;font-weight:900;color:#111827;line-height:1.18;letter-spacing:-.01em}
   .alert-body{font-size:22px;line-height:1.4;color:#111827;font-weight:700;margin-top:5px}
@@ -338,7 +338,7 @@
   .pyramid-stage.split .donut-stack .link-where{opacity:.62;transition-delay:.45s}
   .pyramid-stage.split .donut-stack .link-why{opacity:.72;transition-delay:1.08s}
   .pyramid-stage.split .donut-stack .link-what{opacity:.78;transition-delay:1.55s}
-  .donut-stack .layer-label{font-family:monospace;font-size:28px;font-weight:900;letter-spacing:.12em;fill:#00e5ff;text-anchor:middle;filter:drop-shadow(0 0 6px rgba(0,229,255,.95)) drop-shadow(0 0 14px rgba(0,184,255,.7))}
+  .donut-stack .layer-label{font-family:monospace;font-size:28px;font-weight:900;letter-spacing:.12em;fill:#fff;text-anchor:middle;filter:drop-shadow(0 1px 2px rgba(15,23,42,.55)) drop-shadow(0 0 8px rgba(255,255,255,.45))}
   .donut-stack .layer-sub{font-family:monospace;font-size:12px;font-weight:900;letter-spacing:.08em;fill:#0f172a;text-anchor:middle}
   .layer-card{position:absolute;right:1.6%;width:46%;background:rgba(255,255,255,.96);border-radius:16px;padding:12px 18px 12px 64px;box-shadow:0 16px 32px rgba(15,23,42,.12);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(-10px);transition:opacity .52s ease-out,transform .52s ease-out;backdrop-filter:blur(8px)}
   .layer-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:9px;border-top-left-radius:15px;border-bottom-left-radius:15px}
@@ -1482,7 +1482,7 @@
           <ellipse class="hole-inside" cx="250" cy="302" rx="90" ry="26" fill="#92400e"/>
           <ellipse class="hole-inside" cx="250" cy="304" rx="84" ry="23" fill="#b45309"/>
           <text class="layer-label" x="250" y="302">WHY</text>
-          <text class="layer-sub" x="250" y="330">HDBSCAN</text>
+          <text class="layer-sub" x="250" y="320">HDBSCAN</text>
         </g>
 
         <!-- ③ WHAT 솔리드 원기둥 — 분리 후 윗면 y=180 -->
