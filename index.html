@@ -326,14 +326,12 @@
   .pyramid-stage.split .donut-stack .layer-what{transform:translateY(0);transition-delay:.5s}
   .pyramid-stage.split .donut-stack .layer-why{transform:translateY(0);transition-delay:1.05s}
   .donut-stack .layer-why .side,
-  .donut-stack .layer-why .hole-inside,
   .donut-stack .layer-what .side{opacity:0;transition:opacity .34s ease-out}
   .pyramid-stage.split .donut-stack .layer-what .side{opacity:1;transition-delay:.72s}
-  .pyramid-stage.split .donut-stack .layer-why .side,
-  .pyramid-stage.split .donut-stack .layer-why .hole-inside{opacity:1;transition-delay:1.28s}
-  /* WHERE 가운데 구멍: 합쳐진 상태엔 WHY가 채워서 숨김 → WHY 빠져나간 후 드러남 */
-  .donut-stack .where-hole-side,.donut-stack .where-hole-top{opacity:0;transition:opacity .45s ease-out}
-  .pyramid-stage.split .donut-stack .where-hole-side,.pyramid-stage.split .donut-stack .where-hole-top{opacity:1;transition-delay:1.5s}
+  .pyramid-stage.split .donut-stack .layer-why .side{opacity:1;transition-delay:1.28s}
+  /* WHY/WHERE 가운데 홈은 처음부터 보이게 — 도넛 형태 즉시 인지 */
+  .donut-stack .layer-why .hole-inside{opacity:1}
+  .donut-stack .where-hole-side,.donut-stack .where-hole-top{opacity:1}
   .donut-stack .link-line{opacity:0;transition:opacity .42s ease-out;stroke-linecap:round;stroke-dasharray:none!important;filter:drop-shadow(0 0 4px currentColor)}
   .pyramid-stage.split .donut-stack .link-where{opacity:.62;transition-delay:.45s}
   .pyramid-stage.split .donut-stack .link-why{opacity:.72;transition-delay:1.08s}
@@ -1535,9 +1533,9 @@
           <path d="M 60,440 A 190,55 0 1 0 440,440 L 440,510 A 190,55 0 1 1 60,510 Z" fill="url(#donutRedSide)"/>
           <!-- 윗면 외측 타원 -->
           <ellipse cx="250" cy="440" rx="190" ry="55" fill="url(#donutRedTop)"/>
-          <!-- 가운데 구멍 (분리 후 드러남) — WHY 외경 크기 -->
-          <ellipse class="where-hole-side" cx="250" cy="442" rx="140" ry="40" fill="#7f1d1d"/>
-          <ellipse class="where-hole-top" cx="250" cy="444" rx="134" ry="36" fill="#991b1b"/>
+          <!-- 가운데 구멍 (처음부터 보임) — WHY보다 살짝 커서 빨간 홈 가장자리가 노출 -->
+          <ellipse class="where-hole-side" cx="250" cy="438" rx="152" ry="44" fill="#7f1d1d"/>
+          <ellipse class="where-hole-top" cx="250" cy="440" rx="146" ry="40" fill="#991b1b"/>
           <!-- 라벨 (도넛 외측 윗면 가운데 — 띠 위쪽에 안착해서 잘 보임) -->
           <text class="layer-label" x="250" y="442">WHERE</text>
           <text class="layer-sub" x="250" y="470">LISA HOTSPOT</text>
@@ -1549,9 +1547,9 @@
           <path class="side" d="M 110,300 A 140,40 0 1 0 390,300 L 390,338 A 140,40 0 1 1 110,338 Z" fill="url(#donutBlueSide)"/>
           <!-- 윗면 외측 타원 (항상 보임 — 합쳐진 상태에서도 WHERE 윗면에 끼워진 모습) -->
           <ellipse cx="250" cy="300" rx="140" ry="40" fill="url(#donutBlueTop)"/>
-          <!-- 가운데 구멍 안쪽 (합쳐진 상태엔 WHAT이 채워서 숨김) -->
-          <ellipse class="hole-inside" cx="250" cy="302" rx="90" ry="26" fill="#92400e"/>
-          <ellipse class="hole-inside" cx="250" cy="304" rx="84" ry="23" fill="#b45309"/>
+          <!-- 가운데 구멍 안쪽 (처음부터 보임) — WHAT보다 살짝 커서 노란 홈 가장자리가 노출 -->
+          <ellipse class="hole-inside" cx="250" cy="298" rx="102" ry="29" fill="#92400e"/>
+          <ellipse class="hole-inside" cx="250" cy="300" rx="96" ry="26" fill="#b45309"/>
           <text class="layer-label" x="250" y="302">WHY</text>
           <text class="layer-sub" x="250" y="320">HDBSCAN</text>
         </g>
