@@ -700,32 +700,63 @@
   .s18-alert-msg b{display:flex;justify-content:space-between;font-size:10.5px;margin-bottom:2px}
   .s18-alert-msg small{font-size:8.5px;color:#64748b;font-weight:700}
   #s19.scene-live .s18-alert-msg{animation:s18AlertPop 3.5s ease-in-out 2.9s infinite}
-  .s19-step-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:10px}
-  .s19-step-card{padding:8px 9px!important;text-align:left;min-height:260px;overflow:hidden}
-  .s19-step-card .head{font-size:10.3px!important;margin-bottom:4px!important}
-  .s19-step-card .s19-icon{font-size:20px;line-height:1;margin-bottom:4px;text-align:center}
-  .s19-step-card .s19-title{font-size:11px;font-weight:900;color:var(--text);line-height:1.35;text-align:center;min-height:31px}
-  .s19-step-card .s19-copy{font-size:9.2px;color:var(--muted);line-height:1.35;text-align:center;margin-top:3px;min-height:27px}
-  .s19-step-visual{height:112px;margin-top:7px;opacity:0;transform:translateY(10px) scale(.96)}
-  #s19.scene-live .s19-step-card:nth-child(1) .s19-step-visual{animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) .25s both}
-  #s19.scene-live .s19-step-card:nth-child(2) .s19-step-visual{animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) .65s both}
-  #s19.scene-live .s19-step-card:nth-child(3) .s19-step-visual{animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) 1.05s both}
-  #s19.scene-live .s19-step-card:nth-child(4) .s19-step-visual{animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) 1.45s both}
-  #s19.scene-live .s19-step-card:nth-child(5) .s19-step-visual{animation:s18StepIn .58s cubic-bezier(.2,.86,.25,1) 1.85s both}
-  .s19-step-card .s18-neon-board{height:112px;margin-top:0}
-  .s19-step-card .s18-grid-id{font-size:10.5px;bottom:8px;padding:3px 7px}
-  .s19-step-card .s18-city-mini{height:112px;margin-top:0;transform:scale(.9)}
-  .s19-step-card .s18-route-scene,.s19-step-card .s18-step4-scene{height:112px;margin-top:0}
-  .s19-step-card .s18-route-scene svg{height:92px}
-  .s19-step-card .s18-mini-police{transform:scale(.82);transform-origin:left bottom}
-  .s19-mini-map{position:relative;height:112px;border-radius:10px;overflow:hidden;background:linear-gradient(145deg,#eff6ff,#f8fafc);border:1px solid rgba(148,163,184,.4)}
-  .s19-mini-map::before{content:"";position:absolute;inset:10px;background-image:linear-gradient(rgba(0,229,255,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.34) 1px,transparent 1px);background-size:18px 18px;filter:drop-shadow(0 0 4px rgba(0,229,255,.55))}
-  .s19-mini-map::after{content:"risk score";position:absolute;right:9px;top:8px;font-family:monospace;font-size:8.5px;font-weight:900;color:var(--red-deep);background:#fff;border-radius:999px;padding:2px 6px;border:1px solid rgba(239,68,68,.25)}
-  .s19-risk-cell{position:absolute;left:var(--x);top:var(--y);width:24px;height:24px;border-radius:5px;background:rgba(239,68,68,.64);box-shadow:0 0 14px rgba(239,68,68,.52);animation:s18CellSpread 2.8s ease-in-out infinite;animation-delay:var(--d,0s)}
+  .s19-story-board{position:relative;height:min(535px,calc(100vh - 272px));min-height:462px;margin-bottom:10px;border-radius:14px;overflow:hidden;background:radial-gradient(circle at 16% 24%,rgba(0,229,255,.18),transparent 29%),radial-gradient(circle at 72% 28%,rgba(239,68,68,.14),transparent 28%),linear-gradient(180deg,#08111f,#020617 74%,#050b16);border:1px solid rgba(34,211,238,.36);box-shadow:inset 0 0 34px rgba(34,211,238,.08),0 18px 36px rgba(15,23,42,.16)}
+  .s19-step-strip{position:absolute;left:18px;right:18px;top:13px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;z-index:12}
+  .s19-step-label{min-height:59px;border-radius:10px;padding:8px 9px;background:rgba(248,250,252,.94);border:1.5px solid var(--accent);box-shadow:0 10px 22px rgba(15,23,42,.16);opacity:0;transform:translateY(-8px) scale(.96)}
+  .s19-step-label span{display:block;font-family:monospace;font-size:9px;font-weight:900;color:var(--accent);letter-spacing:.08em;margin-bottom:3px}
+  .s19-step-label b{display:block;font-size:10.8px;line-height:1.25;color:#0f172a;word-break:keep-all}
+  #s19.scene-live .s19-step-label{animation:s19PersistIn .55s cubic-bezier(.2,.86,.25,1) both;animation-delay:var(--step-delay)}
+  .s19-floor{position:absolute;left:30px;right:30px;top:102px;bottom:-64px;border-radius:20px;transform:perspective(900px) rotateX(58deg);transform-origin:50% 100%;background-color:#071827;background-image:linear-gradient(rgba(0,229,255,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.34) 1px,transparent 1px),radial-gradient(ellipse at 50% 50%,rgba(34,211,238,.22),transparent 64%);background-size:34px 34px,34px 34px,100% 100%;box-shadow:0 0 34px rgba(34,211,238,.22),inset 0 0 42px rgba(34,211,238,.1);z-index:1}
+  .s19-floor::after{content:"";position:absolute;inset:0;border-radius:20px;background:linear-gradient(90deg,rgba(2,6,23,.5),transparent 16% 84%,rgba(2,6,23,.55));pointer-events:none}
+  .s19-stage-layer{position:absolute;left:24px;right:24px;top:88px;bottom:18px;z-index:5}
+  .s19-zone{position:absolute;bottom:0;width:19%;height:342px;opacity:0;transform:translateY(18px) scale(.96);pointer-events:none}
+  #s19.scene-live .s19-zone{animation:s19PersistIn .62s cubic-bezier(.2,.86,.25,1) both;animation-delay:var(--step-delay)}
+  .s19-zone.step1{left:0;bottom:18px}.s19-zone.step2{left:20%;bottom:38px}.s19-zone.step3{left:39.8%;bottom:22px;width:20.5%}.s19-zone.step4{left:61%;bottom:40px}.s19-zone.step5{left:80%;bottom:20px}
+  .s19-voxel-set{position:absolute;left:18px;bottom:70px;width:150px;height:110px;z-index:4}
+  .s19-voxel{position:absolute;left:var(--x);bottom:var(--y);width:31px;height:24px;border-radius:4px;background:linear-gradient(145deg,#7dd3fc,#006fff 55%,#0f3ea8);border:1px solid rgba(191,246,255,.95);box-shadow:0 0 16px rgba(0,111,255,.85),inset 0 0 12px rgba(125,249,255,.36);transform:skewY(-9deg) scaleY(.04);transform-origin:50% 100%;opacity:0}
+  .s19-voxel::after{content:"";position:absolute;right:-8px;top:4px;width:8px;height:100%;background:rgba(3,105,161,.82);transform:skewY(38deg);transform-origin:left top;border-radius:0 4px 4px 0}
+  #s19.scene-live .s19-voxel{animation:s19VoxelRise .62s cubic-bezier(.2,.84,.25,1.12) both;animation-delay:calc(var(--step-delay) + .3s + var(--d,0s))}
+  .s19-floor-tag{position:absolute;left:26px;bottom:54px;font-family:monospace;font-size:11px;font-weight:900;color:#a5f3fc;background:rgba(8,47,73,.88);border:1px solid rgba(125,249,255,.8);border-radius:7px;padding:4px 8px;text-shadow:0 0 10px rgba(34,211,238,.9);box-shadow:0 0 14px rgba(34,211,238,.3);opacity:0;z-index:7}
+  #s19.scene-live .s19-floor-tag{animation:s19TagIn .5s ease-out both;animation-delay:calc(var(--step-delay) + .75s)}
+  .s19-popup{position:absolute;left:8px;top:18px;width:170px;border-radius:14px;padding:9px 11px;background:rgba(255,255,255,.96);border:1px solid rgba(148,163,184,.38);box-shadow:0 16px 30px rgba(15,23,42,.26);font-size:10px;line-height:1.33;color:#0f172a;font-weight:800;opacity:0;transform:translateY(14px) scale(.9);z-index:11}
+  .s19-popup b{display:block;font-size:11px;color:#0f172a;margin-bottom:4px}.s19-popup small{display:block;font-family:monospace;font-size:9px;color:#0369a1;font-weight:900}
+  #s19.scene-live .s19-popup{animation:s19PopupIn .58s cubic-bezier(.2,.86,.25,1) both;animation-delay:calc(var(--step-delay) + 1.05s)}
+  .s19-risk-base{position:absolute;left:40px;bottom:74px;width:112px;height:54px;border-radius:50%;background:radial-gradient(ellipse,rgba(248,113,113,.62),rgba(239,68,68,.22) 48%,transparent 72%);filter:drop-shadow(0 0 14px rgba(239,68,68,.62));transform:skewX(-18deg);opacity:0;z-index:2}
+  #s19.scene-live .s19-risk-base{animation:s19SignalIn .5s ease-out both;animation-delay:calc(var(--step-delay) + .65s)}
+  .s19-risk-pulse{position:absolute;left:44px;bottom:77px;width:104px;height:48px;border-radius:50%;border:2.5px solid rgba(248,113,113,.9);box-shadow:0 0 18px rgba(239,68,68,.72),inset 0 0 12px rgba(239,68,68,.26);transform:skewX(-18deg) scale(.35);opacity:0;z-index:3}
+  #s19.scene-live .s19-risk-pulse{animation:s19Ripple 2.35s ease-out infinite;animation-delay:calc(var(--step-delay) + .75s + var(--r,0s))}
+  .s19-zone.step2 .s19-popup{top:4px}.s19-zone.step2 .s19-floor-tag{color:#fecaca;border-color:rgba(248,113,113,.65);background:rgba(69,10,10,.86)}
+  .s19-city{position:absolute;left:-2px;bottom:76px;width:224px;height:148px;--accent:#ef4444;--accent-dark:#991b1b;--scene-rgb:239,68,68;z-index:6;transform:scale(.9);transform-origin:left bottom}
+  .s19-city .s13-plane{width:218px;height:96px}.s19-city .s13-wanderer{opacity:0}
+  .s19-city .s13-bldg,.s19-city .s13-block,.s19-city .s13-shop,.s19-city .s13-house,.s19-city .s13-tree,.s19-city .s13-bus,.s19-city .s13-facility,.s19-city .s13-signal,.s19-city .s13-hill{opacity:0;transform:var(--base,translateZ(0)) translateY(22px) scaleY(.08);transform-origin:50% 100%}
+  #s19.scene-live .s19-city .s13-bldg,#s19.scene-live .s19-city .s13-block,#s19.scene-live .s19-city .s13-shop,#s19.scene-live .s19-city .s13-house,#s19.scene-live .s19-city .s13-tree,#s19.scene-live .s19-city .s13-bus,#s19.scene-live .s19-city .s13-facility,#s19.scene-live .s19-city .s13-signal,#s19.scene-live .s19-city .s13-hill{animation:s18TinyRise .78s cubic-bezier(.2,.82,.25,1.12) both;animation-delay:calc(var(--step-delay) + .42s + var(--rise,var(--d,0s)))}
+  #s19.scene-live .s19-city .s13-wanderer{opacity:1;animation:s13Wander 6s ease-in-out infinite;animation-delay:calc(var(--step-delay) + 1.2s + var(--delay,0s))}
+  .s19-zone.step3 .s19-risk-base{left:38px;bottom:74px;width:134px;height:58px}.s19-zone.step3 .s19-risk-pulse{left:38px;bottom:78px;width:138px;height:58px}.s19-zone.step3 .s19-popup{top:0;left:24px;width:160px}
+  .s19-route{position:absolute;left:2px;right:8px;bottom:62px;height:128px;z-index:3}
+  .s19-route svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.s19-route path{fill:none;stroke:#facc15;stroke-width:6;stroke-linecap:round;stroke-dasharray:10 8;filter:drop-shadow(0 0 10px rgba(250,204,21,.82));opacity:.95}
+  .s19-police-track{position:absolute;left:4px;bottom:18px;width:92px;height:86px;display:flex;align-items:flex-end;gap:1px;z-index:8;opacity:0;transform:translateX(0)}
+  .s19-police-track .s18-mini-police{transform:scale(.82);transform-origin:left bottom}
+  #s19.scene-live .s19-police-track{animation:s19PoliceWalk 3.6s ease-in-out both;animation-delay:calc(var(--step-delay) + .42s)}
+  .s19-zone.step4 .s19-popup{top:22px;left:18px;width:154px}
+  .s19-found-stage{position:absolute;left:0;right:0;bottom:50px;height:190px;z-index:6}
+  .s19-radius-ring{position:absolute;left:22px;bottom:40px;width:172px;height:74px;border-radius:50%;border:2px solid rgba(250,204,21,.86);box-shadow:0 0 20px rgba(250,204,21,.65),inset 0 0 24px rgba(239,68,68,.35);background:radial-gradient(ellipse,rgba(250,204,21,.26),rgba(239,68,68,.12) 48%,transparent 68%);transform:skewX(-14deg);opacity:0}
+  #s19.scene-live .s19-radius-ring{animation:s19RadiusGlow 2.6s ease-in-out infinite;animation-delay:calc(var(--step-delay) + .4s)}
+  .s19-radius-label{position:absolute;left:35px;bottom:52px;width:145px;font-size:9.2px;line-height:1.25;font-weight:900;color:#fde68a;text-align:center;text-shadow:0 0 9px rgba(250,204,21,.9);transform:rotate(-8deg);z-index:9;opacity:0}
+  #s19.scene-live .s19-radius-label{animation:s19TagIn .55s ease-out both;animation-delay:calc(var(--step-delay) + 1.05s)}
+  .s19-spark-cell{position:absolute;width:20px;height:16px;border-radius:4px;background:rgba(250,204,21,.62);box-shadow:0 0 14px rgba(250,204,21,.9);transform:skewY(-9deg);opacity:0;z-index:5}
+  #s19.scene-live .s19-spark-cell{animation:s19Spark 1.35s ease-in-out infinite;animation-delay:calc(var(--step-delay) + .7s + var(--d,0s))}
+  .s19-found-group{position:absolute;left:58px;bottom:78px;display:flex;align-items:flex-end;gap:0;z-index:10;opacity:0}.s19-found-group .s18-mini-police{transform:scale(.72);transform-origin:left bottom}
+  #s19.scene-live .s19-found-group{animation:s19TagIn .6s ease-out both;animation-delay:calc(var(--step-delay) + .78s)}
+  .s19-mini-elder{position:relative;width:31px;height:63px;margin:0 -2px 0 -4px}.s19-mini-elder::before{content:"";position:absolute;left:11px;top:0;width:13px;height:14px;border-radius:50%;background:#e8b89b;box-shadow:0 -3px 0 1px #cbd5e1}.s19-mini-elder::after{content:"";position:absolute;left:8px;top:15px;width:20px;height:28px;border-radius:8px 8px 4px 4px;background:linear-gradient(180deg,#94a3b8,#475569)}
+  .s19-mini-elder i::before,.s19-mini-elder i::after{content:"";position:absolute;top:41px;width:5px;height:19px;border-radius:999px;background:#475569}.s19-mini-elder i::before{left:10px}.s19-mini-elder i::after{right:8px}
+  .s19-facility{position:absolute;bottom:88px;width:38px;height:38px;border-radius:6px;z-index:8;filter:drop-shadow(7px 9px 7px rgba(15,23,42,.25));opacity:0}.s19-facility.store{left:4px;background:linear-gradient(180deg,#fef3c7,#f97316)}.s19-facility.store::before{content:"24";position:absolute;left:7px;top:7px;color:#fff;font-size:10px;font-weight:900;background:#ef4444;border-radius:4px;padding:1px 4px}.s19-facility.pharmacy{right:10px;background:linear-gradient(180deg,#dcfce7,#16a34a)}.s19-facility.pharmacy::before{content:"+";position:absolute;left:13px;top:2px;color:#fff;font-size:24px;font-weight:900}.s19-facility.hospital{left:128px;bottom:138px;background:linear-gradient(180deg,#e0f2fe,#2563eb)}.s19-facility.hospital::before{content:"H";position:absolute;left:12px;top:5px;color:#fff;font-size:20px;font-weight:900}
+  #s19.scene-live .s19-facility{animation:s19TagIn .55s ease-out both;animation-delay:calc(var(--step-delay) + .9s + var(--d,0s))}
+  .s19-alert{position:absolute;width:108px;border-radius:11px;background:rgba(255,255,255,.96);box-shadow:0 12px 22px rgba(15,23,42,.27);padding:6px 7px 6px 25px;font-size:7.7px;line-height:1.22;font-weight:800;color:#111827;z-index:12;opacity:0}.s19-alert::before{content:"!";position:absolute;left:7px;top:10px;width:13px;height:13px;border-radius:4px;background:#facc15;color:#111827;text-align:center;line-height:13px;font-size:10px}.s19-alert b{display:block;font-size:8.3px;margin-bottom:2px}.s19-alert.a1{left:0;top:20px}.s19-alert.a2{right:4px;top:14px}.s19-alert.a3{left:98px;top:-16px}
+  #s19.scene-live .s19-alert{animation:s19PopupIn .58s cubic-bezier(.2,.86,.25,1) both;animation-delay:calc(var(--step-delay) + 1.2s + var(--d,0s))}
   .s19-bottom{display:grid;grid-template-columns:1.05fr .95fr;gap:10px}
-  .s19-bottom .card,.s19-bottom .callout{padding:12px 15px!important}
-  .s19-bottom .bul li{font-size:11.2px;line-height:1.45;padding-top:2px;padding-bottom:2px}
-  .s19-bottom .callout{font-size:13px}
+  .s19-bottom .card,.s19-bottom .callout{padding:10px 14px!important}
+  .s19-bottom .bul li{font-size:10.7px;line-height:1.38;padding-top:1px;padding-bottom:1px}
+  .s19-bottom .callout{font-size:12.5px}
   @keyframes s18GridLayerPulse{0%,100%{opacity:.5}50%{opacity:.78}}
   @keyframes s18GridDrawX{0%{clip-path:inset(0 100% 0 0)}100%{clip-path:inset(0 0 0 0)}}
   @keyframes s18GridDrawY{0%{clip-path:inset(0 0 100% 0)}100%{clip-path:inset(0 0 0 0)}}
@@ -740,6 +771,15 @@
   @keyframes s18PoliceMove{0%{transform:translateX(0) translateY(2px)}45%{transform:translateX(58%) translateY(-11px)}100%{transform:translateX(112%) translateY(0)}}
   @keyframes s18Legs{0%,100%{transform:skewX(6deg)}50%{transform:skewX(-6deg)}}
   @keyframes s18AlertPop{0%,18%{opacity:0;transform:translate(-50%,-18px) scale(.82)}30%,72%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-8px) scale(.95)}}
+  @keyframes s19PersistIn{0%{opacity:0;transform:translateY(18px) scale(.96)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes s19VoxelRise{0%{opacity:0;transform:skewY(-9deg) translateY(26px) scaleY(.04)}72%{opacity:1;transform:skewY(-9deg) translateY(-4px) scaleY(1.08)}100%{opacity:1;transform:skewY(-9deg) translateY(0) scaleY(1)}}
+  @keyframes s19TagIn{0%{opacity:0;transform:translateY(10px) scale(.9)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes s19PopupIn{0%{opacity:0;transform:translateY(14px) scale(.9)}76%{opacity:1;transform:translateY(-2px) scale(1.03)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes s19SignalIn{0%{opacity:0;transform:skewX(-18deg) scale(.35)}100%{opacity:1;transform:skewX(-18deg) scale(1)}}
+  @keyframes s19Ripple{0%{opacity:.88;transform:skewX(-18deg) scale(.35)}72%{opacity:.18;transform:skewX(-18deg) scale(1.32)}100%{opacity:0;transform:skewX(-18deg) scale(1.45)}}
+  @keyframes s19PoliceWalk{0%{opacity:0;transform:translateX(0) translateY(4px)}12%{opacity:1}42%{transform:translateX(62px) translateY(-9px)}72%,100%{opacity:1;transform:translateX(132px) translateY(0)}}
+  @keyframes s19RadiusGlow{0%,100%{opacity:.78;transform:skewX(-14deg) scale(.96)}50%{opacity:1;transform:skewX(-14deg) scale(1.06)}}
+  @keyframes s19Spark{0%,100%{opacity:.42;filter:brightness(1);transform:skewY(-9deg) translateY(0)}48%{opacity:1;filter:brightness(1.8);transform:skewY(-9deg) translateY(-3px)}}
 
   .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   .kpi-card{background:#fff;border:2px solid var(--green);border-radius:12px;padding:12px 14px;text-align:center}
@@ -2700,103 +2740,101 @@
   <h2 class="sectitle">시스템 흐름 — 신고 → 추천 → 영상 분석</h2>
   <p class="secsub">실종 신고 입력 → LISA × HDBSCAN 격자 점수 → AI CCTV 검색 우선순위 → 인상착의 인식 → 안심 신고망 알림</p>
 
-  <div class="s19-step-grid">
-    <div class="card red s19-step-card">
-      <div class="head">STEP 1 · 신고</div>
-      <div class="s19-icon">📞</div>
-      <div class="s19-title">실종 신고 접수<br>(위치·시각)</div>
-      <div class="s19-copy">신고 격자 ID 자동 산출<br>G50-row-col</div>
-      <div class="s19-step-visual">
-        <div class="s18-neon-board" aria-hidden="true">
-            <span class="s18-neon-cell" style="--x:38%;--y:28%;--d:.05s"></span>
-            <span class="s18-neon-cell" style="--x:49%;--y:45%;--d:.2s"></span>
-            <span class="s18-neon-cell" style="--x:60%;--y:62%;--d:.36s"></span>
-            <span class="s18-neon-cell" style="--x:38%;--y:45%;--d:.5s"></span>
-            <span class="s18-neon-cell" style="--x:49%;--y:62%;--d:.64s"></span>
-            <div class="s18-grid-id">G50-MD-184</div>
-        </div>
-      </div>
+  <div class="s19-story-board" aria-label="큰 격자 기반 신고 추천 분석 스토리텔링 애니메이션">
+    <div class="s19-step-strip">
+      <div class="s19-step-label" style="--accent:#ef4444;--step-delay:.15s"><span>STEP 1 · 신고</span><b>실종 신고 접수<br>(위치·시각)</b></div>
+      <div class="s19-step-label" style="--accent:#f97316;--step-delay:1.15s"><span>STEP 2 · 격자 매핑</span><b>50m 격자 위험 점수<br>실시간 조회</b></div>
+      <div class="s19-step-label" style="--accent:#eab308;--step-delay:2.25s"><span>STEP 3 · 추천</span><b>탐색 우선순위<br>격자 리스트 출력</b></div>
+      <div class="s19-step-label" style="--accent:#16a34a;--step-delay:3.45s"><span>STEP 4 · AI CCTV</span><b>서울시 AI 고속검색<br>인상착의·이동방향</b></div>
+      <div class="s19-step-label" style="--accent:#2563eb;--step-delay:4.65s"><span>STEP 5 · 발견</span><b>안심 신고망 알림<br>골든타임 내 발견</b></div>
     </div>
-
-    <div class="card orange s19-step-card">
-      <div class="head">STEP 2 · 격자 매핑</div>
-      <div class="s19-icon">🗺</div>
-      <div class="s19-title">50m 격자 위험 점수<br>실시간 조회</div>
-      <div class="s19-copy">LISA HH 응집 +<br>HDBSCAN 군집 시그너처</div>
-      <div class="s19-step-visual">
-        <div class="s19-mini-map" aria-hidden="true">
-          <span class="s19-risk-cell" style="--x:34%;--y:46%;--d:.05s"></span>
-          <span class="s19-risk-cell" style="--x:50%;--y:58%;--d:.28s"></span>
-          <span class="s19-risk-cell" style="--x:63%;--y:39%;--d:.48s"></span>
+    <div class="s19-floor" aria-hidden="true"></div>
+    <div class="s19-stage-layer" aria-hidden="true">
+      <div class="s19-zone step1" style="--step-delay:.15s">
+        <div class="s19-voxel-set">
+          <span class="s19-voxel" style="--x:28px;--y:22px;--d:.02s"></span>
+          <span class="s19-voxel" style="--x:62px;--y:38px;--d:.12s"></span>
+          <span class="s19-voxel" style="--x:96px;--y:54px;--d:.22s"></span>
+          <span class="s19-voxel" style="--x:28px;--y:54px;--d:.32s"></span>
+          <span class="s19-voxel" style="--x:62px;--y:70px;--d:.42s"></span>
         </div>
+        <div class="s19-floor-tag">G50-MD-184</div>
+        <div class="s19-popup"><b>신고 격자 ID 자동 산출</b><small>G50-row-col</small></div>
       </div>
-    </div>
 
-    <div class="card yellow s19-step-card">
-      <div class="head">STEP 3 · 추천</div>
-      <div class="s19-icon">🎯</div>
-      <div class="s19-title">탐색 우선순위<br>격자 리스트 출력</div>
-      <div class="s19-copy">시간 t × 이동 반경<br>r(t) 가중</div>
-      <div class="s19-step-visual">
-        <div class="s13-city-scene s13-core s18-city-mini" aria-hidden="true">
-            <span class="s13-plane"></span>
-            <span class="s13-roadmark" style="--x:22%;--b:34px;--w:78px;--rot:13deg"></span>
-            <span class="s13-roadmark" style="--x:51%;--b:33px;--w:88px;--rot:-13deg"></span>
-            <span class="s13-crosswalk" style="--x:41%;--b:37px;--w:34px;--rot:12deg"></span>
-            <span class="s13-bldg" style="--x:18%;--b:46px;--w:28px;--h:72px;--d:.05s"></span>
-            <span class="s13-bldg" style="--x:33%;--b:48px;--w:34px;--h:88px;--d:.14s"></span>
-            <span class="s13-bldg" style="--x:52%;--b:49px;--w:42px;--h:98px;--d:.23s"></span>
-            <span class="s13-bldg" style="--x:72%;--b:45px;--w:32px;--h:74px;--d:.32s"></span>
-            <span class="s13-shop" style="--x:11%;--b:38px;--w:38px;--h:35px;--d:.42s"></span>
-            <span class="s13-facility" style="--x:65%;--b:39px;--w:34px;--h:36px;--d:.52s"></span>
-            <span class="s13-house" style="--x:82%;--b:39px;--w:24px;--h:30px;--d:.62s"></span>
-            <span class="s13-bus" style="--x:43%;--b:35px;--d:.72s"></span>
-            <span class="s13-signal" style="--x:28%;--b:41px;--d:.82s"></span>
-            <span class="s13-tree" style="--x:7%;--b:38px;--d:.9s"></span>
-            <span class="s13-tree" style="--x:89%;--b:37px;--d:1s"></span>
-            <span class="s13-wanderer" style="--x:20%;--b:38px;--walk:44px;--delay:.1s"><i></i></span>
-            <span class="s13-wanderer" style="--x:48%;--b:39px;--walk:-40px;--delay:.65s"><i></i></span>
-            <span class="s13-wanderer" style="--x:68%;--b:39px;--walk:36px;--delay:1.2s"><i></i></span>
+      <div class="s19-zone step2" style="--step-delay:1.15s">
+        <span class="s19-risk-base"></span>
+        <span class="s19-risk-pulse" style="--r:0s"></span>
+        <span class="s19-risk-pulse" style="--r:.55s"></span>
+        <div class="s19-voxel-set">
+          <span class="s19-voxel" style="--x:30px;--y:24px;--d:.02s"></span>
+          <span class="s19-voxel" style="--x:65px;--y:40px;--d:.13s"></span>
+          <span class="s19-voxel" style="--x:100px;--y:55px;--d:.24s"></span>
+          <span class="s19-voxel" style="--x:65px;--y:72px;--d:.35s"></span>
         </div>
+        <div class="s19-floor-tag">risk score</div>
+        <div class="s19-popup"><b>LISA HH 응집 +</b>HDBSCAN 군집 시그너처</div>
       </div>
-    </div>
 
-    <div class="card green s19-step-card">
-      <div class="head">STEP 4 · AI CCTV</div>
-      <div class="s19-icon">📹</div>
-      <div class="s19-title">서울시 AI 고속검색<br>인상착의·이동방향</div>
-      <div class="s19-copy">100시간 영상 →<br>10분 분석</div>
-      <div class="s19-step-visual">
-        <div class="s18-route-scene" aria-hidden="true">
-          <svg viewBox="0 0 240 120" preserveAspectRatio="none">
-            <path d="M10,88 C50,54 78,96 112,62 S175,38 228,72"></path>
+      <div class="s19-zone step3" style="--step-delay:2.25s">
+        <span class="s19-risk-base"></span>
+        <span class="s19-risk-pulse" style="--r:0s"></span>
+        <span class="s19-risk-pulse" style="--r:.45s"></span>
+        <div class="s13-city-scene s13-core s19-city">
+          <span class="s13-plane"></span>
+          <span class="s13-roadmark" style="--x:18%;--b:35px;--w:94px;--rot:14deg"></span>
+          <span class="s13-roadmark" style="--x:48%;--b:34px;--w:110px;--rot:-12deg"></span>
+          <span class="s13-crosswalk" style="--x:39%;--b:38px;--w:40px;--rot:12deg"></span>
+          <span class="s13-bldg tall neon" style="--x:14%;--b:47px;--w:28px;--h:72px;--d:.05s"></span>
+          <span class="s13-bldg tall" style="--x:29%;--b:49px;--w:34px;--h:96px;--d:.13s"></span>
+          <span class="s13-bldg neon" style="--x:48%;--b:50px;--w:42px;--h:108px;--d:.21s"></span>
+          <span class="s13-bldg slim" style="--x:69%;--b:47px;--w:31px;--h:84px;--d:.29s"></span>
+          <span class="s13-block" style="--x:7%;--b:39px;--w:34px;--h:28px;--d:.36s"></span>
+          <span class="s13-shop" style="--x:20%;--b:38px;--w:40px;--h:35px;--d:.43s"></span>
+          <span class="s13-facility" style="--x:62%;--b:40px;--w:35px;--h:38px;--d:.5s"></span>
+          <span class="s13-house" style="--x:83%;--b:39px;--w:25px;--h:31px;--d:.58s"></span>
+          <span class="s13-bus" style="--x:42%;--b:36px;--d:.66s"></span>
+          <span class="s13-signal" style="--x:77%;--b:42px;--d:.74s"></span>
+          <span class="s13-tree" style="--x:4%;--b:39px;--d:.84s"></span>
+          <span class="s13-tree" style="--x:91%;--b:38px;--d:.94s"></span>
+          <span class="s13-wanderer" style="--x:16%;--b:39px;--walk:58px;--delay:.1s"><i></i></span>
+          <span class="s13-wanderer" style="--x:50%;--b:40px;--walk:-46px;--delay:.7s"><i></i></span>
+          <span class="s13-wanderer" style="--x:72%;--b:39px;--walk:38px;--delay:1.2s"><i></i></span>
+        </div>
+        <div class="s19-popup"><b>시간 t × 이동 반경</b>r(t) 가중</div>
+      </div>
+
+      <div class="s19-zone step4" style="--step-delay:3.45s">
+        <div class="s19-route">
+          <svg viewBox="0 0 210 130" preserveAspectRatio="none">
+            <path d="M12,104 C48,68 72,96 104,63 S154,42 198,76"></path>
           </svg>
-          <div class="s18-police-team">
-            <div class="s18-mini-police">
-              <span class="head"></span><span class="body"></span><span class="legs"></span><span class="s18-phone"></span>
-            </div>
-            <div class="s18-mini-police">
-              <span class="head"></span><span class="body"></span><span class="legs"></span>
-            </div>
+          <div class="s19-police-track">
+            <div class="s18-mini-police"><span class="head"></span><span class="body"></span><span class="legs"></span><span class="s18-phone"></span></div>
+            <div class="s18-mini-police"><span class="head"></span><span class="body"></span><span class="legs"></span></div>
           </div>
         </div>
+        <div class="s19-popup"><b>100시간 영상 →</b>10분 분석</div>
       </div>
-    </div>
 
-    <div class="card blue s19-step-card">
-      <div class="head">STEP 5 · 발견</div>
-      <div class="s19-icon">🚨</div>
-      <div class="s19-title">안심 신고망 알림<br>골든타임 내 발견</div>
-      <div class="s19-copy">200m 반경 약국·편의시설<br>자동 SMS</div>
-      <div class="s19-step-visual">
-        <div class="s18-step4-scene" aria-hidden="true">
-          <span class="s18-facility-plane"></span>
-          <span class="s18-store"></span>
-          <span class="s18-pharmacy"></span>
-          <div class="s18-alert-msg">
-            <b>실종경보문자 <small>방금 전</small></b>
-            [서울경찰청] 명동 인근 실종 어르신 발견 시 112로 신고 바랍니다.
+      <div class="s19-zone step5" style="--step-delay:4.65s">
+        <div class="s19-found-stage">
+          <span class="s19-radius-ring"></span>
+          <span class="s19-spark-cell" style="left:64px;bottom:56px;--d:.05s"></span>
+          <span class="s19-spark-cell" style="left:94px;bottom:62px;--d:.25s"></span>
+          <span class="s19-spark-cell" style="left:124px;bottom:52px;--d:.45s"></span>
+          <span class="s19-radius-label">200m 반경 약국·편의시설<br>자동 SMS</span>
+          <div class="s19-found-group">
+            <div class="s18-mini-police"><span class="head"></span><span class="body"></span><span class="legs"></span></div>
+            <div class="s19-mini-elder"><i></i></div>
+            <div class="s18-mini-police"><span class="head"></span><span class="body"></span><span class="legs"></span><span class="s18-phone"></span></div>
           </div>
+          <span class="s19-facility store" style="--d:.04s"></span>
+          <span class="s19-facility pharmacy" style="--d:.16s"></span>
+          <span class="s19-facility hospital" style="--d:.28s"></span>
+          <div class="s19-alert a1" style="--d:.05s"><b>실종경보문자</b>명동 인근 발견 시 112</div>
+          <div class="s19-alert a2" style="--d:.18s"><b>실종경보문자</b>약국·편의시설 전파</div>
+          <div class="s19-alert a3" style="--d:.31s"><b>실종경보문자</b>주변 신고망 자동 알림</div>
         </div>
       </div>
     </div>
