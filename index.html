@@ -286,56 +286,58 @@
   #s05 .sectitle{font-size:38px;margin-bottom:5px}
   #s05 .secsub{font-size:15.5px;margin-bottom:14px;line-height:1.45}
   #s05 .callout.yellow{font-size:12.3px;line-height:1.45;padding:8px 14px;border-width:1.5px}
-  .pyramid-stage{position:relative;width:100%;height:min(488px,calc(100vh - 228px));min-height:430px;margin-bottom:10px;border:1px solid rgba(203,213,225,.9);border-radius:18px;overflow:hidden;background:radial-gradient(circle at 23% 34%,rgba(6,182,212,.12),transparent 31%),radial-gradient(circle at 79% 18%,rgba(234,179,8,.1),transparent 28%),linear-gradient(135deg,#fbfdff,#fff 58%,#f8fafc);box-shadow:0 18px 34px rgba(15,23,42,.08)}
+  .pyramid-stage{position:relative;width:100%;height:min(560px,calc(100vh - 220px));min-height:480px;margin-bottom:10px;background:transparent;border:none;box-shadow:none;overflow:visible}
   .pyramid-stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(148,163,184,.16) 1px,transparent 1px),linear-gradient(rgba(148,163,184,.12) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(90deg,#000,transparent 74%);opacity:.55;pointer-events:none}
   .pyramid-stage::after{content:"WHERE × WHY → WHAT";position:absolute;left:28px;top:24px;font-family:monospace;font-size:12px;font-weight:900;letter-spacing:.12em;color:#0f172a;background:rgba(255,255,255,.78);border:1px solid rgba(203,213,225,.85);border-radius:999px;padding:5px 12px;box-shadow:0 8px 18px rgba(15,23,42,.06)}
-  .pyramid-tower{position:absolute;left:0;top:0;width:58%;height:100%;pointer-events:none;display:flex;align-items:center;justify-content:center}
+  .pyramid-tower{position:absolute;left:0;top:0;width:55%;height:100%;pointer-events:none;display:flex;align-items:center;justify-content:center}
   .pyramid-tower::after{content:"";position:absolute;left:14%;right:10%;bottom:35px;height:46px;border-radius:50%;background:radial-gradient(ellipse,rgba(15,23,42,.18),transparent 68%);filter:blur(3px);opacity:.72}
   .donut-stack{width:94%;height:96%;display:block;overflow:visible;filter:drop-shadow(0 20px 18px rgba(15,23,42,.16))}
   .donut-stack .layer-g{transition:transform 1.18s cubic-bezier(.2,.86,.24,1);transform-box:fill-box;transform-origin:center}
   .donut-stack .layer-why{transform:translateY(140px)}
   .donut-stack .layer-what{transform:translateY(260px)}
-  .pyramid-stage.split .donut-stack .layer-why{transform:translateY(0);transition-delay:.55s}
-  .pyramid-stage.split .donut-stack .layer-what{transform:translateY(0);transition-delay:1.02s}
+  /* WHAT(가장 위, 가장 작음)이 먼저 빠져나오고 → WHY가 나중에 */
+  .pyramid-stage.split .donut-stack .layer-what{transform:translateY(0);transition-delay:.5s}
+  .pyramid-stage.split .donut-stack .layer-why{transform:translateY(0);transition-delay:1.05s}
   .donut-stack .layer-why .side,
   .donut-stack .layer-why .hole-inside,
   .donut-stack .layer-what .side{opacity:0;transition:opacity .34s ease-out}
+  .pyramid-stage.split .donut-stack .layer-what .side{opacity:1;transition-delay:.72s}
   .pyramid-stage.split .donut-stack .layer-why .side,
-  .pyramid-stage.split .donut-stack .layer-why .hole-inside{opacity:1;transition-delay:.78s}
-  .pyramid-stage.split .donut-stack .layer-what .side{opacity:1;transition-delay:1.24s}
-  .donut-stack .where-marks{opacity:0;transition:opacity .45s ease-out}
-  .donut-stack .where-marks ellipse{opacity:.2!important}
-  .pyramid-stage.split .donut-stack .where-marks{opacity:1;transition-delay:1.45s}
+  .pyramid-stage.split .donut-stack .layer-why .hole-inside{opacity:1;transition-delay:1.28s}
+  /* WHERE 가운데 구멍: 합쳐진 상태엔 WHY가 채워서 숨김 → WHY 빠져나간 후 드러남 */
+  .donut-stack .where-hole-side,.donut-stack .where-hole-top{opacity:0;transition:opacity .45s ease-out}
+  .pyramid-stage.split .donut-stack .where-hole-side,.pyramid-stage.split .donut-stack .where-hole-top{opacity:1;transition-delay:1.5s}
   .donut-stack .link-line{opacity:0;transition:opacity .42s ease-out;stroke-linecap:round;stroke-dasharray:none!important;filter:drop-shadow(0 0 4px currentColor)}
   .pyramid-stage.split .donut-stack .link-where{opacity:.62;transition-delay:.45s}
   .pyramid-stage.split .donut-stack .link-why{opacity:.72;transition-delay:1.08s}
   .pyramid-stage.split .donut-stack .link-what{opacity:.78;transition-delay:1.55s}
-  .donut-stack .layer-label{font-family:monospace;font-size:20px;font-weight:900;letter-spacing:.12em;fill:#fff;text-anchor:middle;paint-order:stroke;stroke:rgba(15,23,42,.22);stroke-width:3px}
-  .donut-stack .layer-sub{font-family:monospace;font-size:9px;font-weight:900;letter-spacing:.08em;fill:rgba(255,255,255,.92);text-anchor:middle}
-  .layer-card{position:absolute;right:1.6%;width:39%;background:rgba(255,255,255,.94);border-radius:13px;padding:11px 14px 11px 58px;box-shadow:0 14px 28px rgba(15,23,42,.1);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(-10px);transition:opacity .52s ease-out,transform .52s ease-out;backdrop-filter:blur(8px)}
-  .layer-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;border-top-left-radius:13px;border-bottom-left-radius:13px}
-  .layer-card::after{content:attr(data-icon);position:absolute;left:17px;top:50%;transform:translateY(-50%);width:27px;height:27px;border-radius:50%;display:grid;place-items:center;font-family:monospace;font-size:10px;font-weight:900;color:#fff;box-shadow:0 8px 16px rgba(15,23,42,.16)}
+  .donut-stack .layer-label{font-family:monospace;font-size:26px;font-weight:900;letter-spacing:.12em;fill:#0f172a;text-anchor:middle}
+  .donut-stack .layer-sub{font-family:monospace;font-size:11px;font-weight:900;letter-spacing:.08em;fill:#1e293b;text-anchor:middle}
+  .layer-card{position:absolute;right:1.6%;width:42%;background:rgba(255,255,255,.96);border-radius:15px;padding:16px 20px 16px 72px;box-shadow:0 16px 32px rgba(15,23,42,.12);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(-10px);transition:opacity .52s ease-out,transform .52s ease-out;backdrop-filter:blur(8px)}
+  .layer-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:9px;border-top-left-radius:15px;border-bottom-left-radius:15px}
+  .layer-card::after{content:attr(data-icon);position:absolute;left:20px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:monospace;font-size:14px;font-weight:900;color:#fff;box-shadow:0 8px 16px rgba(15,23,42,.18)}
+  /* 카드도 WHAT 먼저 등장 */
   .pyramid-stage.split .layer-card{opacity:1;transform:translateX(0)}
-  .pyramid-stage.split .layer-card.where{transition-delay:.55s}
-  .pyramid-stage.split .layer-card.why{transition-delay:1.14s}
-  .pyramid-stage.split .layer-card.what{transition-delay:1.68s}
-  .layer-card.what{top:5%;height:28.5%;border:1.5px solid rgba(6,182,212,.34);background:linear-gradient(135deg,rgba(207,250,254,.96),rgba(255,255,255,.95))}
+  .pyramid-stage.split .layer-card.what{transition-delay:1.0s}
+  .pyramid-stage.split .layer-card.why{transition-delay:1.55s}
+  .pyramid-stage.split .layer-card.where{transition-delay:2.0s}
+  .layer-card.what{top:4%;height:29.5%;border:1.5px solid rgba(6,182,212,.34);background:linear-gradient(135deg,rgba(207,250,254,.96),rgba(255,255,255,.95))}
   .layer-card.what::before,.layer-card.what::after{background:var(--cyan)}
-  .layer-card.why{top:36%;height:28.5%;border:1.5px solid rgba(234,179,8,.34);background:linear-gradient(135deg,rgba(254,243,199,.96),rgba(255,255,255,.95))}
+  .layer-card.why{top:35.5%;height:29.5%;border:1.5px solid rgba(234,179,8,.34);background:linear-gradient(135deg,rgba(254,243,199,.96),rgba(255,255,255,.95))}
   .layer-card.why::before,.layer-card.why::after{background:var(--yellow)}
-  .layer-card.where{top:67%;height:28.5%;border:1.5px solid rgba(239,68,68,.32);background:linear-gradient(135deg,rgba(255,237,213,.96),rgba(255,255,255,.95))}
+  .layer-card.where{top:67%;height:29.5%;border:1.5px solid rgba(239,68,68,.32);background:linear-gradient(135deg,rgba(255,237,213,.96),rgba(255,255,255,.95))}
   .layer-card.where::before,.layer-card.where::after{background:linear-gradient(180deg,#ef4444,#ea580c)}
-  .layer-tag{display:inline-block;font-family:monospace;font-size:9.4px;font-weight:900;padding:2px 8px;border-radius:6px;letter-spacing:.08em;margin-bottom:5px}
+  .layer-tag{display:inline-block;font-family:monospace;font-size:11.5px;font-weight:900;padding:3px 10px;border-radius:6px;letter-spacing:.08em;margin-bottom:7px}
   .layer-card.where .layer-tag{background:var(--red-soft);color:var(--red-deep)}
   .layer-card.why .layer-tag{background:var(--yellow-soft);color:var(--yellow-deep)}
   .layer-card.what .layer-tag{background:var(--cyan-soft);color:#0e7490}
-  .layer-card h3{font-size:15.3px;font-weight:900;letter-spacing:-.02em;margin-bottom:2px}
+  .layer-card h3{font-size:19px;font-weight:900;letter-spacing:-.02em;margin-bottom:5px;line-height:1.2}
   .layer-card.where h3{color:var(--red-deep)}
   .layer-card.why h3{color:var(--yellow-deep)}
   .layer-card.what h3{color:#0e7490}
-  .layer-card .meth{font-family:monospace;font-size:9.5px;color:var(--text-soft);line-height:1.38;border-top:1px dashed rgba(148,163,184,.55);padding-top:4px;margin-top:4px;margin-bottom:4px}
-  .layer-card .result{font-size:10.8px;font-weight:850;line-height:1.28}
-  .layer-card .result span{font-size:10.2px!important}
+  .layer-card .meth{font-family:monospace;font-size:12px;color:var(--text-soft);line-height:1.5;border-top:1px dashed rgba(148,163,184,.55);padding-top:6px;margin-top:6px;margin-bottom:6px;font-weight:600}
+  .layer-card .result{font-size:13px;font-weight:850;line-height:1.4}
+  .layer-card .result span{font-size:12px!important}
   @keyframes s05LayerPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
   .pyramid-stage.split .layer-where{animation:s05LayerPulse 2.6s ease-in-out .45s infinite}
   .pyramid-stage.split .layer-why{animation:s05LayerPulse 2.8s ease-in-out 1.05s infinite}
@@ -790,10 +792,10 @@
   .s19-city .s13-bldg,.s19-city .s13-block,.s19-city .s13-shop,.s19-city .s13-house,.s19-city .s13-tree,.s19-city .s13-bus,.s19-city .s13-facility,.s19-city .s13-signal,.s19-city .s13-hill{opacity:0;transform:var(--base,translateZ(0)) translateY(22px) scaleY(.08);transform-origin:50% 100%}
   #s19.scene-live .s19-city .s13-bldg,#s19.scene-live .s19-city .s13-block,#s19.scene-live .s19-city .s13-shop,#s19.scene-live .s19-city .s13-house,#s19.scene-live .s19-city .s13-tree,#s19.scene-live .s19-city .s13-bus,#s19.scene-live .s19-city .s13-facility,#s19.scene-live .s19-city .s13-signal,#s19.scene-live .s19-city .s13-hill{animation:s18TinyRise .78s cubic-bezier(.2,.82,.25,1.12) both;animation-delay:calc(var(--step-delay) + .42s + var(--rise,var(--d,0s)))}
   #s19.scene-live .s19-city .s13-wanderer{opacity:1;animation:s13Wander 6s ease-in-out infinite;animation-delay:calc(var(--step-delay) + 1.2s + var(--delay,0s))}
-  .s19-cctv{position:absolute;left:var(--x);bottom:var(--b);width:78px;height:62px;z-index:26;opacity:0;transform:translateY(16px) scale(.72) rotate(var(--rot,-7deg));transform-origin:50% 100%;filter:drop-shadow(0 0 8px rgba(125,249,255,.72)) drop-shadow(0 10px 8px rgba(15,23,42,.32))}
-  .s19-cctv::before{content:"";position:absolute;left:12px;top:8px;width:48px;height:25px;border-radius:5px 7px 7px 5px;background:linear-gradient(165deg,#fffef4 0 18%,#ece9db 18% 70%,#c9c5b8 100%);clip-path:polygon(0 16%,92% 0,100% 26%,100% 78%,92% 100%,0 88%);border:1px solid rgba(255,255,255,.9);box-shadow:inset 0 4px 0 rgba(255,255,255,.72),inset -8px -7px 0 rgba(169,164,148,.22),0 5px 8px rgba(15,23,42,.2)}
-  .s19-cctv::after{content:"";position:absolute;left:8px;top:2px;width:55px;height:13px;border-radius:6px 7px 3px 3px;background:linear-gradient(170deg,#fffef7,#d8d4c4);clip-path:polygon(5% 0,100% 0,92% 100%,0 100%);box-shadow:0 2px 0 rgba(148,139,119,.22),0 5px 8px rgba(15,23,42,.12)}
-  .s19-cctv i{position:absolute;left:7px;top:11px;width:22px;height:22px;border-radius:4px;background:radial-gradient(circle at 48% 48%,#f8fafc 0 12%,#64748b 13% 22%,#111827 23% 39%,#f8fafc 40% 48%,#111827 49% 100%);border:4px solid #e8e5d8;box-shadow:inset 0 0 0 2px rgba(255,255,255,.5),0 4px 7px rgba(15,23,42,.24);z-index:3}
+  .s19-cctv{position:absolute;left:var(--x);bottom:var(--b);width:52px;height:42px;z-index:26;opacity:0;transform:translateY(16px) scale(.72) rotate(var(--rot,-7deg));transform-origin:50% 100%;filter:drop-shadow(0 0 6px rgba(125,249,255,.72)) drop-shadow(0 8px 6px rgba(15,23,42,.32))}
+  .s19-cctv::before{content:"";position:absolute;left:8px;top:5px;width:32px;height:18px;border-radius:4px 5px 5px 4px;background:linear-gradient(165deg,#fffef4 0 18%,#ece9db 18% 70%,#c9c5b8 100%);clip-path:polygon(0 16%,92% 0,100% 26%,100% 78%,92% 100%,0 88%);border:1px solid rgba(255,255,255,.9);box-shadow:inset 0 3px 0 rgba(255,255,255,.72),inset -5px -5px 0 rgba(169,164,148,.22),0 3px 6px rgba(15,23,42,.2)}
+  .s19-cctv::after{content:"";position:absolute;left:6px;top:1px;width:37px;height:9px;border-radius:4px 5px 2px 2px;background:linear-gradient(170deg,#fffef7,#d8d4c4);clip-path:polygon(5% 0,100% 0,92% 100%,0 100%);box-shadow:0 1px 0 rgba(148,139,119,.22),0 3px 6px rgba(15,23,42,.12)}
+  .s19-cctv i{position:absolute;left:5px;top:7px;width:15px;height:15px;border-radius:3px;background:radial-gradient(circle at 48% 48%,#f8fafc 0 12%,#64748b 13% 22%,#111827 23% 39%,#f8fafc 40% 48%,#111827 49% 100%);border:3px solid #e8e5d8;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),0 3px 5px rgba(15,23,42,.24);z-index:3}
   .s19-cctv i::before{content:"";position:absolute;left:33px;top:22px;width:12px;height:18px;border-radius:3px;background:linear-gradient(180deg,#f6f4e8,#c9c5b8);box-shadow:0 13px 0 -2px #d8d4c4,7px 26px 0 -3px #ece9db,27px 31px 0 -1px #d8d4c4,35px 27px 0 1px #c7c1b3}
   .s19-cctv i::after{content:"";position:absolute;left:43px;top:44px;width:42px;height:10px;border-radius:3px;background:linear-gradient(180deg,#f5f2e6,#c8c3b5);box-shadow:38px -5px 0 3px #d8d4c4,39px -5px 0 5px rgba(255,255,255,.7),30px -18px 0 -4px #111827;transform:rotate(-3deg);transform-origin:left center}
   #s19.scene-live .s19-cctv{animation:s19CctvPop .66s cubic-bezier(.2,.86,.25,1.14) both,s19CctvScan 2.4s ease-in-out infinite;animation-delay:calc(5.05s + var(--d,0s)),calc(5.65s + var(--d,0s))}
@@ -1348,7 +1350,7 @@
 <section id="s05" data-section="5">
   <div class="secnum cyan">SLIDE 05 · APPROACH</div>
   <h2 class="sectitle">연구 접근법 — 3-Layer 진단 프레임</h2>
-  <p class="secsub">Where (공간) × Why (환경) = What (정책) — 격자 단위 비지도 학습으로 <strong>어디 × 왜</strong> 동시 식별</p>
+  <p class="secsub">격자 단위 비지도 학습으로 <strong>어디 × 왜</strong> 동시 식별</p>
 
   <div class="pyramid-stage" id="s05-pyramid">
     <!-- 좌측: 3단 동심 도넛 (밑 WHERE 가장 큼 → WHY → WHAT 가장 작음) -->
@@ -1386,21 +1388,18 @@
              분리 후: y=180 (가장 위)
         -->
 
-        <!-- ① WHERE 큰 원기둥 (맨 아래, 고정) — 분리 후엔 WHY/WHAT이 박혀있던 자국이 드러남 -->
+        <!-- ① WHERE 도넛 (맨 아래, 고정) — 가운데 뻥 뚫린 형태로 변경 -->
         <g class="layer-g layer-where">
+          <!-- 측면 (도넛 외측) -->
           <path d="M 60,440 A 190,55 0 1 0 440,440 L 440,510 A 190,55 0 1 1 60,510 Z" fill="url(#donutRedSide)"/>
+          <!-- 윗면 외측 타원 -->
           <ellipse cx="250" cy="440" rx="190" ry="55" fill="url(#donutRedTop)"/>
-          <!-- 박혀있던 자국 (분리 후에만 보임) — WHY 도넛 외경 크기의 어두운 음영 + 가운데에 더 어두운 WHAT 자국 -->
-          <g class="where-marks">
-            <!-- WHY 자국 (도넛 외경 크기 — 어두운 빨강) -->
-            <ellipse cx="250" cy="440" rx="140" ry="40" fill="#7f1d1d" opacity=".65"/>
-            <!-- WHY 안쪽 그림자 (도넛 형태 음각) -->
-            <ellipse cx="250" cy="442" rx="135" ry="37" fill="none" stroke="#450a0a" stroke-width="2" opacity=".55"/>
-            <!-- WHAT 자국 (솔리드 원기둥 크기 — 더 깊은 어두운) -->
-            <ellipse cx="250" cy="440" rx="90" ry="26" fill="#450a0a" opacity=".85"/>
-          </g>
-          <text class="layer-label" x="250" y="438">WHERE</text>
-          <text class="layer-sub" x="250" y="456">LISA HOTSPOT</text>
+          <!-- 가운데 구멍 (분리 후 드러남) — WHY 외경 크기 -->
+          <ellipse class="where-hole-side" cx="250" cy="442" rx="140" ry="40" fill="#7f1d1d"/>
+          <ellipse class="where-hole-top" cx="250" cy="444" rx="134" ry="36" fill="#991b1b"/>
+          <!-- 라벨 (도넛 윗면 위쪽 — 구멍 비켜서 배치) -->
+          <text class="layer-label" x="250" y="412">WHERE</text>
+          <text class="layer-sub" x="250" y="500">LISA HOTSPOT</text>
         </g>
 
         <!-- ② WHY 도넛 — 분리 후 윗면 y=300, 합쳐진 상태에서는 측면/구멍 안쪽 숨김 -->
@@ -1412,8 +1411,8 @@
           <!-- 가운데 구멍 안쪽 (합쳐진 상태엔 WHAT이 채워서 숨김) -->
           <ellipse class="hole-inside" cx="250" cy="302" rx="90" ry="26" fill="#92400e"/>
           <ellipse class="hole-inside" cx="250" cy="304" rx="84" ry="23" fill="#b45309"/>
-          <text class="layer-label" x="250" y="304">WHY</text>
-          <text class="layer-sub" x="250" y="320">HDBSCAN</text>
+          <text class="layer-label" x="250" y="278">WHY</text>
+          <text class="layer-sub" x="250" y="358">HDBSCAN</text>
         </g>
 
         <!-- ③ WHAT 솔리드 원기둥 — 분리 후 윗면 y=180 -->
@@ -3056,10 +3055,15 @@
           <span class="s13-signal" style="--x:77%;--b:42px;--d:.74s"></span>
           <span class="s13-tree" style="--x:4%;--b:39px;--d:.84s"></span>
           <span class="s13-tree" style="--x:101%;--b:38px;--d:.94s"></span>
-          <span class="s19-cctv" style="--x:13%;--b:116px;--rot:-10deg;--d:.05s"><i></i></span>
-          <span class="s19-cctv" style="--x:39%;--b:142px;--rot:7deg;--d:.17s"><i></i></span>
-          <span class="s19-cctv" style="--x:66%;--b:138px;--rot:-4deg;--d:.29s"><i></i></span>
-          <span class="s19-cctv" style="--x:90%;--b:112px;--rot:9deg;--d:.41s"><i></i></span>
+          <!-- CCTV들을 더 작게(52×42) + 다양한 위치/높이로 분산 -->
+          <span class="s19-cctv" style="--x:8%;--b:128px;--rot:-12deg;--d:.05s"><i></i></span>
+          <span class="s19-cctv" style="--x:22%;--b:98px;--rot:8deg;--d:.11s"><i></i></span>
+          <span class="s19-cctv" style="--x:33%;--b:156px;--rot:-6deg;--d:.17s"><i></i></span>
+          <span class="s19-cctv" style="--x:46%;--b:118px;--rot:10deg;--d:.23s"><i></i></span>
+          <span class="s19-cctv" style="--x:58%;--b:148px;--rot:-9deg;--d:.29s"><i></i></span>
+          <span class="s19-cctv" style="--x:71%;--b:106px;--rot:5deg;--d:.35s"><i></i></span>
+          <span class="s19-cctv" style="--x:82%;--b:138px;--rot:-7deg;--d:.41s"><i></i></span>
+          <span class="s19-cctv" style="--x:93%;--b:92px;--rot:11deg;--d:.47s"><i></i></span>
           <span class="s13-wanderer" style="--x:16%;--b:39px;--walk:58px;--delay:.1s"><i></i></span>
           <span class="s13-wanderer" style="--x:50%;--b:40px;--walk:-46px;--delay:.7s"><i></i></span>
           <span class="s13-wanderer" style="--x:72%;--b:39px;--walk:38px;--delay:1.2s"><i></i></span>
