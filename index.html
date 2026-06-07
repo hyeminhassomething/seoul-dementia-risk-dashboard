@@ -1224,23 +1224,22 @@
              분리 후: y=180 (가장 위)
         -->
 
-        <!-- ① WHERE 큰 원기둥 (맨 아래, 고정) -->
+        <!-- ① WHERE 큰 원기둥 (맨 아래, 고정) — 깨끗한 윗면, 자국 없음 -->
         <g class="layer-g layer-where">
-          <!-- 측면 -->
           <path d="M 60,440 A 190,55 0 1 0 440,440 L 440,510 A 190,55 0 1 1 60,510 Z" fill="url(#donutRedSide)"/>
-          <!-- 윗면 (꽉 찬 타원 — 도넛 X) -->
           <ellipse cx="250" cy="440" rx="190" ry="55" fill="url(#donutRedTop)"/>
-          <!-- 윗면 안쪽 가운데에 WHY 자국 (어두운 분리선) — WHY가 떠오를 자리 표시 -->
-          <ellipse cx="250" cy="440" rx="140" ry="40" fill="rgba(127,29,29,.18)"/>
         </g>
 
-        <!-- ② WHY 도넛 — 분리 후 윗면 y=300 -->
+        <!-- ② WHY 도넛 — 분리 후 윗면 y=300, 구멍 안쪽은 어두운 측면만 (흰 칠 X) -->
         <g class="layer-g layer-why">
+          <!-- 외측 측면 -->
           <path d="M 110,300 A 140,40 0 1 0 390,300 L 390,338 A 140,40 0 1 1 110,338 Z" fill="url(#donutBlueSide)"/>
+          <!-- 윗면 외측 타원 -->
           <ellipse cx="250" cy="300" rx="140" ry="40" fill="url(#donutBlueTop)"/>
-          <!-- 가운데 구멍 (어두운 측면 보이게) -->
-          <ellipse cx="250" cy="302" rx="90" ry="26" fill="#1e3a8a"/>
-          <ellipse cx="250" cy="300" rx="90" ry="26" fill="#fff"/>
+          <!-- 가운데 구멍 안쪽 측면 (어두운 파랑 — 안쪽 벽) -->
+          <ellipse cx="250" cy="300" rx="90" ry="26" fill="#1e3a8a"/>
+          <!-- 안쪽 윗면 (도넛 안쪽 깊이 표현 — 살짝 더 진한 파랑) -->
+          <ellipse cx="250" cy="304" rx="84" ry="23" fill="#1e40af"/>
         </g>
 
         <!-- ③ WHAT 솔리드 원기둥 — 분리 후 윗면 y=180 -->
