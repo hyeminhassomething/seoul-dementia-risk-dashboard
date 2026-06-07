@@ -3375,27 +3375,42 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
     document.getElementById('s18-conn-3'),
   ];
   if (!svg || !layout || origins.length < 3 || cards.length < 3) return;
+  let lastSig = '';
   function update(){
     const lr = layout.getBoundingClientRect();
     if (lr.width < 10) return;
+    // 변화 시그니처 — layout width + origin/card 위치
+    const sig = lr.width + '|' + Array.from(origins).map(o => o.getBoundingClientRect().left.toFixed(1)).join(',') + '|' + Array.from(cards).map(c => c.getBoundingClientRect().left.toFixed(1)).join(',');
+    if (sig === lastSig) return;
+    lastSig = sig;
     for (let i = 0; i < 3; i++){
       const o = origins[i].getBoundingClientRect();
       const c = cards[i].getBoundingClientRect();
-      // origin 중심 좌표 (layout 비례 0~100)
       const x1 = ((o.left + o.width/2) - lr.left) / lr.width * 100;
       const y1 = ((o.top + o.height/2) - lr.top) / lr.height * 100;
-      // 카드 좌측 변 중심 (수직 가운데)
       const x2 = (c.left - lr.left) / lr.width * 100;
       const y2 = ((c.top + c.height/2) - lr.top) / lr.height * 100;
       const cx = (x1 + x2) / 2;
       paths[i].setAttribute('d', `M${x1.toFixed(2)},${y1.toFixed(2)} C${cx.toFixed(2)},${y1.toFixed(2)} ${cx.toFixed(2)},${y2.toFixed(2)} ${x2.toFixed(2)},${y2.toFixed(2)}`);
     }
   }
-  // 초기 + resize + scene-live 활성화 시 반복 갱신
+  // 초기 + resize + sidebar toggle 감지 (body class 변경)
   window.addEventListener('resize', update);
-  setTimeout(update, 100);
-  setTimeout(update, 800);
-  setTimeout(update, 1600);
+  const bodyObserver = new MutationObserver(() => {
+    // sidebar 토글 transition .25s 동안 path 추적
+    [50, 150, 280, 450, 700].forEach(t => setTimeout(update, t));
+  });
+  bodyObserver.observe(document.body, {attributes:true, attributeFilter:['class']});
+  // 진입/스크롤 감지
+  const io = new IntersectionObserver(() => requestAnimationFrame(update), {threshold:[0,.25,.5,.75,1]});
+  io.observe(sec);
+  // 초기 다중 polling (이미지/폰트 로드 후 layout 안정화)
+  [100, 400, 900, 1600, 2400].forEach(t => setTimeout(update, t));
+  // ResizeObserver: layout 폭 변화 직접 감지 (sidebar collapse 등으로 인한)
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(() => requestAnimationFrame(update));
+    ro.observe(layout);
+  }
 })();
 
 // s13/s14/s18/s19 — 미니 도시 빌딩 상승 및 케이스/시스템 시퀀스 등장
