@@ -2466,7 +2466,7 @@
 <section id="s15" data-section="15">
   <div class="secnum orange">SLIDE 15 · TOP 동</div>
   <h2 class="sectitle">동별 위험 밀도 TOP — 4가지 페르소나</h2>
-  <p class="secsub">클러스터 구성과 밀도만으로 본 서울 대표 위험구역 4동 — <strong>왕십리도선동의 혼합도가 가장 흥미로움</strong></p>
+  <p class="secsub">클러스터 구성과 밀도만으로 본 서울 대표 위험구역 4동</p>
 
   <div style="display:grid;grid-template-columns:1.05fr 1.4fr;gap:14px;margin-bottom:10px;align-items:start">
     <!-- 4 페르소나 카드 -->
@@ -3104,15 +3104,26 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
       const el = document.createElement('div');
       el.className = 's15-pop';
       el.style.cssText = `position:absolute;top:${top.toFixed(2)}%;left:${left.toFixed(2)}%;transform:translate(-50%,-100%) scale(.6);opacity:0;transition:opacity .35s ease-out,transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none`;
-      const tag = d.tag ? `<div style="position:absolute;top:-7px;left:50%;transform:translateX(-50%);background:${d.dark};color:#fff;font-size:9px;font-weight:900;padding:1px 7px;border-radius:999px;letter-spacing:.04em;white-space:nowrap">${d.tag}</div>` : '';
+      // 명동 = 빨강으로 강조 (배경 빨강, 글씨 흰색, 글로우)
+      const isMyeongdong = d.name.includes('명동');
+      const cardBg = isMyeongdong ? 'linear-gradient(145deg,#ef4444,#b91c1c)' : '#fff';
+      const cardBorder = isMyeongdong ? '#991b1b' : d.dark;
+      const cardShadow = isMyeongdong ? '0 0 24px rgba(239,68,68,.7),0 6px 18px rgba(220,38,38,.5)' : '0 6px 18px rgba(0,0,0,.2)';
+      const nameColor = isMyeongdong ? '#fff' : '#0f172a';
+      const densityColor = isMyeongdong ? 'rgba(255,255,255,.95)' : d.dark;
+      const personaColor = isMyeongdong ? 'rgba(255,255,255,.92)' : '#0f172a';
+      const personaBorder = isMyeongdong ? 'rgba(255,255,255,.32)' : '#e5e7eb';
+      const arrowColor = isMyeongdong ? '#dc2626' : d.dark;
+      const tag = d.tag ? `<div style="position:absolute;top:-7px;left:50%;transform:translateX(-50%);background:${isMyeongdong?'#fff':d.dark};color:${isMyeongdong?'#dc2626':'#fff'};font-size:9px;font-weight:900;padding:1px 7px;border-radius:999px;letter-spacing:.04em;white-space:nowrap">${d.tag}</div>` : '';
+      const textShadow = isMyeongdong ? 'text-shadow:0 1px 2px rgba(0,0,0,.3);' : '';
       el.innerHTML = `
-        <div style="position:absolute;left:50%;top:100%;transform:translate(-50%,0);width:9px;height:9px;border-radius:50%;background:${d.dark};border:1.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>
-        <div style="background:#fff;border:2px solid ${d.dark};border-radius:8px;padding:6px 10px;box-shadow:0 6px 18px rgba(0,0,0,.2);white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;margin-bottom:7px;position:relative">
+        <div style="position:absolute;left:50%;top:100%;transform:translate(-50%,0);width:9px;height:9px;border-radius:50%;background:${d.dark};border:1.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)${isMyeongdong?',0 0 12px rgba(239,68,68,.9)':''}"></div>
+        <div style="background:${cardBg};border:2px solid ${cardBorder};border-radius:8px;padding:6px 10px;box-shadow:${cardShadow};white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;margin-bottom:7px;position:relative">
           ${tag}
-          <div style="font-size:11px;font-weight:900;color:#0f172a;line-height:1.2;margin-top:${d.tag?'4px':'0'}">${d.name}</div>
-          <div style="font-size:9.5px;color:${d.dark};font-weight:800;margin-top:2px;line-height:1.2">density <b style="font-family:monospace;font-size:11px">${d.density}</b></div>
-          <div style="font-size:9.5px;color:#0f172a;font-weight:700;margin-top:2px;padding-top:2px;border-top:1px dashed #e5e7eb;line-height:1.25">${d.persona}</div>
-          <div style="position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid ${d.dark}"></div>
+          <div style="font-size:11px;font-weight:900;color:${nameColor};line-height:1.2;margin-top:${d.tag?'4px':'0'};${textShadow}">${d.name}</div>
+          <div style="font-size:9.5px;color:${densityColor};font-weight:800;margin-top:2px;line-height:1.2;${textShadow}">density <b style="font-family:monospace;font-size:11px">${d.density}</b></div>
+          <div style="font-size:9.5px;color:${personaColor};font-weight:700;margin-top:2px;padding-top:2px;border-top:1px dashed ${personaBorder};line-height:1.25;${textShadow}">${d.persona}</div>
+          <div style="position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid ${arrowColor}"></div>
         </div>`;
       wrap.appendChild(el);
     });
