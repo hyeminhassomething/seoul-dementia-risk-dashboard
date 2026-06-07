@@ -441,11 +441,12 @@
   .lisa-row-c .cnum small{font-size:12px;color:var(--muted);display:block;font-weight:700;margin-top:3px}
 
   /* Section 12 — HDBSCAN */
-  .hdb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:10px}
-  .hdb-card{background:#fff;border:2px solid var(--border-strong);border-radius:12px;padding:12px 16px}
-  .hdb-card .n{font-family:monospace;font-size:12px;color:var(--cyan);font-weight:900;margin-bottom:4px;letter-spacing:.05em}
-  .hdb-card .t{font-size:14px;font-weight:900;color:var(--text);margin-bottom:6px}
-  .hdb-card .b{font-size:11.5px;color:var(--text-soft);line-height:1.6}
+  .hdb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:12px;align-items:stretch}
+  .hdb-card{background:#fff;border:2px solid var(--border-strong);border-radius:14px;padding:16px 20px;display:flex;flex-direction:column}
+  .hdb-card .n{font-family:monospace;font-size:13.5px;color:var(--cyan);font-weight:900;margin-bottom:6px;letter-spacing:.06em}
+  .hdb-card .t{font-size:16px;font-weight:900;color:var(--text);margin-bottom:10px;line-height:1.35;word-break:keep-all}
+  .hdb-card .b{font-size:13.5px;color:var(--text-soft);line-height:1.7;font-weight:600;flex:1}
+  .hdb-card .b strong{color:var(--text);font-weight:900}
 
   /* Section 13 — HH persona */
   .persona-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:10px}
@@ -2203,8 +2204,9 @@
       <div class="n">① 정의</div>
       <div class="t">🎯 Hierarchical Density-Based Spatial Clustering of Applications with Noise</div>
       <div class="b">
-        데이터 밀도가 높은 영역을 군집으로 자생적 식별, 낮은 영역은 노이즈로 자동 분리.
-        <hr style="border:0;border-top:1px dashed var(--border);margin:6px 0">
+        밀도가 높은 영역 → 군집으로 자생적 식별<br>
+        낮은 영역 → 노이즈로 자동 분리
+        <hr style="border:0;border-top:1px dashed var(--border);margin:10px 0">
         · mutual reachability distance<br>
         · condensed cluster tree<br>
         · stability-based pruning
@@ -2215,9 +2217,14 @@
       <div class="n">② 채택 근거</div>
       <div class="t">3가지 강점</div>
       <div class="b">
-        <strong>K-사전 지정 불필요</strong> — K-means와 달리 밀도 기반으로 군집 개수 자동 결정<br><br>
-        <strong>노이즈 자동 식별</strong> — 어디에도 속하지 않는 격자 · 1군 분리<br><br>
-        <strong>임의 모양 군집 허용</strong> — K-means/GMM은 구형만 가정 → 밀도 컴팩트성이 충분해 밀도 기반이 적합
+        <strong>K-사전 지정 불필요</strong><br>
+        → K-means와 달리 밀도 기반으로 군집 개수 자동 결정
+        <hr style="border:0;border-top:1px dashed var(--border);margin:8px 0">
+        <strong>노이즈 자동 식별</strong><br>
+        → 어디에도 속하지 않는 격자를 따로 분리
+        <hr style="border:0;border-top:1px dashed var(--border);margin:8px 0">
+        <strong>임의 모양 군집 허용</strong><br>
+        → K-means/GMM은 구형만 가정, HDBSCAN은 형태 무관
       </div>
     </div>
 
@@ -2225,43 +2232,46 @@
       <div class="n">③ 본 연구 적용</div>
       <div class="t">하이퍼파라미터 · 입력 · 결과</div>
       <div class="b">
-        <strong>[Hyperparameter]</strong><br>
+        <strong style="color:var(--cyan)">[Hyperparameter]</strong><br>
         · min_cluster_size = 500<br>
-        · metric = euclidean<br><br>
-        <strong>[입력]</strong><br>
-        · 13개 환경 변수 (교차로·막다른길·경사·INFRASTRUCTURE·STORE·65+ 인구 등)<br>
-        · z-score 정규화<br><br>
-        <strong>[결과]</strong><br>
-        · <span style="color:var(--cyan)">82 valid clusters</span>: 자생적 동일 환경<br>
-        · 노이즈 <span style="color:var(--orange-deep)">76,461 격자 (31.3%)</span><br>
-        · 82 군집 = 5가지 환경 유형 통합 명명 (5종 슬라이드로)
+        · metric = euclidean
+        <hr style="border:0;border-top:1px dashed var(--border);margin:8px 0">
+        <strong style="color:var(--cyan)">[입력]</strong><br>
+        · 13개 환경 변수 + z-score 정규화
+        <hr style="border:0;border-top:1px dashed var(--border);margin:8px 0">
+        <strong style="color:var(--cyan)">[결과]</strong><br>
+        · <span style="color:var(--cyan);font-weight:900">82 valid clusters</span> — 자생적 동일 환경<br>
+        · 노이즈 <span style="color:var(--orange-deep);font-weight:900">76,461 격자 (31.3%)</span><br>
+        · → 5가지 환경 유형으로 통합 명명
       </div>
     </div>
   </div>
 
-  <div class="grid-2" style="gap:12px;margin-top:8px;align-items:start">
-    <div class="card" style="border-color:var(--text);padding:6px 8px">
-      <div class="head" style="margin-bottom:3px;font-size:10.5px">HDBSCAN 82 valid clusters — 서울 전역</div>
-      <div style="position:relative;width:100%;max-width:330px;margin:0 auto;aspect-ratio:1293/1204;background:#f1f5f9;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+  <div class="grid-2" style="gap:14px;margin-top:10px;align-items:stretch">
+    <div class="card" style="border-color:var(--text);padding:12px 14px;display:flex;flex-direction:column">
+      <div class="head" style="margin-bottom:8px;font-size:14px">HDBSCAN 82 valid clusters — 서울 전역</div>
+      <div style="position:relative;width:100%;max-width:380px;margin:0 auto;aspect-ratio:1293/1204;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
         <img src="maps/s12_v2.png?v=2" alt="HDBSCAN 82 군집 산점도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
       </div>
-      <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
-        * 색상 = HDBSCAN 군집 ID — 사전 라벨링 없이 자생적으로 등장한 82개 valid clusters
+      <div style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.55;font-weight:700">
+        * 색상 = HDBSCAN 군집 ID<br>
+        → 사전 라벨링 없이 자생적으로 등장한 82개 valid clusters
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <div class="card cyan" style="padding:8px 12px">
-        <div class="head" style="font-size:11px;margin-bottom:4px">밀도 기반 군집 (density scatter)</div>
-        <div style="font-size:11.5px;line-height:1.6;color:var(--text-soft)">
-          <strong style="color:var(--text)">밀도 높은 영역</strong> → 자생적 군집 / <strong style="color:var(--text)">낮은 영역</strong> → 노이즈
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card cyan" style="padding:14px 18px;flex:1 1 0">
+        <div class="head" style="font-size:14px;margin-bottom:8px">📊 밀도 기반 군집 (density scatter)</div>
+        <div style="font-size:13.5px;line-height:1.7;color:var(--text-soft);font-weight:700">
+          <strong style="color:var(--text)">밀도 높은 영역</strong> → 자생적 군집<br>
+          <strong style="color:var(--text)">낮은 영역</strong> → 노이즈로 자동 분리
         </div>
       </div>
-      <div class="card orange" style="padding:8px 12px">
-        <div class="head" style="font-size:11px;margin-bottom:4px">응축 군집 트리 + 안정성 기반 가지치기</div>
-        <div style="font-size:11.5px;color:var(--text-soft);line-height:1.6">
-          계층적 트리 → <strong>condensed cluster tree</strong> → 자생적 군집<br>
-          밀도(λ)별 <strong>stability-based pruning</strong><br>
-          <strong style="color:var(--orange-deep)">→ 82 valid + noise 76,461 (31.3%)</strong>
+      <div class="card orange" style="padding:14px 18px;flex:1 1 0">
+        <div class="head" style="font-size:14px;margin-bottom:8px">🌳 응축 군집 트리 + 안정성 기반 가지치기</div>
+        <div style="font-size:13.5px;color:var(--text-soft);line-height:1.7;font-weight:700">
+          계층적 트리 → <strong style="color:var(--text)">condensed cluster tree</strong><br>
+          → 밀도(λ)별 <strong style="color:var(--text)">stability-based pruning</strong><br>
+          → <strong style="color:var(--orange-deep)">82 valid + noise 76,461 (31.3%)</strong>
         </div>
       </div>
     </div>
