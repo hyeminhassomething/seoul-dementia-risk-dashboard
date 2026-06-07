@@ -652,7 +652,7 @@
   #s18 .secsub{font-size:13.5px;margin-bottom:9px;line-height:1.42}
   #s19 .sectitle{font-size:34px;margin-bottom:4px}
   #s19 .secsub{font-size:14px;margin-bottom:11px;line-height:1.45}
-  .s18-case-layout{position:relative;display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);gap:18px;align-items:start}
+  .s18-case-layout{position:relative;display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);gap:18px;align-items:stretch}
   .s18-map-zone{position:relative;z-index:2;min-width:0}
   .s18-map-shell{display:grid;grid-template-columns:minmax(0,1fr) 42px;gap:10px;align-items:stretch;height:min(590px,calc(100vh - 174px));min-height:500px}
   .s18-map-wrap{position:relative;height:100%;aspect-ratio:1315/1312;justify-self:end;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid rgba(239,68,68,.2);box-shadow:0 16px 34px rgba(15,23,42,.1)}
@@ -670,13 +670,14 @@
   .s18-map-cell{position:absolute;left:var(--x);top:var(--y);width:calc(100% / 20);height:calc(100% / 28);border-radius:3px;background:rgba(0,111,255,.72);border:1.4px solid rgba(191,246,255,.98);box-shadow:0 0 16px rgba(0,111,255,.86),inset 0 0 11px rgba(125,249,255,.42);transform:scale(.35);transform-origin:center;opacity:0;z-index:4}
   #s18.scene-live .s18-origin{animation:s18OriginPulse 2.2s ease-in-out infinite;animation-delay:var(--d,0s)}
   #s18.scene-live .s18-map-cell{animation:s18GridCellGlow 4.4s ease-in-out infinite;animation-delay:calc(.78s + var(--d,0s))}
-  .s18-info-side{position:relative;z-index:4;display:flex;flex-direction:column;gap:10px;padding-top:6px}
-  .s18-info-card{opacity:0;transform:translateX(-20px) scale(.96);box-shadow:0 14px 30px rgba(15,23,42,.08)}
+  .s18-info-side{position:relative;z-index:4;display:flex;flex-direction:column;gap:12px;padding-top:0;height:100%}
+  .s18-info-card{opacity:0;transform:translateX(-20px) scale(.96);box-shadow:0 14px 30px rgba(15,23,42,.08);flex:1 1 0;min-height:0;display:flex;flex-direction:column;justify-content:center}
   #s18.scene-live .s18-info-card{animation:s18StepIn .62s cubic-bezier(.2,.86,.25,1) both;animation-delay:var(--d,1s)}
-  .s18-why{padding:13px 15px!important;border-width:2.4px!important}
-  .s18-why .head,.s18-stack-card .head{font-size:12.3px!important;margin-bottom:6px!important}
-  .s18-why .bul li,.s18-stack-card .bul li{font-size:11.1px!important;line-height:1.45!important;padding:2px 0 2px 13px!important}
-  .s18-stack-card{padding:11px 14px!important;border-width:2.2px!important}
+  .s18-why{padding:16px 20px!important;border-width:2.4px!important}
+  .s18-why .head,.s18-stack-card .head{font-size:15.5px!important;margin-bottom:10px!important;font-weight:900!important}
+  .s18-why .bul li,.s18-stack-card .bul li{font-size:13.5px!important;line-height:1.55!important;padding:4px 0 4px 17px!important;font-weight:600}
+  .s18-why .bul li strong,.s18-stack-card .bul li strong{font-weight:900}
+  .s18-stack-card{padding:16px 20px!important;border-width:2.2px!important}
   .s18-connector{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
   .s18-connector path{fill:none;stroke:rgba(0,184,216,.74);stroke-width:2px;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;opacity:0;filter:drop-shadow(0 0 4px rgba(0,229,255,.42))}
   #s18.scene-live .s18-connector path{animation:s18ConnectorIn .7s ease-out 1s both}
@@ -3970,27 +3971,37 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
           requestAnimationFrame(drawLine);
         }, lineDelay);
       }
-      // 3) 평균 행: R²/MSE 카운트업 (±SD는 처음부터 표시되어 있어 레이아웃 흔들림 없음)
+      // 3) 평균 행: R²/MSE + ±SD 모두 동시에 카운트업
       const avg = box.querySelector('.s09b-avg');
       if (avg) {
         const r2Target = parseFloat(avg.dataset.r2);
+        const r2sdTarget = parseFloat(avg.dataset.r2sd);
         const mseTarget = parseFloat(avg.dataset.mse);
+        const msesdTarget = parseFloat(avg.dataset.msesd);
         const r2NumEl = avg.querySelector('.r2-cell .num');
         const mseNumEl = avg.querySelector('.mse-cell .num');
+        const r2SdEl = avg.querySelector('.r2-cell small');
+        const mseSdEl = avg.querySelector('.mse-cell small');
         const avgStart = lineDelay + 600;
         setTimeout(() => {
           if (r2NumEl) r2NumEl.textContent = '0.0000';
           if (mseNumEl) mseNumEl.textContent = '0.0000';
+          if (r2SdEl) r2SdEl.textContent = '±0.0000';
+          if (mseSdEl) mseSdEl.textContent = '±0.0000';
           const start = performance.now();
           function step(now){
             const t = Math.min(1, (now - start) / 1100);
             const eased = 1 - Math.pow(1 - t, 3);
             if (r2NumEl) r2NumEl.textContent = tickFmt(r2Target * eased, 4);
             if (mseNumEl) mseNumEl.textContent = tickFmt(mseTarget * eased, 4);
+            if (r2SdEl) r2SdEl.textContent = '±' + tickFmt(r2sdTarget * eased, 4);
+            if (mseSdEl) mseSdEl.textContent = '±' + tickFmt(msesdTarget * eased, 4);
             if (t < 1) requestAnimationFrame(step);
             else {
               if (r2NumEl) r2NumEl.textContent = tickFmt(r2Target, 4);
               if (mseNumEl) mseNumEl.textContent = tickFmt(mseTarget, 4);
+              if (r2SdEl) r2SdEl.textContent = '±' + tickFmt(r2sdTarget, 4);
+              if (mseSdEl) mseSdEl.textContent = '±' + tickFmt(msesdTarget, 4);
             }
           }
           requestAnimationFrame(step);
