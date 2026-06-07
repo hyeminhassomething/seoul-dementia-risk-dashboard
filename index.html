@@ -334,18 +334,18 @@
   .donut-stack .where-hole-side,.donut-stack .where-hole-top{opacity:1}
   .donut-stack .link-line{opacity:0;transition:opacity .42s ease-out;stroke-linecap:round;stroke-dasharray:none!important;filter:drop-shadow(0 0 4px currentColor)}
   .pyramid-stage.split .donut-stack .link-where{opacity:.62;transition-delay:.45s}
-  .pyramid-stage.split .donut-stack .link-why{opacity:.72;transition-delay:1.08s}
-  .pyramid-stage.split .donut-stack .link-what{opacity:.78;transition-delay:1.55s}
+  .pyramid-stage.split .donut-stack .link-why{opacity:.72;transition-delay:1.5s}
+  .pyramid-stage.split .donut-stack .link-what{opacity:.78;transition-delay:2.55s}
   .donut-stack .layer-label{font-family:monospace;font-size:28px;font-weight:900;letter-spacing:.12em;fill:#fff;text-anchor:middle;filter:drop-shadow(0 1px 2px rgba(15,23,42,.55)) drop-shadow(0 0 8px rgba(255,255,255,.45))}
   .donut-stack .layer-sub{font-family:monospace;font-size:12px;font-weight:900;letter-spacing:.08em;fill:#0f172a;text-anchor:middle}
   .layer-card{position:absolute;right:1.6%;width:46%;background:rgba(255,255,255,.96);border-radius:16px;padding:12px 18px 12px 64px;box-shadow:0 16px 32px rgba(15,23,42,.12);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(-10px);transition:opacity .52s ease-out,transform .52s ease-out;backdrop-filter:blur(8px)}
   .layer-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:9px;border-top-left-radius:15px;border-bottom-left-radius:15px}
   .layer-card::after{content:attr(data-icon);position:absolute;left:14px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:monospace;font-size:13px;font-weight:900;color:#fff;box-shadow:0 8px 16px rgba(15,23,42,.18)}
-  /* 카드도 WHAT 먼저 등장 */
+  /* 카드 등장 순서: WHERE(빨강) → WHY(노랑) → WHAT(파랑) — 각각 자신의 연결선 등장 직후 */
   .pyramid-stage.split .layer-card{opacity:1;transform:translateX(0)}
-  .pyramid-stage.split .layer-card.what{transition-delay:1.0s}
-  .pyramid-stage.split .layer-card.why{transition-delay:1.55s}
-  .pyramid-stage.split .layer-card.where{transition-delay:2.0s}
+  .pyramid-stage.split .layer-card.where{transition-delay:.95s}
+  .pyramid-stage.split .layer-card.why{transition-delay:2.0s}
+  .pyramid-stage.split .layer-card.what{transition-delay:3.05s}
   .layer-card.what{top:0.5%;height:29%;border:1.5px solid rgba(6,182,212,.34);background:linear-gradient(135deg,rgba(207,250,254,.96),rgba(255,255,255,.95))}
   .layer-card.what::before,.layer-card.what::after{background:var(--cyan)}
   .layer-card.why{top:35.5%;height:29%;border:1.5px solid rgba(234,179,8,.34);background:linear-gradient(135deg,rgba(254,243,199,.96),rgba(255,255,255,.95))}
