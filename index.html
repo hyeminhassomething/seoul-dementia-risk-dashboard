@@ -462,10 +462,12 @@
   #s13 .sectitle,#s14 .sectitle{font-size:36px;margin-bottom:5px}
   #s13 .secsub,#s14 .secsub{font-size:15.5px;margin-bottom:14px}
   .s13-layout{display:grid;grid-template-columns:minmax(320px,34%) minmax(0,1fr);gap:20px;align-items:start;margin-bottom:10px}
-  .s13-map-panel{min-width:0;margin:0}
-  .s13-map-image{display:block;width:100%;height:auto;max-height:calc(100vh - 258px);object-fit:contain;margin:0 auto 8px;user-select:none}
-  .s13-map-caption{font-size:11.2px;line-height:1.55;color:var(--text-soft);font-weight:650;padding:0 3px}
-  .s13-map-caption strong{color:var(--red-deep);font-weight:900}
+  .s13-map-panel{min-width:0;margin:0;display:flex;flex-direction:column}
+  /* 13/14 지도 영역 동일 높이로 통일 — aspect ratio 다른 두 PNG가 동일한 외부 박스에 contain */
+  .s13-map-image{display:block;width:100%;height:320px;object-fit:contain;margin:0 auto 10px;user-select:none}
+  .s13-map-caption{font-size:12.5px;line-height:1.7;color:var(--text-soft);font-weight:700;padding:0 3px}
+  .s13-map-caption strong{color:var(--red-deep);font-weight:900;font-size:13.5px}
+  .s13-map-caption .ar{color:var(--text);font-weight:800}
   .s13-persona-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 16px;align-items:stretch}
   .s13-card{grid-column:span 2;display:flex;flex-direction:column;overflow:visible;padding:0 6px 4px!important;border:0!important;border-top:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
   .s13-card:nth-child(4){grid-column:2 / span 2}
@@ -2254,7 +2256,10 @@
     <figure class="s13-map-panel">
       <img class="s13-map-image" src="maps/s13_map.png?v=20260605-2140" alt="HH 클러스터 지도" draggable="false">
       <figcaption class="s13-map-caption">
-        <strong>HH 클러스터 지도</strong> — 서울 전역 82개 valid cluster. 색상별 군집 조합이 오른쪽 5개 도시 기능 페르소나로 요약된다.
+        <strong>HH 클러스터 지도</strong><br>
+        서울 전역 82개 valid cluster<br>
+        → 색상별 군집 조합으로 매핑<br>
+        → 오른쪽 <span class="ar">5개 도시 기능 페르소나</span>로 요약
       </figcaption>
     </figure>
 
@@ -2395,7 +2400,11 @@
     <figure class="s13-map-panel">
       <img class="s13-map-image" src="maps/s14_hl_persona.png?v=20260607-001" alt="HL 클러스터 지도" draggable="false">
       <figcaption class="s13-map-caption">
-        <strong>HL 클러스터 지도</strong> — 기존 점 계열을 보라·청록·자홍·라임·인디고 팔레트로 재매핑. 같은 계열 점은 같은 색, 다른 계열은 다른 색으로 유지했다.
+        <strong>HL 클러스터 지도</strong><br>
+        보라·청록·자홍·라임·인디고 팔레트로 재매핑<br>
+        → 같은 계열 점은 <span class="ar">같은 색</span><br>
+        → 다른 계열은 <span class="ar">다른 색</span>으로 유지<br>
+        → 오른쪽 <span class="ar">5개 비도시·확장형 페르소나</span>로 요약
       </figcaption>
     </figure>
 
@@ -2403,7 +2412,7 @@
       <div class="persona-card s13-card s14-card s14-violet">
         <div class="pcode">cluster [8, 7, 5]</div>
         <div class="ptitle">🟣 ① 극저밀도<br>자연/비도시</div>
-        <div class="pdesc">STORE↓↓↓ · facility↓↓↓ · population↓↓↓ · slope 일부↑. 도시 기능이 거의 없는 비활성 공간.</div>
+        <div class="pdesc">STORE↓↓↓ · facility↓↓↓ · population↓↓↓<br>+ slope 일부↑<br>→ 도시 기능 거의 없음<br>→ 비활성 공간</div>
         <div class="pdong">산지 / 공원 / 개발 제한 구역 — "빈 공간" 성격</div>
         <div class="s13-city-scene s14-nature" aria-hidden="true">
           <span class="s13-plane"></span>
@@ -2421,7 +2430,7 @@
       <div class="persona-card s13-card s14-card s14-teal">
         <div class="pcode">cluster [2,3,6,0,17,31]</div>
         <div class="ptitle">🟢 ② 주거 기반<br>단순 구조</div>
-        <div class="pdesc">is_residential↑ · STORE↓ · facility 중간. 서울 평균보다 단순한 주거 구조.</div>
+        <div class="pdesc">is_residential↑ · STORE↓<br>+ facility 중간<br>→ 서울 평균보다 단순한 주거 구조</div>
         <div class="pdong">오래된 주거지 · 기능 단순 · 상업 거의 없음</div>
         <div class="s13-city-scene s14-plain" aria-hidden="true">
           <span class="s13-plane"></span>
@@ -2439,7 +2448,7 @@
       <div class="persona-card s13-card s14-card s14-fuchsia">
         <div class="pcode">cluster [1, 16, 3]</div>
         <div class="ptitle">🟣 ③ 인프라 편중형<br>비균형 주거</div>
-        <div class="pdesc">STORE↑ or POPULATION↑ 일부 · facility 일부만. 한두 기능만 과도 발달한 비균형 구조.</div>
+        <div class="pdesc">STORE↑ or POPULATION↑ 일부<br>+ facility 일부만<br>→ 한두 기능만 과도 발달<br>→ 비균형 구조</div>
         <div class="pdong">특정 상권/시설 집중 · 주변 인프라 부족</div>
         <div class="s13-city-scene s14-imbalance" aria-hidden="true">
           <span class="s13-plane"></span>
@@ -2458,7 +2467,7 @@
       <div class="persona-card s13-card s14-card s14-lime">
         <div class="pcode">cluster [20,22,26,32,33,39]</div>
         <div class="ptitle">🟩 ④ 외곽 확장<br>생활권</div>
-        <div class="pdesc">POPULATION↑ · STORE 중간 · road complexity↓ · facility 낮음. 도시 외곽 생활권.</div>
+        <div class="pdesc">POPULATION↑ · STORE 중간<br>+ road complexity↓ · facility↓<br>→ 도시 외곽 생활권</div>
         <div class="pdong">신도시/외곽 주거 · 생활 인프라 부족 · 확장 중</div>
         <div class="s13-city-scene s14-expansion" aria-hidden="true">
           <span class="s13-plane"></span>
@@ -2477,7 +2486,7 @@
       <div class="persona-card s13-card s14-card s14-indigo">
         <div class="pcode">cluster [15,19,21,24,25,27,30,37]</div>
         <div class="ptitle">🔷 ⑤ 혼합형<br>전이 클러스터</div>
-        <div class="pdesc">모든 변수 중간값 · 특정 강한 feature 없음 · 구조 불안정. 도시 ↔ 외곽 경계.</div>
+        <div class="pdesc">모든 변수 중간값<br>+ 특정 강한 feature 없음<br>→ 구조 불안정<br>→ 도시 ↔ 외곽 경계</div>
         <div class="pdong">재개발/변화 구간 · 구조가 안정되지 않음</div>
         <div class="s13-city-scene s14-transition" aria-hidden="true">
           <span class="s13-plane"></span>
