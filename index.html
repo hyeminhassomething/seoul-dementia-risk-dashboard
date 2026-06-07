@@ -288,6 +288,9 @@
   .donut-stack .layer-what{transform:translateY(260px);transform-box:fill-box;transform-origin:center;opacity:0}
   .pyramid-stage.split .donut-stack .layer-why{transform:translateY(0);opacity:1;transition-delay:.5s,.5s}
   .pyramid-stage.split .donut-stack .layer-what{transform:translateY(0);opacity:1;transition-delay:1.0s,1.0s}
+  /* WHERE 윗면의 자국 — 분리 후 드러남 (WHY/WHAT이 빠져나간 자리) */
+  .donut-stack .where-marks{opacity:0;transition:opacity .5s ease-out}
+  .pyramid-stage.split .donut-stack .where-marks{opacity:1;transition-delay:.4s}
   /* 점선 연결자는 분리 후에만 등장 */
   .donut-stack .link-line{opacity:0;transition:opacity .5s ease-out}
   .pyramid-stage.split .donut-stack .link-what{opacity:1;transition-delay:1.7s}
@@ -1224,10 +1227,19 @@
              분리 후: y=180 (가장 위)
         -->
 
-        <!-- ① WHERE 큰 원기둥 (맨 아래, 고정) — 깨끗한 윗면, 자국 없음 -->
+        <!-- ① WHERE 큰 원기둥 (맨 아래, 고정) — 분리 후엔 WHY/WHAT이 박혀있던 자국이 드러남 -->
         <g class="layer-g layer-where">
           <path d="M 60,440 A 190,55 0 1 0 440,440 L 440,510 A 190,55 0 1 1 60,510 Z" fill="url(#donutRedSide)"/>
           <ellipse cx="250" cy="440" rx="190" ry="55" fill="url(#donutRedTop)"/>
+          <!-- 박혀있던 자국 (분리 후에만 보임) — WHY 도넛 외경 크기의 어두운 음영 + 가운데에 더 어두운 WHAT 자국 -->
+          <g class="where-marks">
+            <!-- WHY 자국 (도넛 외경 크기 — 어두운 빨강) -->
+            <ellipse cx="250" cy="440" rx="140" ry="40" fill="#7f1d1d" opacity=".65"/>
+            <!-- WHY 안쪽 그림자 (도넛 형태 음각) -->
+            <ellipse cx="250" cy="442" rx="135" ry="37" fill="none" stroke="#450a0a" stroke-width="2" opacity=".55"/>
+            <!-- WHAT 자국 (솔리드 원기둥 크기 — 더 깊은 어두운) -->
+            <ellipse cx="250" cy="440" rx="90" ry="26" fill="#450a0a" opacity=".85"/>
+          </g>
         </g>
 
         <!-- ② WHY 도넛 — 분리 후 윗면 y=300, 구멍 안쪽은 어두운 측면만 (흰 칠 X) -->
