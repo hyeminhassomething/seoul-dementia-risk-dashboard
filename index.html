@@ -216,17 +216,19 @@
   .s11-pop-pin{position:absolute;left:50%;top:100%;transform:translate(-50%,0);width:10px;height:10px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
   .s11-pop-hh .s11-pop-pin{background:#dc2626}
   .s11-pop-hl .s11-pop-pin{background:#f97316}
-  .s11-pop-card{border:1.5px solid;border-radius:8px;padding:5px 9px;box-shadow:0 6px 18px rgba(15,23,42,.24);white-space:nowrap;font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;position:relative;margin-bottom:6px}
-  .s11-pop-hh .s11-pop-card{background:linear-gradient(145deg,rgba(239,68,68,.55),rgba(185,28,28,.55));border-color:rgba(153,27,27,.6);color:#0f172a;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
-  .s11-pop-hl .s11-pop-card{background:linear-gradient(145deg,rgba(251,146,60,.55),rgba(234,88,12,.55));border-color:rgba(194,65,12,.6);color:#0f172a;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+  .s11-pop-card{border:1px solid;border-radius:8px;padding:5px 9px;box-shadow:0 4px 12px rgba(15,23,42,.18);white-space:nowrap;font-family:inherit;position:relative;margin-bottom:6px}
+  /* 파스텔 톤 + 투명도 더 올림 */
+  .s11-pop-hh .s11-pop-card{background:linear-gradient(145deg,rgba(252,165,165,.4),rgba(248,113,113,.38));border-color:rgba(220,38,38,.4);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+  .s11-pop-hl .s11-pop-card{background:linear-gradient(145deg,rgba(254,215,170,.42),rgba(253,186,116,.4));border-color:rgba(234,88,12,.4);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
   .s11-pop-card::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid;}
-  .s11-pop-hh .s11-pop-card::after{border-top-color:rgba(220,38,38,.55)}
-  .s11-pop-hl .s11-pop-card::after{border-top-color:rgba(249,115,22,.55)}
-  .s11-pop-name{font-size:9.5px;font-weight:900;color:#0f172a;line-height:1.2}
-  .s11-pop-meta{font-size:8.5px;color:#0f172a;font-weight:800;margin-top:1px;line-height:1.2}
-  .s11-pop-meta b{color:#000;font-weight:950}
-  .s11-pop-score{font-size:8.5px;font-family:"SF Mono",monospace;color:#0f172a;font-weight:800;margin-top:2px;padding-top:2px;border-top:1px dashed rgba(15,23,42,.42);line-height:1.2}
-  .s11-pop-score b{color:#000;font-size:10px;font-weight:950}
+  .s11-pop-hh .s11-pop-card::after{border-top-color:rgba(248,113,113,.4)}
+  .s11-pop-hl .s11-pop-card::after{border-top-color:rgba(253,186,116,.4)}
+  /* 글씨 — 흰색에 가까운 회색, 페이지 기본 폰트 상속 */
+  .s11-pop-name{font-size:9.5px;font-weight:800;color:#f8fafc;line-height:1.2;font-family:inherit;text-shadow:0 1px 2px rgba(0,0,0,.32)}
+  .s11-pop-meta{font-size:8.5px;color:#e2e8f0;font-weight:700;margin-top:1px;line-height:1.2;font-family:inherit;text-shadow:0 1px 2px rgba(0,0,0,.28)}
+  .s11-pop-meta b{color:#fff;font-weight:900}
+  .s11-pop-score{font-size:8.5px;color:#e2e8f0;font-weight:700;margin-top:2px;padding-top:2px;border-top:1px dashed rgba(248,250,252,.4);line-height:1.2;font-family:inherit;text-shadow:0 1px 2px rgba(0,0,0,.28)}
+  .s11-pop-score b{color:#fff;font-size:10px;font-weight:900}
   .s11-pop-pin{width:7px;height:7px;border-width:1.5px}
   /* 펄스 효과 — 새로 등장한 팝업 강조 */
   .s11-pop.flash .s11-pop-pin{animation:s11PinPulse 1.2s ease-out 2}
