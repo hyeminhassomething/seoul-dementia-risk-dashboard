@@ -665,7 +665,7 @@
   #s18 .secsub{font-size:13.5px;margin-bottom:9px;line-height:1.42}
   #s19 .sectitle{font-size:35px;margin-bottom:4px}
   #s19 .secsub{font-size:13.5px;margin-bottom:12px;line-height:1.35}
-  .s18-case-layout{position:relative;display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);gap:18px;align-items:stretch}
+  .s18-case-layout{position:relative;display:grid;grid-template-columns:minmax(260px,1fr) minmax(0,1.6fr) minmax(260px,1fr);gap:14px;align-items:stretch}
   .s18-map-zone{position:relative;z-index:2;min-width:0}
   .s18-map-shell{display:grid;grid-template-columns:minmax(0,1fr) 42px;gap:10px;align-items:stretch;height:min(590px,calc(100vh - 174px));min-height:500px}
   .s18-map-wrap{position:relative;height:100%;aspect-ratio:1315/1312;justify-self:end;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid rgba(239,68,68,.2);box-shadow:0 16px 34px rgba(15,23,42,.1)}
@@ -685,6 +685,7 @@
   #s18.scene-live .s18-map-cell{animation:s18GridCellGlow 4.4s ease-in-out infinite;animation-delay:calc(.78s + var(--d,0s))}
   .s18-info-side{position:relative;z-index:4;display:flex;flex-direction:column;gap:12px;padding-top:0;height:100%}
   .s18-info-card{opacity:0;transform:translateX(-20px) scale(.96);box-shadow:0 14px 30px rgba(15,23,42,.08);flex:1 1 0;min-height:0;display:flex;flex-direction:column;justify-content:center}
+  .s18-info-left .s18-info-card{transform:translateX(20px) scale(.96)}
   #s18.scene-live .s18-info-card{animation:s18StepIn .62s cubic-bezier(.2,.86,.25,1) both;animation-delay:var(--d,1s)}
   .s18-why{padding:16px 20px!important;border-width:2.4px!important}
   .s18-why .head,.s18-stack-card .head{font-size:15.5px!important;margin-bottom:10px!important;font-weight:900!important}
@@ -2867,6 +2868,31 @@
   <p class="secsub">대표 사례로 명동을 살펴보면, <strong>전체 386개 격자 중 355개가 HH</strong>로 분류되어 위험 밀도 <strong>0.92</strong>를 기록했습니다.</p>
 
   <div class="s18-case-layout">
+    <!-- 좌측: 명동 CCTV 운영 카드 3개 (지도 origin 3곳과 연결) -->
+    <div class="s18-info-side s18-info-left">
+      <div class="card red s18-stack-card s18-info-card" style="--d:1s">
+        <div class="head">🛍 상업 중심 구역</div>
+        <ul class="bul red">
+          <li><strong>PTZ 카메라</strong>로 짧은 주기 군중 추적</li>
+          <li>군중 속 대상 <strong>인물 재식별</strong> 수행</li>
+        </ul>
+      </div>
+      <div class="card orange s18-stack-card s18-info-card" style="--d:1s">
+        <div class="head">🏘 골목 구간</div>
+        <ul class="bul orange">
+          <li><strong>고정형 CCTV</strong>를 이동 방향 중심으로 설치</li>
+          <li>골목 안에서 <strong>연속적인 추적</strong> 유지</li>
+        </ul>
+      </div>
+      <div class="card yellow s18-stack-card s18-info-card" style="--d:1s">
+        <div class="head">🚇 경계 지점 (지하철·교차로)</div>
+        <ul class="bul yellow">
+          <li>출구·교차로에서 <strong>이동 이탈 감지</strong></li>
+          <li>이탈 직전 <strong>마지막 위치 확보</strong></li>
+        </ul>
+      </div>
+    </div>
+
     <div class="s18-map-zone">
       <div class="s18-map-shell" aria-label="명동 HH 격자 분포 지도와 위험 척도">
         <div class="s18-map-wrap">
@@ -3440,7 +3466,8 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   const svg = sec.querySelector('#s18-connector');
   const layout = sec.querySelector('.s18-case-layout');
   const origins = sec.querySelectorAll('.s18-origin');
-  const cards = sec.querySelectorAll('.s18-info-card');
+  // 좌측 카드만 연결 (우측 기존 카드는 연결 끊김)
+  const cards = sec.querySelectorAll('.s18-info-left .s18-info-card');
   const paths = [
     document.getElementById('s18-conn-1'),
     document.getElementById('s18-conn-2'),
@@ -3464,7 +3491,8 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
       // layout 기준 px 좌표
       const x1 = (o.left + o.width/2) - lr.left;
       const y1 = (o.top + o.height/2) - lr.top;
-      const x2 = c.left - lr.left;
+      // 좌측 카드의 우측 변 중심
+      const x2 = (c.right) - lr.left;
       const y2 = (c.top + c.height/2) - lr.top;
       const cx = (x1 + x2) / 2;
       paths[i].setAttribute('d', `M${x1.toFixed(1)},${y1.toFixed(1)} C${cx.toFixed(1)},${y1.toFixed(1)} ${cx.toFixed(1)},${y2.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}`);
