@@ -929,6 +929,10 @@
   .s19-bottom .card,.s19-bottom .callout{padding:8px 12px!important}
   .s19-bottom .card .head{font-size:13.2px;margin-bottom:6px}
   .s19-bottom .bul li{font-size:10.9px;line-height:1.27;padding-top:1px;padding-bottom:1px;word-break:keep-all}
+  /* Slide 19 — 소프트웨어 레이어 리스트: 각 항목 라벨/설명 2단 정렬 */
+  .s19-bottom .s19-soft-list li{display:grid;grid-template-columns:140px 1fr;gap:8px;align-items:baseline;padding:3px 0 3px 14px}
+  .s19-bottom .s19-soft-list li strong{font-weight:900;color:var(--purple);font-size:11.5px;line-height:1.3;letter-spacing:-.01em}
+  .s19-bottom .s19-soft-list .s19-soft-desc{font-size:11px;color:var(--text-soft);line-height:1.32;font-weight:600}
   .s19-bottom .callout{font-size:11.4px;line-height:1.42}
   body.sb-collapsed #s19 .s19-zone.step3{left:37.5%;width:30.6%}
   body.sb-collapsed #s19 .s19-zone.step4{left:58.8%;width:21.2%}
@@ -936,6 +940,9 @@
   body.sb-collapsed #s19 .s19-city{left:-10px;width:560px}
   body.sb-collapsed #s19 .s19-bottom .bul li{font-size:11.7px;line-height:1.26}
   body.sb-collapsed #s19 .s19-bottom .card .head{font-size:14.2px}
+  body.sb-collapsed #s19 .s19-bottom .s19-soft-list li{grid-template-columns:160px 1fr;gap:10px}
+  body.sb-collapsed #s19 .s19-bottom .s19-soft-list li strong{font-size:12.5px}
+  body.sb-collapsed #s19 .s19-bottom .s19-soft-list .s19-soft-desc{font-size:12px}
   @media (max-height:820px){
     body.sb-collapsed #s19 .s19-story-board{height:min(448px,calc(100vh - 260px));min-height:400px}
     body.sb-collapsed #s19 .s19-bottom .bul li{font-size:10.8px;line-height:1.22}
@@ -988,11 +995,11 @@
   .s20-layout{display:grid;grid-template-columns:0.95fr 1.15fr;gap:18px;align-items:stretch}
   .s20-left{display:flex;flex-direction:column;gap:12px}
   .s20-kpi{grid-template-columns:repeat(2,1fr) !important;gap:12px}
-  .s20-kpi .kpi-card{padding:14px 16px;border-width:2.5px}
-  .s20-kpi .kpi-card .n{font-size:34px;letter-spacing:-.02em}
-  .s20-kpi .kpi-card .n.s20-kpi-text{font-size:22px;font-family:inherit;letter-spacing:-.01em}
+  .s20-kpi .kpi-card{padding:14px 16px;border-width:2.5px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+  .s20-kpi .kpi-card .n{font-size:34px;letter-spacing:-.02em;min-height:34px;display:flex;align-items:center;justify-content:center}
+  .s20-kpi .kpi-card .n.s20-kpi-text{font-size:28px;font-family:inherit;letter-spacing:-.02em;font-weight:900}
   .s20-kpi .kpi-card .n .unit{font-size:17px;font-weight:800}
-  .s20-kpi .kpi-card .l{font-size:13px;margin-top:8px;font-weight:800;line-height:1.4}
+  .s20-kpi .kpi-card .l{font-size:13px;margin-top:8px;font-weight:800;line-height:1.4;text-align:center}
   .s20-limits{padding:16px 20px;flex:1}
   .s20-limits .head{font-size:16px;margin-bottom:10px;font-weight:900}
   .s20-limits .bul li{font-size:13.5px;line-height:1.55;padding:4px 0 4px 17px;font-weight:600}
@@ -3296,11 +3303,11 @@
   <div class="s19-bottom">
     <div class="card purple">
       <div class="head">⭐ 소프트웨어 레이어 = 추가 인프라 0원</div>
-      <ul class="bul purple">
-        <li><strong>새 CCTV 설치 X</strong> — 기존 12만 3천 대 활용</li>
-        <li><strong>새 영상 분석 모델 X</strong> — 서울시 기존 AI 검색 엔진 그대로</li>
-        <li><strong>역할은 미들웨어</strong> — "어디부터 볼지" 우선순위 데이터 공급</li>
-        <li><strong>운영 방식</strong> — API 연동 + 격자 데이터 정기 갱신</li>
+      <ul class="bul purple s19-soft-list">
+        <li><strong>새 CCTV 설치 X</strong><span class="s19-soft-desc">기존 12만 3천 대 활용</span></li>
+        <li><strong>새 영상 분석 모델 X</strong><span class="s19-soft-desc">서울시 기존 AI 검색 엔진 그대로</span></li>
+        <li><strong>역할은 미들웨어</strong><span class="s19-soft-desc">"어디부터 볼지" 우선순위 데이터 공급</span></li>
+        <li><strong>운영 방식</strong><span class="s19-soft-desc">API 연동 + 격자 데이터 정기 갱신</span></li>
       </ul>
     </div>
     <div class="callout dark" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center">
