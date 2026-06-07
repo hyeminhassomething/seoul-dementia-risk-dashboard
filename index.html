@@ -280,56 +280,65 @@
   .ratio-card .rn .vs{font-size:14px;color:var(--text);margin:0 6px}
   .ratio-card .rl{font-size:12px;color:var(--text);font-weight:700;margin-top:6px}
 
-  /* Section 05 — 3-Layer: 솔리드 원기둥 + 도넛 + 솔리드 원기둥 (합쳐진 상태 → 분리 애니메이션) */
-  .pyramid-stage{position:relative;width:100%;height:calc(100vh - 220px);max-height:620px;margin-bottom:14px}
-  .pyramid-tower{position:absolute;left:2%;top:0;width:48%;height:100%;pointer-events:none;display:flex;align-items:center;justify-content:center}
-  .donut-stack{width:100%;height:100%;display:block;overflow:visible}
-  /* 분리 애니메이션: 초기 = WHERE 윗면에 WHY/WHAT 윗면이 끼워져 있음 → 위로 빠져나오듯 분리 */
-  .donut-stack .layer-g{transition:transform 1.3s cubic-bezier(.22,1,.36,1)}
-  .donut-stack .layer-why{transform:translateY(140px);transform-box:fill-box;transform-origin:center}
-  .donut-stack .layer-what{transform:translateY(260px);transform-box:fill-box;transform-origin:center}
-  .pyramid-stage.split .donut-stack .layer-why{transform:translateY(0);transition-delay:.5s}
-  .pyramid-stage.split .donut-stack .layer-what{transform:translateY(0);transition-delay:1.0s}
-  /* 측면 / 도넛 안쪽 — 합쳐진 상태엔 숨김 (분리 시 등장) */
+  /* Section 05 — 3-Layer diagnostic frame */
+  #s05{padding:30px 50px 24px;justify-content:flex-start}
+  #s05 .sectitle{font-size:38px;margin-bottom:5px}
+  #s05 .secsub{font-size:15.5px;margin-bottom:14px;line-height:1.45}
+  #s05 .callout.yellow{font-size:12.3px;line-height:1.45;padding:8px 14px;border-width:1.5px}
+  .pyramid-stage{position:relative;width:100%;height:min(488px,calc(100vh - 228px));min-height:430px;margin-bottom:10px;border:1px solid rgba(203,213,225,.9);border-radius:18px;overflow:hidden;background:radial-gradient(circle at 26% 38%,rgba(6,182,212,.14),transparent 34%),radial-gradient(circle at 82% 18%,rgba(22,163,74,.1),transparent 30%),linear-gradient(135deg,#f8fafc,#fff 58%,#f1f5f9);box-shadow:0 18px 34px rgba(15,23,42,.08)}
+  .pyramid-stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(148,163,184,.16) 1px,transparent 1px),linear-gradient(rgba(148,163,184,.12) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(90deg,#000,transparent 74%);opacity:.55;pointer-events:none}
+  .pyramid-stage::after{content:"WHERE × WHY → WHAT";position:absolute;left:28px;top:24px;font-family:monospace;font-size:12px;font-weight:900;letter-spacing:.12em;color:#0f172a;background:rgba(255,255,255,.78);border:1px solid rgba(203,213,225,.85);border-radius:999px;padding:5px 12px;box-shadow:0 8px 18px rgba(15,23,42,.06)}
+  .pyramid-tower{position:absolute;left:0;top:0;width:58%;height:100%;pointer-events:none;display:flex;align-items:center;justify-content:center}
+  .pyramid-tower::after{content:"";position:absolute;left:14%;right:10%;bottom:35px;height:46px;border-radius:50%;background:radial-gradient(ellipse,rgba(15,23,42,.18),transparent 68%);filter:blur(3px);opacity:.72}
+  .donut-stack{width:94%;height:96%;display:block;overflow:visible;filter:drop-shadow(0 20px 18px rgba(15,23,42,.16))}
+  .donut-stack .layer-g{transition:transform 1.18s cubic-bezier(.2,.86,.24,1);transform-box:fill-box;transform-origin:center}
+  .donut-stack .layer-why{transform:translateY(140px)}
+  .donut-stack .layer-what{transform:translateY(260px)}
+  .pyramid-stage.split .donut-stack .layer-why{transform:translateY(0);transition-delay:.55s}
+  .pyramid-stage.split .donut-stack .layer-what{transform:translateY(0);transition-delay:1.02s}
   .donut-stack .layer-why .side,
   .donut-stack .layer-why .hole-inside,
-  .donut-stack .layer-what .side{opacity:0;transition:opacity .4s ease-out}
+  .donut-stack .layer-what .side{opacity:0;transition:opacity .34s ease-out}
   .pyramid-stage.split .donut-stack .layer-why .side,
-  .pyramid-stage.split .donut-stack .layer-why .hole-inside{opacity:1;transition-delay:.7s}
-  .pyramid-stage.split .donut-stack .layer-what .side{opacity:1;transition-delay:1.2s}
-  /* WHERE 윗면의 자국 — 분리되어 위로 올라간 후에만 드러남 */
-  .donut-stack .where-marks{opacity:0;transition:opacity .5s ease-out}
-  .pyramid-stage.split .donut-stack .where-marks{opacity:1;transition-delay:1.6s}
-  /* 점선 연결자는 분리 후에만 등장 */
-  .donut-stack .link-line{opacity:0;transition:opacity .5s ease-out}
-  .pyramid-stage.split .donut-stack .link-what{opacity:1;transition-delay:1.7s}
-  .pyramid-stage.split .donut-stack .link-why{opacity:1;transition-delay:2.0s}
-  .pyramid-stage.split .donut-stack .link-where{opacity:1;transition-delay:.3s}
-  /* 우측 카드 — 좌측 색 strip + 아이콘 */
-  .layer-card{position:absolute;right:2%;width:38%;background:#fff;border-radius:14px;padding:14px 18px 14px 60px;box-shadow:0 12px 28px rgba(15,23,42,.08);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(-14px);transition:opacity .6s ease-out,transform .6s ease-out}
-  .layer-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:46px;border-top-left-radius:14px;border-bottom-left-radius:14px}
-  .layer-card::after{content:attr(data-icon);position:absolute;left:0;top:50%;transform:translateY(-50%);width:46px;text-align:center;font-size:22px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+  .pyramid-stage.split .donut-stack .layer-why .hole-inside{opacity:1;transition-delay:.78s}
+  .pyramid-stage.split .donut-stack .layer-what .side{opacity:1;transition-delay:1.24s}
+  .donut-stack .where-marks{opacity:0;transition:opacity .45s ease-out}
+  .donut-stack .where-marks ellipse{opacity:.2!important}
+  .pyramid-stage.split .donut-stack .where-marks{opacity:1;transition-delay:1.45s}
+  .donut-stack .link-line{opacity:0;transition:opacity .42s ease-out;stroke-linecap:round;stroke-dasharray:none!important;filter:drop-shadow(0 0 4px currentColor)}
+  .pyramid-stage.split .donut-stack .link-where{opacity:.62;transition-delay:.45s}
+  .pyramid-stage.split .donut-stack .link-why{opacity:.72;transition-delay:1.08s}
+  .pyramid-stage.split .donut-stack .link-what{opacity:.78;transition-delay:1.55s}
+  .donut-stack .layer-label{font-family:monospace;font-size:20px;font-weight:900;letter-spacing:.12em;fill:#fff;text-anchor:middle;paint-order:stroke;stroke:rgba(15,23,42,.22);stroke-width:3px}
+  .donut-stack .layer-sub{font-family:monospace;font-size:9px;font-weight:900;letter-spacing:.08em;fill:rgba(255,255,255,.92);text-anchor:middle}
+  .layer-card{position:absolute;right:1.6%;width:39%;background:rgba(255,255,255,.94);border-radius:13px;padding:11px 14px 11px 58px;box-shadow:0 14px 28px rgba(15,23,42,.1);z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(-10px);transition:opacity .52s ease-out,transform .52s ease-out;backdrop-filter:blur(8px)}
+  .layer-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;border-top-left-radius:13px;border-bottom-left-radius:13px}
+  .layer-card::after{content:attr(data-icon);position:absolute;left:17px;top:50%;transform:translateY(-50%);width:27px;height:27px;border-radius:50%;display:grid;place-items:center;font-family:monospace;font-size:10px;font-weight:900;color:#fff;box-shadow:0 8px 16px rgba(15,23,42,.16)}
   .pyramid-stage.split .layer-card{opacity:1;transform:translateX(0)}
-  .pyramid-stage.split .layer-card.what{transition-delay:1.6s}
-  .pyramid-stage.split .layer-card.why{transition-delay:1.9s}
-  .pyramid-stage.split .layer-card.where{transition-delay:2.2s}
-  /* 카드 위치: 위에서 WHAT → WHY → WHERE (도넛 순서와 매칭) */
-  .layer-card.what{top:3%;height:30%;border:1.5px solid var(--green-soft)}
-  .layer-card.what::before{background:var(--green)}
-  .layer-card.why{top:35%;height:30%;border:1.5px solid var(--blue-soft)}
-  .layer-card.why::before{background:var(--blue)}
-  .layer-card.where{top:67%;height:30%;border:1.5px solid var(--red-soft)}
-  .layer-card.where::before{background:var(--red)}
-  .layer-tag{display:inline-block;font-family:monospace;font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;letter-spacing:.05em;margin-bottom:8px}
+  .pyramid-stage.split .layer-card.where{transition-delay:.55s}
+  .pyramid-stage.split .layer-card.why{transition-delay:1.14s}
+  .pyramid-stage.split .layer-card.what{transition-delay:1.68s}
+  .layer-card.what{top:5%;height:28.5%;border:1.5px solid rgba(22,163,74,.26);background:linear-gradient(135deg,rgba(240,253,244,.96),rgba(255,255,255,.95))}
+  .layer-card.what::before,.layer-card.what::after{background:var(--green)}
+  .layer-card.why{top:36%;height:28.5%;border:1.5px solid rgba(37,99,235,.25);background:linear-gradient(135deg,rgba(239,246,255,.96),rgba(255,255,255,.95))}
+  .layer-card.why::before,.layer-card.why::after{background:var(--blue)}
+  .layer-card.where{top:67%;height:28.5%;border:1.5px solid rgba(239,68,68,.25);background:linear-gradient(135deg,rgba(254,242,242,.96),rgba(255,255,255,.95))}
+  .layer-card.where::before,.layer-card.where::after{background:var(--red)}
+  .layer-tag{display:inline-block;font-family:monospace;font-size:9.4px;font-weight:900;padding:2px 8px;border-radius:6px;letter-spacing:.08em;margin-bottom:5px}
   .layer-card.where .layer-tag{background:var(--red-soft);color:var(--red-deep)}
   .layer-card.why .layer-tag{background:var(--blue-soft);color:var(--blue-deep)}
   .layer-card.what .layer-tag{background:var(--green-soft);color:var(--green-deep)}
-  .layer-card h3{font-size:17px;font-weight:900;letter-spacing:-.02em;margin-bottom:3px}
+  .layer-card h3{font-size:15.3px;font-weight:900;letter-spacing:-.02em;margin-bottom:2px}
   .layer-card.where h3{color:var(--red-deep)}
   .layer-card.why h3{color:var(--blue-deep)}
   .layer-card.what h3{color:var(--green-deep)}
-  .layer-card .meth{font-family:monospace;font-size:10.5px;color:var(--text-soft);line-height:1.45;border-top:1px dashed var(--border);padding-top:5px;margin-top:5px;margin-bottom:6px}
-  .layer-card .result{font-size:11.5px;font-weight:800;line-height:1.35}
+  .layer-card .meth{font-family:monospace;font-size:9.5px;color:var(--text-soft);line-height:1.38;border-top:1px dashed rgba(148,163,184,.55);padding-top:4px;margin-top:4px;margin-bottom:4px}
+  .layer-card .result{font-size:10.8px;font-weight:850;line-height:1.28}
+  .layer-card .result span{font-size:10.2px!important}
+  @keyframes s05LayerPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
+  .pyramid-stage.split .layer-where{animation:s05LayerPulse 2.6s ease-in-out .45s infinite}
+  .pyramid-stage.split .layer-why{animation:s05LayerPulse 2.8s ease-in-out 1.05s infinite}
+  .pyramid-stage.split .layer-what{animation:s05LayerPulse 3s ease-in-out 1.6s infinite}
   .layer-card.where .result{color:var(--red-deep)} .layer-card.why .result{color:var(--blue-deep)} .layer-card.what .result{color:var(--green-deep)}
 
   /* Section 06 — 50m grid */
@@ -1321,7 +1330,7 @@
   <div class="pyramid-stage" id="s05-pyramid">
     <!-- 좌측: 3단 동심 도넛 (밑 WHERE 가장 큼 → WHY → WHAT 가장 작음) -->
     <div class="pyramid-tower">
-      <svg class="donut-stack" viewBox="0 0 500 600" preserveAspectRatio="xMidYMid meet">
+      <svg class="donut-stack" viewBox="0 0 500 600" preserveAspectRatio="xMaxYMid meet">
         <defs>
           <linearGradient id="donutRedTop" x1="0" x2="0" y1="0" y2="1">
             <stop offset="0%" stop-color="#fca5a5"/><stop offset="100%" stop-color="#ef4444"/>
@@ -1367,6 +1376,8 @@
             <!-- WHAT 자국 (솔리드 원기둥 크기 — 더 깊은 어두운) -->
             <ellipse cx="250" cy="440" rx="90" ry="26" fill="#450a0a" opacity=".85"/>
           </g>
+          <text class="layer-label" x="250" y="438">WHERE</text>
+          <text class="layer-sub" x="250" y="456">LISA HOTSPOT</text>
         </g>
 
         <!-- ② WHY 도넛 — 분리 후 윗면 y=300, 합쳐진 상태에서는 측면/구멍 안쪽 숨김 -->
@@ -1378,6 +1389,8 @@
           <!-- 가운데 구멍 안쪽 (합쳐진 상태엔 WHAT이 채워서 숨김) -->
           <ellipse class="hole-inside" cx="250" cy="302" rx="90" ry="26" fill="#1e3a8a"/>
           <ellipse class="hole-inside" cx="250" cy="304" rx="84" ry="23" fill="#1e40af"/>
+          <text class="layer-label" x="250" y="304">WHY</text>
+          <text class="layer-sub" x="250" y="320">HDBSCAN</text>
         </g>
 
         <!-- ③ WHAT 솔리드 원기둥 — 분리 후 윗면 y=180 -->
@@ -1386,6 +1399,7 @@
           <path class="side" d="M 160,180 A 90,26 0 1 0 340,180 L 340,204 A 90,26 0 1 1 160,204 Z" fill="url(#donutGreenSide)"/>
           <!-- 윗면 (항상 보임) -->
           <ellipse cx="250" cy="180" rx="90" ry="26" fill="url(#donutGreenTop)"/>
+          <text class="layer-label" x="250" y="184">WHAT</text>
         </g>
 
         <!-- 연결 점선 + 끝점 — 도넛 분리된 위치 기준 -->
@@ -1402,7 +1416,7 @@
     </div>
 
     <!-- 우측 카드 (위에서 WHAT → WHY → WHERE 순) -->
-    <div class="layer-card where" data-icon="🗺">
+    <div class="layer-card where" data-icon="01">
       <span class="layer-tag">LAYER 01 · WHERE</span>
       <h3>공간 자기상관</h3>
       <div class="meth">
@@ -1412,7 +1426,7 @@
       </div>
       <div class="result">HH 46,960 · HL 948<br><span style="font-weight:600;font-size:12px">(통계적 핫스팟 · 사각지대)</span></div>
     </div>
-    <div class="layer-card why" data-icon="🧬">
+    <div class="layer-card why" data-icon="02">
       <span class="layer-tag">LAYER 02 · WHY</span>
       <h3>환경 군집화</h3>
       <div class="meth">
@@ -1422,7 +1436,7 @@
       </div>
       <div class="result">82 valid clusters · 노이즈 76,461 (31.3%)<br><span style="font-weight:600;font-size:12px">환경 시그너처 자동 도출</span></div>
     </div>
-    <div class="layer-card what" data-icon="🎯">
+    <div class="layer-card what" data-icon="03">
       <span class="layer-tag">LAYER 03 · WHAT</span>
       <h3>정책 매핑</h3>
       <div class="meth">
