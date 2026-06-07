@@ -3393,19 +3393,23 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   function update(){
     const lr = layout.getBoundingClientRect();
     if (lr.width < 10) return;
-    // 변화 시그니처 — layout width + origin/card 위치
-    const sig = lr.width + '|' + Array.from(origins).map(o => o.getBoundingClientRect().left.toFixed(1)).join(',') + '|' + Array.from(cards).map(c => c.getBoundingClientRect().left.toFixed(1)).join(',');
+    // 변화 시그니처 — layout 사이즈 + origin/card 좌표 변화 감지
+    const sig = lr.width.toFixed(0) + 'x' + lr.height.toFixed(0) + '|' + Array.from(origins).map(o => { const r = o.getBoundingClientRect(); return r.left.toFixed(1)+','+r.top.toFixed(1); }).join(';') + '|' + Array.from(cards).map(c => { const r = c.getBoundingClientRect(); return r.left.toFixed(1)+','+r.top.toFixed(1); }).join(';');
     if (sig === lastSig) return;
     lastSig = sig;
+    // viewBox를 layout의 실제 px로 — preserveAspectRatio stretch 영향 없이 1:1 좌표
+    svg.setAttribute('viewBox', `0 0 ${lr.width.toFixed(0)} ${lr.height.toFixed(0)}`);
+    svg.setAttribute('preserveAspectRatio', 'none');
     for (let i = 0; i < 3; i++){
       const o = origins[i].getBoundingClientRect();
       const c = cards[i].getBoundingClientRect();
-      const x1 = ((o.left + o.width/2) - lr.left) / lr.width * 100;
-      const y1 = ((o.top + o.height/2) - lr.top) / lr.height * 100;
-      const x2 = (c.left - lr.left) / lr.width * 100;
-      const y2 = ((c.top + c.height/2) - lr.top) / lr.height * 100;
+      // layout 기준 px 좌표
+      const x1 = (o.left + o.width/2) - lr.left;
+      const y1 = (o.top + o.height/2) - lr.top;
+      const x2 = c.left - lr.left;
+      const y2 = (c.top + c.height/2) - lr.top;
       const cx = (x1 + x2) / 2;
-      paths[i].setAttribute('d', `M${x1.toFixed(2)},${y1.toFixed(2)} C${cx.toFixed(2)},${y1.toFixed(2)} ${cx.toFixed(2)},${y2.toFixed(2)} ${x2.toFixed(2)},${y2.toFixed(2)}`);
+      paths[i].setAttribute('d', `M${x1.toFixed(1)},${y1.toFixed(1)} C${cx.toFixed(1)},${y1.toFixed(1)} ${cx.toFixed(1)},${y2.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}`);
     }
   }
   // 초기 + resize + sidebar toggle 감지 (body class 변경)
