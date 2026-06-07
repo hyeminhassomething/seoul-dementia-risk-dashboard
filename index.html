@@ -2520,11 +2520,11 @@
   <h2 class="sectitle">동별 위험 밀도 TOP — 4가지 페르소나</h2>
   <p class="secsub">클러스터 구성과 밀도만으로 본 서울 대표 위험구역 4동</p>
 
-  <div style="display:grid;grid-template-columns:1.05fr 1.4fr;gap:14px;margin-bottom:10px;align-items:start">
-    <!-- 4 페르소나 카드 -->
-    <div style="display:flex;flex-direction:column;gap:6px">
+  <div style="display:grid;grid-template-columns:1.05fr 1.4fr;gap:14px;margin-bottom:10px;align-items:stretch">
+    <!-- 4 페르소나 카드 — 우측 지도 높이에 맞춰 4개가 균등 분배 -->
+    <div style="display:flex;flex-direction:column;gap:8px">
       <!-- 명동 -->
-      <div style="background:linear-gradient(135deg,var(--red-soft),#fff 60%);border:2.5px solid var(--red);border-left:6px solid var(--red);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;box-shadow:0 4px 16px rgba(239,68,68,.18);position:relative">
+      <div style="background:linear-gradient(135deg,var(--red-soft),#fff 60%);border:2.5px solid var(--red);border-left:6px solid var(--red);border-radius:10px;padding:8px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;box-shadow:0 4px 16px rgba(239,68,68,.18);position:relative;flex:1 1 0;min-height:0">
         <div style="position:absolute;top:-8px;left:14px;background:var(--red);color:#fff;font-size:10px;font-weight:900;padding:2px 9px;border-radius:999px;letter-spacing:.04em">🎯 분석 대상</div>
         <div>
           <div style="font-size:14px;font-weight:900;color:var(--red-deep);margin-top:2px">중구 명동</div>
@@ -2537,7 +2537,7 @@
         </div>
       </div>
       <!-- 대치4동 -->
-      <div style="background:#fff;border:2px solid var(--orange);border-left:6px solid var(--orange);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center">
+      <div style="background:#fff;border:2px solid var(--orange);border-left:6px solid var(--orange);border-radius:10px;padding:8px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;flex:1 1 0;min-height:0">
         <div>
           <div style="font-size:14px;font-weight:900;color:var(--orange-deep)">강남구 대치4동</div>
           <div style="font-size:11.5px;color:var(--text);font-weight:700;margin-top:2px">고밀도 교육·주거·상업 결합 생활권</div>
@@ -2549,7 +2549,7 @@
         </div>
       </div>
       <!-- 왕십리도선동 (강조) -->
-      <div style="background:#fff;border:2px solid var(--yellow);border-left:6px solid var(--yellow);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center">
+      <div style="background:#fff;border:2px solid var(--yellow);border-left:6px solid var(--yellow);border-radius:10px;padding:8px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;flex:1 1 0;min-height:0">
         <div>
           <div style="font-size:14px;font-weight:900;color:var(--yellow-deep)">성동구 왕십리도선동</div>
           <div style="font-size:11.5px;color:var(--text);font-weight:700;margin-top:2px">광역 교통거점 기반 복합 도시 중심지</div>
@@ -2561,7 +2561,7 @@
         </div>
       </div>
       <!-- 수유3동 -->
-      <div style="background:#fff;border:2px solid var(--green);border-left:6px solid var(--green);border-radius:10px;padding:7px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center">
+      <div style="background:#fff;border:2px solid var(--green);border-left:6px solid var(--green);border-radius:10px;padding:8px 12px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;flex:1 1 0;min-height:0">
         <div>
           <div style="font-size:14px;font-weight:900;color:var(--green-deep)">강북구 수유3동</div>
           <div style="font-size:11.5px;color:var(--text);font-weight:700;margin-top:2px">고밀도 서민형 주거·생활상권 혼합 지역</div>
@@ -2588,12 +2588,12 @@
     </div>
   </div>
 
-  <div class="callout dark" style="font-size:11.5px;padding:8px 14px">
-    <span style="display:inline-block;color:var(--yellow);font-weight:900;margin-right:6px">📌 한 줄</span>
-    <b style="color:var(--red-deep)">명동</b> 도심 상업 중심 ·
-    <b style="color:var(--orange-deep)">대치4동</b> 교육·주거 ·
-    <b style="color:var(--yellow-deep)">왕십리도선동</b> 교통·상업 복합 거점 ·
-    <b style="color:#86efac">수유3동</b> 생활밀착형 주거·상권
+  <div class="callout dark" style="font-size:13.5px;line-height:1.7;padding:14px 22px">
+    <span style="display:inline-block;color:var(--yellow);font-weight:900;margin-right:10px;font-size:14px">📌 한 줄 요약</span><br>
+    <b style="color:#fca5a5">명동</b> 도심 상업 중심
+    · <b style="color:#fdba74">대치4동</b> 교육·주거
+    · <b style="color:#fde047">왕십리도선동</b> 교통·상업 복합 거점
+    · <b style="color:#86efac">수유3동</b> 생활밀착형 주거·상권
   </div>
   <span class="pageno">SLIDE 15 / 23</span>
 </section>
