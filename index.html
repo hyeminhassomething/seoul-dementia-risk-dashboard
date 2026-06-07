@@ -427,18 +427,18 @@
 
   /* Section 11 — LISA map */
   .lisamap-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:16px}
-  .lisa-row-c{background:#fff;border:2px solid;border-radius:12px;padding:10px 14px;display:grid;grid-template-columns:50px 1fr auto;align-items:center;gap:12px;margin-bottom:8px}
-  .lisa-row-c.hh{border-color:var(--red)}
-  .lisa-row-c.hl{border-color:var(--orange);background:linear-gradient(90deg,var(--orange-soft),#fff 50%)}
-  .lisa-row-c.lh{border-color:var(--yellow)}
-  .lisa-row-c.ll{border-color:var(--blue)}
-  .lisa-row-c .code{font-family:monospace;font-size:22px;font-weight:900;line-height:1;text-align:center}
+  .lisa-row-c{background:#fff;border:2px solid;border-radius:12px;padding:14px 18px;display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:14px;margin-bottom:10px}
+  .lisa-row-c.hh{border-color:var(--red);border-left-width:7px}
+  .lisa-row-c.hl{border-color:var(--orange);border-left-width:7px;background:linear-gradient(90deg,var(--orange-soft),#fff 50%)}
+  .lisa-row-c.lh{border-color:var(--yellow);border-left-width:7px}
+  .lisa-row-c.ll{border-color:var(--blue);border-left-width:7px}
+  .lisa-row-c .code{font-family:monospace;font-size:30px;font-weight:900;line-height:1;text-align:center;letter-spacing:-.02em}
   .lisa-row-c.hh .code{color:var(--red-deep)} .lisa-row-c.hl .code{color:var(--orange-deep)} .lisa-row-c.lh .code{color:var(--yellow-deep)} .lisa-row-c.ll .code{color:var(--blue-deep)}
-  .lisa-row-c .desc-t{font-weight:800;color:var(--text);font-size:12.5px}
-  .lisa-row-c .desc-s{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px}
-  .lisa-row-c .cnum{font-family:monospace;font-size:18px;font-weight:900;text-align:right;letter-spacing:-.02em}
+  .lisa-row-c .desc-t{font-weight:900;color:var(--text);font-size:16px;line-height:1.25}
+  .lisa-row-c .desc-s{font-size:13px;color:var(--text-soft);font-weight:700;margin-top:4px;line-height:1.4}
+  .lisa-row-c .cnum{font-family:monospace;font-size:26px;font-weight:900;text-align:right;letter-spacing:-.02em;line-height:1}
   .lisa-row-c.hh .cnum{color:var(--red-deep)} .lisa-row-c.hl .cnum{color:var(--orange-deep)} .lisa-row-c.lh .cnum{color:var(--yellow-deep)} .lisa-row-c.ll .cnum{color:var(--blue-deep)}
-  .lisa-row-c .cnum small{font-size:10px;color:var(--muted);display:block;font-weight:600;margin-top:1px}
+  .lisa-row-c .cnum small{font-size:12px;color:var(--muted);display:block;font-weight:700;margin-top:3px}
 
   /* Section 12 — HDBSCAN */
   .hdb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:10px}
@@ -2144,16 +2144,19 @@
         <div class="cnum">약 84,180<small>격자</small></div>
       </div>
 
-      <div class="card" style="border-color:var(--text);margin-top:10px;padding:10px 14px">
-        <div class="head">읽는 법</div>
-        <div style="font-size:12px;color:var(--text-soft);line-height:1.65">
-          HH(<strong style="color:var(--red-deep)">빨강</strong>)는 면으로 퍼지고 HL(<strong style="color:var(--orange-deep)">주황</strong>)은 점으로 흩어진다.<br>
-          HL 948개가 자치구 단위 LL 안에 박혀 있는 <strong>보이지 않는 사각지대</strong>.
+      <div class="card" style="border-color:var(--text);margin-top:12px;padding:14px 18px">
+        <div class="head" style="font-size:14px;margin-bottom:8px">읽는 법</div>
+        <div style="font-size:14px;color:var(--text-soft);line-height:1.7;font-weight:700">
+          HH(<strong style="color:var(--red-deep)">빨강</strong>)는 면으로 퍼지고<br>
+          HL(<strong style="color:var(--orange-deep)">주황</strong>)은 점으로 흩어진다<br>
+          → HL 948개가 LL 안에 박혀있는 <strong style="color:var(--text)">보이지 않는 사각지대</strong>
         </div>
       </div>
 
-      <div class="callout yellow" style="margin-top:10px;font-size:12px">
-        <strong>정책 함의 →</strong> HL 948 × 평균 0.0025 km² ≈ <strong>2.45 km²</strong> — 표면적은 작지만 ROI가 가장 높은 우선 투입 대상. HH 광역 핫스팟은 면 단위 정비, HL은 격자 단위 핀셋 정책으로 이중 처방.
+      <div class="callout yellow" style="margin-top:12px;font-size:14px;line-height:1.7;padding:14px 18px">
+        <strong style="font-size:15px">정책 함의 →</strong> HL 948 × 평균 0.0025 km² ≈ <strong style="font-size:15px">2.45 km²</strong><br>
+        → 표면적은 작지만 <strong>ROI가 가장 높은 우선 투입 대상</strong><br>
+        → HH는 면 단위 정비 · HL은 격자 단위 핀셋 정책으로 <strong>이중 처방</strong>
       </div>
     </div>
 
