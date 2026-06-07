@@ -1104,7 +1104,7 @@
     </div>
     <div class="toc-row yellow">
       <div class="tn">05</div>
-      <div><div class="ttitle">🚀 결론 &amp; 확장</div><div class="tsub">KPI · 한계 · 광역시 일반화</div></div>
+      <div><div class="ttitle">🚀 결론 &amp; 확장</div><div class="tsub">한계 · 광역시 일반화</div></div>
       <div class="tslide">Slides 21–22</div>
       <div class="tdetail">확장 계획 · 한계 · 광역시 일반화 · Q&amp;A</div>
     </div>
@@ -1886,63 +1886,70 @@
   <div style="display:grid;grid-template-columns:0.85fr 1fr 1fr;gap:14px;align-items:stretch">
     <!-- Spearman + 비교 카드 -->
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="card orange" style="padding:14px 18px">
-        <div class="head" style="margin-bottom:6px">📈 Spearman 상관계수</div>
-        <div style="font-family:monospace;font-size:44px;font-weight:900;color:var(--orange-deep);line-height:1;letter-spacing:-.02em">0.7427</div>
-        <div style="font-size:11.5px;color:var(--text-soft);margin-top:8px;line-height:1.55">
-          risk_score ↔ Target_y 간 <strong>강한 양의 순위 상관</strong> — PCA로 합성한 점수가 실제 위험 분포를 잘 따라간다는 1차 증거
+      <div class="card orange" style="padding:16px 20px">
+        <div class="head" style="margin-bottom:8px;font-size:15px">📈 Spearman 상관계수</div>
+        <div style="font-family:monospace;font-size:54px;font-weight:900;color:var(--orange-deep);line-height:1;letter-spacing:-.02em">0.7427</div>
+        <div style="font-size:13.5px;color:var(--text-soft);margin-top:10px;line-height:1.6;font-weight:700">
+          risk_score ↔ Target_y 간 <strong style="color:var(--text)">강한 양의 순위 상관</strong><br>
+          → PCA 합성 점수가 실제 위험 분포 잘 따름
         </div>
       </div>
-      <div class="card" style="border-color:var(--text);padding:12px 16px">
-        <div class="head" style="margin-bottom:6px">🧪 검증 설계</div>
-        <ul class="bul" style="font-size:11.5px">
-          <li style="font-size:11.5px;padding:3px 0 3px 14px">5-Fold <strong>공간 블록 CV</strong> (지리적 누수 차단)</li>
-          <li style="font-size:11.5px;padding:3px 0 3px 14px">단독 risk_score vs 원변수 13개</li>
-          <li style="font-size:11.5px;padding:3px 0 3px 14px">개별 변수 CV R² 순위 산출</li>
+      <div class="card" style="border-color:var(--text);padding:16px 20px">
+        <div class="head" style="margin-bottom:8px;font-size:15px">🧪 검증 설계</div>
+        <ul class="bul" style="font-size:13.5px">
+          <li style="font-size:13.5px;padding:5px 0 5px 16px;line-height:1.5;font-weight:700">5-Fold <strong>공간 블록 CV</strong> (지리적 누수 차단)</li>
+          <li style="font-size:13.5px;padding:5px 0 5px 16px;line-height:1.5;font-weight:700">단독 risk_score vs 원변수 13개</li>
+          <li style="font-size:13.5px;padding:5px 0 5px 16px;line-height:1.5;font-weight:700">개별 변수 CV R² 순위 산출</li>
         </ul>
       </div>
     </div>
 
-    <!-- CV 결과 비교 표 -->
-    <div class="card red" style="padding:12px 16px">
-      <div class="head" style="margin-bottom:8px">📊 공간 블록 CV — risk_score 단독</div>
-      <div style="font-family:monospace;font-size:11px;line-height:1.7">
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px;color:var(--muted);font-weight:800;border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:4px">
+    <!-- CV 결과 비교 표 — risk_score 단독 -->
+    <div class="card red" id="s09b-cv-risk" style="padding:16px 20px">
+      <div class="head" style="margin-bottom:10px;font-size:15px">📊 공간 블록 CV — risk_score 단독</div>
+      <div class="s09b-cv" style="font-family:monospace;font-size:14px;line-height:1.85">
+        <div class="s09b-cv-head" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px;color:var(--muted);font-weight:800;border-bottom:1.5px solid var(--border);padding-bottom:6px;margin-bottom:6px;font-size:12.5px">
           <div>Fold</div><div style="text-align:right">R²</div><div style="text-align:right">MSE</div>
         </div>
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>0</div><div style="text-align:right;color:var(--text)">0.1876</div><div style="text-align:right;color:var(--text-soft)">0.0120</div></div>
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>1</div><div style="text-align:right;color:var(--text)">0.1987</div><div style="text-align:right;color:var(--text-soft)">0.0078</div></div>
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>2</div><div style="text-align:right;color:var(--text)">0.2375</div><div style="text-align:right;color:var(--text-soft)">0.0162</div></div>
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>3</div><div style="text-align:right;color:var(--text)">0.3151</div><div style="text-align:right;color:var(--text-soft)">0.0064</div></div>
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>4</div><div style="text-align:right;color:var(--text)">0.1728</div><div style="text-align:right;color:var(--text-soft)">0.0062</div></div>
-        <div style="border-top:2px solid var(--red);margin-top:5px;padding-top:5px;font-weight:900;display:grid;grid-template-columns:30px 1fr 1fr;gap:6px;color:var(--red-deep)">
-          <div>평균</div><div style="text-align:right">0.2223<small style="color:var(--muted);font-weight:600">±0.0571</small></div><div style="text-align:right">0.0097<small style="color:var(--muted);font-weight:600">±0.0043</small></div>
+        <div class="s09b-row" data-r2="0.1876" data-mse="0.0120" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px"><div style="color:var(--muted);font-weight:700">0</div><div class="r2" style="text-align:right;color:var(--text);font-weight:800">0</div><div class="mse" style="text-align:right;color:var(--text-soft);font-weight:700">0</div></div>
+        <div class="s09b-row" data-r2="0.1987" data-mse="0.0078" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px"><div style="color:var(--muted);font-weight:700">1</div><div class="r2" style="text-align:right;color:var(--text);font-weight:800">0</div><div class="mse" style="text-align:right;color:var(--text-soft);font-weight:700">0</div></div>
+        <div class="s09b-row" data-r2="0.2375" data-mse="0.0162" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px"><div style="color:var(--muted);font-weight:700">2</div><div class="r2" style="text-align:right;color:var(--text);font-weight:800">0</div><div class="mse" style="text-align:right;color:var(--text-soft);font-weight:700">0</div></div>
+        <div class="s09b-row" data-r2="0.3151" data-mse="0.0064" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px"><div style="color:var(--muted);font-weight:700">3</div><div class="r2" style="text-align:right;color:var(--text);font-weight:800">0</div><div class="mse" style="text-align:right;color:var(--text-soft);font-weight:700">0</div></div>
+        <div class="s09b-row" data-r2="0.1728" data-mse="0.0062" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px"><div style="color:var(--muted);font-weight:700">4</div><div class="r2" style="text-align:right;color:var(--text);font-weight:800">0</div><div class="mse" style="text-align:right;color:var(--text-soft);font-weight:700">0</div></div>
+        <div class="s09b-avg-line" style="position:relative;height:3px;margin:8px 0 6px;background:linear-gradient(90deg,var(--red) 0%,var(--red) var(--p,0%),transparent var(--p,0%));transition:none"></div>
+        <div class="s09b-avg" data-r2="0.2223" data-r2sd="0.0571" data-mse="0.0097" data-msesd="0.0043" style="font-weight:900;display:grid;grid-template-columns:48px 1fr 1fr;gap:8px;color:var(--red-deep);font-size:15px">
+          <div>평균</div>
+          <div style="text-align:right" class="r2-cell">0<small style="color:var(--muted);font-weight:600;font-size:11px"></small></div>
+          <div style="text-align:right" class="mse-cell">0<small style="color:var(--muted);font-weight:600;font-size:11px"></small></div>
         </div>
       </div>
     </div>
 
-    <div class="card green" style="padding:12px 16px">
-      <div class="head" style="margin-bottom:8px">📊 공간 블록 CV — PCA 원변수 13개</div>
-      <div style="font-family:monospace;font-size:11px;line-height:1.7">
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px;color:var(--muted);font-weight:800;border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:4px">
+    <div class="card green" id="s09b-cv-pca" style="padding:16px 20px">
+      <div class="head" style="margin-bottom:10px;font-size:15px">📊 공간 블록 CV — PCA 원변수 13개</div>
+      <div class="s09b-cv" style="font-family:monospace;font-size:14px;line-height:1.85">
+        <div class="s09b-cv-head" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px;color:var(--muted);font-weight:800;border-bottom:1.5px solid var(--border);padding-bottom:6px;margin-bottom:6px;font-size:12.5px">
           <div>Fold</div><div style="text-align:right">R²</div><div style="text-align:right">MSE</div>
         </div>
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>0</div><div style="text-align:right;color:var(--text)">0.3720</div><div style="text-align:right;color:var(--text-soft)">0.0093</div></div>
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>1</div><div style="text-align:right;color:var(--text)">0.3209</div><div style="text-align:right;color:var(--text-soft)">0.0066</div></div>
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>2</div><div style="text-align:right;color:var(--text)">0.4117</div><div style="text-align:right;color:var(--text-soft)">0.0125</div></div>
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>3</div><div style="text-align:right;color:var(--text)">0.4407</div><div style="text-align:right;color:var(--text-soft)">0.0053</div></div>
-        <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:6px"><div>4</div><div style="text-align:right;color:var(--text)">0.2121</div><div style="text-align:right;color:var(--text-soft)">0.0059</div></div>
-        <div style="border-top:2px solid var(--green);margin-top:5px;padding-top:5px;font-weight:900;display:grid;grid-template-columns:30px 1fr 1fr;gap:6px;color:var(--green-deep)">
-          <div>평균</div><div style="text-align:right">0.3515<small style="color:var(--muted);font-weight:600">±0.0900</small></div><div style="text-align:right">0.0079<small style="color:var(--muted);font-weight:600">±0.0030</small></div>
+        <div class="s09b-row" data-r2="0.3720" data-mse="0.0093" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px"><div style="color:var(--muted);font-weight:700">0</div><div class="r2" style="text-align:right;color:var(--text);font-weight:800">0</div><div class="mse" style="text-align:right;color:var(--text-soft);font-weight:700">0</div></div>
+        <div class="s09b-row" data-r2="0.3209" data-mse="0.0066" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px"><div style="color:var(--muted);font-weight:700">1</div><div class="r2" style="text-align:right;color:var(--text);font-weight:800">0</div><div class="mse" style="text-align:right;color:var(--text-soft);font-weight:700">0</div></div>
+        <div class="s09b-row" data-r2="0.4117" data-mse="0.0125" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px"><div style="color:var(--muted);font-weight:700">2</div><div class="r2" style="text-align:right;color:var(--text);font-weight:800">0</div><div class="mse" style="text-align:right;color:var(--text-soft);font-weight:700">0</div></div>
+        <div class="s09b-row" data-r2="0.4407" data-mse="0.0053" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px"><div style="color:var(--muted);font-weight:700">3</div><div class="r2" style="text-align:right;color:var(--text);font-weight:800">0</div><div class="mse" style="text-align:right;color:var(--text-soft);font-weight:700">0</div></div>
+        <div class="s09b-row" data-r2="0.2121" data-mse="0.0059" style="display:grid;grid-template-columns:48px 1fr 1fr;gap:8px"><div style="color:var(--muted);font-weight:700">4</div><div class="r2" style="text-align:right;color:var(--text);font-weight:800">0</div><div class="mse" style="text-align:right;color:var(--text-soft);font-weight:700">0</div></div>
+        <div class="s09b-avg-line" style="position:relative;height:3px;margin:8px 0 6px;background:linear-gradient(90deg,var(--green) 0%,var(--green) var(--p,0%),transparent var(--p,0%));transition:none"></div>
+        <div class="s09b-avg" data-r2="0.3515" data-r2sd="0.0900" data-mse="0.0079" data-msesd="0.0030" style="font-weight:900;display:grid;grid-template-columns:48px 1fr 1fr;gap:8px;color:var(--green-deep);font-size:15px">
+          <div>평균</div>
+          <div style="text-align:right" class="r2-cell">0<small style="color:var(--muted);font-weight:600;font-size:11px"></small></div>
+          <div style="text-align:right" class="mse-cell">0<small style="color:var(--muted);font-weight:600;font-size:11px"></small></div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- 개별 변수 CV R² 순위 -->
-  <div class="card" style="border-color:var(--blue);padding:12px 18px;margin-top:12px">
-    <div class="head" style="color:var(--blue-deep);margin-bottom:8px">🥇 개별 변수 CV R² 순위 (단일 변수로만 학습 시)</div>
-    <div style="display:grid;grid-template-columns:repeat(13,1fr);gap:4px;font-size:10.5px;font-family:monospace">
+  <div class="card" style="border-color:var(--blue);padding:16px 20px;margin-top:14px">
+    <div class="head" style="color:var(--blue-deep);margin-bottom:10px;font-size:15px">🥇 개별 변수 CV R² 순위 (단일 변수로만 학습 시)</div>
+    <div style="display:grid;grid-template-columns:repeat(13,1fr);gap:5px;font-size:11.5px;font-family:monospace">
       <div style="text-align:center"><div style="font-weight:900;color:var(--text)">is_residential</div><div style="background:#dcfce7;color:#15803d;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">0.2645</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0977</div></div>
       <div style="text-align:center"><div style="font-weight:900;color:var(--text)">rest_200m</div><div style="background:#dcfce7;color:#15803d;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">0.1630</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0498</div></div>
       <div style="text-align:center"><div style="font-weight:900;color:var(--text)">road_complex</div><div style="background:#dcfce7;color:#15803d;font-weight:900;padding:4px;border-radius:4px;margin-top:3px">0.1314</div><div style="color:var(--muted);font-size:9.5px;margin-top:2px">±0.0522</div></div>
@@ -1959,8 +1966,9 @@
     </div>
   </div>
 
-  <div class="callout dark" style="margin-top:12px;font-size:12.5px">
-    <strong style="color:var(--yellow)">결론 →</strong> 단일 변수로는 노이즈 수준이지만 PCA 합성 risk_score는 평균 R² 0.22, 원변수 13개 함께 쓰면 0.35 — <strong>PCA가 다중 변수의 위험 신호를 효과적으로 응축</strong>한 것이 확인됨. Spearman 0.74로 순위 일치도도 높음.
+  <div class="callout dark" style="margin-top:14px;font-size:14px;line-height:1.75;padding:14px 20px">
+    <strong style="color:var(--yellow);font-size:15px">결론 →</strong> 단일 변수로는 노이즈 수준이지만 <strong style="color:#fff">PCA 합성 risk_score 평균 R² 0.22</strong>, 원변수 13개 함께 쓰면 <strong style="color:#fff">0.35</strong><br>
+    → <strong style="color:var(--yellow)">PCA가 다중 변수의 위험 신호를 효과적으로 응축</strong>한 것이 확인됨 · Spearman 0.74로 순위 일치도도 높음
   </div>
   <span class="pageno">SLIDE 09+ / 23</span>
 </section>
@@ -3847,6 +3855,101 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
       if (step >= stages.length) btn.textContent = '↻ 처음으로';
     });
   }
+})();
+
+// s09b — 공간 블록 CV 두 박스 동시 계산 애니메이션 (위→아래 fold별 R²/MSE 카운트업 + 평균 줄긋기)
+(function(){
+  const sec = document.getElementById('s09b');
+  if (!sec) return;
+  const boxes = sec.querySelectorAll('#s09b-cv-risk, #s09b-cv-pca');
+  if (!boxes.length) return;
+  let triggered = false;
+  function tickFmt(v, dec){ return v.toFixed(dec); }
+  function countUp(el, from, to, dec, duration){
+    const start = performance.now();
+    function step(now){
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const v = from + (to - from) * eased;
+      el.textContent = tickFmt(v, dec);
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = tickFmt(to, dec);
+    }
+    requestAnimationFrame(step);
+  }
+  function play(){
+    boxes.forEach(box => {
+      // 1) 각 fold 행 순차로 카운트업 (위→아래)
+      const rows = box.querySelectorAll('.s09b-row');
+      rows.forEach((row, i) => {
+        const r2Target = parseFloat(row.dataset.r2);
+        const mseTarget = parseFloat(row.dataset.mse);
+        setTimeout(() => {
+          countUp(row.querySelector('.r2'), 0, r2Target, 4, 700);
+          countUp(row.querySelector('.mse'), 0, mseTarget, 4, 700);
+        }, 200 + i * 350);
+      });
+      // 2) 평균 줄 (마지막 fold 직후): 왼쪽 → 오른쪽으로 그어짐
+      const lineEl = box.querySelector('.s09b-avg-line');
+      const lineDelay = 200 + rows.length * 350 + 100;
+      if (lineEl) {
+        setTimeout(() => {
+          const lineStart = performance.now();
+          function drawLine(now){
+            const t = Math.min(1, (now - lineStart) / 700);
+            lineEl.style.setProperty('--p', (t * 100).toFixed(1) + '%');
+            if (t < 1) requestAnimationFrame(drawLine);
+            else lineEl.style.setProperty('--p', '100%');
+          }
+          requestAnimationFrame(drawLine);
+        }, lineDelay);
+      }
+      // 3) 평균 행: R²/MSE 카운트업 + ±SD 표시
+      const avg = box.querySelector('.s09b-avg');
+      if (avg) {
+        const r2Target = parseFloat(avg.dataset.r2);
+        const r2sd = avg.dataset.r2sd;
+        const mseTarget = parseFloat(avg.dataset.mse);
+        const msesd = avg.dataset.msesd;
+        const r2Cell = avg.querySelector('.r2-cell');
+        const mseCell = avg.querySelector('.mse-cell');
+        const r2Small = r2Cell.querySelector('small');
+        const mseSmall = mseCell.querySelector('small');
+        const avgStart = lineDelay + 600;
+        setTimeout(() => {
+          // 카운트업 동안 텍스트 노드를 갱신 (small은 별도 보존)
+          const r2Text = document.createTextNode('0');
+          r2Cell.firstChild.replaceWith(r2Text);
+          const mseText = document.createTextNode('0');
+          mseCell.firstChild.replaceWith(mseText);
+          const start = performance.now();
+          function step(now){
+            const t = Math.min(1, (now - start) / 1100);
+            const eased = 1 - Math.pow(1 - t, 3);
+            r2Text.nodeValue = tickFmt(r2Target * eased, 4);
+            mseText.nodeValue = tickFmt(mseTarget * eased, 4);
+            if (t < 1) requestAnimationFrame(step);
+            else {
+              r2Text.nodeValue = tickFmt(r2Target, 4);
+              mseText.nodeValue = tickFmt(mseTarget, 4);
+              if (r2Small) r2Small.textContent = '±' + r2sd;
+              if (mseSmall) mseSmall.textContent = '±' + msesd;
+            }
+          }
+          requestAnimationFrame(step);
+        }, avgStart);
+      }
+    });
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .35 && !triggered) {
+        triggered = true;
+        play();
+      }
+    });
+  }, { threshold: [.35] });
+  io.observe(sec);
 })();
 
 // s10 LISA 4-Cluster 산점도 4단계 등장 애니메이션 (SMIL 기반 — opacity attribute 직접 제어)
