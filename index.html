@@ -2448,7 +2448,7 @@
         <div class="head" style="margin-bottom:6px">LISA 4-Cluster — 서울 전역 50m 격자 (Queen contiguity · p&lt;0.05)</div>
         <div id="s11-map-wrap" style="position:relative;width:100%;max-width:560px;aspect-ratio:1263/1188;background:#f1f5f9;border-radius:10px;overflow:hidden;border:1px solid var(--border);margin:0 auto">
           <img src="maps/s11_final.jpg" alt="서울 HH/HL 분포 지도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none" draggable="false">
-          <div class="s11-popups" id="s11-popups" style="position:absolute;inset:0;pointer-events:none"></div>
+          <div class="s11-popups" id="s11-popups" style="position:absolute;inset:0;pointer-events:none;display:none"></div>
           <button id="s11-replay" style="position:absolute;bottom:8px;right:8px;background:#fff;border:1.5px solid var(--text);border-radius:999px;padding:4px 12px;font-size:11px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12);z-index:5;pointer-events:auto">↻ 다시 재생</button>
           <div style="position:absolute;top:8px;left:8px;background:#fff;border:1.5px solid var(--text);border-radius:8px;padding:5px 10px;font-size:10.5px;font-weight:800;color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.1);z-index:5">
             <span style="display:inline-block;width:8px;height:8px;background:#dc2626;border-radius:50%;border:1.5px solid #fff;margin-right:4px;vertical-align:middle"></span>HH 핫스팟
@@ -3366,6 +3366,9 @@
     </div>
   </div>
 
+  <button type="button" id="s19-replay" aria-label="애니메이션 다시 재생" style="position:absolute;right:60px;bottom:24px;z-index:30;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:linear-gradient(180deg,#1e293b,#0f172a);color:#fff;border:1.5px solid rgba(34,211,238,.5);box-shadow:0 8px 22px rgba(15,23,42,.32),0 0 0 1px rgba(255,255,255,.05) inset,0 0 22px rgba(34,211,238,.25);font-size:13px;font-weight:800;letter-spacing:-.01em;cursor:pointer;font-family:inherit">
+    <span style="font-size:14px;line-height:1">↻</span>다시 재생
+  </button>
   <span class="pageno">SLIDE 19 / 23</span>
 </section>
 
@@ -3778,14 +3781,25 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   }
   if (!('IntersectionObserver' in window)) {
     sections.forEach(activate);
-    return;
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && e.intersectionRatio > .28) activate(e.target);
+      });
+    }, { threshold: [.28, .45] });
+    sections.forEach(sec => io.observe(sec));
   }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting && e.intersectionRatio > .28) activate(e.target);
+  // Slide 19 — 다시 재생 버튼
+  const s19 = document.getElementById('s19');
+  const replay = document.getElementById('s19-replay');
+  if (s19 && replay) {
+    replay.addEventListener('click', () => {
+      s19.classList.remove('scene-live');
+      // 강제 리플로우로 모든 CSS 애니메이션 리셋
+      void s19.offsetWidth;
+      requestAnimationFrame(() => s19.classList.add('scene-live'));
     });
-  }, { threshold: [.28, .45] });
-  sections.forEach(sec => io.observe(sec));
+  }
 })();
 
 // s16 — 뉴스 카드 날아 모이기 + 플래시
@@ -4297,7 +4311,7 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
   window.addEventListener('resize', () => { if (triggered) { drawConnector(); drawSpotBeam(); } });
 })();
 
-// s20 — 확장 계획: "다음 ▸" 버튼으로 단계별 한반도 도트 + 타임라인 진행
+// s20 — 확장 계획: 진입 시 자동 재생 (10초 간격으로 한반도 도트 + 타임라인 진행)
 (function(){
   const sec = document.getElementById('s20');
   if (!sec) return;
@@ -4308,29 +4322,37 @@ g.innerHTML+=`<text x="360" y="332" font-size="20" text-anchor="middle" fill="#d
     { dots: '.s20-dots-metro', li: 'li.s20-step2' },
     { dots: '.s20-dots-rest',  li: 'li.s20-step3' },
   ];
-  let step = 0; // 0 → 1 → 2 → 3 (3은 완료 상태)
+  // 버튼 숨김 (자동 재생이므로 불필요)
+  if (btn) btn.style.display = 'none';
+
   function reveal(i){
     if (i < 0 || i >= stages.length) return;
     sec.querySelector(stages[i].dots)?.classList.add('on');
     sec.querySelectorAll(stages[i].li).forEach(el => el.classList.add('on'));
     if (stepDots[i]) stepDots[i].classList.add('on');
   }
-  function reset(){
-    stages.forEach(s => {
-      sec.querySelector(s.dots)?.classList.remove('on');
-      sec.querySelectorAll(s.li).forEach(el => el.classList.remove('on'));
-    });
-    stepDots.forEach(d => d.classList.remove('on'));
-    step = 0;
-    if (btn) btn.textContent = '다음 ▸';
+
+  let started = false;
+  let timers = [];
+  function startSequence(){
+    if (started) return;
+    started = true;
+    // 첫 단계는 진입 즉시 (시각적 피드백)
+    timers.push(setTimeout(() => reveal(0), 600));
+    // 2단계, 3단계는 10초 간격
+    timers.push(setTimeout(() => reveal(1), 10000));
+    timers.push(setTimeout(() => reveal(2), 20000));
   }
-  if (btn) {
-    btn.addEventListener('click', () => {
-      if (step >= stages.length) { reset(); return; }
-      reveal(step);
-      step++;
-      if (step >= stages.length) btn.textContent = '↻ 처음으로';
-    });
+
+  if (!('IntersectionObserver' in window)) {
+    startSequence();
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && e.intersectionRatio > .35) startSequence();
+      });
+    }, { threshold: [.35, .55] });
+    io.observe(sec);
   }
 })();
 
